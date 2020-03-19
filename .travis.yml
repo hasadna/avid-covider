@@ -5,7 +5,7 @@ sudo: required
 install:
 - nvm install 10
 - nvm use 10
-- pip install transifex-client
+- pip install transifex-client yaml
 - npm install
 - npm install -g @angular/cli@7.1.3
 script:
