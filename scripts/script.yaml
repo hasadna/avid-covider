@@ -11,42 +11,42 @@
                 - show: לא כל כך טוב
                   steps:
                     - say: אוייש… תוכל/י לפרט איך זה בא לידי ביטוי?
-                    - say: האם את/ה סובל/ת משיעול?
+                    - say: שיעול?
                     - wait:
                         variable: symptoms_cough
                         options:
                           - show: כן
                           - show: לא
 
-                    - say: האם את/ה סובל/ת מעייפות מוגברת?
+                    - say: עייפות מוגברת?
                     - wait:
                         variable: symptoms_fatigue
                         options:
                           - show: כן
                           - show: לא
 
-                    - say: האם יש לך כאבי שרירים?
+                    - say: כאבי שרירים?
                     - wait:
                         variable: symptoms_muscles_pain
                         options:
                           - show: כן
                           - show: לא
 
-                    - say: האם את/ה סובל/ת מקוצר נשימה?
+                    - say: קוצר נשימה?
                     - wait:
                         variable: symptoms_muscles_dyspnea
                         options:
                           - show: כן
                           - show: לא
 
-                    - say: האם יש לך הרבה נזלת או גודש באף?
+                    - say: נזלת או גודש באף?
                     - wait:
                         variable: symptoms_clogged_nose
                         options:
                           - show: כן
                           - show: לא
 
-                    - say: האם את/ה סובל/ת מבחילה או הקאות?
+                    - say: בחילה או הקאות?
                     - wait:
                         variable: symptoms_nausea_and_vomiting
                         options:
