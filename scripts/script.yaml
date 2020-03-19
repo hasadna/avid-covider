@@ -1,28 +1,161 @@
-- description: תסריט לניהול שיחות מצד הפונה
-  name: פונה
-  snippets:
-    - name: default
-      steps:
-        - say: >-
-            שלום, הגעת למערכת דיווח בריאות.
-        - say: האם את.ה מרגיש.ה טוב??
-        - wait:
-            options:
-              - show: כן
-                steps:
-                  - say: מעולה, תודה!
-              - show: לא
-                steps:
-                  - say: האם יש לך חום?
-                  - wait:
-                      variable: has_fever
-                      options:
-                        - show: כן
-                          steps:
-                            - say: כמה יצא?
-                            - wait:
-                                variable: fever_measurement
-                        - show: לא
-        - say: |-
-            תודה רבה על שיתוף הפעולה.
-            רק בריאות!
+  - description: תסריט לניהול שיחות מצד הפונה
+    name: פונה
+    snippets:
+      - name: default
+        steps:
+          - say: שלום, הגעת למערכת דיווח בריאות.
+          - say: האם את/ה מרגיש טוב?
+          - wait:
+              options:
+                - show: כן
+                - show: לא
+                  steps:
+                    - say: אוייש… תוכל/י לפרט איך זה בא לידי ביטוי?
+                    - say: האם את/ה סובל/ת משיעול?
+                    - wait:
+                        variable: symptoms_cough
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם את/ה סובל/ת מעייפות מוגברת?
+                    - wait:
+                        variable: symptoms_fatigue
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם יש לך כאבי שרירים?
+                    - wait:
+                        variable: symptoms_muscles_pain
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם את/ה סובל/ת מקוצר נשימה?
+                    - wait:
+                        variable: symptoms_muscles_dyspnea
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם יש לך הרבה נזלת או גודש באף?
+                    - wait:
+                        variable: symptoms_clogged_nose
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם את/ה סובל/ת מבחילה או הקאות?
+                    - wait:
+                        variable: symptoms_nausea_and_vomiting
+                        options:
+                          - show: כן
+                          - show: לא
+
+                    - say: האם יש לך תופעות או סימפטומים אחרים שכדאי שנדע עליהם?
+                    - wait:
+                        options:
+                          - show: כן
+                            steps:
+                              - say: במה מדובר?
+                              - wait:
+                                  variable: symptoms_other
+                                  placeholder: "שם המחלה או הסימפטום"
+                          - show: לא
+                          
+          - say:  אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר.
+          - say: קודם כל, מה גילך?
+          - wait:
+              variable: age
+              validation: "[.0-9]+"
+              placeholder: "גיל"
+              
+          - say: בן? בת?
+          - wait:
+              variable: sex
+              options:
+                - show: בן
+                - show: בת
+                
+          - say: מה הוא מקום מגוריך?
+          - wait:
+              variable: city_town
+              placeholder: "שם העיר או הישוב"
+
+          - say: שם הרחוב?
+          - wait:
+              variable: street
+          
+          - say: אני אשאל אותך על 6 מחלות שחשוב לנו לדעת אם יש לך. קודם כל, האם אובחנת כחולה סכרת?
+          - wait:
+              variable: chronic_diabetes
+              options: 
+                - show: כן
+                - show: לא
+
+          - say: בעיית יתר לחץ דם?
+          - wait:
+              variable: chronic_hypertension
+              options: 
+                - show: כן
+                - show: לא
+
+          - say: מחלת לב איסכמית?
+          - wait:
+              variable: chronic_ischemic_heart_disease
+              options: 
+                - show: כן
+                - show: לא
+
+          - say: יש לך אסטמה?
+          - wait:
+              variable: asthma
+              options: 
+                - show: כן
+                - show: לא
+
+          - say: מה לגבי מחלת ריאות כרונית?
+          - wait:
+              variable: chronic_lung_disease
+              options: 
+                - show: כן
+                - show: לא                                        
+
+          - say: אחרונה ודי, אי ספיקת כליות כרונית?
+          - wait:        
+              variable: chronic_kidney_failure
+              options: 
+                - show: כן
+                - show: לא                                        
+
+          - say: אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?
+          - wait:
+              variable: insulation
+              options:
+                - show: אני לא בבידוד
+                - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                - show: אני בבידוד כי הייתי במגע עם מישהו שחזר מחו״ל לאחרונה
+                - show: אני בבידוד כי הייתי במגע עם מישהו שנדבק בנגיף 
+              
+          - say: מה לגבי עישון?
+          - wait:
+              variable: smoking
+              options:
+                - show: מעולם לא עישנתי
+                - show: עישנתי בעבר
+                - show: עישנתי לפחות 10 סיגריות בשבוע האחרון
+
+          - say: ומה אומר המדחום?
+          - wait:
+              variable: temprature
+              validation: "[.0-9]+"
+              placeholder: כמה מעלות?
+
+          - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהם לפני שהן מתפשטות. נתראה פה מחר?
+          - wait:
+              variable: continue
+              options:
+                - show: בטח!
+                - show: בהחלט. ואשמח גם לשתף את הטופס [לינקים לשיתוף ברשתות]
+    
