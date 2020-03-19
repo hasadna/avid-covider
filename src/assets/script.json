@@ -1,1 +1,250 @@
-{"s": [{"description": "תסריט לניהול שיחות מצד הפונה", "name": "פונה", "snippets": [{"name": "default", "steps": [{"say": "שלום, הגעת למערכת דיווח בריאות.", "uid": "4f7145b7a2"}, {"say": "מה שלומך היום?", "uid": "a636111e03"}, {"uid": "7a26c4124f", "wait": {"options": [{"show": "מצויין!"}, {"show": "לא כל כך טוב", "steps": [{"say": "אוייש… תוכל/י לפרט איך זה בא לידי ביטוי?", "uid": "ac146a1b26"}, {"say": "שיעול?", "uid": "6f0b1cd1aa"}, {"uid": "e4b95dab6a", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_cough"}}, {"say": "עייפות מוגברת?", "uid": "c7692b366c"}, {"uid": "7e3e48fd49", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_fatigue"}}, {"say": "כאבי שרירים?", "uid": "b595736cda"}, {"uid": "3963c4c057", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_muscles_pain"}}, {"say": "קוצר נשימה?", "uid": "6c43ec1b06"}, {"uid": "cffea1bccb", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_muscles_dyspnea"}}, {"say": "נזלת או גודש באף?", "uid": "ad948d2939"}, {"uid": "20167a1ccb", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_clogged_nose"}}, {"say": "בחילה או הקאות?", "uid": "139da543b3"}, {"uid": "58672012b8", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "symptoms_nausea_and_vomiting"}}, {"say": "האם יש לך תופעות או סימפטומים אחרים שכדאי שנדע עליהם?", "uid": "b270726d12"}, {"uid": "8250ca9ac1", "wait": {"options": [{"show": "כן", "steps": [{"say": "במה מדובר?", "uid": "eff42e8cfb"}, {"uid": "bd66a8ccb5", "wait": {"placeholder": "שם המחלה או הסימפטום", "variable": "symptoms_other"}}], "uid": "54b7ce2aea"}, {"show": "לא"}]}}], "uid": "bdb80ac844"}]}}, {"say": "אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר.", "uid": "c2554bd634"}, {"say": "קודם כל, מה גילך?", "uid": "c31ede006c"}, {"uid": "16dcad8fca", "wait": {"placeholder": "גיל", "validation": "[.0-9]+", "variable": "age"}}, {"say": "בן? בת?", "uid": "04da387d22"}, {"uid": "5934bcdf3f", "wait": {"options": [{"show": "בן"}, {"show": "בת"}], "variable": "sex"}}, {"say": "מה הוא מקום מגוריך?", "uid": "5be242b195"}, {"uid": "a472b2aee3", "wait": {"placeholder": "שם העיר או הישוב", "variable": "city_town"}}, {"say": "שם הרחוב?", "uid": "2a6dea7d70"}, {"uid": "23950fe65f", "wait": {"variable": "street"}}, {"say": "אני אשאל אותך על 6 מחלות שחשוב לנו לדעת אם יש לך. קודם כל, האם אובחנת כחולה סכרת?", "uid": "a1b5adbd87"}, {"uid": "af9759e9b1", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "chronic_diabetes"}}, {"say": "בעיית יתר לחץ דם?", "uid": "be067646c1"}, {"uid": "e1510c4291", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "chronic_hypertension"}}, {"say": "מחלת לב איסכמית?", "uid": "21181b8ec7"}, {"uid": "40e7976741", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "chronic_ischemic_heart_disease"}}, {"say": "יש לך אסטמה?", "uid": "95eafb4142"}, {"uid": "eae14b962d", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "asthma"}}, {"say": "מה לגבי מחלת ריאות כרונית?", "uid": "d1299b97d6"}, {"uid": "2774eadeea", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "chronic_lung_disease"}}, {"say": "אחרונה ודי, אי ספיקת כליות כרונית?", "uid": "fe53981ff8"}, {"uid": "f40f5491db", "wait": {"options": [{"show": "כן"}, {"show": "לא"}], "variable": "chronic_kidney_failure"}}, {"say": "אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?", "uid": "e843a29c6c"}, {"uid": "900cb8cc34", "wait": {"options": [{"show": "אני לא בבידוד"}, {"show": "אני בבידוד כי חזרתי מחו״ל לאחרונה"}, {"show": "אני בבידוד כי הייתי במגע עם מישהו שחזר מחו״ל לאחרונה"}, {"show": "אני בבידוד כי הייתי במגע עם מישהו שנדבק בנגיף"}], "variable": "insulation"}}, {"say": "מה לגבי עישון?", "uid": "659fabc8b1"}, {"uid": "45f176bde5", "wait": {"options": [{"show": "מעולם לא עישנתי"}, {"show": "עישנתי בעבר"}, {"show": "עישנתי לפחות 10 סיגריות בשבוע האחרון"}], "variable": "smoking"}}, {"say": "ומה אומר המדחום?", "uid": "e2b0324aee"}, {"uid": "602a8f7c01", "wait": {"placeholder": "כמה מעלות?", "validation": "[.0-9]+", "variable": "temprature"}}, {"say": "המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהם לפני שהן מתפשטות. נתראה פה מחר?", "uid": "dd73ce0f8c"}, {"uid": "cb1e99e383", "wait": {"options": [{"show": "בטח!"}, {"show": "בהחלט. ואשמח גם לשתף את הטופס [לינקים לשיתוף ברשתות]"}], "variable": "continue"}}], "uid": "898235e117"}]}]}
+{
+  "s": [
+    {
+      "description": "תסריט לניהול שיחות מצד הפונה",
+      "name": "פונה",
+      "snippets": [
+        {
+          "name": "default",
+          "steps": [
+            { "say": "שלום, הגעת למערכת דיווח בריאות.", "uid": "4f7145b7a2" },
+            { "say": "מה שלומך היום?", "uid": "a636111e03" },
+            {
+              "uid": "7a26c4124f",
+              "wait": {
+                "options": [
+                  { "show": "מצויין!" },
+                  {
+                    "show": "לא כל כך טוב",
+                    "steps": [
+                      {
+                        "say": "אוייש… איך זה בא לידי ביטוי?",
+                        "uid": "ac146a1b26"
+                      },
+                      { "say": "שיעול?", "uid": "6f0b1cd1aa" },
+                      {
+                        "uid": "e4b95dab6a",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_cough"
+                        }
+                      },
+                      { "say": "עייפות מוגברת?", "uid": "c7692b366c" },
+                      {
+                        "uid": "7e3e48fd49",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_fatigue"
+                        }
+                      },
+                      { "say": "כאבי שרירים?", "uid": "b595736cda" },
+                      {
+                        "uid": "3963c4c057",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_muscles_pain"
+                        }
+                      },
+                      { "say": "קוצר נשימה?", "uid": "6c43ec1b06" },
+                      {
+                        "uid": "cffea1bccb",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_muscles_dyspnea"
+                        }
+                      },
+                      { "say": "נזלת או גודש באף?", "uid": "ad948d2939" },
+                      {
+                        "uid": "20167a1ccb",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_clogged_nose"
+                        }
+                      },
+                      { "say": "בחילה או הקאות?", "uid": "139da543b3" },
+                      {
+                        "uid": "58672012b8",
+                        "wait": {
+                          "options": [{ "show": "כן" }, { "show": "לא" }],
+                          "variable": "symptoms_nausea_and_vomiting"
+                        }
+                      },
+                      {
+                        "say": "האם יש לך תופעות או סימפטומים אחרים שכדאי שנדע עליהם?",
+                        "uid": "b270726d12"
+                      },
+                      {
+                        "uid": "8250ca9ac1",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן",
+                              "steps": [
+                                { "say": "במה מדובר?", "uid": "eff42e8cfb" },
+                                {
+                                  "uid": "bd66a8ccb5",
+                                  "wait": {
+                                    "placeholder": "שם המחלה או הסימפטום",
+                                    "variable": "symptoms_other"
+                                  }
+                                }
+                              ],
+                              "uid": "54b7ce2aea"
+                            },
+                            { "show": "לא" }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "bdb80ac844"
+                  }
+                ]
+              }
+            },
+            {
+              "say": "אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר.",
+              "uid": "c2554bd634"
+            },
+            { "say": "קודם כל, מה גילך?", "uid": "c31ede006c" },
+            {
+              "uid": "16dcad8fca",
+              "wait": {
+                "placeholder": "גיל",
+                "validation": "[.0-9]+",
+                "variable": "age"
+              }
+            },
+            { "say": "בן? בת?", "uid": "04da387d22" },
+            {
+              "uid": "5934bcdf3f",
+              "wait": {
+                "options": [{ "show": "בן" }, { "show": "בת" }],
+                "variable": "sex"
+              }
+            },
+            { "say": "מה הוא מקום מגוריך?", "uid": "5be242b195" },
+            {
+              "uid": "a472b2aee3",
+              "wait": {
+                "placeholder": "שם העיר או הישוב",
+                "variable": "city_town"
+              }
+            },
+            { "say": "שם הרחוב?", "uid": "2a6dea7d70" },
+            { "uid": "23950fe65f", "wait": { "variable": "street" } },
+            {
+              "say": "אני אשאל אותך על 6 מחלות שחשוב לנו לדעת אם יש לך. קודם כל, האם אובחנת כחולה סכרת?",
+              "uid": "a1b5adbd87"
+            },
+            {
+              "uid": "af9759e9b1",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "chronic_diabetes"
+              }
+            },
+            { "say": "בעיית יתר לחץ דם?", "uid": "be067646c1" },
+            {
+              "uid": "e1510c4291",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "chronic_hypertension"
+              }
+            },
+            { "say": "מחלת לב איסכמית?", "uid": "21181b8ec7" },
+            {
+              "uid": "40e7976741",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "chronic_ischemic_heart_disease"
+              }
+            },
+            { "say": "יש לך אסטמה?", "uid": "95eafb4142" },
+            {
+              "uid": "eae14b962d",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "asthma"
+              }
+            },
+            { "say": "מה לגבי מחלת ריאות כרונית?", "uid": "d1299b97d6" },
+            {
+              "uid": "2774eadeea",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "chronic_lung_disease"
+              }
+            },
+            {
+              "say": "אחרונה ודי, אי ספיקת כליות כרונית?",
+              "uid": "fe53981ff8"
+            },
+            {
+              "uid": "f40f5491db",
+              "wait": {
+                "options": [{ "show": "כן" }, { "show": "לא" }],
+                "variable": "chronic_kidney_failure"
+              }
+            },
+            {
+              "say": "אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?",
+              "uid": "e843a29c6c"
+            },
+            {
+              "uid": "900cb8cc34",
+              "wait": {
+                "options": [
+                  { "show": "אני לא בבידוד" },
+                  { "show": "אני בבידוד כי חזרתי מחו״ל לאחרונה" },
+                  {
+                    "show": "אני בבידוד כי הייתי במגע עם מישהו שחזר מחו״ל לאחרונה"
+                  },
+                  { "show": "אני בבידוד כי הייתי במגע עם מישהו שנדבק בנגיף" }
+                ],
+                "variable": "insulation"
+              }
+            },
+            { "say": "מה לגבי עישון?", "uid": "659fabc8b1" },
+            {
+              "uid": "45f176bde5",
+              "wait": {
+                "options": [
+                  { "show": "מעולם לא עישנתי" },
+                  { "show": "עישנתי בעבר" },
+                  { "show": "עישנתי לפחות 10 סיגריות בשבוע האחרון" }
+                ],
+                "variable": "smoking"
+              }
+            },
+            { "say": "ומה אומר המדחום?", "uid": "e2b0324aee" },
+            {
+              "uid": "602a8f7c01",
+              "wait": {
+                "placeholder": "כמה מעלות?",
+                "validation": "[.0-9]+",
+                "variable": "temprature"
+              }
+            },
+            {
+              "say": "המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהם לפני שהן מתפשטות. נתראה פה מחר?",
+              "uid": "dd73ce0f8c"
+            },
+            {
+              "uid": "cb1e99e383",
+              "wait": {
+                "options": [
+                  { "show": "בטח!" },
+                  {
+                    "show": "בהחלט. ואשמח גם לשתף את הטופס [לינקים לשיתוף ברשתות]"
+                  }
+                ],
+                "variable": "continue"
+              }
+            }
+          ],
+          "uid": "898235e117"
+        }
+      ]
+    }
+  ]
+}
