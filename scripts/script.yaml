@@ -1,0 +1,28 @@
+- description: תסריט לניהול שיחות מצד הפונה
+  name: פונה
+  snippets:
+    - name: default
+      steps:
+        - say: >-
+            שלום, הגעת למערכת דיווח בריאות.
+        - say: האם את.ה מרגיש.ה טוב??
+        - wait:
+            options:
+              - show: כן
+                steps:
+                  - say: מעולה, תודה!
+              - show: לא
+                steps:
+                  - say: האם יש לך חום?
+                  - wait:
+                      variable: has_fever
+                      options:
+                        - show: כן
+                          steps:
+                            - say: כמה יצא?
+                            - wait:
+                                variable: fever_measurement
+                        - show: לא
+        - say: |-
+            תודה רבה על שיתוף הפעולה.
+            רק בריאות!

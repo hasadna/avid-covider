@@ -1,0 +1,318 @@
+<?xml version="1.0" ?><xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file datatype="plaintext" original="ng2.template" source-language="he" target-language="en">
+    <body>
+      <trans-unit datatype="html" id="3216936f7696cdeac3358c949fe30b5312b6e170">
+        <source>חזרה<x ctype="lb" equiv-text="&lt;br/&gt;" id="LINE_BREAK"/>לדיווח</source>
+        <target>חזרה<x ctype="lb" equiv-text="&lt;br/&gt;" id="LINE_BREAK"/>לדיווח</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="2d5daea50362df136cd0e704d3aed15642524833">
+        <source>דיווח על מקרי גזענות ממסדית</source>
+        <target>דיווח על מקרי גזענות ממסדית</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="364fef1bfce612ee1499c1bbe7d55aed9b7307a1">
+        <source>אתר זה נועד לסייע לנפגעות ונפגעי תופעות של גזענות ואפליה. המערכת מסייעת ב:</source>
+        <target>אתר זה נועד לסייע לנפגעות ונפגעי תופעות של גזענות ואפליה. המערכת מסייעת ב:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="9d45c6a6320a1e217f5dbe343bc8f7615f8c2703">
+        <source>איסוף ותיעוד מידע מנפגע/ת אירוע גזענות ואפליה.</source>
+        <target>איסוף ותיעוד מידע מנפגע/ת אירוע גזענות ואפליה.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="03ed946ab9faf68490ecbad76527a005e8f2f1ee">
+        <source>הכרות הזכויות והפעולות בהן הנפגע/ת יכול/ה לנקוט.</source>
+        <target>הכרות הזכויות והפעולות בהן הנפגע/ת יכול/ה לנקוט.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="727a0979ce32b780bd9d996b809a778fc8c2bed0">
+        <source>יצירת קשר עם גופים רלוונטים במגזר הציבורי.</source>
+        <target>יצירת קשר עם גופים רלוונטים במגזר הציבורי.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="6279a76d9e95e30be448b95005c38a005f38fb28">
+        <source>שיתוף המידע וקבלת סיוע מארגוני מגזר השלישי רלוונטיים.</source>
+        <target>שיתוף המידע וקבלת סיוע מארגוני מגזר השלישי רלוונטיים.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="aae09b7e507d73e2f1f474c71f0c705eeeedb13d">
+        <source>מדיניות פרטיות</source>
+        <target>מדיניות פרטיות</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="947ff83ef269bc6aaa190847b650b867dcd0980e">
+        <source>מאחר שהעמותות המפעילות את מערכת הצ'אט לטיפול בתלונות גזענות (להלן &quot;הצ'אט&quot;), הסדנא לידע ציבורי והאגודה לזכויות האזרח (להלן &quot;העמותות&quot;), מכבדות את פרטיות המשתמשים בצ'אט, הפועל בכתובת האינטרנט [domain], החליטו העמותות לפרסם את מדיניותן ביחס להגנת הפרטיות בצ'אט, והן מתחייבות כלפי המשתמשים לקיים מדיניות זו.</source>
+        <target>מאחר שהעמותות המפעילות את מערכת הצ'אט לטיפול בתלונות גזענות (להלן &quot;הצ'אט&quot;), הסדנא לידע ציבורי והאגודה לזכויות האזרח (להלן &quot;העמותות&quot;), מכבדות את פרטיות המשתמשים בצ'אט, הפועל בכתובת האינטרנט [domain], החליטו העמותות לפרסם את מדיניותן ביחס להגנת הפרטיות בצ'אט, והן מתחייבות כלפי המשתמשים לקיים מדיניות זו.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="15af0f694671601603c0a18a6440203b7056b51f">
+        <source>מטרת המדיניות להסביר מהם נוהגי העמותות ביחס לפרטיות המשתמשים בצ'אט, וכיצד משתמשות העמותות במידע, הנמסר להן על-ידי המשתמשים בצ'אט או הנאסף על-ידן בעת השימוש בצ'אט. </source>
+        <target>מטרת המדיניות להסביר מהם נוהגי העמותות ביחס לפרטיות המשתמשים בצ'אט, וכיצד משתמשות העמותות במידע, הנמסר להן על-ידי המשתמשים בצ'אט או הנאסף על-ידן בעת השימוש בצ'אט. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="142ee1d033c63b1cbe0febc24651b26c6a2a31d6">
+        <source>דיווח על פגיעה בפרטיותך:</source>
+        <target>דיווח על פגיעה בפרטיותך:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="700b8a4e9e01e626282a3552defb946cad43316e">
+        <source>אם את/ה חושב/ת שפרטיותך נפגעה במהלך השימוש בצ'אט, אנא פנו לעמותות באמצעות כתובת הדוא&quot;ל: email@acri.org.il.</source>
+        <target>אם את/ה חושב/ת שפרטיותך נפגעה במהלך השימוש בצ'אט, אנא פנו לעמותות באמצעות כתובת הדוא&quot;ל: email@acri.org.il.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="8720bf4678554a367c3ac802a2989078625e5ea4">
+        <source>מידע שנאסף במהלך השימוש בצ'אט </source>
+        <target>מידע שנאסף במהלך השימוש בצ'אט </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="fdb07dc8dbeb0504a6f04480e82f5107ebdfd75f">
+        <source>בעת שימוש בצ'אט הנך מתבקש/ת למסור פרטי אמצעי ליצירת קשר (מייל, טלפון וכו') וכן פרטים אודות האירוע שבענייננו הנך פונה לצ'אט והכל לצורך הטיפול בתלונה. ניתן להישאר בעילום שם בעת השימוש בצ'אט. הפרטים שתמסור/תמסרי בצ'אט יועברו לנציגים בעמותות לצורך טיפול בתלונה. אינך חייב/ת על פי חוק למסור את הפרטים והמידע האישי. אולם ללא מסירת פרטים ליצירת קשר, לא נוכל להמשיך בטיפול בתלונה ולסייע לך. </source>
+        <target>בעת שימוש בצ'אט הנך מתבקש/ת למסור פרטי אמצעי ליצירת קשר (מייל, טלפון וכו') וכן פרטים אודות האירוע שבענייננו הנך פונה לצ'אט והכל לצורך הטיפול בתלונה. ניתן להישאר בעילום שם בעת השימוש בצ'אט. הפרטים שתמסור/תמסרי בצ'אט יועברו לנציגים בעמותות לצורך טיפול בתלונה. אינך חייב/ת על פי חוק למסור את הפרטים והמידע האישי. אולם ללא מסירת פרטים ליצירת קשר, לא נוכל להמשיך בטיפול בתלונה ולסייע לך. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="43fd547e0f9ea5a41d523fe79ee92db5a9d0da2b">
+        <source>מאגר המידע </source>
+        <target>מאגר המידע </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="e19783b1c327e673fdd7f6696c20acd05f2239ba">
+        <source>הנתונים שנאספים ממשתמשי הצ'אט יישמרו במאגר המידע של העמותות ובאחריותן.</source>
+        <target>הנתונים שנאספים ממשתמשי הצ'אט יישמרו במאגר המידע של העמותות ובאחריותן.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="ecc681c5346a8c329e38c62f82a00d80429384a3">
+        <source>השימוש במידע</source>
+        <target>השימוש במידע</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="42d9629a93c89a5535d9ed12ac9b0a9566ec8387">
+        <source>השימוש במידע שנאסף, ייעשה רק על פי מדיניות פרטיות זו על מנת לטפל בתלונה הפרטנית. כמו כן, לצרכי זיהוי מגמות של גילויי גזענות וטיפול מערכתי בגזענות, ייעשה שימוש סטטיסטי במידע שנאסף שאין בו כל מימד אישי שעלול לזהות את המשתמש. </source>
+        <target>השימוש במידע שנאסף, ייעשה רק על פי מדיניות פרטיות זו על מנת לטפל בתלונה הפרטנית. כמו כן, לצרכי זיהוי מגמות של גילויי גזענות וטיפול מערכתי בגזענות, ייעשה שימוש סטטיסטי במידע שנאסף שאין בו כל מימד אישי שעלול לזהות את המשתמש. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="daa0be9590eecd602c8b3b154959a417737eacc4">
+        <source>מסירת מידע לצד שלישי </source>
+        <target>מסירת מידע לצד שלישי </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="c376f3933d51071151406051e8eace192cdde82a">
+        <source>העמותות לא יעבירו לצדדים שלישיים את פרטיך האישיים וכל מידע אחר שמסרת בצ'אט  אלא אם נתת את הסכמתך להעברת התלונה לטיפול בידי רשות שלטונית רלוונטית או לטיפול של עמותה אחרת. </source>
+        <target>העמותות לא יעבירו לצדדים שלישיים את פרטיך האישיים וכל מידע אחר שמסרת בצ'אט  אלא אם נתת את הסכמתך להעברת התלונה לטיפול בידי רשות שלטונית רלוונטית או לטיפול של עמותה אחרת. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="4f489cc30da4fa5f11f653ae52eacef505ba9170">
+        <source>Cookies</source>
+        <target>Cookies</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="4ad29e861f29913be0ab78e5390c1acd28732b54">
+        <source>אתר החברה  משתמש ב&quot;עוגיות&quot; (Cookies) לצורך תפעולם השוטף והתקין, ובכלל זה כדי לאסוף נתונים סטטיסטיים אודות השימוש באתר, לאימות פרטים, כדי להתאים את האתר להעדפותיך האישיות ולצורכי אבטחת מידע.</source>
+        <target>אתר החברה  משתמש ב&quot;עוגיות&quot; (Cookies) לצורך תפעולם השוטף והתקין, ובכלל זה כדי לאסוף נתונים סטטיסטיים אודות השימוש באתר, לאימות פרטים, כדי להתאים את האתר להעדפותיך האישיות ולצורכי אבטחת מידע.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="c2ae17ecc49ce1e8d6c298754123aaff6dd0106f">
+        <source>דפדפנים מודרניים כוללים אפשרות להימנע מקבלת Cookies. אם אינך יודע/ת כיצד לעשות זאת, בדוק בקובץ העזרה של הדפדפן שבו את/ה משתמש/ת.</source>
+        <target>דפדפנים מודרניים כוללים אפשרות להימנע מקבלת Cookies. אם אינך יודע/ת כיצד לעשות זאת, בדוק בקובץ העזרה של הדפדפן שבו את/ה משתמש/ת.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="327bbbee401a29eb04b742a757f656afe747b473">
+        <source>אבטחת מידע</source>
+        <target>אבטחת מידע</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="1785dc3cf4f3dbae4f1c3e6544b4c2f91bda41dc">
+        <source>העמותות מיישמות במערכת הצ'אט מערכות ונהלים עדכניים לאבטחת מידע. בעוד שמערכות ונהלים אלה מצמצמים את הסיכונים לחדירה בלתי-מורשית, אין הם מעניקים בטחון מוחלט. לכן, העמותות לא מתחייבות שהמערכת תהיה חסינה באופן מוחלט מפני גישה בלתי-מורשית למידע המאוחסן בה. </source>
+        <target>העמותות מיישמות במערכת הצ'אט מערכות ונהלים עדכניים לאבטחת מידע. בעוד שמערכות ונהלים אלה מצמצמים את הסיכונים לחדירה בלתי-מורשית, אין הם מעניקים בטחון מוחלט. לכן, העמותות לא מתחייבות שהמערכת תהיה חסינה באופן מוחלט מפני גישה בלתי-מורשית למידע המאוחסן בה. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="ea6ff87ad473c3c43c827708a614c448ce8ba36f">
+        <source>זכות לעיין במידע </source>
+        <target>זכות לעיין במידע </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="57d111f85d1e03f2fb49d7f19e0c5493aea87c58">
+        <source>על-פי חוק הגנת הפרטיות, התשמ&quot;א - 1981, כל אדם זכאי לעיין במידע שעליו המוחזק במאגר מידע. אדם שעיין במידע שעליו ומצא כי אינו נכון, שלם, ברור או מעודכן, רשאי לפנות לבעל מאגר המידע בבקשה לתקן את המידע או למוחקו. פנייה כזאת יש להפנות אל email@acri.org.il.</source>
+        <target>על-פי חוק הגנת הפרטיות, התשמ&quot;א - 1981, כל אדם זכאי לעיין במידע שעליו המוחזק במאגר מידע. אדם שעיין במידע שעליו ומצא כי אינו נכון, שלם, ברור או מעודכן, רשאי לפנות לבעל מאגר המידע בבקשה לתקן את המידע או למוחקו. פנייה כזאת יש להפנות אל email@acri.org.il.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="3a28323bed868b28ab4bd39dec93a27290bfb061">
+        <source>שינויים במדיניות הפרטיות </source>
+        <target>שינויים במדיניות הפרטיות </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="99bd81fa2cb4b20dad3854c58f46b4e398486f5a">
+        <source>בכל מקרה בו יבוצעו במדיניות זו שינויים מהותיים בהוראות שעניינן השימוש במידע אישי שמסרת, תפורסם על-כך הודעה באתר הפרוייקט.</source>
+        <target>בכל מקרה בו יבוצעו במדיניות זו שינויים מהותיים בהוראות שעניינן השימוש במידע אישי שמסרת, תפורסם על-כך הודעה באתר הפרוייקט.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="8bb69fabf895eddfa56eeeab599541b24aa3d21d">
+        <source>
+        Funded by the European Union. The content of this site should in no way be considered to reflect the view of the European Union.
+      </source>
+        <target>
+        Funded by the European Union. The content of this site should in no way be considered to reflect the view of the European Union.
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="466b774b68a0cf411642684098a6cccaa410c408">
+        <source>שלום,<x ctype="lb" equiv-text="&lt;br/&gt;" id="LINE_BREAK"/>
+      הגעת למוקד סיוע לנפגעי גזענות ואפליה ממסדית.</source>
+        <target>שלום,<x ctype="lb" equiv-text="&lt;br/&gt;" id="LINE_BREAK"/>
+      הגעת למוקד סיוע לנפגעי גזענות ואפליה ממסדית.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="e6d695b53cbc6d5a92f0caedbc3ec416954dfba4">
+        <source>לדיווח על אירוע אפליה או גזענות <x ctype="x-i" equiv-text="&lt;i&gt;" id="START_ITALIC_TEXT"/><x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></source>
+        <target>לדיווח על אירוע אפליה או גזענות <x ctype="x-i" equiv-text="&lt;i&gt;" id="START_ITALIC_TEXT"/><x ctype="x-i" equiv-text="&lt;/i&gt;" id="CLOSE_ITALIC_TEXT"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="a433efec070578c6564c7dd0d4a8bf495fcfab0c">
+        <source>מידע נוסף</source>
+        <target>מידע נוסף</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="2b299db3b08e59a7b03bd8da3ed8a2d567c14da5">
+        <source>
+          נתקלתם בגזענות או אפליה? רוצים לדווח עליה או לדעת מה אפשר לעשות? 
+          </source>
+        <target>
+          נתקלתם בגזענות או אפליה? רוצים לדווח עליה או לדעת מה אפשר לעשות? 
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="08e52622e8bb8e25b753640ca2873dc8e5e3333c">
+        <source>
+            שלחו לנו את פרטי המקרה 24/7 ונחזור אליכם עם תשובות והמלצות לפעולה
+          </source>
+        <target>
+            שלחו לנו את פרטי המקרה 24/7 ונחזור אליכם עם תשובות והמלצות לפעולה
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">80</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit datatype="html" id="d53025e82ad750419c8904e9e19d72774573cec0">
+        <source>
+            התנהגות גזענית ומפלה היא תופעה נפוצה בחברה הישראלית.
+            כדי למגר אותה חשוב שלא נשתוק ולא נוותר כשאנחנו נתקלים במקרים כאלה.
+          </source>
+        <target>
+            התנהגות גזענית ומפלה היא תופעה נפוצה בחברה הישראלית.
+            כדי למגר אותה חשוב שלא נשתוק ולא נוותר כשאנחנו נתקלים במקרים כאלה.
+          </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="linenumber">83</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
