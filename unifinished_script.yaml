@@ -7,6 +7,7 @@
         - goto: preconditions
         - goto: insulation
         - goto: current_report
+        - goto: exposures
         - goto: end_of_report
 
       - name: personal_details
@@ -237,3 +238,38 @@
               options:
                 - show: בטח!
                 - show: בהחלט. ואשמח גם לשתף את הטופס [לינקים לשיתוף ברשתות]
+
+      - name: exposures
+        steps:
+          - say: מהו מספר האנשים השונים ששהית בקרבתם מעל ל-5 דקות ביממה האחרונה?
+          - wait:
+              variable: exposure_met_people
+              placehoder: מספר האנשים
+              validation: "[0-9]+"
+
+          - say: כמה בני משפחה או דיירים אחרים מתגוררים איתך באותו הבית או באותה הדירה?
+          - wait:
+              variable: flatmates
+              placehoder: מספר האנשים
+              validation: "[0-9]+"
+          
+          - say: כמה מהם בני 70 או יותר?
+          - wait:
+              variable: flatmates_over_70
+              placehoder: מספר האנשים
+              validation: "[0-9]+"
+
+          - say: כמה מהם מתחת לגיל 18?
+          - wait:
+              variable: flatmates_under_18
+              plachoder: מספר האנשים
+              validation: "[0-9]_"
+
+          - say: האם בעבודתך את/ה נותנ/ת שירות באופן פיזי ליותר מ-10 אנשים ביום?
+          - wait:
+              variable: work_serve_over_10
+              options:
+                - show: "כן"
+                  value: True 
+                - show: "לא"
+                  value: False
