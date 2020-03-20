@@ -1,0 +1,239 @@
+  - description: תסריט לניהול שיחות מצד הפונה
+    name: פונה
+    snippets:
+      - name: default
+        steps:
+        - goto: personal_details
+        - goto: preconditions
+        - goto: insulation
+        - goto: current_report
+        - goto: end_of_report
+
+      - name: personal_details
+        steps:
+          - say: שלום, הגעת למערכת דיווח בריאות.
+                          
+          - say:  אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר.
+          - say: קודם כל, מה גילך?
+          - wait:
+              variable: age
+              validation: "[.0-9]+"
+              placeholder: "גיל"
+              
+          - say: בן? בת?
+          - wait:      
+              variable: sex
+              options:
+                - show: בן
+                  value: male
+                - show: בת
+                  value: female
+                
+          - say: מה הוא מקום מגוריך?
+          - wait:
+              variable: city_town
+              placeholder: "שם העיר או הישוב"
+
+          - say: שם הרחוב?
+          - wait:
+              variable: street
+
+      - name: preconditions
+        steps:
+          - say: "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:"
+          - wait:
+              options:
+                - show: "סוכרת"
+                  value: chronic_diabetes
+                  unless: chronic_diabetes
+                - show: "בעיית יתר לחץ דם"
+                  value: chronic_hypertension
+                  unless: chronic_hypertension
+                - show: מחלקת לב, כלי דם או שבץ
+                  value: chronic_ischemic_heart_disease_or_stroke
+                  unless: chronic_ischemic_heart_disease_or_stroke
+                - show: מחלת ריאות כרונית
+                  value: chronic_lung_disease
+                  unless: chronic_lung_disease
+                - show: סרטן
+                  value: chronic_cacner
+                  nuless: chronic_cacner
+                - show: אי ספיקת כליות
+                  value: chronic_kidney_failure
+                  unless: chronic_kidney_failure
+                - show: לא אובחנתי באף אחד מאלה
+          - say: מה לגבי עישון?
+          - wait:
+              variable: smoking
+              options:
+                - show: אני מעשן
+                - show: עישנתי בעבר, בחמש השנים האחרונות
+                - show: עישנתי בעבר, לפני יותר מחמש שנים
+                - show: אף פעם
+
+      - name: insulation
+        steps:
+          - say: אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?
+          - wait:
+              variable: insulation_status
+              options:
+                - show: אני לא בבידוד
+                - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                  steps: 
+                    - say: מתי חזרת לארץ?
+                      wait:
+                        variable: insulation_returned_from_abroad_date
+                        placeholder: "תאריך: dd.mm.yy"
+                        validation: "[0-9][0-9].[0-9][0-9].[0-9][0-9]"
+                - show: אני בבידוד כי נחשפתי לחולה מאומת/ת
+                  steps:
+                    - say: ידוע לך מה מספר החולה המאומת/ת שפגשת?
+                    - wait:
+                      variable: 
+                      options:
+                        - show: "כן"
+                        - steps:
+                          - say: מה מספר החולה המאומת/ת שפגשת?
+                          - wait:
+                            variable: insulation_patient_number
+                            validation: "[0-9]+"
+                            placeholder: "מספר החולה שפגשתי"
+                          - say: האם ידוע לכם התאריך שבו נפגשתם?
+                          - wait:
+                            options:
+                              - show: "כן"
+                                steps: 
+                                  - say: באיזה תאריך?
+                                  - wait:
+                                    variable: insulation_exposure_date
+                                    placeholder: "תאריך: dd.mm.yy"
+                                    validation: "[0-9][0-9].[0-9][0-9].[0-9][0-9]"
+                              - show: "לא"
+                        - show: "לא"
+                - show: אני נמצא בבידוד כי חוויתי תסמינים
+                - show: אני נמצא בבידוד מרצוני האישי                    
+                - show: אני מאושפז
+                  steps:
+                    variable: hospitalized
+                    options:                    
+                    - show: אני חולה מאומת/ת בבדיקת מעבדה לקורונה – מאושפז/ת בבית חולים
+                    - show: אני חולה מאומת/ת –  מאושפז/ת בבית חולים
+                    - show: אני חולה מאומת/ת - מאושפז/ת במלון
+                    - show: אני חולה מאומת/ת - בבידוד בבית
+      
+      - name: current_report
+        steps:
+          - say: מה שלומך היום?
+          - wait:
+              options:
+                - show: מצויין!
+                - show: לא כל כך טוב
+                  steps:                    
+                    - say: אוייש… תוכל/י לפרט איך זה בא לידי ביטוי?
+                    - wait:
+                      variable: reprted_symptoms
+                      options:
+                        - show: שיעולים ו/או נזלת
+                          unless: שיעולים ו/או נזלת 
+                          steps: 
+                            goto: symptoms_cough_questions
+                        - show: כאבים
+                          unless: כאבים
+                          steps:
+                            goto: symptoms_pains_questions
+                        - show: עייפות או חולשה
+                          unless: עייפות או חולשה
+                          steps:
+                            - goto: sympotms_tiredness_questions
+                        - show: בעיות קיבה
+                          unless: שלשולים ובחילות
+                          steps:
+                            - goto: symptoms_stomach_questions
+                        - show: משהו אחר
+                          unless: משהו אחר
+                          steps:
+                            - goto: symptoms_other_questions
+                        - show: אף אחת מהאפשרויות
+
+          - say: ומה אומר המדחום?
+          - wait:
+              variable: fever
+              options:
+                - show: "36-36.9"
+                - show: "37-37.4"
+                - show: "37.5-37.9"
+                - show: "38-38.9"
+                - show: "39 או יותר"
+
+      - name: symptoms_cough_questions
+        steps:
+        - wait:
+          variable: symptoms_cough
+          options:
+           - show: נזלת או גודש באף
+             value: נזלת או גודש באף
+             unless: נזלת או גודש באף
+           - show: כאבי גרון
+             value: כאבי גרון
+             unless: כאבי גרון
+           - show: שיעול יבש
+             value: שיעול יבש
+             unless: שיעול יבש
+           - show: שיעול לח, או שיעול עם כיח
+             value: שיעול לח, או שיעול עם כיח
+             unless: שיעול לח, או שיעול עם כיח
+           - show: קוצר נשימה
+             value: קוצר נשימה
+             unless: קוצר נשימה  
+
+      - name: symptoms_pains_questions
+        steps:
+        - wait:
+            variable: symptoms_pains
+            options:
+            - show: כאבי שרירים
+              value: כאבי שרירים
+              unless: כאבי שרירים
+            - show: כאבי ראש
+              value: כאבי ראש
+              unless: כאבי ראש
+
+      - name: sympotms_tiredness_questions
+        steps:
+        - wait:
+          variable: symptoms_tiredness
+          options:
+          - show: חולשה
+            value: חולשה
+            unless: חולשה
+          - show: עייפות חריגה
+            value: עייפות חריגה
+            unless: עייפות חריגה
+
+      - name: symptoms_stomach_questions
+        steps:
+        - wait:
+          variable: symptoms_stomach
+          options:
+          - show: שלשול
+            value: שלשול
+            unless: שלשול
+          - show: בחילה או הקאות
+            value: בחילה או הקאות
+            unless: בחילה או הקאות
+
+      - name: symptoms_other_questions
+        steps:
+        - say: מהם התופעות או הסימפטומים הנוספים שכדאי שנדע עליהם?
+        - wait:
+          variable: symptoms_other
+          placeholder: "שם המחלה או הסימפטום"
+      
+      - name: end_of_report
+        steps:
+          - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהם לפני שהן מתפשטות. נתראה פה מחר?
+          - wait:
+              variable: continue
+              options:
+                - show: בטח!
+                - show: בהחלט. ואשמח גם לשתף את הטופס [לינקים לשיתוף ברשתות]
