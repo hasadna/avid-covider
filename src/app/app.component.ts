@@ -53,6 +53,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   start() {
+    this.moreInfoVisible = false;
     if (this.started) {
       return;
     }

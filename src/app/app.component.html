@@ -1,75 +1,56 @@
 <div class='container' [class.started]='started'>
   <div class='more-info-box' *ngIf='moreInfoVisible'>
     <div class='header'>
-      <div class='help' (click)='moreInfoVisible = false'>
-        <span class='close'>
-          <i class='fas fa-chevron-right'></i>
-          <span i18n>חזרה<br/>לדיווח</span>
-        </span>
-      </div>
-      <div class='title' i18n>נלחמים בקורונה ביחד</div>
     </div>
     <div class='content'>
-      <p i18n>אתר זה נועד לסייע באיתור התפרצויות מקומיות של קורונה</p>
-      <div class='images'>
-        <a href='https://www.hasadna.org.il' target='_blank'><img src='assets/img/hasadna.png'/></a>
-        <a href='https://www.weizmann.ac.il/pages/he' target='_blank'><img src='assets/img/department-logo-copy-2@3x.png'></a>
-      </div>
+      <div class='text'>
+        <p i18n class='bigger'>
+              כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+        </p>
         <p i18n>
-        כולנו מעדכנים כל יום על מצב בריאותנו כדי להגין על הורינו וילדינו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
         </p>
-        <p il18n>
-        חוקרי מכון וייצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו, שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
+        <p i18n>
+עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/>
+השאלון אנונימי לחלוטין. 
         </p>
-        <p il18n>
-        עליך למלא את השאלון פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/><br/>
-        השאלון אנונימי לחלוטין. תודה לך!
+        <p i18n>
+תודה לך! 🙏
         </p>
-        <p il18n>
-          * חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף- אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. <br/><br/>
-          פרופסור ערן סגל, מכון ויצמן למדע<br/>
-          פרופסור יובל דור, האוניברסיטה העברית<br/>
-          פרופסור בנימין גיגר, מכון ויצמן למדע<br/>
+        <p i18n>
+*חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
         </p>
-      <hr/>
-      <!--div class='images'>
-        <a href='https://europa.eu/european-union/about-eu_en' target='_blank'><img src='assets/img/eu.svg'/></a>
+        <p i18n>
+פרופסור ערן סגל, מכון ויצמן למדע
+<br/>
+פרופסור יובל דור, האוניברסיטה העברית
+<br/>
+פרופסור בנימין גיגר, מכון ויצמן למדע
+        </p>
       </div>
-      <p class='center' i18n>
-        Funded by the European Union. The content of this site should in no way be considered to reflect the view of the European Union.
-      </p-->
+      <div class='cta'>
+        <span class='button' (click)='start()' i18n>בהחלט, בואו נתחיל</span>
+      </div>
     </div>
   </div>
-  <div class='introduction'>
+  <div class='introduction' *ngIf='!moreInfoVisible'>
     <div class='header'>
     </div>
     <div class='hero'>
       <h1 i18n>הי,<br/>
       חשוב לנו לדעת מה שלומך, באמת.</h1>
+      <h2 i18n>
+      כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+      </h2>
+      <h2 class='moreinfo' (click)='moreInfoVisible = !moreInfoVisible' i18n>עוד על המחקר…</h2>
+      <div class='logos'>
+        <img src='assets/img/weizmann-logo.png'/>
+        <img src='assets/img/hasadna-logo.svg'/>
+      </div>
       <div class='cta'>
-        <span class='button' (click)='start()' i18n>בהחלט, בואו נתחיל <i class="fas fa-chevron-left"></i></span>
-        <span class='moreinfo' (click)='moreInfoVisible = !moreInfoVisible' i18n>מידע נוסף</span>
+        <span class='button' (click)='start()' i18n>בהחלט, בואו נתחיל</span>
       </div>
-      <div class='explanation' [class.active]='helpVisible'>
-        <div class='content'>
-          <p i18n>
-          כולנו מעדכנים כל יום על מצב בריאותנו כדי להגין על הורינו וילדינו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
-          </p>
-          <p il18n>
-          חוקרי מכון וייצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו, שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
-          </p>
-          <p il18n>
-          עליך למלא את השאלון פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/><br/>
-          השאלון אנונימי לחלוטין. תודה לך!
-          </p>
-          <p il18n>
-            * חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף- אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. <br/><br/>
-            פרופסור ערן סגל, מכון ויצמן למדע<br/>
-            פרופסור יובל דור, האוניברסיטה העברית<br/>
-            פרופסור בנימין גיגר, מכון ויצמן למדע<br/>
-          </p>
-        </div>
-      </div>
+
     </div>
   </div>
   <div class='chat'>
