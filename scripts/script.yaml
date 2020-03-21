@@ -381,7 +381,7 @@
 
           - say: האם בעבודה יוצא לך לתת שירות ליותר מ-10 אנשים ביום?
           - wait:
-              variable: work_serve_over_18
+              variable: work_serve_over_10
               options:
                 - show: "כן"
                   value: true 
