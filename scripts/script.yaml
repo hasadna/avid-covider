@@ -115,7 +115,7 @@
                 - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
                   value: back-from-abroad
                   steps: 
-                    - say: "מתי חזרת לארץ (תאריך: dd.mm.yy)"
+                    - say: "מתי חזרת לארץ?"
                     - wait:
                         variable: insulation_returned_from_abroad_date
                         placeholder: "תאריך: dd.mm.yy"
@@ -131,7 +131,7 @@
                               - wait:
                                   variable: insulation_patient_number
                                   placeholder: "מספר החולה שפגשתי"
-                              - say: האם ידוע לכם התאריך שבו נפגשתם? (dd.mm.yy)
+                              - say: האם ידוע לכם התאריך שבו נפגשתם?
                               - wait:
                                   options:
                                     - show: "כן"
