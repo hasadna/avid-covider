@@ -209,7 +209,7 @@
                   unless: toplevel_symptoms_cough
                   value: toplevel_symptoms_cough
                   steps:
-                    - say: מה בדיוק?
+                    - say: נשמח לעוד כמה פרטים בנוגע לגבי תופעות השיעול והנזלת. 
                     - goto: symptoms_cough_questions
                     - say: יש עוד בעיות שקשורות בשיעולים או נזלת?
                     - goto: symptoms_cough_questions
