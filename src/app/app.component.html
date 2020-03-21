@@ -7,7 +7,7 @@
           <span i18n>חזרה<br/>לדיווח</span>
         </span>
       </div>
-      <div class='title' i18n>דיווח בריאות יומי</div>
+      <div class='title' i18n>נלחמים בקורונה ביחד</div>
     </div>
     <div class='content'>
       <p i18n>אתר זה נועד לסייע באיתור התפרצויות מקומיות של קורונה</p>
@@ -66,16 +66,31 @@
     <div class='header'>
     </div>
     <div class='hero'>
-      <h1 i18n>שלום,<br/>
-      הגעת למערכת דיווח בריאות יומית.</h1>
+      <h1 i18n>הי,<br/>
+      חשוב לנו לדעת מה שלומך, באמת.</h1>
       <div class='cta'>
-        <span class='button' (click)='start()' i18n>לדיווח על מצב בריאותכם <i class="fas fa-chevron-left"></i></span>
-        <span class='moreinfo' (click)='moreInfoVisible = !moreInfoVisible' i18n>מידע נוסף</span>
+        <span class='button' (click)='start()' i18n>בהחלט, בואו נתחיל <i class="fas fa-chevron-left"></i></span>
+        <!-- <span class='moreinfo' (click)='moreInfoVisible = !moreInfoVisible' i18n>מידע נוסף</span> -->
       </div>
       <div class='explanation' [class.active]='helpVisible'>
         <div class='content'>
           <p i18n>
-          הסבר הסבר הסבר? 
+          כולנו מעדכנים כל יום על מצב בריאותנו כדי להגין על הורינו וילדינו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+          </p>
+          <p il18n>
+          חוקרי מכון וייצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו, שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
+          </p>
+          <p il18n>
+          עליך למלא את השאלון פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br>
+          השאלון אנונימי לחלוטין.
+          <br/>
+          תודה לך!
+          </p>
+          <p il18n>
+            * חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף- אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. <br/><br/>
+            פרופסור ערן סגל, מכון ויצמן למדע<br/>
+            פרופסור יובל דור, האוניברסיטה העברית<br/>
+            פרופסור בנימין גיגר, מכון ויצמן למדע<br/>
           </p>
         </div>
       </div>
@@ -86,7 +101,7 @@
       <div class='help' [class.active]='moreInfoVisible' (click)='moreInfoVisible = !moreInfoVisible'>
         <span class='question'>?</span>
       </div>
-      <div class='title' i18n>דיווח על בריאותכם</div>
+      <div class='title' i18n>נלחמים בקורונה ביחד</div>
     </div>
     <htl-hatool></htl-hatool>
   </div>
