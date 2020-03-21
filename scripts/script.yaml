@@ -130,7 +130,7 @@
                               - wait:
                                   variable: insulation_patient_number
                                   placeholder: "מספר החולה שפגשתי"
-                              - say: האם ידוע לכם התאריך שבו נפגשתם?
+                              - say: האם ידוע לך התאריך שבו נפגשתם?
                               - wait:
                                   options:
                                     - show: "כן"
