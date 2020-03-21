@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { ScriptRunnerService, ContentService } from 'hatool';
+import { ScriptRunnerService, ContentService, ScriptRunnerNew } from 'hatool';
 import { FileUploader } from 'hatool';
 
 
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   moreInfoVisible = false;
   started = false;
   created = false;
+  runnerImpl: ScriptRunnerNew;
 
   @ViewChild('uploadFileText') uploadFileText: ElementRef;
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
@@ -22,7 +23,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
 
   constructor(private runner: ScriptRunnerService,
-              private content: ContentService) {}
+              private content: ContentService) {
+    this.runnerImpl = <ScriptRunnerNew>this.runner.R;
+    this.runnerImpl.timeout = 1;
+  }
 
   prepareToSave(record) {
     // filter records fields, to save those that do not start with '_'
@@ -55,7 +59,15 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.runner.run(
       '/assets/script.json',
       0,
-      {},
+      {
+        flag_from_var: (record: any, varname) => {
+          varname = varname || '_var';
+          if (record[varname]) {
+            record[record[varname]] = true;
+            record[varname] = null;
+          }
+        }
+      },
       (key, value, record) => {}
     ).subscribe(() => { console.log('done!'); });
   }

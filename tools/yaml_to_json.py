@@ -25,14 +25,18 @@ def get_field(x, f):
 
 
 def get_uid(x, stack, index=None):
-    FIELDS = ['name', 'wait.variable', 'say', 'switch.arg', 'do.cmd', 'do.variable', 'match', 'pattern', 'default', 'show']
-    values = [get_field(x, f) for f in FIELDS]
-    values = ','.join([str(v) for v in values if v is not None])
-    assert len(values) > 0
-    current_hash = ''.join(stack)
-    key = '{}|{}|{}'.format(current_hash, values, index)
-    ret = calc_hash(key)
-    return ret
+    try:
+        FIELDS = ['name', 'wait.variable', 'say', 'switch.arg', 'do.cmd', 'do.variable', 'match', 'pattern', 'default', 'show']
+        values = [get_field(x, f) for f in FIELDS]
+        values = ','.join([str(v) for v in values if v is not None])
+        assert len(values) > 0
+        current_hash = ''.join(stack)
+        key = '{}|{}|{}'.format(current_hash, values, index)
+        ret = calc_hash(key)
+        return ret
+    except:
+        print(x, stack)
+        raise
 
 
 def assign_ids(x, stack=[]):
