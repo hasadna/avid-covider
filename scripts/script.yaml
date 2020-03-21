@@ -18,7 +18,6 @@
           - say: קודם כל, מה גילך?
           - wait:
               variable: age
-              validation: "[.0-9]+"
               placeholder: "גיל"
               input-kind: number
               
