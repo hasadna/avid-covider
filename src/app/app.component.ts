@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { ScriptRunnerService, ContentService, ScriptRunnerNew } from 'hatool';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID } from '@angular/core';
+import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { switchMap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -14,20 +14,24 @@ export class AppComponent implements OnInit, AfterViewInit {
   title = 'hatool';
   helpVisible = false;
   moreInfoVisible = false;
+  thankYouVisible = false;
   started = false;
   created = false;
-  runnerImpl: ScriptRunnerNew;
+  content: ContentManager;
+  runner: ScriptRunnerImpl;
 
   @ViewChild('uploadFileText') uploadFileText: ElementRef;
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
   @ViewChild('notUploadedFileText') notUploadedFileText: ElementRef;
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
 
-  constructor(private runner: ScriptRunnerService,
-              private content: ContentService,
-              private http: HttpClient) {
-    this.runnerImpl = <ScriptRunnerNew>this.runner.R;
-    this.runnerImpl.timeout = 250;
+  constructor(private http: HttpClient, @Inject(LOCALE_ID) private locale) {}
+
+  init() {
+    this.content = new ContentManager();
+    this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
+    this.runner.timeout = 250;
+    this.runner.debug = true;
   }
 
   prepareToSave(record) {
@@ -42,18 +46,27 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.content.M.uploadFileText = this.uploadFileText.nativeElement.innerHTML;
-    this.content.M.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
-    this.content.M.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
-    this.content.M.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
+    this.content.uploadFileText = this.uploadFileText.nativeElement.innerHTML;
+    this.content.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
+    this.content.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
+    this.content.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
   }
 
   ngOnInit() {
-    this.content.M.sendButtonText = '';
+    this.init();
+    this.content.sendButtonText = '';
+  }
+
+  restart() {
+    this.ngOnInit();
+    this.ngAfterViewInit();
+    this.runner.state = {};
+    this.start();
   }
 
   start() {
     this.moreInfoVisible = false;
+    this.thankYouVisible = false;
     if (this.started) {
       return;
     }
@@ -74,11 +87,15 @@ export class AppComponent implements OnInit, AfterViewInit {
       (key, value, record) => {}
     ).pipe(
       switchMap(() => {
-        const payload = this.prepareToSave(this.runnerImpl.record);
+        const payload = this.prepareToSave(this.runner.record);
         return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
       }),
       map((response: any) => response.success)
-    ).subscribe((success) => {console.log('done, success=' + success); });
+    ).subscribe((success) => {
+      console.log('done, success=' + success);
+      this.thankYouVisible = true;
+      this.started = false;
+    });
   }
 
 }

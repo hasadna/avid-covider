@@ -27,12 +27,48 @@
 <br/>
 פרופסור בנימין גיגר, מכון ויצמן למדע
         </p>
+        <div class='logos'>
+          <img src='assets/img/weizmann-logo.png'/>
+          <img src='assets/img/hasadna-logo.svg'/>
+        </div>
+        <div class='logos'>
+          <img src='assets/img/migdal-logo.svg'/>
+        </div>
+        <div class='links'>
+          <a href='privacy.com' i18n target='_blank'>מדיניות פרטיות</a>&nbsp;|&nbsp;<a href='https://github.com/hasadna/avid-co' i18n target='_blank'>קוד המקור</a>
+        </div>
       </div>
       <div class='cta'>
         <span class='button' (click)='start()' i18n>בהחלט, בואו נתחיל</span>
       </div>
     </div>
   </div>
+  <div class='thank-you-box' *ngIf='thankYouVisible'>
+    <div class='header'>
+    </div>
+    <div class='content'>
+      <h1 i18n>
+תודה רבה,<br/>
+בזכותך התקרבנו עוד צעד אחד לסוף של זה…
+      </h1>
+      <h2 i18n>
+כדאי לשתף את הקישור עם בני משפחה וחברים, חשוב שכולם יתרגלו לדווח כל יום.
+זה המעט שאנחנו יכולים לעשות…
+      </h2>
+
+      <div class='copybox'>
+        <div class='url'>https://coronadaily.org</div>
+        <div class='ic'><img src='assets/img/copy-icon.svg'></div>
+      </div>
+
+      <div class='share-text' i18n>ילדים בבית? מבוגרים?</div>
+
+      <div class='cta'>
+        <span class='button' (click)='restart()' i18n>אפשר לשלוח עדכון נוסף</span>
+      </div>
+    </div>
+  </div>
+
   <div class='introduction' *ngIf='!moreInfoVisible'>
     <div class='header'>
     </div>
@@ -55,12 +91,12 @@
   </div>
   <div class='chat'>
     <div class='header'>
-      <div class='help' [class.active]='moreInfoVisible' (click)='moreInfoVisible = !moreInfoVisible'>
+      <div class='help' [class.active]='thankYouVisible' (click)='thankYouVisible = !thankYouVisible'>
         <span class='question'>?</span>
       </div>
       <div class='title' i18n>נלחמים בקורונה ביחד</div>
     </div>
-    <htl-hatool></htl-hatool>
+    <htl-hatool [content]='content'></htl-hatool>
   </div>
 </div>
 
