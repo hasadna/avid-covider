@@ -39,6 +39,8 @@
           - say: שם הרחוב?
           - wait:
               variable: street
+              placeholder: שם הרחוב
+
 
       - name: preconditions
         steps:
@@ -111,8 +113,7 @@
                     - wait:
                         variable: insulation_returned_from_abroad_date
                         placeholder: "תאריך: dd.mm.yy"
-                        validation: "[0-9][0-9].[0-9][0-9].[0-9][0-9]"
-                - show: אני בבידוד כי נחשפתי לחולה מאומת/ת
+                - show: אני בבידוד כי נחשפתי לחולה מאומת
                   value: contact-with-patient
                   steps:
                     - say: ידוע לך מה מספר החולה שפגשת?
@@ -123,7 +124,6 @@
                               - say: מה מספר החולה שפגשת?
                               - wait:
                                   variable: insulation_patient_number
-                                  validation: "[0-9]+"
                                   placeholder: "מספר החולה שפגשתי"
                               - say: האם ידוע לכם התאריך שבו נפגשתם? (dd.mm.yy)
                               - wait:
@@ -134,7 +134,6 @@
                                         - wait:
                                             variable: insulation_exposure_date
                                             placeholder: "תאריך: dd.mm.yy"
-                                            validation: "[0-9][0-9].[0-9][0-9].[0-9][0-9]"
                                     - show: "לא"
                           - show: "לא"
                 - show: אני נמצא בבידוד כי חוויתי תסמינים
@@ -260,12 +259,22 @@
             - show: כאבי גרון
               value: symptoms_sore_throat
               unless: symptoms_sore_throat
-            - show: שיעול יבש
-              value: symptoms_dry_cough
-              unless: symptoms_dry_cough
-            - show: שיעול לח, או שיעול עם כיח
-              value: symptoms_moist_cough
-              unless: symptoms_moist_cough
+            - show: שיעול
+              value: sympotms_cough
+              unless: symptoms_cough
+              steps:
+                - say: איזה סוג שיעול?
+                  unless: symptoms_cough
+                - wait:
+                    variable: _var
+                    options:
+                    - show: שיעול יבש
+                      value: symptoms_dry_cough
+                      unless: symptoms_dry_cough
+                    - show: שיעול לח, או שיעול עם כיח
+                      value: symptoms_moist_cough
+                      unless: symptoms_moist_cough
+                      
             - show: קוצר נשימה
               value: symptoms_breath_shortness
               unless: symptoms_breath_shortness
