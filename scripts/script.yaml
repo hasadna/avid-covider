@@ -244,7 +244,9 @@
                     - say: יש עוד?
                     - goto: symptoms_stomach_questions
                 - show: משהו אחר
+                  unless: symptoms_other
                   steps:
+                    - say: "ספרו לנו..."
                     - goto: symptoms_other_questions
                 - show: זהו
                   steps:
