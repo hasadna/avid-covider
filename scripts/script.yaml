@@ -356,24 +356,28 @@
               variable: exposure_met_people
               placehoder: מספר האנשים
               validation: "[0-9]+"
+              input-kind: number
 
           - say: כמה בני משפחה או דיירים אחרים מתגוררים איתך באותו הבית או באותה הדירה?
           - wait:
               variable: flatmates
               placehoder: מספר האנשים
               validation: "[0-9]+"
+              input-kind: number
           
           - say: כמה מהם בני 70 או יותר?
           - wait:
               variable: flatmates_over_70
               placehoder: מספר האנשים
               validation: "[0-9]+"
+              input-kind: number
 
           - say: כמה מהם מתחת לגיל 18?
           - wait:
               variable: flatmates_under_18
               plachoder: מספר האנשים
               validation: "[0-9]+"
+              input-kind: number
 
           - say: האם בעבודה יוצא לך לתת שירות ליותר מ-10 אנשים ביום?
           - wait:
