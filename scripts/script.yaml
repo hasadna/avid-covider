@@ -77,7 +77,7 @@
                 - show: אי ספיקת כליות
                   value: chronic_kidney_failure
                   unless: chronic_kidney_failure
-                - show: לא אובחנתי באף אחד מאלה
+                - show: לא אובחנתי באף אחת מאלה
                   steps:
                     - pop: preconditions
           - do:
@@ -107,7 +107,7 @@
                 - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
                   value: back-from-abroad
                   steps: 
-                    - say: מתי חזרת לארץ?
+                    - say: "מתי חזרת לארץ (תאריך: dd.mm.yy)"
                     - wait:
                         variable: insulation_returned_from_abroad_date
                         placeholder: "תאריך: dd.mm.yy"
@@ -125,7 +125,7 @@
                                   variable: insulation_patient_number
                                   validation: "[0-9]+"
                                   placeholder: "מספר החולה שפגשתי"
-                              - say: האם ידוע לכם התאריך שבו נפגשתם?
+                              - say: האם ידוע לכם התאריך שבו נפגשתם? (dd.mm.yy)
                               - wait:
                                   options:
                                     - show: "כן"
@@ -343,7 +343,7 @@
       
       - name: exposures
         steps:
-          - say: מהו מספר האנשים השונים ששהית בקרבתם מעל ל-5 דקות ביממה האחרונה?
+          - say: מה מספר האנשים השונים (לא כולל בני ביתך) ששהית בקרבתם מעל ל-5 דקות ביממה האחרונה?
           - wait:
               variable: exposure_met_people
               placehoder: מספר האנשים
