@@ -215,7 +215,11 @@
                     - goto: symptoms_cough_questions
                     - say: עוד משהו?
                     - goto: symptoms_cough_questions
+                    - say: משהו נוסף שכדאי שנכיר?
+                    - goto: symptoms_cough_questions
                     - say: עוד משהו?
+                    - goto: symptoms_cough_questions
+                    -  say: סימפטום נוסף?
                     - goto: symptoms_cough_questions
                 - show: כאבים
                   unless: toplevel_symptoms_pains
