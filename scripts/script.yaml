@@ -192,13 +192,14 @@
         steps:
           - say: אוייש… איך זה בא לידי ביטוי?
           - goto: current-report-top-level-symptoms
-          - say: יש עוד בעיות?
+          - say: האם יש עוד סוגים של סימפטומים?
           - goto: current-report-top-level-symptoms
-          - say: מה עוד?
+          - say: עוד תופעות שכדאי שנכיר?
           - goto: current-report-top-level-symptoms
-          - say: עוד משהו?
+          - say: עוד משהו שגורם לך להרגיש לא טוב?
           - goto: current-report-top-level-symptoms
-          
+          - say: עוד משהו לדווח עליו?
+          - goto: current-report-top-level-symptoms
 
       - name: current-report-top-level-symptoms
         steps:
@@ -211,13 +212,11 @@
                   steps:
                     - say: מה בדיוק?
                     - goto: symptoms_cough_questions
-                    - say: יש עוד?
+                    - say: יש עוד בעיות שקשורות בשיעולים או נזלת?
                     - goto: symptoms_cough_questions
-                    - say: עוד משהו?
+                    - say: עוד תופעה מאלו?
                     - goto: symptoms_cough_questions
                     - say: משהו נוסף שכדאי שנכיר?
-                    - goto: symptoms_cough_questions
-                    - say: עוד משהו?
                     - goto: symptoms_cough_questions
                     -  say: סימפטום נוסף?
                     - goto: symptoms_cough_questions
@@ -269,22 +268,12 @@
             - show: כאבי גרון
               value: symptoms_sore_throat
               unless: symptoms_sore_throat
-            - show: שיעול
-              value: sympotms_cough
-              unless: symptoms_cough
-              steps:
-                - say: איזה סוג שיעול?
-                  unless: symptoms_cough
-                - wait:
-                    variable: _var
-                    options:
-                    - show: שיעול יבש
-                      value: symptoms_dry_cough
-                      unless: symptoms_dry_cough
-                    - show: שיעול לח, או שיעול עם כיח
-                      value: symptoms_moist_cough
-                      unless: symptoms_moist_cough
-                      
+            - show: שיעול יבש
+              value: symptoms_dry_cough
+              unless: symptoms_dry_cough
+            - show: שיעול לח, או שיעול עם כיח
+              value: symptoms_moist_cough
+              unless: symptoms_moist_cough          
             - show: קוצר נשימה
               value: symptoms_breath_shortness
               unless: symptoms_breath_shortness
