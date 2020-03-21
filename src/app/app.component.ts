@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ScriptRunnerService, ContentService, ScriptRunnerNew } from 'hatool';
-import { FileUploader } from 'hatool';
+import { switchMap, map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -23,9 +24,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
 
   constructor(private runner: ScriptRunnerService,
-              private content: ContentService) {
+              private content: ContentService,
+              private http: HttpClient) {
     this.runnerImpl = <ScriptRunnerNew>this.runner.R;
-    this.runnerImpl.timeout = 1;
+    this.runnerImpl.timeout = 250;
   }
 
   prepareToSave(record) {
@@ -69,7 +71,13 @@ export class AppComponent implements OnInit, AfterViewInit {
         }
       },
       (key, value, record) => {}
-    ).subscribe(() => { console.log('done!'); });
+    ).pipe(
+      switchMap(() => {
+        const payload = this.prepareToSave(this.runnerImpl.record);
+        return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
+      }),
+      map((response: any) => response.success)
+    ).subscribe((success) => {console.log('done, success=' + success); });
   }
 
 }
