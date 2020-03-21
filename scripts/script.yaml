@@ -91,7 +91,7 @@
           - wait:
               variable: smoking
               options:
-                - show: אני מעשן
+                - show: עישון הוא חלק מהשיגרה שלי
                 - show: עישנתי בעבר, בחמש השנים האחרונות
                 - show: עישנתי בעבר, לפני יותר מחמש שנים
                 - show: אף פעם
@@ -115,12 +115,12 @@
                 - show: אני בבידוד כי נחשפתי לחולה מאומת/ת
                   value: contact-with-patient
                   steps:
-                    - say: ידוע לך מה מספר החולה המאומת/ת שפגשת?
+                    - say: ידוע לך מה מספר החולה שפגשת?
                     - wait:
                         options:
                           - show: "כן"
                             steps:
-                              - say: מה מספר החולה המאומת/ת שפגשת?
+                              - say: מה מספר החולה שפגשת?
                               - wait:
                                   variable: insulation_patient_number
                                   validation: "[0-9]+"
@@ -147,13 +147,13 @@
                     - wait:
                         variable: hospitalized
                         options:                    
-                        - show: אני חולה מאומת/ת בבדיקת מעבדה לקורונה – מאושפז/ת בבית חולים
+                        - show: אובחנתי כחולה בבדיקת מעבדה לקורונה – באישפוז בבית חולים
                           value: hospital_from_corona_lab
-                        - show: אני חולה מאומת/ת –  מאושפז/ת בבית חולים
+                        - show: אובחנתי כחולה –  באישפוז בבית חולים
                           value: hospital
-                        - show: אני חולה מאומת/ת - מאושפז/ת במלון
+                        - show: אובחנתי כחולה - באישפוז במלון
                           value: hotel
-                        - show: אני חולה מאומת/ת - בבידוד בבית
+                        - show: אובחנתי כחולה - בבידוד בבית
                           value: home
 
       - name: current-report
@@ -185,7 +185,7 @@
       
       - name: current-report-symptoms-loop
         steps:
-          - say: אוייש… תוכל/י לפרט איך זה בא לידי ביטוי?
+          - say: אוייש… איך זה בא לידי ביטוי?
           - goto: current-report-top-level-symptoms
           - say: יש עוד בעיות?
           - goto: current-report-top-level-symptoms
@@ -200,7 +200,7 @@
           - wait:
               variable: _var_symptoms
               options:
-                - show: שיעולים ו/או נזלת
+                - show: שיעולים או נזלת
                   unless: toplevel_symptoms_cough
                   value: toplevel_symptoms_cough
                   steps:
@@ -367,7 +367,7 @@
               plachoder: מספר האנשים
               validation: "[0-9]+"
 
-          - say: האם בעבודתך את/ה נותנ/ת שירות באופן פיזי ליותר מ-10 אנשים ביום?
+          - say: האם בעבודה יוצא לך לתת שירות ליותר מ-10 אנשים ביום?
           - wait:
               variable: work_serve_over_18
               options:
