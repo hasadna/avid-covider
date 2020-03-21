@@ -55,7 +55,13 @@
           - goto: preconditions-diseases
           - say: "עוד משהו?"
           - goto: preconditions-diseases
-      
+          - say: "האם ישנן מחלקות רקע נוספות בהן אובחנת?"
+          - goto: preconditions-diseases
+          - say: "עוד משהו?"
+          - goto: preconditions-diseases
+          - say: "מחלות נוספות?"
+          - goto: preconditions-diseases
+  
       - name: preconditions-diseases
         steps:
           - wait:
@@ -67,7 +73,7 @@
                 - show: "בעיית יתר לחץ דם"
                   value: chronic_hypertension
                   unless: chronic_hypertension
-                - show: מחלקת לב, כלי דם או שבץ
+                - show: מחלת לב, כלי דם או שבץ
                   value: chronic_ischemic_heart_disease_or_stroke
                   unless: chronic_ischemic_heart_disease_or_stroke
                 - show: מחלת ריאות כרונית
