@@ -14,4 +14,23 @@ export class ThankYouPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  share() {
+    const navigator = window.navigator;
+    if (navigator['share']) {
+      try {
+        navigator['share']({ title: 'Corona Predict', url: window.location.href })
+          .then((res) => {
+            alert('success');
+          }, (err) => {
+            alert('Failed to share, alas');
+          }
+        );
+      } catch {
+        alert('Failed to share, alas 2');
+      }
+    } else {
+      alert('no share...');
+    }
+  }
+
 }
