@@ -8,7 +8,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 export class ThankYouPageComponent implements OnInit {
 
   @Output() restart = new EventEmitter<void>();
-  
+
   constructor() { }
 
   ngOnInit() {
