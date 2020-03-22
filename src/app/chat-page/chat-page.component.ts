@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output } from '@angular/core';
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chat-page',
@@ -86,6 +86,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
       }),
+      catchError(() => <any>{success: false}),
       map((response: any) => response.success)
     ).subscribe((success) => {
       console.log('done, success=' + success);
