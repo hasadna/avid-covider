@@ -12,7 +12,7 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 Sentry.init({
-  dsn: 'https://cf52812983df4a6a8d452544bfabbd11@sentry.io/1489566'
+  dsn: "https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583"
 });
 
 @Injectable()
@@ -38,7 +38,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HatoolLibModule,
   ],
   providers: [
-    // {provide: ErrorHandler, useClass: SentryErrorHandler}
+    {provide: ErrorHandler, useClass: SentryErrorHandler}
   ],
   bootstrap: [AppComponent]
 })
