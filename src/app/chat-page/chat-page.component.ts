@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
+import { VERSION } from '../constants';
 
 @Component({
   selector: 'app-chat-page',
@@ -84,6 +85,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     ).pipe(
       switchMap(() => {
         const payload = this.prepareToSave(this.runner.record);
+        payload['version'] = VERSION;
         return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
       }),
       catchError(() => <any>{success: false}),

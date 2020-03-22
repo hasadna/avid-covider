@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { VERSION } from '../constants';
 
 @Component({
   selector: 'app-info-page',
@@ -8,6 +9,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class InfoPageComponent implements OnInit {
 
   @Output() start = new EventEmitter<void>();
+  version = VERSION;
 
   constructor() { }
 

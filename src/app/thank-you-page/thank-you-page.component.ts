@@ -20,17 +20,13 @@ export class ThankYouPageComponent implements OnInit {
       try {
         navigator['share']({ title: 'Corona Predict', url: window.location.href })
           .then((res) => {
-            alert('success');
-          }, (err) => {
-            alert('Failed to share, alas');
-          }
-        );
+            console.log('success');
+        });
       } catch {
-        alert('Failed to share, alas 2');
+        console.log('Failed to share, alas 2');
       }
     } else {
-      alert('no share...');
+      console.log('no share...');
     }
   }
-
 }
