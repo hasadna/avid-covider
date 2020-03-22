@@ -1,0 +1,132 @@
+.header {
+    height: 67px;
+    flex: 0 0 auto;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    flex-flow: row;
+
+    .help {
+        min-width: 67px;
+        height: 100%;
+        display: flex;
+        flex: 0 0 auto;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+        font-weight: 500;          
+
+        .span {
+            display: inline-block;
+        }
+        .question {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            text-align: center;
+            padding: 0px 0px 4px 1px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    }
+
+    .title {
+        flex: 1 1 auto;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 500;
+        background-color: #fbfbfb;
+    }
+}
+
+.introduction, .more-info-box, .thank-you-box {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    padding: 40px 50px;
+    padding-top: 0;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.links {
+    text-align: center;
+    a, a:visited {
+        color: #480a35;
+    }
+}
+
+.logos {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 40px -16px;
+    img {
+        height: 44px;
+        margin: 0 16px;
+    }
+}
+
+.cta {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-top: auto;
+    width: 100%;
+
+    .button {
+
+        border-radius: 18px;
+        border: solid 1px #6ededa;                
+        background-color: #d9f2f1;
+        font-size: 18px;
+        color: #00807c;
+        text-align: center;
+
+        font-weight: normal;
+        padding: 4px 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        width: 100%;
+    }
+}
+/*
+@media only screen and (min-width: 600px) {
+    .container {
+        width: 100vw;
+        &.started {
+            margin-right: 0;
+        }
+
+        .introduction {
+            flex: 0 0 50%;
+
+            .hero {
+                margin: 0 24px 0 60px;
+                .cta {
+                    flex-flow: row;
+                }
+            }
+        }
+
+        .chat {
+            flex: 0 0 50%;
+
+            .header {
+                display: none;
+            }
+        }
+    }
+}
+*/

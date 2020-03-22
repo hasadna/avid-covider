@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import { HatoolLibModule } from 'hatool';
 
 import * as Sentry from '@sentry/browser';
+import { IntroPageComponent } from './intro-page/intro-page.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
+import { InfoPageComponent } from './info-page/info-page.component';
+import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 Sentry.init({
   dsn: 'https://cf52812983df4a6a8d452544bfabbd11@sentry.io/1489566'
@@ -22,7 +26,11 @@ export class SentryErrorHandler implements ErrorHandler {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IntroPageComponent,
+    ChatPageComponent,
+    InfoPageComponent,
+    ThankYouPageComponent
   ],
   imports: [
     BrowserModule,
