@@ -223,15 +223,15 @@
                   unless: toplevel_symptoms_pains
                   value: toplevel_symptoms_pains
                   steps:
-                    - say: מה בדיוק?
+                    - say: מה כואב בדיוק?
                     - goto: symptoms_pains_questions
-                    - say: יש עוד?
+                    - say: יש עוד כאבים?
                     - goto: symptoms_pains_questions
                 - show: עייפות או חולשה
                   unless: toplevel_symptoms_tiredness
                   value: toplevel_symptoms_tiredness
                   steps:
-                    - say: מה בדיוק?
+                    - say: איך העייפות מתבטאת?
                     - goto: sympotms_tiredness_questions
                     - say: יש עוד?
                     - goto: sympotms_tiredness_questions
@@ -239,15 +239,15 @@
                   unless: toplevel_symptoms_stomach
                   value: toplevel_symptoms_stomach
                   steps:
-                    - say: מה בדיוק?
+                    - say: מה לא בסדר בקיבה?
                     - goto: symptoms_stomach_questions
-                    - say: יש עוד?
+                    - say: יש עוד בעיות קיבה?
                     - goto: symptoms_stomach_questions
-                - show: משהו אחר
-                  unless: symptoms_other
-                  steps:
-                    - say: "ספרו לנו..."
-                    - goto: symptoms_other_questions
+                # - show: משהו אחר
+                #   unless: symptoms_other
+                #   steps:
+                #     - say: "ספרו לנו..."
+                #     - goto: symptoms_other_questions
                 - show: זהו
                   steps:
                     - pop: current-report-symptoms
