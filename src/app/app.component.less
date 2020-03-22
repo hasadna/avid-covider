@@ -10,8 +10,47 @@
     height: 100vh;
     max-height: 100%;
 
-    > * {
+    .pane {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        &:first-child {
+            display: none;
+        }
+
         width: 100%;
         height: 100%;
+        > * {
+            width: 100%;
+            height: 100%;
+            &.desktop {
+                display: none;
+            }
+        }    
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .container {
+        flex-flow: row;
+        .pane {
+            flex: 0 0 50%;
+            &:first-child {
+                display: flex;
+            }
+
+            > * {
+                &.mobile {
+                    display: none;
+                }
+    
+                &.desktop {
+                    display: inherit;
+                }
+            }
+
+        }
     }
 }

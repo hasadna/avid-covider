@@ -8,6 +8,7 @@ import { Component, Inject, LOCALE_ID } from '@angular/core';
 })
 
 export class AppComponent  {
+  ftab = 'intro';
   _tab = 'intro';
 
   constructor(@Inject(LOCALE_ID) private locale) {}

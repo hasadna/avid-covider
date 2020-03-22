@@ -7,7 +7,8 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class IntroPageComponent implements OnInit {
 
-  @Output() selected = new EventEmitter<string>();
+  @Output() info = new EventEmitter<void>();
+  @Output() chat = new EventEmitter<void>();
 
   constructor() { }
 

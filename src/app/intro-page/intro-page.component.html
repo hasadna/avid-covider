@@ -7,9 +7,9 @@
     <h2 i18n>
     כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
     </h2>
-    <h2 class='moreinfo' (click)='selected.emit("info")' i18n>עוד על המחקר…</h2>
+    <h2 class='moreinfo' (click)='info.emit()' i18n>עוד על המחקר…</h2>
     <div class='cta'>
-      <span class='button' (click)='selected.emit("chat")' i18n>בהחלט, בואו נתחיל</span>
+      <span class='button' (click)='chat.emit()' i18n>בהחלט, בואו נתחיל</span>
     </div>
     <div class='logos'>
       <img src='assets/img/weizmann-logo.png'/>
