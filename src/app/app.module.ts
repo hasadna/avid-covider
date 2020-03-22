@@ -12,7 +12,7 @@ import { InfoPageComponent } from './info-page/info-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 
 Sentry.init({
-  dsn: "https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583"
+  dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583'
 });
 
 @Injectable()
