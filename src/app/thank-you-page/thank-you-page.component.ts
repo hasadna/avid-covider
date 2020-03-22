@@ -21,6 +21,8 @@ export class ThankYouPageComponent implements OnInit {
         navigator['share']({ title: 'Corona Predict', url: window.location.href })
           .then((res) => {
             console.log('success');
+        }, (err) => {
+          console.log('error / aborted');
         });
       } catch {
         console.log('Failed to share, alas 2');
