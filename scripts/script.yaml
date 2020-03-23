@@ -40,7 +40,6 @@
               variable: street
               placeholder: שם הרחוב
 
-
       - name: preconditions
         steps:
           - goto: preconditions-diseases-loop
@@ -105,7 +104,7 @@
 
       - name: insulation
         steps:
-          - say: אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?
+          - say: מהו סטטוס החשיפה שלך לקורונה?
           - wait:
               variable: insulation_status
               options:
@@ -166,8 +165,13 @@
           - wait:
               options:
                 - show: מצויין!
+                  step:
+                  - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
+                  - goto: current-report-symptoms
+
                 - show: לא כל כך טוב
-                  steps:                    
+                  steps:
+                    - say: אוייש… איך זה בא לידי ביטוי?
                     - goto: current-report-symptoms
 
       - name: current-report-symptoms
@@ -189,7 +193,6 @@
       
       - name: current-report-symptoms-loop
         steps:
-          - say: אוייש… איך זה בא לידי ביטוי?
           - goto: current-report-top-level-symptoms
           - say: האם יש עוד סוגים של סימפטומים?
           - goto: current-report-top-level-symptoms
@@ -243,11 +246,6 @@
                     - goto: symptoms_stomach_questions
                     - say: יש עוד בעיות קיבה?
                     - goto: symptoms_stomach_questions
-                # - show: משהו אחר
-                #   unless: symptoms_other
-                #   steps:
-                #     - say: "ספרו לנו..."
-                #     - goto: symptoms_other_questions
                 - show: זהו
                   steps:
                     - pop: current-report-symptoms
@@ -278,7 +276,7 @@
             - show: קוצר נשימה
               value: symptoms_breath_shortness
               unless: symptoms_breath_shortness
-            - show: זהו
+            - show: בעצם, לא
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
@@ -297,7 +295,7 @@
             - show: כאבי ראש
               value: symptoms_headache
               unless: symptoms_headache
-            - show: זהו
+            - show: בעצם, לא
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
@@ -316,7 +314,7 @@
             - show: עייפות חריגה
               value: symptoms_infirmity
               unless: symptoms_infirmity
-            - show: זהו
+            - show: בעצם, לא
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
@@ -335,7 +333,7 @@
             - show: בחילה או הקאות
               value: symptoms_nausea_and_vomiting
               unless: symptoms_nausea_and_vomiting
-            - show: זהו
+            - show: בעצם, לא
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
@@ -352,27 +350,7 @@
       
       - name: exposures
         steps:
-          - say: מה מספר האנשים השונים (לא כולל בני ביתך) ששהית בקרבתם מעל ל-5 דקות ביממה האחרונה?
-          - wait:
-              variable: exposure_met_people
-              placehoder: מספר האנשים
-              validation: "[0-9]+"
-              input-kind: number
-
-          - say: כמה בני משפחה או דיירים אחרים מתגוררים איתך באותו הבית או באותה הדירה?
-          - wait:
-              variable: flatmates
-              placehoder: מספר האנשים
-              validation: "[0-9]+"
-              input-kind: number
-          
-          - say: כמה מהם בני 70 או יותר?
-          - wait:
-              variable: flatmates_over_70
-              placehoder: מספר האנשים
-              validation: "[0-9]+"
-              input-kind: number
-
+          - say: מה מספר האנשים השונים ששהית בקרבתם מעל ל-15 דקות בטווח 2 מטרים ביממה האחרונה?
           - say: כמה מהם מתחת לגיל 18?
           - wait:
               variable: flatmates_under_18
@@ -380,20 +358,28 @@
               validation: "[0-9]+"
               input-kind: number
 
-          - say: האם בעבודה יוצא לך לתת שירות ליותר מ-10 אנשים ביום?
+          - say: כמה מהם מעל לגיל 18?
           - wait:
-              variable: work_serve_over_10
-              options:
-                - show: "כן"
-                  value: true 
-                - show: "לא"
-                  value: false
+              variable: flatmates_above_18
+              plachoder: מספר האנשים
+              validation: "[0-9]+"
+              input-kind: number
 
       - name: end-of-report
         steps:
-          - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות. נתראה פה מחר?
+          - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.
+          - say: שנזכיר לך מחר לעדכן אותנו מה המצב?
+          - wait:
+              variable: reminder
+              options:
+                - show: כן, בבקשה!
+                  value: True
+                - show: לא, תודה
+                  value: False
+          - say: אז נתראה מחר?
           - wait:
               variable: continue
               options:
                 - show: בטח!
                 - show: בהחלט, ואשמח גם לשתף את הטופס
+      
