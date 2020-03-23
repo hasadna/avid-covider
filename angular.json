@@ -46,6 +46,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "i18nLocale": "he",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -165,6 +166,36 @@
               "i18nFile": "src/locale/messages.ru.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "ru",
+              "i18nMissingTranslation": "ignore",              
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "qu": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputPath": "dist/avid-covider/test",
+              "baseHref": "/test/",
+              "i18nFile": "src/locale/messages.qu.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "qu",
               "i18nMissingTranslation": "ignore",              
               "optimization": true,
               "outputHashing": "all",

@@ -180,7 +180,7 @@ if __name__=='__main__':
                 rx_translations.setdefault(key, {})[lang] = value
         tx_translations = {}
         for script in scripts:
-            for k, v in assign_translations(script, [], translations=rx_translations, fields=('show', 'say')):
+            for k, v in assign_translations(script, [], translations=rx_translations, fields=('show', 'say', 'placeholder')):
                 assert tx_translations.get(k, v) == v, 'Duplicate key %s (v=%r, tx[k]==%r)' % (k, v, tx_translations[k])
                 tx_translations[k] = v
         push_translations(f_in, tx_translations)

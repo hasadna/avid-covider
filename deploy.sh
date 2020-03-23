@@ -8,6 +8,7 @@ ng build --prod -c ar && \
 ng build --prod -c en && \
 ng build --prod -c ru && \
 ng build --prod -c am && \
+ng build --prod -c qu && \
 cp CNAME dist/avid-covider/ && \
 git add dist/avid-covider && \
 git commit -m dist && \
