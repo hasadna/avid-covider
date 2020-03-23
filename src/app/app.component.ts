@@ -11,7 +11,9 @@ export class AppComponent  {
   ftab = 'intro';
   _tab = 'intro';
 
-  constructor(@Inject(LOCALE_ID) private locale) {}
+  constructor(@Inject(LOCALE_ID) private locale) {
+    console.log('LOCALE=', locale);
+  }
 
   set tab(value) {
     console.log('TAB=', value);

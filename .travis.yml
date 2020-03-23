@@ -12,7 +12,7 @@ script:
 - ng lint
 - ". extract_i18n.sh"
 - tx push --source
-- tx pull --mode sourceastranslation -l ar,en,am,ru
+- tx pull --mode sourceastranslation -l ar,en,am,ru,qu
 - python tools/yaml_to_json.py
 deploy:
   skip_cleanup: true
