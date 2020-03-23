@@ -2,245 +2,177 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="he" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="3216936f7696cdeac3358c949fe30b5312b6e170" datatype="html">
-        <source>חזרה<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>לדיווח</source>
+      <trans-unit id="0a5ae89e308cc86326efe1c80afc9128b0ecb719" datatype="html">
+        <source>הי,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+    חשוב לנו לדעת מה שלומך, באמת.</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="sourcefile">app/intro-page/intro-page.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4cfeb574b27a7487ec16a752b716fd046fd32642" datatype="html">
+        <source>
+    כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/intro-page/intro-page.component.html</context>
           <context context-type="linenumber">7</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="66295e94d289ef3795c201cb5d7b485f98695e36" datatype="html">
-        <source>דיווח בריאות יומי</source>
+      <trans-unit id="87a67dc0da0ff0b20c610cdfb5eb75c2fb3c7741" datatype="html">
+        <source>עוד על המחקר…</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
+          <context context-type="sourcefile">app/intro-page/intro-page.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="d031c4eb4e2d3868dc1e18c9281c9e797e0edc71" datatype="html">
-        <source>אתר זה נועד לסייע באיתור התפרצויות מקומיות של קורונה</source>
+      <trans-unit id="629ababebb0103a4e7662922ad7a3a84b0288fe6" datatype="html">
+        <source>בהחלט, בואו נתחיל</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="aae09b7e507d73e2f1f474c71f0c705eeeedb13d" datatype="html">
-        <source>מדיניות פרטיות</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="00dfb3c63e30e00df191e15f453309250065f453" datatype="html">
-        <source>מאחר שהעמותות המפעילות את מערכת הצ&apos;אט לאיתור מוקדם של התפרצות קורונה (להלן &quot;הצ&apos;אט&quot;), הסדנא לידע ציבורי (להלן &quot;העמותה&quot;), מכבדות את פרטיות המשתמשים בצ&apos;אט, הפועל בכתובת האינטרנט [domain], החליטו העמותות לפרסם את מדיניותן ביחס להגנת הפרטיות בצ&apos;אט, והן מתחייבות כלפי המשתמשים לקיים מדיניות זו.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="15af0f694671601603c0a18a6440203b7056b51f" datatype="html">
-        <source>מטרת המדיניות להסביר מהם נוהגי העמותות ביחס לפרטיות המשתמשים בצ&apos;אט, וכיצד משתמשות העמותות במידע, הנמסר להן על-ידי המשתמשים בצ&apos;אט או הנאסף על-ידן בעת השימוש בצ&apos;אט. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">26</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="142ee1d033c63b1cbe0febc24651b26c6a2a31d6" datatype="html">
-        <source>דיווח על פגיעה בפרטיותך:</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="237147a0ca636f3702550000d77ccb55eff9c084" datatype="html">
-        <source>אם את/ה חושב/ת שפרטיותך נפגעה במהלך השימוש בצ&apos;אט, אנא פנו לעמותות באמצעות כתובת הדוא&quot;ל: email@hasadna.org.il.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="8720bf4678554a367c3ac802a2989078625e5ea4" datatype="html">
-        <source>מידע שנאסף במהלך השימוש בצ&apos;אט </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="fdb07dc8dbeb0504a6f04480e82f5107ebdfd75f" datatype="html">
-        <source>בעת שימוש בצ&apos;אט הנך מתבקש/ת למסור פרטי אמצעי ליצירת קשר (מייל, טלפון וכו&apos;) וכן פרטים אודות האירוע שבענייננו הנך פונה לצ&apos;אט והכל לצורך הטיפול בתלונה. ניתן להישאר בעילום שם בעת השימוש בצ&apos;אט. הפרטים שתמסור/תמסרי בצ&apos;אט יועברו לנציגים בעמותות לצורך טיפול בתלונה. אינך חייב/ת על פי חוק למסור את הפרטים והמידע האישי. אולם ללא מסירת פרטים ליצירת קשר, לא נוכל להמשיך בטיפול בתלונה ולסייע לך. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">32</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="43fd547e0f9ea5a41d523fe79ee92db5a9d0da2b" datatype="html">
-        <source>מאגר המידע </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e19783b1c327e673fdd7f6696c20acd05f2239ba" datatype="html">
-        <source>הנתונים שנאספים ממשתמשי הצ&apos;אט יישמרו במאגר המידע של העמותות ובאחריותן.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ecc681c5346a8c329e38c62f82a00d80429384a3" datatype="html">
-        <source>השימוש במידע</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="42d9629a93c89a5535d9ed12ac9b0a9566ec8387" datatype="html">
-        <source>השימוש במידע שנאסף, ייעשה רק על פי מדיניות פרטיות זו על מנת לטפל בתלונה הפרטנית. כמו כן, לצרכי זיהוי מגמות של גילויי גזענות וטיפול מערכתי בגזענות, ייעשה שימוש סטטיסטי במידע שנאסף שאין בו כל מימד אישי שעלול לזהות את המשתמש. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="daa0be9590eecd602c8b3b154959a417737eacc4" datatype="html">
-        <source>מסירת מידע לצד שלישי </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c376f3933d51071151406051e8eace192cdde82a" datatype="html">
-        <source>העמותות לא יעבירו לצדדים שלישיים את פרטיך האישיים וכל מידע אחר שמסרת בצ&apos;אט  אלא אם נתת את הסכמתך להעברת התלונה לטיפול בידי רשות שלטונית רלוונטית או לטיפול של עמותה אחרת. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">41</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4f489cc30da4fa5f11f653ae52eacef505ba9170" datatype="html">
-        <source>Cookies</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4ad29e861f29913be0ab78e5390c1acd28732b54" datatype="html">
-        <source>אתר החברה  משתמש ב&quot;עוגיות&quot; (Cookies) לצורך תפעולם השוטף והתקין, ובכלל זה כדי לאסוף נתונים סטטיסטיים אודות השימוש באתר, לאימות פרטים, כדי להתאים את האתר להעדפותיך האישיות ולצורכי אבטחת מידע.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">44</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="c2ae17ecc49ce1e8d6c298754123aaff6dd0106f" datatype="html">
-        <source>דפדפנים מודרניים כוללים אפשרות להימנע מקבלת Cookies. אם אינך יודע/ת כיצד לעשות זאת, בדוק בקובץ העזרה של הדפדפן שבו את/ה משתמש/ת.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">45</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="327bbbee401a29eb04b742a757f656afe747b473" datatype="html">
-        <source>אבטחת מידע</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">47</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1785dc3cf4f3dbae4f1c3e6544b4c2f91bda41dc" datatype="html">
-        <source>העמותות מיישמות במערכת הצ&apos;אט מערכות ונהלים עדכניים לאבטחת מידע. בעוד שמערכות ונהלים אלה מצמצמים את הסיכונים לחדירה בלתי-מורשית, אין הם מעניקים בטחון מוחלט. לכן, העמותות לא מתחייבות שהמערכת תהיה חסינה באופן מוחלט מפני גישה בלתי-מורשית למידע המאוחסן בה. </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">48</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ea6ff87ad473c3c43c827708a614c448ce8ba36f" datatype="html">
-        <source>זכות לעיין במידע </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="57d111f85d1e03f2fb49d7f19e0c5493aea87c58" datatype="html">
-        <source>על-פי חוק הגנת הפרטיות, התשמ&quot;א - 1981, כל אדם זכאי לעיין במידע שעליו המוחזק במאגר מידע. אדם שעיין במידע שעליו ומצא כי אינו נכון, שלם, ברור או מעודכן, רשאי לפנות לבעל מאגר המידע בבקשה לתקן את המידע או למוחקו. פנייה כזאת יש להפנות אל email@acri.org.il.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">51</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3a28323bed868b28ab4bd39dec93a27290bfb061" datatype="html">
-        <source>שינויים במדיניות הפרטיות </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="99bd81fa2cb4b20dad3854c58f46b4e398486f5a" datatype="html">
-        <source>בכל מקרה בו יבוצעו במדיניות זו שינויים מהותיים בהוראות שעניינן השימוש במידע אישי שמסרת, תפורסם על-כך הודעה באתר הפרוייקט.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">54</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="3fd9fff08d1e1aa440cacad6355f3b3b8b92af16" datatype="html">
-        <source>שלום,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
-      הגעת למערכת דיווח בריאות יומית.</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="088cff027aab4d82d0db46eebbfe237f7dda76bb" datatype="html">
-        <source>לדיווח על מצב בריאותכם <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="a433efec070578c6564c7dd0d4a8bf495fcfab0c" datatype="html">
-        <source>מידע נוסף</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">73</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="ffab2d473da34e72be5353a1ee1b4000f8657ba5" datatype="html">
-        <source>
-          הסבר הסבר הסבר? 
-          </source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5538e7d2d298426150394dd2cd6996a915535f98" datatype="html">
-        <source>דיווח על בריאותכם</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">89</context>
+          <context context-type="sourcefile">app/intro-page/intro-page.component.html</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="09cb388d5fd77f659c9fc3863c435be6806e675b" datatype="html">
         <source>לחצ/י לבחירת קובץ</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">95</context>
+          <context context-type="sourcefile">app/chat-page/chat-page.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="69f58cbcb82ed576d10bceb98edc7b982760f1bc" datatype="html">
         <source>קובץ הועלה בהצלחה</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">96</context>
+          <context context-type="sourcefile">app/chat-page/chat-page.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
       <trans-unit id="e624eb14d0ca7713b8765e17aeb00125b6f085ac" datatype="html">
         <source>תקלה בהעלאת קובץ</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">97</context>
+          <context context-type="sourcefile">app/chat-page/chat-page.component.html</context>
+          <context context-type="linenumber">6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="c00c844a49bdb12f820709d1a86ed36a9f19fb7a" datatype="html">
         <source>הקלידו הודעה...</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/app.component.html</context>
-          <context context-type="linenumber">98</context>
+          <context context-type="sourcefile">app/chat-page/chat-page.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4f5c41894dff453998f6ee99d780cedcf12d5c00" datatype="html">
+        <source>
+            כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="562d2dbe141d177c8815609fb019f54fb48f0183" datatype="html">
+        <source>
+חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="92954fb0d3be6aabbcbd55eacd225681277f4280" datatype="html">
+        <source>
+עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+השאלון אנונימי לחלוטין. 
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="29a4c414d9d8282ed28cc091bc0af3d516f1c0f6" datatype="html">
+        <source>
+תודה לך! 🙏
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="763afce9f6561512e4b2d9bc262b6bcf892e9c80" datatype="html">
+        <source>
+*חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="867afd97be779aeb9304bdefff6516c0c2dc69e9" datatype="html">
+        <source>
+פרופסור ערן סגל, מכון ויצמן למדע
+<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+פרופסור יובל דור, האוניברסיטה העברית
+<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+פרופסור בנימין גיגר, מכון ויצמן למדע
+      </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="aae09b7e507d73e2f1f474c71f0c705eeeedb13d" datatype="html">
+        <source>מדיניות פרטיות</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3e26230f12d06d23c403d35e6920d2b14ea0c7f0" datatype="html">
+        <source>קוד המקור</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cb0696d4184bedd08106371fc5a498bd8523c47d" datatype="html">
+        <source>הבנתי, בואו נתחיל</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/info-page/info-page.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2d64374167f9a5f3accb8cb11bed024cef1f563f" datatype="html">
+        <source>
+תודה רבה,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/&gt;"/>
+בזכותך התקרבנו עוד צעד אחד לסוף של זה…
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thank-you-page/thank-you-page.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="28c92da6dbe7c7b74b6537b2239ac8e2d292ced1" datatype="html">
+        <source>
+כדאי לשתף את הקישור עם בני משפחה וחברים, חשוב שכולם יתרגלו לדווח כל יום.
+זה המעט שאנחנו יכולים לעשות…
+    </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thank-you-page/thank-you-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cedb7ad0e921e9b44f936ecbffd8a3e27d50f4de" datatype="html">
+        <source>ילדים בבית? מבוגרים?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thank-you-page/thank-you-page.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f2ae354689a1dffd3dbb8ffecad38b518ebde411" datatype="html">
+        <source>אפשר לשלוח עדכון נוסף</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/thank-you-page/thank-you-page.component.html</context>
+          <context context-type="linenumber">22</context>
         </context-group>
       </trans-unit>
     </body>
