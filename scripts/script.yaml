@@ -54,7 +54,7 @@
           - goto: preconditions-diseases
           - say: "עוד משהו?"
           - goto: preconditions-diseases
-          - say: "האם ישנן מחלקות רקע נוספות בהן אובחנת?"
+          - say: "האם ישנן מחלות רקע נוספות בהן אובחנת?"
           - goto: preconditions-diseases
           - say: "עוד משהו?"
           - goto: preconditions-diseases
