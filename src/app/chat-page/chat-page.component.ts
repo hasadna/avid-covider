@@ -3,6 +3,7 @@ import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { VERSION } from '../constants';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-chat-page',
@@ -89,7 +90,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         payload['locale'] = this.locale;
         return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
       }),
-      catchError(() => <any>{success: false}),
+      catchError(() => of({success: false})),
       map((response: any) => response.success)
     ).subscribe((success) => {
       console.log('done, success=' + success);
