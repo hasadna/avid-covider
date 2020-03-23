@@ -46,6 +46,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "i18nLocale": "he",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
