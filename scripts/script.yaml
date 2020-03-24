@@ -396,7 +396,5 @@
               variable: continue
               options:
                 - show: בטח!
-                  value: "sure"
                 - show: בהחלט, ואשמח גם לשתף את הטופס
-                  value: "share"
       
