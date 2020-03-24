@@ -21,11 +21,6 @@ script:
 - ng build --prod -c am
 - ng build --prod -c qu
 deploy:
-  # - skip_cleanup: true
-  #   provider: script
-  #   script: "./travis_deploy.sh"
-  #   on:
-  #     branch: master
   - provider: s3
     secret_access_key:
       secure: sO7tlKs1Sx2r1MaDlTnVfCQSBPOPUBJQzCymCWuQ2oRshZnQvTM7qx0GbeefFeKOYiO+KNttFNBxoKzR7JzOnZ9Cc+fISOFET8LkbKz3d3QF0aHdebUVnSdpRtg5NTd50EtuTqXXJsyIHxgUAMj05LSTQEvaAieJDM+eZM/ZWbu5A0nk8URNQ6DkT9PuRGmWrbJjab6Pk73N/WGK3KXivGpE2MfKp2i920JCmBUVFWdC8PvgSj01zPuYNoSrj2F+QS2ChyqcuxbH5Uo/7FSd/79q0ZL1qe/ogqHyw02mT97QPPACV1vbmjDOubEgFBrjRn7FvQ4sYkzSTlHWGWQ+IFQ8+CD879cy5EzFJdN4MLteCt4LUy9F9RyWkPydUX761YLdZAhKSDyA6B0RT8+o5RkuCeZL+AkGux/z6h+T5zdv38KEUEVqZQHO2bX4HglNhr+krj32cpCZOtBaJjGwNQkAVXNWAZ6NqLZEP319DnEkMQ1UwvPGN0afeKSaU/eB6iYu2VcwRGXnFVjK2Eh7Dgfh8JSr1xPpfGCbYFaEVZI7Yu9bZwsSZEON602B1NrnKrQaKf00vajC+QvwEaZJTCotXL+Hp8F09K2bs1q5gRs1sy37epkQK+Q2IdHAsAZBprcXHJiMI4ft1v/s/gmi7udG2rUPx9CJC34LqxoDo6E=
@@ -40,6 +35,20 @@ deploy:
     endpoint: https://storage.googleapis.com
     on:
       branch: master
+  - provider: s3
+    secret_access_key:
+      secure: sO7tlKs1Sx2r1MaDlTnVfCQSBPOPUBJQzCymCWuQ2oRshZnQvTM7qx0GbeefFeKOYiO+KNttFNBxoKzR7JzOnZ9Cc+fISOFET8LkbKz3d3QF0aHdebUVnSdpRtg5NTd50EtuTqXXJsyIHxgUAMj05LSTQEvaAieJDM+eZM/ZWbu5A0nk8URNQ6DkT9PuRGmWrbJjab6Pk73N/WGK3KXivGpE2MfKp2i920JCmBUVFWdC8PvgSj01zPuYNoSrj2F+QS2ChyqcuxbH5Uo/7FSd/79q0ZL1qe/ogqHyw02mT97QPPACV1vbmjDOubEgFBrjRn7FvQ4sYkzSTlHWGWQ+IFQ8+CD879cy5EzFJdN4MLteCt4LUy9F9RyWkPydUX761YLdZAhKSDyA6B0RT8+o5RkuCeZL+AkGux/z6h+T5zdv38KEUEVqZQHO2bX4HglNhr+krj32cpCZOtBaJjGwNQkAVXNWAZ6NqLZEP319DnEkMQ1UwvPGN0afeKSaU/eB6iYu2VcwRGXnFVjK2Eh7Dgfh8JSr1xPpfGCbYFaEVZI7Yu9bZwsSZEON602B1NrnKrQaKf00vajC+QvwEaZJTCotXL+Hp8F09K2bs1q5gRs1sy37epkQK+Q2IdHAsAZBprcXHJiMI4ft1v/s/gmi7udG2rUPx9CJC34LqxoDo6E=
+    access_key_id:
+      secure: vZVGhh/t3/pP9zoz8dkVfbpKxcYWVlAiJqlrEDJMLOXsCtNME3Bakhgct944TeGjtI8RO+31qOIuUdPbIvQIb++lwk+Qpx2VITUKAjTrSrTuPykVlrykE8h6jFno+Q7/LyVzHNJTgZJqlzND+7aHZqFLli8ZdqErdoFfwfyV466XikHbq71UvUzanEJfcolWZ3DAmTpUc6ZPIAICFFZQ4NFbltyKqyKUV891uSKkID70a7FVTK0HDrYM+IWc0ZQ+byT9PL2D29we0QIuvFvPN2WyzBoV3Glfqn+Yu6UEbn9cb47DAdzXPL1TOQd8/D7iYxSJGaXcnHxCgSJJHeqPoudldUH+5mEjZRvKMCrqAnvx78OHtohUjSWm+PtQpmUg4HvRdHDJsHrAaklFULCrchU3bwnBFNm9Sc90aN3eyPnJDbKIfVyMzqIqrRbKj2Xb6TPKaRjXufiueHx4T07QDLz8yBvAoXe1sKeYoJ8OgDywTMSzk0fEs48YmjzCZwQpbAy09nleYDyxsBDw22Eam7vIhhtPlzgTbTyHV5rjHQqnrF2AgNF12RU4WAN9LjhawvJ/eGPanqA5itr0Uu0GQKveFa4PcbcQv9kd9luoukuh4jc9Z8PjWQZgE7clvNg82B6TKqBb/wQVJeqDHMaF9SqnY5mm9boQfTWR0jQ1+tY=
+    bucket: coronaisrael.org
+    skip_cleanup: true
+    acl: public_read
+    region: eu
+    cache_control: "max-age=86400"
+    local_dir: dist/avid-covider/
+    endpoint: https://storage.googleapis.com
+    on:
+      tags: true
 
 env:
   global:
