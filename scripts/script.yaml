@@ -167,7 +167,7 @@
                   steps:
                     - say: והיכן אתם נמצאים?
                       wait:
-                        variable: location
+                        variable: diagnoes_location
                         option:                 
                         - show: אשפוז בבית חולים
                           value: hospital
