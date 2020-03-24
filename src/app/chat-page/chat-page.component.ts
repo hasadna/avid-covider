@@ -24,7 +24,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   @Output() done = new EventEmitter<void>();
 
-  constructor(private http: HttpClient, @Inject(LOCALE_ID) private locale) {}
+  constructor(private http: HttpClient, 
+              private 
+              @Inject(LOCALE_ID) private locale) {}
 
   init() {
     this.content = new ContentManager();
@@ -88,6 +90,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
+
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
         } else {
