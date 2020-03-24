@@ -203,13 +203,8 @@
                 steps:
                 - say: "ומה המדחום אומר?"
                 - wait:
-                    variable: fever
-                    options:
-                    - show: "36-36.9"
-                    - show: "37-37.4"
-                    - show: "37.5-37.9"
-                    - show: "38-38.9"
-                    - show: "39 או יותר"
+                    variable: temprature
+                    placeholder: מעלות חום, 32-43
               - show: "לא"
       
       - name: current-report-symptoms-loop
