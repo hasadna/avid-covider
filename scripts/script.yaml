@@ -203,7 +203,7 @@
           - goto: current-report-symptoms-loop
           - goto: current-report-temperature
 
-      - name: current-report-temprature
+      - name: current-report-temperature
         steps:
           - say: האם מדדת חום ביממה האחרונה?
           - wait:
@@ -212,8 +212,9 @@
                 steps:
                 - say: "ומה המדחום אומר?"
                 - wait:
-                    variable: temprature
+                    variable: temperature
                     placeholder: מעלות חום, 32-43
+                    input-kind: number
               - show: "לא"
       
       - name: current-report-symptoms-loop
