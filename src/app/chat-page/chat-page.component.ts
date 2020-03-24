@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { VERSION } from '../constants';
 import { of } from 'rxjs';
+import { ReportStoreService } from '../report-store.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -24,8 +25,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   @Output() done = new EventEmitter<void>();
 
-  constructor(private http: HttpClient, 
-              private 
+  constructor(private http: HttpClient,
+              private storage: ReportStoreService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -90,7 +91,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
-
+        this.storage.addReport(payload);
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
         } else {
