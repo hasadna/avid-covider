@@ -12,9 +12,9 @@
 
       - name: personal-details
         steps:
-          - say: שלום, הגעת למערכת דיווח בריאות.
-                          
-          - say:  אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר.
+          - say: טוב שבאת,
+          - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
+          - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
           - say: קודם כל, מה גילך?
           - wait:
               variable: age
@@ -105,7 +105,8 @@
 
       - name: insulation
         steps:
-          - say: אוקיי, עברנו את זה... עכשיו, מה לגבי בידוד?
+          - say: אוקיי, עברנו את זה...
+          - say: עכשיו, מה בנוגע לבידוד?
           - wait:
               variable: insulation_status
               options:
@@ -126,27 +127,29 @@
                         options:
                           - show: "כן"
                             steps:
-                              - say: מה מספר החולה שפגשת?
+                              - say: מצויין. מה המספר?
                               - wait:
                                   variable: insulation_patient_number
                                   placeholder: "מספר החולה שפגשתי"
-                              - say: האם ידוע לך התאריך שבו נפגשתם?
+                              - say: האם זכור לך היום שבו נפגשתם?
                               - wait:
                                   options:
                                     - show: "כן"
                                       steps: 
-                                        - say: באיזה תאריך?
+                                        - say: מה היה התאריך?
                                         - wait:
                                             variable: insulation_exposure_date
                                             placeholder: "תאריך: dd.mm.yy"
-                                    - show: "לא"
+                                    - show: "לא זכור לי"
                           - show: "לא"
-                - show: אני נמצא בבידוד כי חוויתי תסמינים
+                - show: אני בבידוד כי חוויתי תסמינים
                   value: has-symptoms
-                - show: אני נמצא בבידוד מרצוני האישי                    
+                - show: אני בבידוד מרצוני האישי                    
                   value: voluntary
-                - show: אני מאושפז
+                - show: אני באישפוז
                   value: hospitalized
+                - say: החלמה מהירה! 
+                - say: איזה סוג של אשפוז?
                   steps:
                     - wait:
                         variable: hospitalized
@@ -162,12 +165,18 @@
 
       - name: current-report
         steps:
-          - say: מה שלומך היום?
+          - say: ומה שלומך היום?
           - wait:
               options:
-                - show: מצויין!
+                - show: בסדר גמור
+                  step:
+                  - say: נהדר לשמוע!
+                  - say: "אבל רק כדי להיות בטוחים, האם יש לך אלו מהתסמינים הללו:"
+                  - goto: current-report-symptoms
+
                 - show: לא כל כך טוב
-                  steps:                    
+                  steps:
+                    - say: אוייש… איך זה בא לידי ביטוי?
                     - goto: current-report-symptoms
 
       - name: current-report-symptoms
@@ -209,7 +218,7 @@
                   unless: toplevel_symptoms_cough
                   value: toplevel_symptoms_cough
                   steps:
-                    - say: נשמח לעוד כמה פרטים בנוגע לגבי תופעות השיעול והנזלת. 
+                    - say: נשמח לעוד כמה פרטים בנוגע לגבי השיעול והנזלת. 
                     - goto: symptoms_cough_questions
                     - say: יש עוד בעיות שקשורות בשיעולים או נזלת?
                     - goto: symptoms_cough_questions
@@ -352,7 +361,7 @@
       
       - name: exposures
         steps:
-          - say: מה מספר האנשים השונים (לא כולל בני ביתך) ששהית בקרבתם מעל ל-5 דקות ביממה האחרונה?
+          - say: בקרבת כמה אנשים שהית בטווח 2 מטרים מעל ל-15 דקות ביממה האחרונה?
           - wait:
               variable: exposure_met_people
               placehoder: מספר האנשים
@@ -391,9 +400,10 @@
 
       - name: end-of-report
         steps:
-          - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות. נתראה פה מחר?
+          - say: תודה גדולה!
+          - say: המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.
+          - say: אז נתראה מחר?
           - wait:
               variable: continue
               options:
                 - show: בטח!
-                - show: בהחלט, ואשמח גם לשתף את הטופס
