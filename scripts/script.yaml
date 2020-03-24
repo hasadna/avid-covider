@@ -274,6 +274,9 @@
                 - show: עייפות או חולשה
                   unless: symptoms_tiredness_or_fatigue
                   value: symptoms_tiredness_or_fatigue
+                - show: איבדתי את חוש הטעם או הריח
+                  unless: symptoms_smell_taste_loss
+                  value: symptoms_smell_taste_loss
                 - show: זהו
                   steps:
                     - pop: current-report-symptoms
