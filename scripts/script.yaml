@@ -322,7 +322,6 @@
             value: symptoms_breath_shortness
             unless: symptoms_breath_shortness
           - show: זהו
-            value: ""
             steps:
               - pop: current-report-top-level-symptoms
       - do:
@@ -364,7 +363,6 @@
             value: symptoms_nausea_and_vomiting
             unless: symptoms_nausea_and_vomiting
           - show: זהו
-            value: ""
             steps:
               - pop: current-report-top-level-symptoms
       - do:
@@ -381,7 +379,7 @@
     
     - name: exposures
       steps:
-        - say: חשוב לנו לדעת, בקרבת כמה אנשים שונים שהית ביממה האחרונה, מעל ל-15 דקות, בטווח של פחות מ-2 מטרים?
+        - say: חשוב לנו לדעת, בקרבת כמה אנשים שונים שהית ביממה האחרונה, מעל ל-15 דקות, בטווח של פחות מ-2 מטרים
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
@@ -399,11 +397,7 @@
     - name: end-of-report
       steps:
         - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.
-        - say: שנזכיר לך מחר לעדכן אותנו מה המצב?
+        - say: אז נתראה מחר?
         - wait:
-            variable: reminder
             options:
-              - show: כן, בבקשה!
-                value: true
-              - show: לא, תודה
-                value: false
+              - show: בטח!
