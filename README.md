@@ -5,7 +5,6 @@ The project based on an [Angular CLI](https://github.com/angular/angular-cli) ve
 
 ## Technical Background
 
-The site serves via [Github Pages](https://pages.github.com/)
 Our live site [is here](https://coronaisrael.org)
 
 
@@ -21,7 +20,7 @@ The master branch is synchronized with [our staging enviroment](https://avid-cov
 
 ### Main Parts / Porject Structure
 
-- Usage Scenarios / Chats Flow : most of content changes are taking place in the chat script. The script is represented in a custumized YAML fie: [`https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml`](https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml). *Note:* The YAML file is intended to enable a human-readable format. To check the updated version of your `script.yaml`, make sure to run the `avid-covider/tools/yaml_to_json.py` compiler and to include both `script.yaml` and `script.json` in your commit and pull request.
+- Usage Scenarios / Chats Flow : most of content changes are taking place in the chat script. The script is represented in a custumized YAML fie: [`https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml`](https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml). *Note:* The YAML file is intended to enable a human-readable format. To check the updated version of your `script.yaml`, make sure to run the `avid-covider/tools/yaml_to_json.py` compiler and check localy before you submit your commit and pull request.
 
 - hatool: The technical core of the the site: https://github.com/akariv/hatool
 
