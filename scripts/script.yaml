@@ -141,6 +141,7 @@
                                     - wait:
                                         options:
                                         - show: "כן"
+                                          value: "yes"
                                           steps:
                                             - say: מה מספר החולה שפגשת?
                                             - wait:
@@ -150,6 +151,7 @@
                                             - wait:
                                                 options:
                                                 - show: "כן"
+                                                  value: "yes"
                                                   steps: 
                                                   - say: באיזה תאריך?
                                                   - wait:
@@ -157,7 +159,9 @@
                                                       placeholder: "תאריך: dd.mm.yy"
                                                       input-kind: date
                                                 - show: "לא"
+                                                  value: "no"
                                         - show: "לא"
+                                          value: "no"
                         - show: אני נמצא בבידוד כי חוויתי תסמינים
                           value: has_symptoms
                         - show: אני נמצא בבידוד מרצוני האישי                    
@@ -187,19 +191,14 @@
               variable: general_feeling
               options:
               - show: מצויין!
-                variable: feel_good
+                value: feel_good
+                steps:
+                - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
               - show: לא כל כך טוב
-                variable: feel_bad
-              - switch:
-                  arg: general_feeling
-                  cases:
-                  - match: "feel_good"
-                    steps:
-                      - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
-                  - match: "feel_bad"
-                    steps:
-                      - say: "אוייש… איך זה בא לידי ביטוי?"
-              - goto: current-report-symptoms
+                value: feel_bad
+                steps:
+                - say: "אוייש… איך זה בא לידי ביטוי?"
+          - goto: current-report-symptoms
 
       - name: current-report-symptoms
         steps:
@@ -212,6 +211,7 @@
           - wait:
               options:
               - show: "כן"
+                value: "yes"
                 steps:
                 - say: "ומה המדחום אומר?"
                 - wait:
@@ -219,6 +219,7 @@
                     placeholder: מעלות חום, 32-43
                     input-kind: number
               - show: "לא"
+                value: "no"
       
       - name: current-report-symptoms-loop
         steps:
@@ -315,6 +316,7 @@
               value: symptoms_breath_shortness
               unless: symptoms_breath_shortness
             - show: זהו
+              value: ""
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
@@ -356,6 +358,7 @@
               value: symptoms_nausea_and_vomiting
               unless: symptoms_nausea_and_vomiting
             - show: זהו
+              value: ""
               steps:
                 - pop: current-report-top-level-symptoms
         - do:
