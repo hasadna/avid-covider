@@ -110,6 +110,7 @@
               - show: עישנתי בעבר, לפני יותר מחמש שנים
                 value: long_past_smokre
               - show: אף פעם
+                class: other
                 value: never
                 class: other
 
@@ -188,6 +189,7 @@
                         - show: החלמתי ואני בבית
                           value: recovered
               - show: "אני לא בבידוד"
+                class: other
                 value: "none"
                 class: other
 
@@ -306,75 +308,75 @@
 
     - name: symptoms_cough_questions
       steps:
-        - wait:
-            variable: _var
-            options:
-              - show: נזלת או גודש באף
-                value: symptoms_clogged_nose
-                unless: symptoms_clogged_nose
-              - show: כאבי גרון
-                value: symptoms_sore_throat
-                unless: symptoms_sore_throat
-              - show: שיעול יבש
-                value: symptoms_dry_cough
-                unless: symptoms_dry_cough
-              - show: שיעול לח, או שיעול עם כיח
-                value: symptoms_moist_cough
-                unless: symptoms_moist_cough
-              - show: קוצר נשימה
-                value: symptoms_breath_shortness
-                unless: symptoms_breath_shortness
-              - show: זהו
-                class: other
-                steps:
-                  - pop: current-report-top-level-symptoms
-        - do:
-            cmd: flag_from_var
-            params:
-              - record
+      - wait:
+          variable: _var
+          options:
+          - show: נזלת או גודש באף
+            value: symptoms_clogged_nose
+            unless: symptoms_clogged_nose
+          - show: כאבי גרון
+            value: symptoms_sore_throat
+            unless: symptoms_sore_throat
+          - show: שיעול יבש
+            value: symptoms_dry_cough
+            unless: symptoms_dry_cough
+          - show: שיעול לח, או שיעול עם כיח
+            value: symptoms_moist_cough
+            unless: symptoms_moist_cough          
+          - show: קוצר נשימה
+            value: symptoms_breath_shortness
+            unless: symptoms_breath_shortness
+          - show: זהו
+            class: other
+            steps:
+              - pop: current-report-top-level-symptoms
+      - do:
+          cmd: flag_from_var
+          params:
+            - record
 
     - name: symptoms_pains_questions
       steps:
-        - wait:
-            variable: _var
-            options:
-              - show: כאבי שרירים
-                value: symptoms_muscles_pain
-                unless: symptoms_muscles_pain
-              - show: כאבי ראש
-                value: symptoms_headache
-                unless: symptoms_headache
-              - show: כאבי גרון
-                value: symptoms_sore_throat
-                unless: symptoms_sore_throat
-              - show: זהו
-                class: other
-                steps:
-                  - pop: current-report-top-level-symptoms
-        - do:
-            cmd: flag_from_var
-            params:
-              - record
+      - wait:
+          variable: _var
+          options:
+          - show: כאבי שרירים
+            value: symptoms_muscles_pain
+            unless: symptoms_muscles_pain
+          - show: כאבי ראש
+            value: symptoms_headache
+            unless: symptoms_headache
+          - show: כאבי גרון
+            value: symptoms_sore_throat
+            unless: symptoms_sore_throat
+          - show: זהו
+            class: other
+            steps:
+              - pop: current-report-top-level-symptoms
+      - do:
+          cmd: flag_from_var
+          params:
+            - record
 
     - name: symptoms_stomach_questions
       steps:
-        - wait:
-            variable: _var
-            options:
-              - show: שלשול
-                value: symptoms_diarrhea
-                unless: symptoms_diarrhea
-              - show: בחילה או הקאות
-                value: symptoms_nausea_and_vomiting
-                unless: symptoms_nausea_and_vomiting
-              - show: זהו
-                class: other
-                steps:
-                  - pop: current-report-top-level-symptoms
-        - do:
-            cmd: flag_from_var
-            params:
-              - record
+      - wait:
+          variable: _var
+          options:
+          - show: שלשול
+            value: symptoms_diarrhea
+            unless: symptoms_diarrhea
+          - show: בחילה או הקאות
+            value: symptoms_nausea_and_vomiting
+            unless: symptoms_nausea_and_vomiting
+          - show: זהו
+            class: other
+            steps:
+              - pop: current-report-top-level-symptoms
+      - do:
+          cmd: flag_from_var
+          params:
+            - record
 
     - name: symptoms_other_questions
       steps:
