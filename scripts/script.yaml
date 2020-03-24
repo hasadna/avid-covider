@@ -392,9 +392,9 @@
               variable: reminder
               options:
                 - show: כן, בבקשה!
-                  value: "True"
+                  value: true
                 - show: לא, תודה
-                  value: "False"
+                  value: false
           - say: אז נתראה מחר?
           - wait:
               options:
