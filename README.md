@@ -1,12 +1,12 @@
 # AvidCovider
 The project aims to support gathering daily information on the spread of the corona virus.
-The project based on an [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3, offering a dynamic chatbot frontend service (named Chatool) and a dynamic script. Another example for a live implementation can be found on [another repo](https://github.com/hasadna/reportit-user).
+The project based on an [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3, offering a dynamic chatbot frontend service (named hatool) and a dynamic script. Another example for a live implementation can be found on [another repo](https://github.com/hasadna/reportit-user).
 
-## Live Site
-
-[link](https://coronaisrael.org)
 
 ## Technical Background
+
+The site serves via [Github Pages](https://pages.github.com/)
+Our live site [is here](https://coronaisrael.org)
 
 
 ### Staging Enviroment
@@ -23,11 +23,11 @@ The master branch is synchronized with [our staging enviroment](https://avid-cov
 
 - Usage Scenarios / Chats Flow : most of content changes are taking place in the chat script. The script is represented in a custumized YAML fie: [`https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml`](https://github.com/hasadna/avid-covider/blob/master/scripts/script.yaml). *Note:* The YAML file is intended to enable a human-readable format. To check the updated version of your `script.yaml`, make sure to run the `avid-covider/tools/yaml_to_json.py` compiler and to include both `script.yaml` and `script.json` in your commit and pull request.
 
-- Chatool: The technical core of the the site. 
+- hatool: The technical core of the the site: https://github.com/akariv/hatool
 
-- Markups
+- Markups: 
 
-- Design
+- Design: 
 
 
 ### Setting a Local Enviroment
