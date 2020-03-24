@@ -167,16 +167,16 @@
                   steps:
                     - say: והיכן אתם נמצאים?
                       wait:
-                        variable: diagnosed_location
+                        variable: location
                         option:                 
                         - show: אשפוז בבית חולים
-                          value: diagnosed_hospital
+                          value: hospital
                         - show: בבית מלון
-                          value: diagnosed_hotel
+                          value: hotel
                         - show: בבית
-                          value: diagnosed_home
+                          value: home
                         - show: החלמתי ואני בבית
-                          value: diagnosed_recovered
+                          value: recovered
                 - show: "אני לא בבידוד"
                   value: "None"
 
