@@ -191,7 +191,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputPath": "dist/avid-covider/test",
+              "outputPath": "dist/avid-covider/es",
               "baseHref": "/es/",
               "i18nFile": "src/locale/messages.es.xlf",
               "i18nFormat": "xlf",
