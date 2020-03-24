@@ -110,6 +110,7 @@
               - show: עישנתי בעבר, לפני יותר מחמש שנים
                 value: long_past_smokre
               - show: אף פעם
+                class: other
                 value: never
 
     - name: insulation
@@ -187,6 +188,7 @@
                       - show: החלמתי ואני בבית
                         value: recovered
               - show: "אני לא בבידוד"
+                class: other
                 value: "none"
 
     - name: current-report
@@ -293,6 +295,7 @@
                 unless: symptoms_smell_taste_loss
                 value: symptoms_smell_taste_loss
               - show: אף אחד מאלה
+                class: other
                 steps:
                   - pop: current-report-symptoms
         - do:
@@ -322,6 +325,7 @@
             value: symptoms_breath_shortness
             unless: symptoms_breath_shortness
           - show: זהו
+            class: other
             steps:
               - pop: current-report-top-level-symptoms
       - do:
@@ -344,6 +348,7 @@
             value: symptoms_sore_throat
             unless: symptoms_sore_throat
           - show: זהו
+            class: other
             steps:
               - pop: current-report-top-level-symptoms
       - do:
@@ -363,6 +368,7 @@
             value: symptoms_nausea_and_vomiting
             unless: symptoms_nausea_and_vomiting
           - show: זהו
+            class: other
             steps:
               - pop: current-report-top-level-symptoms
       - do:
@@ -401,3 +407,4 @@
         - wait:
             options:
               - show: בטח!
+                class: other
