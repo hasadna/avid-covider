@@ -376,14 +376,14 @@
           - say: כמה מהם מתחת לגיל 18?
           - wait:
               variable: met_under_18
-              plachoder: מספר האנשים
+              placholder: מספר האנשים
               validation: "[0-9]+"
               input-kind: number
 
           - say: כמה מהם מעל לגיל 18?
           - wait:
               variable: met_above_18
-              plachoder: מספר האנשים
+              placholder: מספר האנשים
               validation: "[0-9]+"
               input-kind: number
 
