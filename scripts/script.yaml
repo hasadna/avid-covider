@@ -326,7 +326,6 @@
                 unless: symptoms_breath_shortness
               - show: זהו
                 class: other
-                value: ""
                 steps:
                   - pop: current-report-top-level-symptoms
         - do:
@@ -370,7 +369,6 @@
                 unless: symptoms_nausea_and_vomiting
               - show: זהו
                 class: other
-                value: ""
                 steps:
                   - pop: current-report-top-level-symptoms
         - do:
@@ -387,7 +385,7 @@
 
     - name: exposures
       steps:
-        - say: חשוב לנו לדעת, בקרבת כמה אנשים שונים שהית ביממה האחרונה, מעל ל-15 דקות, בטווח של פחות מ-2 מטרים?
+        - say: חשוב לנו לדעת, בקרבת כמה אנשים שונים שהית ביממה האחרונה, מעל ל-15 דקות, בטווח של פחות מ-2 מטרים
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
