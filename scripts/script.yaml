@@ -114,12 +114,13 @@
               variable: exposure_status
               options:
                 - show: אני בבידוד מבני משפחה, ובחדר סגור
-                  value: "inulation"
+                  value: "insulation"
                   steps:
                     - say: "מאיזה תאריך נמשך הבידוד?"
                     - wait:
                         variable: insulation_start_date
                         placeholder: "תאריך: dd.mm.yy"
+                        input-kind: date
                     - say: מה הסיבה לשהות שלך בבידוד?
                     - wait:
                         variable: insulation_reason
@@ -131,6 +132,7 @@
                             - wait:
                                 variable: insulation_returned_from_abroad_date
                                 placeholder: "תאריך: dd.mm.yy"
+                                input-kind: date
                                 options:
                                 - show: אני בבידוד כי נחשפתי לחולה מאומת
                                   value: contact-with-patient
@@ -153,6 +155,7 @@
                                                   - wait:
                                                       variable: insulation_exposure_date
                                                       placeholder: "תאריך: dd.mm.yy"
+                                                      input-kind: date
                                                 - show: "לא"
                                         - show: "לא"
                         - show: אני נמצא בבידוד כי חוויתי תסמינים
