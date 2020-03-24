@@ -59,6 +59,8 @@
         - goto: preconditions-diseases
         - say: "מחלות נוספות?"
         - goto: preconditions-diseases
+        - say: "עוד משהו?"
+        - goto: preconditions-diseases
 
     - name: preconditions-diseases
       steps:
@@ -85,6 +87,7 @@
               unless: chronic_kidney_failure
             - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
               value: chronic_immune_system_suppression
+              unless: chronic_immune_system_suppression
             - show: לא אובחנתי באף אחת מאלה
               class: other
               steps:
@@ -102,7 +105,7 @@
             options:
               - show: עישון יומיומי
                 value: daily_smoker
-              - show: עישנתי בעבר, בחמש השנים האחרונות
+              - show: עישנתי בעבר, הפסקתי לפני פחות מחמש שנים
                 value: short_past_smoker
               - show: עישנתי בעבר, לפני יותר מחמש שנים
                 value: long_past_smokre
@@ -119,7 +122,7 @@
               - show: אני בבידוד מבני משפחה, ובחדר סגור
                 value: "insulation"
                 steps:
-                  - say: "מאיזה תאריך נמשך הבידוד?"
+                  - say: "באיזה תאריך התחיל הבידוד?"
                   - wait:
                       variable: insulation_start_date
                       placeholder: "תאריך: dd.mm.yy"
@@ -172,10 +175,9 @@
               - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
                 value: diagnosed
                 steps:
-                  - say: והיכן אתם נמצאים?
-                    wait:
+                  - wait:
                       variable: diagnosed_location
-                      option:                 
+                      options:                 
                       - show: אשפוז בבית חולים
                         value: hospital
                       - show: בבית מלון
@@ -197,7 +199,7 @@
               value: feel_good
               steps:
                 - say: נהדר לשמוע!
-                - say: "אבל רק כדי להיות בטוחים, האם יש לך אלו מהתסמינים הללו:"
+                - say: "ליתר בטחון, האם יש לך אלו מהתסמינים הללו:"
             - show: לא כל כך טוב
               value: feel_bad
               steps:
@@ -238,8 +240,6 @@
         - goto: current-report-top-level-symptoms
         - say: יש עוד משהו שמפריע לך?
         - goto: current-report-top-level-symptoms
-        - say: עוד משהו?
-        - goto: current-report-top-level-symptoms
         - say: עוד משהו שגורם לך להרגיש לא טוב?
         - goto: current-report-top-level-symptoms          
 
@@ -252,7 +252,7 @@
                 unless: toplevel_symptoms_cough
                 value: toplevel_symptoms_cough
                 steps:
-                  - say: נשמח לעוד כמה פרטים בנוגע לגבי השיעול והנזלת. 
+                  - say: נשמח לעוד כמה פרטים לגבי השיעול והנזלת. 
                   - goto: symptoms_cough_questions
                   - say: יש עוד בעיות שקשורות בשיעולים או נזלת?
                   - goto: symptoms_cough_questions
@@ -270,6 +270,8 @@
                   - goto: symptoms_pains_questions
                   - say: יש עוד כאבים?
                   - goto: symptoms_pains_questions
+                  - say: סוג נוסף של כאב?
+                  - goto: symptoms_pains_question
               - show: בעיות קיבה
                 unless: toplevel_symptoms_stomach
                 value: toplevel_symptoms_stomach
@@ -290,7 +292,7 @@
               - show: איבדתי את חוש הטעם או הריח
                 unless: symptoms_smell_taste_loss
                 value: symptoms_smell_taste_loss
-              - show: זהו
+              - show: אף אחד מאלה
                 steps:
                   - pop: current-report-symptoms
         - do:
@@ -379,7 +381,7 @@
     
     - name: exposures
       steps:
-        - say: כעת נברר מה מספר האנשים השונים ששהית בקרבתם מעל ל-15 דקות בטווח 2 מטרים ביממה האחרונה.
+        - say: חשוב לנו לדעת, בקרבת כמה אנשים שונים שהית ביממה האחרונה, מעל ל-15 דקות, בטווח של פחות מ-2 מטרים?
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
@@ -387,7 +389,7 @@
             validation: "[0-9]+"
             input-kind: number
 
-        - say: כמה מהם מעל לגיל 18?
+        - say: וכמה מעל גיל 18?
         - wait:
             variable: met_above_18
             placholder: מספר האנשים
