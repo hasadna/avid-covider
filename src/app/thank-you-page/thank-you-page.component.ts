@@ -9,7 +9,11 @@ export class ThankYouPageComponent implements OnInit {
 
   @Output() restart = new EventEmitter<void>();
 
-  constructor() { }
+  // clipboardCopySupported = false;
+
+  constructor() {
+    // this.clipsboardCopySupported = document.queryCommandSupported && document.queryCommandSupported('copy');
+  }
 
   ngOnInit() {
   }
@@ -31,4 +35,24 @@ export class ThankYouPageComponent implements OnInit {
       console.log('no share...');
     }
   }
+
+  // clipboardCopy(text: string, owner: HTMLElement): boolean {
+  //   if (!this.clipboardCopySupported) {
+  //     return false;
+  //   }
+  //   const txt = document.createElement('textarea');
+  //   txt.setAttribute(contentAttrs.name, getName(owner));
+  //   txt.textContent = text;
+  //   txt.classList.add('visually-hidden');
+  //   document.body.appendChild(txt);
+  //   txt.select();
+  //   try {
+  //     return document.execCommand('copy');
+  //   } catch (ex) {
+  //     return false;
+  //   } finally {
+  //     document.body.removeChild(txt);
+  //   }
+  // }
+
 }
