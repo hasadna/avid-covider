@@ -88,7 +88,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
-        return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
+        if (window.location.hostname === 'coronaisrael.org') {
+          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
+        } else {
+          return of({success: true});
+        }
       }),
       catchError(() => of({success: false})),
       map((response: any) => response.success)
