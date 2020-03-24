@@ -379,7 +379,8 @@
     - name: exposures
       steps:
         - say: בקרבת כמה אנשים שהית בטווח 2 מטרים מעל ל-15 דקות ביממה האחרונה?
-        - say: כמה מהם מתחת לגיל 18?
+        - say: כמה מהם מתחת ל
+        18?
         - wait:
             variable: met_under_18
             placholder: מספר האנשים

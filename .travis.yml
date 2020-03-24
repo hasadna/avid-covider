@@ -30,7 +30,7 @@ deploy:
     skip_cleanup: true
     acl: public_read
     region: eu
-    cache_control: "max-age=86400"
+    cache_control: "max-age=60"
     local_dir: dist/avid-covider/
     endpoint: https://storage.googleapis.com
     on:
