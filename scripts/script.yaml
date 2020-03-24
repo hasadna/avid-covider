@@ -178,7 +178,7 @@
                         - show: החלמתי ואני בבית
                           value: recovered
                 - show: "אני לא בבידוד"
-                  value: "None"
+                  value: "none"
 
       - name: current-report
         steps:
