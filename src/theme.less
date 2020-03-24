@@ -78,8 +78,12 @@ htl-hatool {
                             margin: 6px 10px;
                             min-width: 30%;
                             color: #1a7f4e;
-                            background-color: transparent;
+                            background-color: #f6f6f6;
                             width: 100%;
+
+                            &.other {
+                                background-color: #d9f2f1
+                            }
     
                             &.selected {
                                 margin: 8px 0;
@@ -232,6 +236,48 @@ htl-hatool {
                     z-index: 2;
                 }
             }            
+        }
+    }
+
+    &.ltr {
+        htl-chatbox {
+            htl-messages {
+                .container {
+                    text-align: right;
+                    htl-message-from {
+                        .speech-bubble {
+                            border-bottom-left-radius: 0px;
+                            border-bottom-right-radius: 8px;    
+                        }
+                    }
+                    htl-message-to {
+                        .message-to-wrapper {
+                            .speech-bubble {
+                                border-top-right-radius: 0px;
+                                border-top-left-radius: 8px;
+                            }
+                        }
+                    }
+                }
+            }
+            htl-input {
+                .input {
+                    input[type="text"], input[type="number"], input[type="date"] {
+                        padding: 7px 12px;
+                        padding-left: 12px;
+                        padding-right: 38px;
+                        margin-right: -30px;
+                        margin-left: 0;
+                    }
+                }
+                button {
+                    right: auto;
+                    margin-right: inherit;
+                    left: -2px;
+                    margin-left: 0;
+                    transform: scaleX(-1);
+                }
+            }
         }
     }
 }

@@ -86,6 +86,7 @@
             - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
               value: chronic_immune_system_suppression
             - show: לא אובחנתי באף אחת מאלה
+              class: other
               steps:
                 - pop: preconditions
         - do:

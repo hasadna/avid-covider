@@ -184,7 +184,7 @@
                 }
               ]
             },
-            "qu": {
+            "es": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -192,10 +192,10 @@
                 }
               ],
               "outputPath": "dist/avid-covider/test",
-              "baseHref": "/test/",
-              "i18nFile": "src/locale/messages.qu.xlf",
+              "baseHref": "/es/",
+              "i18nFile": "src/locale/messages.es.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "qu",
+              "i18nLocale": "es",
               "i18nMissingTranslation": "ignore",              
               "optimization": true,
               "outputHashing": "all",

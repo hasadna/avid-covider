@@ -13,13 +13,13 @@ script:
 - ng lint
 - ". extract_i18n.sh"
 - tx push --source
-- tx pull --mode sourceastranslation -l ar,en,am,ru,qu
+- tx pull --mode sourceastranslation -l ar,en,am,ru,es
 - ng build --prod -c production
 - ng build --prod -c ar
 - ng build --prod -c en
 - ng build --prod -c ru
 - ng build --prod -c am
-- ng build --prod -c qu
+- ng build --prod -c es
 deploy:
   - provider: s3
     secret_access_key:
