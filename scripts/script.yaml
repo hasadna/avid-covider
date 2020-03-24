@@ -188,15 +188,18 @@
               options:
               - show: מצויין!
                 variable: feel_good
-                step:
-                - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
-                - goto: current-report-symptoms
-
               - show: לא כל כך טוב
                 variable: feel_bad
-                steps:
-                  - say: אוייש… איך זה בא לידי ביטוי?
-                  - goto: current-report-symptoms
+              - switch:
+                  arg: general_feeling
+                  cases:
+                  - match: "feel_good"
+                    steps:
+                      - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
+                  - match: "feel_bad"
+                    steps:
+                      - say: "אוייש… איך זה בא לידי ביטוי?"
+              - goto: current-report-symptoms
 
       - name: current-report-symptoms
         steps:
