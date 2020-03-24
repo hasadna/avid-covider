@@ -126,14 +126,7 @@ export const script = {
           "name": "preconditions-diseases-loop",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
-                  "ar": "بدي أسألك على شوية أمراض, اللي مهم لإلنا نعرف إذا كانوا عندك بالماضي:",
-                  "es": "Te preguntaré sobre algunas enfermedades que es importante que sepamos si te las han diagnosticado en el pasado:",
-                  "ru": "Я спрошу у вас а некоторых заболеваниях, о которых нам важно знать был ли вам когда либо поставлен диагноз:"
-                }
-              },
+              "say": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
               "uid": "3b1b905fff"
             },
             {
@@ -141,15 +134,7 @@ export const script = {
               "uid": "ade3b992a5"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "מחלות נוספות?",
-                  "ar": "كمان أمراض؟",
-                  "en": "Any other existing illnesses?",
-                  "es": "¿Otras enfermedades?",
-                  "ru": "Дополнительные заболевания?"
-                }
-              },
+              "say": "מחלות נוספות?",
               "uid": "90ed58a48c"
             },
             {
@@ -157,15 +142,7 @@ export const script = {
               "uid": "07e85460da"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "עוד משהו?",
-                  "ar": "كمان إشي؟",
-                  "en": "Anything else?",
-                  "es": "¿Algo más?",
-                  "ru": "Что то еще?"
-                }
-              },
+              "say": "עוד משהו?",
               "uid": "7da48d9dba"
             },
             {
@@ -173,15 +150,7 @@ export const script = {
               "uid": "03e166a37b"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "האם ישנן מחלות רקע נוספות בהן אובחנת?",
-                  "ar": " هل تم تشخيصك بأمراض مزمنة أخرى؟",
-                  "en": "Have you been diagnosed with any other pre-existing conditions?",
-                  "es": "¿Te han diagnosticado otras enfermedades crónicas o tienes antecedentes patológicos?",
-                  "ru": "Диагностированы ли у вас какие-либо сопутствующие заболевания?"
-                }
-              },
+              "say": "האם ישנן מחלות רקע נוספות בהן אובחנת?",
               "uid": "3337d3489a"
             },
             {
@@ -189,15 +158,7 @@ export const script = {
               "uid": "ff913f4be2"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "עוד משהו?",
-                  "ar": "كمان إشي؟",
-                  "en": "Anything else?",
-                  "es": "¿Algo más?",
-                  "ru": "Что то еще?"
-                }
-              },
+              "say": "עוד משהו?",
               "uid": "ebeb9fc029"
             },
             {
@@ -205,20 +166,20 @@ export const script = {
               "uid": "593bd58fad"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "מחלות נוספות?",
-                  "ar": "أمراض أخرى",
-                  "en": "Any other existing illnesses?",
-                  "es": "¿Otras enfermedades?",
-                  "ru": "Дополнительные заболевания?"
-                }
-              },
+              "say": "מחלות נוספות?",
               "uid": "4e7519c646"
             },
             {
               "goto": "preconditions-diseases",
               "uid": "fb727c4c8b"
+            },
+            {
+              "say": "עוד משהו?",
+              "uid": "8c4196787f"
+            },
+            {
+              "goto": "preconditions-diseases",
+              "uid": "3d6501c445"
             }
           ],
           "uid": "d14be6bcf5"
@@ -231,97 +192,43 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "סוכרת",
-                        "ar": "سُكري",
-                        "en": "Diabetes",
-                        "es": "Diabetes",
-                        "ru": "диабет"
-                      }
-                    },
+                    "show": "סוכרת",
                     "unless": "chronic_diabetes",
                     "value": "chronic_diabetes"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "בעיית יתר לחץ דם",
-                        "ar": "مشكلة ضغط دم عالي",
-                        "en": "Hypertension",
-                        "es": "Hipertensión arterial",
-                        "ru": "высокое давление"
-                      }
-                    },
+                    "show": "בעיית יתר לחץ דם",
                     "unless": "chronic_hypertension",
                     "value": "chronic_hypertension"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "מחלת לב, כלי דם או שבץ",
-                        "ar": "أمراض قلب, أوعية دموية أو جلطة",
-                        "en": "Coronary artery disease, stroke or Cardiovascular disease",
-                        "es": "Enfermedades del corazón, vasos sanguíneos o derrames cerebrales",
-                        "ru": "сердечно-сосудистое заболевание или инсульт"
-                      }
-                    },
+                    "show": "מחלת לב, כלי דם או שבץ",
                     "unless": "chronic_ischemic_heart_disease_or_stroke",
                     "value": "chronic_ischemic_heart_disease_or_stroke"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)",
-                        "en": "Chronic pulmonary disease including Asthma (not including childhood Asthma)"
-                      }
-                    },
+                    "show": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)",
                     "unless": "chronic_lung_disease",
                     "value": "chronic_lung_disease"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "סרטן",
-                        "ar": "سرطان",
-                        "en": "Cancer",
-                        "es": "Cáncer",
-                        "ru": "рак"
-                      }
-                    },
+                    "show": "סרטן",
                     "unless": "chronic_cancer",
                     "value": "chronic_cancer"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "אי ספיקת כליות",
-                        "ar": "قصور كلوي",
-                        "en": "Renal failure",
-                        "es": "Insuficiencia renal",
-                        "ru": "почечная недостаточность"
-                      }
-                    },
+                    "show": "אי ספיקת כליות",
                     "unless": "chronic_kidney_failure",
                     "value": "chronic_kidney_failure"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון",
-                        "en": "immunosupressed, including takingimmunosuppressant drugs"
-                      }
-                    },
+                    "show": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון",
+                    "unless": "chronic_immune_system_suppression",
                     "value": "chronic_immune_system_suppression"
                   },
                   {
                     "class": "other",
-                    "show": {
-                      ".tx": {
-                        "_": "לא אובחנתי באף אחת מאלה",
-                        "en": "I wasn't diagnosed with any of these"
-                      }
-                    },
+                    "show": "לא אובחנתי באף אחת מאלה",
                     "steps": [
                       {
                         "pop": "preconditions",
@@ -350,15 +257,7 @@ export const script = {
           "name": "preconditions-smoking",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "מה לגבי עישון?",
-                  "ar": "شو مع التدخين؟",
-                  "en": "How about smoking?",
-                  "es": "¿Qué podemos decir sobre el fumar?",
-                  "ru": "Как насчет курения?"
-                }
-              },
+              "say": "מה לגבי עישון?",
               "uid": "92a9456fa5"
             },
             {
@@ -366,51 +265,19 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישון יומיומי",
-                        "ar": "تدخين بشكل يومي",
-                        "en": "Smoking daily",
-                        "es": "Fumo diariamente",
-                        "ru": "ежедневное курение"
-                      }
-                    },
+                    "show": "עישון יומיומי",
                     "value": "daily_smoker"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישנתי בעבר, בחמש השנים האחרונות",
-                        "ar": "دخنت في السابق, في الخمس سنوات الأخيرة",
-                        "en": "Smoked in the last 5 years",
-                        "es": "Fumé en el pasado, en los últimos cinco años",
-                        "ru": "Я курил/а раньше, в течение последних пяти лет"
-                      }
-                    },
+                    "show": "עישנתי בעבר, הפסקתי לפני פחות מחמש שנים",
                     "value": "short_past_smoker"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישנתי בעבר, לפני יותר מחמש שנים",
-                        "ar": "دخنت في السابق, قبل أكثر من خمس سنين",
-                        "en": "Smoked in the past, more than 5 years ago",
-                        "es": "Fumé en el pasado, hace más de cinco años",
-                        "ru": "Я курил/а раньше, более пяти лет назад"
-                      }
-                    },
+                    "show": "עישנתי בעבר, לפני יותר מחמש שנים",
                     "value": "long_past_smokre"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "אף פעם",
-                        "ar": "ولا مرة",
-                        "en": "Never",
-                        "es": "Nunca",
-                        "ru": "никогда"
-                      }
-                    },
+                    "show": "אף פעם",
                     "value": "never"
                   }
                 ],
@@ -439,8 +306,8 @@ export const script = {
                     "show": "אני בבידוד מבני משפחה, ובחדר סגור",
                     "steps": [
                       {
-                        "say": "מאיזה תאריך נמשך הבידוד?",
-                        "uid": "30f4bcaac8"
+                        "say": "באיזה תאריך התחיל הבידוד?",
+                        "uid": "f9362506b2"
                       },
                       {
                         "uid": "8c17e0398f",
@@ -469,82 +336,7 @@ export const script = {
                                   "uid": "94235655cf",
                                   "wait": {
                                     "input-kind": "date",
-                                    "options": [
-                                      {
-                                        "show": "אני בבידוד כי נחשפתי לחולה מאומת",
-                                        "steps": [
-                                          {
-                                            "say": "ידוע לך מה מספר החולה שפגשת?",
-                                            "uid": "e21a448032"
-                                          },
-                                          {
-                                            "uid": "1d2c27deb7",
-                                            "wait": {
-                                              "options": [
-                                                {
-                                                  "show": "כן",
-                                                  "steps": [
-                                                    {
-                                                      "say": "מצויין. מה המספר?",
-                                                      "uid": "7c816fe7b9"
-                                                    },
-                                                    {
-                                                      "uid": "c45353ab23",
-                                                      "wait": {
-                                                        "placeholder": "מספר החולה שפגשתי",
-                                                        "variable": "insulation_patient_number"
-                                                      }
-                                                    },
-                                                    {
-                                                      "say": "האם זכור לך היום שבו נפגשתם?",
-                                                      "uid": "00859fa043"
-                                                    },
-                                                    {
-                                                      "uid": "2e102de72a",
-                                                      "wait": {
-                                                        "options": [
-                                                          {
-                                                            "show": "כן",
-                                                            "steps": [
-                                                              {
-                                                                "say": "מה היה התאריך?",
-                                                                "uid": "e10c679952"
-                                                              },
-                                                              {
-                                                                "uid": "a52138951f",
-                                                                "wait": {
-                                                                  "input-kind": "date",
-                                                                  "placeholder": "תאריך: dd.mm.yy",
-                                                                  "variable": "insulation_exposure_date"
-                                                                }
-                                                              }
-                                                            ],
-                                                            "uid": "93046856eb",
-                                                            "value": "yes"
-                                                          },
-                                                          {
-                                                            "show": "לא זכור לי",
-                                                            "value": "no"
-                                                          }
-                                                        ]
-                                                      }
-                                                    }
-                                                  ],
-                                                  "uid": "6b108607c2",
-                                                  "value": "yes"
-                                                },
-                                                {
-                                                  "show": "לא",
-                                                  "value": "no"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ],
-                                        "uid": "e18baef4a5",
-                                        "value": "contact-with-patient"
-                                      }
-                                    ],
+                                    "options": null,
                                     "placeholder": "תאריך: dd.mm.yy",
                                     "variable": "insulation_returned_from_abroad_date"
                                   }
@@ -552,6 +344,80 @@ export const script = {
                               ],
                               "uid": "1af5329911",
                               "value": "back-from-abroad"
+                            },
+                            {
+                              "show": "אני בבידוד כי נחשפתי לחולה מאומת",
+                              "steps": [
+                                {
+                                  "say": "ידוע לך מה מספר החולה שפגשת?",
+                                  "uid": "0bb4443352"
+                                },
+                                {
+                                  "uid": "0c950224be",
+                                  "wait": {
+                                    "options": [
+                                      {
+                                        "show": "כן",
+                                        "steps": [
+                                          {
+                                            "say": "מצויין. מה המספר?",
+                                            "uid": "3c9aba4455"
+                                          },
+                                          {
+                                            "uid": "78d13be6b4",
+                                            "wait": {
+                                              "placeholder": "מספר החולה שפגשתי",
+                                              "variable": "insulation_patient_number"
+                                            }
+                                          },
+                                          {
+                                            "say": "האם זכור לך היום שבו נפגשתם?",
+                                            "uid": "ca89530901"
+                                          },
+                                          {
+                                            "uid": "6e6884024e",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": "כן",
+                                                  "steps": [
+                                                    {
+                                                      "say": "מה היה התאריך?",
+                                                      "uid": "d841e72e5e"
+                                                    },
+                                                    {
+                                                      "uid": "acb6f0bcb5",
+                                                      "wait": {
+                                                        "input-kind": "date",
+                                                        "placeholder": "תאריך: dd.mm.yy",
+                                                        "variable": "insulation_exposure_date"
+                                                      }
+                                                    }
+                                                  ],
+                                                  "uid": "b3490242e6",
+                                                  "value": "yes"
+                                                },
+                                                {
+                                                  "show": "לא זכור לי",
+                                                  "value": "no"
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        "uid": "46ddf1c6f1",
+                                        "value": "yes"
+                                      },
+                                      {
+                                        "show": "לא",
+                                        "value": "no"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              "uid": "01ab3f0c1d",
+                              "value": "contact-with-patient"
                             },
                             {
                               "show": "אני נמצא בבידוד כי חוויתי תסמינים",
@@ -573,10 +439,9 @@ export const script = {
                     "show": "אני חולה קורונה (מאומת בבדיקת מעבדה)",
                     "steps": [
                       {
-                        "say": "והיכן אתם נמצאים?",
-                        "uid": "acc602660b",
+                        "uid": "6d11a2097c",
                         "wait": {
-                          "option": [
+                          "options": [
                             {
                               "show": "אשפוז בבית חולים",
                               "value": "hospital"
@@ -631,8 +496,8 @@ export const script = {
                         "uid": "520f128fa1"
                       },
                       {
-                        "say": "אבל רק כדי להיות בטוחים, האם יש לך אלו מהתסמינים הללו:",
-                        "uid": "92920f9722"
+                        "say": "ליתר בטחון, האם יש לך אלו מהתסמינים הללו:",
+                        "uid": "3ae0851629"
                       }
                     ],
                     "uid": "012c841404",
@@ -722,12 +587,7 @@ export const script = {
               "uid": "63755ce1aa"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "האם יש עוד סוגים של סימפטומים?",
-                  "en": "Experiencing any other symptoms?"
-                }
-              },
+              "say": "האם יש עוד סוגים של סימפטומים?",
               "uid": "203b61a17e"
             },
             {
@@ -743,12 +603,7 @@ export const script = {
               "uid": "14ed40aca4"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "עוד משהו שגורם לך להרגיש לא טוב?",
-                  "en": "Anything else that makes you feel ill?"
-                }
-              },
+              "say": "עוד משהו שגורם לך להרגיש לא טוב?",
               "uid": "eda119f0f5"
             },
             {
@@ -756,12 +611,7 @@ export const script = {
               "uid": "0bad6900a2"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "מה עוד?",
-                  "en": "What else?"
-                }
-              },
+              "say": "מה עוד?",
               "uid": "b6fb5b4c3c"
             },
             {
@@ -769,12 +619,7 @@ export const script = {
               "uid": "281a379675"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "יש עוד משהו שמפריע לך?",
-                  "en": "Anything else bothering you?"
-                }
-              },
+              "say": "יש עוד משהו שמפריע לך?",
               "uid": "0455473662"
             },
             {
@@ -782,30 +627,12 @@ export const script = {
               "uid": "e7ebec4dda"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "עוד משהו?",
-                  "en": "Anything else?"
-                }
-              },
-              "uid": "b5ce139681"
+              "say": "עוד משהו שגורם לך להרגיש לא טוב?",
+              "uid": "51910a9cef"
             },
             {
               "goto": "current-report-top-level-symptoms",
               "uid": "f06c342959"
-            },
-            {
-              "say": {
-                ".tx": {
-                  "_": "עוד משהו שגורם לך להרגיש לא טוב?",
-                  "en": "Are you feeling unwell in any other way?"
-                }
-              },
-              "uid": "4374db5a63"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "41c512be93"
             }
           ],
           "uid": "529f6c7050"
@@ -818,34 +645,18 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "שיעולים או נזלת",
-                        "ar": "سُعال او سيلان بالأنف؟",
-                        "en": "Coughing or a runny nose",
-                        "es": "Tos o secreción nasal",
-                        "ru": "кашель или насморк"
-                      }
-                    },
+                    "show": "שיעולים או נזלת",
                     "steps": [
                       {
-                        "say": "נשמח לעוד כמה פרטים בנוגע לגבי השיעול והנזלת.",
-                        "uid": "dc4cf7d239"
+                        "say": "נשמח לעוד כמה פרטים לגבי השיעול והנזלת.",
+                        "uid": "ba134f7deb"
                       },
                       {
                         "goto": "symptoms_cough_questions",
                         "uid": "52bf71f303"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "יש עוד בעיות שקשורות בשיעולים או נזלת?",
-                            "ar": "كمان مشاكل مرتبطة بالسُعال أو سيلان الأنف؟",
-                            "en": "Other issues related to coughing or runny nose?",
-                            "es": "¿Hay más problemas relacionados con la tos y la mucosidad?",
-                            "ru": "Любые другие проблемы, связанные с кашлем или насморком?"
-                          }
-                        },
+                        "say": "יש עוד בעיות שקשורות בשיעולים או נזלת?",
                         "uid": "eba3372b9e"
                       },
                       {
@@ -853,14 +664,7 @@ export const script = {
                         "uid": "83e63b4189"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "עוד תופעה מאלו?",
-                            "ar": "كمان أعراض مشابهة؟",
-                            "es": "¿Otros síntomas además de esos?",
-                            "ru": "Дополнительные из вышеупомянутых симптомы?"
-                          }
-                        },
+                        "say": "עוד תופעה מאלו?",
                         "uid": "42d6c4e645"
                       },
                       {
@@ -868,15 +672,7 @@ export const script = {
                         "uid": "70b6fb49a9"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "משהו נוסף שכדאי שנכיר?",
-                            "ar": "كمان إشي إضافي لازم نعرفه؟",
-                            "en": "Anythings else we need to know about?",
-                            "es": "¿Hay algo más que sería conveniente que sepamos?",
-                            "ru": "Что-то ещё о чём стоит рассказать?"
-                          }
-                        },
+                        "say": "משהו נוסף שכדאי שנכיר?",
                         "uid": "a7b059c04f"
                       },
                       {
@@ -884,15 +680,7 @@ export const script = {
                         "uid": "28da6a7199"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "סימפטום נוסף?",
-                            "ar": "كمان أعراض؟",
-                            "en": "Other symptoms?",
-                            "es": "¿Otro síntoma?",
-                            "ru": "Дополнительный симптом?"
-                          }
-                        },
+                        "say": "סימפטום נוסף?",
                         "uid": "d6622e8976"
                       },
                       {
@@ -905,26 +693,10 @@ export const script = {
                     "value": "toplevel_symptoms_cough"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כאבים",
-                        "ar": "أوجاع",
-                        "en": "Pain",
-                        "es": "Dolores",
-                        "ru": "боли"
-                      }
-                    },
+                    "show": "כאבים",
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "מה כואב בדיוק?",
-                            "ar": "شو بيوجعك بالضبط؟",
-                            "en": "Where does it hurt?",
-                            "es": "¿Qué te duele exactamente?",
-                            "ru": "Где точно болит?"
-                          }
-                        },
+                        "say": "מה כואב בדיוק?",
                         "uid": "5225dcb4e0"
                       },
                       {
@@ -932,20 +704,20 @@ export const script = {
                         "uid": "f19ded6166"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "יש עוד כאבים?",
-                            "ar": "في كمان أوجاع؟",
-                            "en": "Any other kinds of pain?",
-                            "es": "¿Hay otros dolores?",
-                            "ru": "Есть ли дополнительные боли?"
-                          }
-                        },
+                        "say": "יש עוד כאבים?",
                         "uid": "240cdbad54"
                       },
                       {
                         "goto": "symptoms_pains_questions",
                         "uid": "347e27709f"
+                      },
+                      {
+                        "say": "סוג נוסף של כאב?",
+                        "uid": "f15d5c8449"
+                      },
+                      {
+                        "goto": "symptoms_pains_question",
+                        "uid": "6000c71548"
                       }
                     ],
                     "uid": "f0f2b86dfa",
@@ -953,20 +725,10 @@ export const script = {
                     "value": "toplevel_symptoms_pains"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "בעיות קיבה",
-                        "en": "Stomach issues"
-                      }
-                    },
+                    "show": "בעיות קיבה",
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "מה לא בסדר בקיבה?",
-                            "en": "What's wrong with your stomach?"
-                          }
-                        },
+                        "say": "מה לא בסדר בקיבה?",
                         "uid": "1a6c6ab4c0"
                       },
                       {
@@ -974,12 +736,7 @@ export const script = {
                         "uid": "c6a58971e8"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "יש עוד בעיות קיבה?",
-                            "en": "Any other stomach issues?"
-                          }
-                        },
+                        "say": "יש עוד בעיות קיבה?",
                         "uid": "f1dbf23100"
                       },
                       {
@@ -997,49 +754,29 @@ export const script = {
                     "value": "symptoms_chills"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "בלבול",
-                        "en": "Disorientation or confusion"
-                      }
-                    },
+                    "show": "בלבול",
                     "unless": "symptoms_confusion",
                     "value": "symptoms_confusion"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עייפות או חולשה",
-                        "en": "Fatigue or weakness"
-                      }
-                    },
+                    "show": "עייפות או חולשה",
                     "unless": "symptoms_tiredness_or_fatigue",
                     "value": "symptoms_tiredness_or_fatigue"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "איבדתי את חוש הטעם או הריח",
-                        "en": "Lost my sense of taste or smell"
-                      }
-                    },
+                    "show": "איבדתי את חוש הטעם או הריח",
                     "unless": "symptoms_smell_taste_loss",
                     "value": "symptoms_smell_taste_loss"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "זהו",
-                        "en": "That's it"
-                      }
-                    },
+                    "show": "אף אחד מאלה",
                     "steps": [
                       {
                         "pop": "current-report-symptoms",
-                        "uid": "9b79d06b62"
+                        "uid": "4714c37cc0"
                       }
                     ],
-                    "uid": "af98e3478a"
+                    "uid": "e2aa3f16be"
                   }
                 ],
                 "variable": "_var_symptoms"
@@ -1066,78 +803,32 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "נזלת או גודש באף",
-                        "ar": "سيلان أو إنسداد بالأنف",
-                        "en": "Runny nose or nasal congestion",
-                        "es": "Mucosidad o congestión nasal",
-                        "ru": "сопли или заложенность носа"
-                      }
-                    },
+                    "show": "נזלת או גודש באף",
                     "unless": "symptoms_clogged_nose",
                     "value": "symptoms_clogged_nose"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כאבי גרון",
-                        "ar": "وجع حلق",
-                        "es": "Dolor de garganta",
-                        "ru": "боли в горле"
-                      }
-                    },
+                    "show": "כאבי גרון",
                     "unless": "symptoms_sore_throat",
                     "value": "symptoms_sore_throat"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "שיעול יבש",
-                        "ar": "سعال ناشف",
-                        "en": "Dry cough",
-                        "es": "Tos seca",
-                        "ru": "сухой кашель"
-                      }
-                    },
+                    "show": "שיעול יבש",
                     "unless": "symptoms_dry_cough",
                     "value": "symptoms_dry_cough"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "שיעול לח, או שיעול עם כיח",
-                        "ar": "سُعال رطب, أو سُعال مع بلغم",
-                        "es": "Tos grasa o tos con esputo (flema)",
-                        "ru": "влажный кашель или кашель с мокротой"
-                      }
-                    },
+                    "show": "שיעול לח, או שיעול עם כיח",
                     "unless": "symptoms_moist_cough",
                     "value": "symptoms_moist_cough"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "קוצר נשימה",
-                        "ar": "ضيق بالتنفس",
-                        "en": "Shortness of breath",
-                        "es": "Falta de aire al respirar",
-                        "ru": "одышка"
-                      }
-                    },
+                    "show": "קוצר נשימה",
                     "unless": "symptoms_breath_shortness",
                     "value": "symptoms_breath_shortness"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "זהו",
-                        "ar": "خلص",
-                        "en": "That's it",
-                        "es": "Listo",
-                        "ru": "всё"
-                      }
-                    },
+                    "show": "זהו",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
@@ -1171,48 +862,22 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כאבי שרירים",
-                        "ar": "وجع بالعضلات",
-                        "en": "Muscle pain",
-                        "es": "Dolor muscular",
-                        "ru": "мышечные боли"
-                      }
-                    },
+                    "show": "כאבי שרירים",
                     "unless": "symptoms_muscles_pain",
                     "value": "symptoms_muscles_pain"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כאבי ראש",
-                        "ar": "وجع رأس",
-                        "en": "Head ache",
-                        "es": "Dolor de cabeza",
-                        "ru": "головные боли"
-                      }
-                    },
+                    "show": "כאבי ראש",
                     "unless": "symptoms_headache",
                     "value": "symptoms_headache"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כאבי גרון",
-                        "en": "Throat pain"
-                      }
-                    },
+                    "show": "כאבי גרון",
                     "unless": "symptoms_sore_throat",
                     "value": "symptoms_sore_throat"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "זהו",
-                        "en": "That's it"
-                      }
-                    },
+                    "show": "זהו",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
@@ -1245,32 +910,17 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "שלשול",
-                        "en": "diarrhea"
-                      }
-                    },
+                    "show": "שלשול",
                     "unless": "symptoms_diarrhea",
                     "value": "symptoms_diarrhea"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "בחילה או הקאות",
-                        "en": "Nausea or vomiting"
-                      }
-                    },
+                    "show": "בחילה או הקאות",
                     "unless": "symptoms_nausea_and_vomiting",
                     "value": "symptoms_nausea_and_vomiting"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "זהו",
-                        "en": "That's it"
-                      }
-                    },
+                    "show": "זהו",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
@@ -1300,23 +950,13 @@ export const script = {
           "name": "symptoms_other_questions",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "מהם התופעות או הסימפטומים הנוספים שכדאי שנדע עליהם?",
-                  "en": "What are the other issues or symptoms we should know about?"
-                }
-              },
+              "say": "מהם התופעות או הסימפטומים הנוספים שכדאי שנדע עליהם?",
               "uid": "a81805f857"
             },
             {
               "uid": "7d68d617f8",
               "wait": {
-                "placeholder": {
-                  ".tx": {
-                    "_": "שם המחלה או הסימפטום",
-                    "en": "Name of disease or symptom"
-                  }
-                },
+                "placeholder": "שם המחלה או הסימפטום",
                 "variable": "symptoms_other"
               }
             }
@@ -1327,8 +967,8 @@ export const script = {
           "name": "exposures",
           "steps": [
             {
-              "say": "כעת נברר מה מספר האנשים השונים ששהית בקרבתם מעל ל-15 דקות בטווח 2 מטרים ביממה האחרונה.",
-              "uid": "cb48345c0d"
+              "say": "כעת נברר מה מספר האנשים השונים ששהית בקרבתם מעל ל-15 דקות בטווח של פחות מ-2 מטרים ביממה האחרונה.",
+              "uid": "d406fad5ac"
             },
             {
               "say": "כמה מהם מתחת לגיל 18?",
@@ -1344,12 +984,7 @@ export const script = {
               }
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "כמה מהם מעל לגיל 18?",
-                  "en": "How many older than 18?"
-                }
-              },
+              "say": "כמה מהם מעל לגיל 18?",
               "uid": "506502c1d2"
             },
             {
@@ -1368,21 +1003,11 @@ export const script = {
           "name": "end-of-report",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.",
-                  "en": "Thanks a lot. The information you have provided would help the Weizmann Institution researchers as well as colleagues from other countries to locate disease hot-spots and take care of them before they spread."
-                }
-              },
+              "say": "המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.",
               "uid": "8d11a569f1"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "שנזכיר לך מחר לעדכן אותנו מה המצב?",
-                  "en": "Shall we remind you tomorrow to update us on how you're feeling?"
-                }
-              },
+              "say": "שנזכיר לך מחר לעדכן אותנו מה המצב?",
               "uid": "20f0dbaedf"
             },
             {
@@ -1390,21 +1015,11 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כן, בבקשה!",
-                        "en": "Yes, please!"
-                      }
-                    },
+                    "show": "כן, בבקשה!",
                     "value": true
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "לא, תודה",
-                        "en": "No, thanks"
-                      }
-                    },
+                    "show": "לא, תודה",
                     "value": false
                   }
                 ],
