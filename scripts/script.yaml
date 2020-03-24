@@ -205,7 +205,7 @@
 
       - name: current-report-temprature
         steps:
-          - say: האם המדחום חום ביממה האחרונה?
+          - say: האם מדדת חום ביממה האחרונה?
           - wait:
               options:
               - show: "כן"
