@@ -186,6 +186,12 @@ if __name__=='__main__':
         push_translations(f_in, tx_translations)
 
     scripts = dict(s=scripts)
-    f_out = Path('src/assets/script.json')
-    json.dump(scripts, f_out.open('w'), ensure_ascii=False, sort_keys=True)
+    f_out = Path('src/app/script.ts')
+    f_out.open('w').write('''
+/* tslint:disable */
+export const script = {};
+'''.format(json.dumps(
+        scripts, ensure_ascii=False, sort_keys=True, indent=2)
+        )
+    )
 

@@ -3,6 +3,7 @@ import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { VERSION } from '../constants';
+import { script } from '../script';
 import { of } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
 
@@ -52,7 +53,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
     this.content.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
     this.content.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
-    this.start();
+    setTimeout(() => {
+      this.start();
+    }, 0);
+
   }
 
   ngOnInit() {
@@ -74,7 +78,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.started = true;
     this.created = false;
     this.runner.run(
-      '/assets/script.json',
+      script,
       0,
       {
         flag_from_var: (record: any, varname) => {
