@@ -99,9 +99,13 @@
               variable: smoking
               options:
                 - show: עישון יומיומי
+                  value: daily_smoker
                 - show: עישנתי בעבר, בחמש השנים האחרונות
+                  value: short_past_smoker
                 - show: עישנתי בעבר, לפני יותר מחמש שנים
+                  value: long_past_smokre
                 - show: אף פעם
+                  value: never
 
       - name: insulation
         steps:
@@ -180,11 +184,13 @@
               variable: general_feeling
               options:
               - show: מצויין!
+                variable: feel_good
                 step:
                 - say: "שמחים לשמוע. בכל זאת נרצה לברר אם יש לך משהו מהתסמינים הללו:"
                 - goto: current-report-symptoms
 
               - show: לא כל כך טוב
+                variable: feel_bad
                 steps:
                   - say: אוייש… איך זה בא לידי ביטוי?
                   - goto: current-report-symptoms
@@ -382,13 +388,15 @@
               variable: reminder
               options:
                 - show: כן, בבקשה!
-                  value: True
+                  value: "True"
                 - show: לא, תודה
-                  value: False
+                  value: "False"
           - say: אז נתראה מחר?
           - wait:
               variable: continue
               options:
                 - show: בטח!
+                  value: "sure"
                 - show: בהחלט, ואשמח גם לשתף את הטופס
+                  value: "share"
       
