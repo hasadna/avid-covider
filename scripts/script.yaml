@@ -372,14 +372,14 @@
           - say: מה מספר האנשים השונים ששהית בקרבתם מעל ל-15 דקות בטווח 2 מטרים ביממה האחרונה?
           - say: כמה מהם מתחת לגיל 18?
           - wait:
-              variable: flatmates_under_18
+              variable: met_under_18
               plachoder: מספר האנשים
               validation: "[0-9]+"
               input-kind: number
 
           - say: כמה מהם מעל לגיל 18?
           - wait:
-              variable: flatmates_above_18
+              variable: met_above_18
               plachoder: מספר האנשים
               validation: "[0-9]+"
               input-kind: number
