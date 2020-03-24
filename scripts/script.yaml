@@ -137,34 +137,34 @@
                               placeholder: "תאריך: dd.mm.yy"
                               input-kind: date
                               options:
-                              - show: אני בבידוד כי נחשפתי לחולה מאומת
-                                value: contact-with-patient
+                      - show: אני בבידוד כי נחשפתי לחולה מאומת
+                        value: contact-with-patient
+                        steps:
+                          - say: ידוע לך מה מספר החולה שפגשת?
+                          - wait:
+                              options:
+                              - show: "כן"
+                                value: "yes"
                                 steps:
-                                  - say: ידוע לך מה מספר החולה שפגשת?
+                                  - say: מצויין. מה המספר?
+                                  - wait:
+                                      variable: insulation_patient_number
+                                      placeholder: "מספר החולה שפגשתי"
+                                  - say: האם זכור לך היום שבו נפגשתם?
                                   - wait:
                                       options:
                                       - show: "כן"
                                         value: "yes"
-                                        steps:
-                                          - say: מצויין. מה המספר?
-                                          - wait:
-                                              variable: insulation_patient_number
-                                              placeholder: "מספר החולה שפגשתי"
-                                          - say: האם זכור לך היום שבו נפגשתם?
-                                          - wait:
-                                              options:
-                                              - show: "כן"
-                                                value: "yes"
-                                                steps: 
-                                                - say: מה היה התאריך?
-                                                - wait:
-                                                    variable: insulation_exposure_date
-                                                    placeholder: "תאריך: dd.mm.yy"
-                                                    input-kind: date
-                                              - show: "לא זכור לי"
-                                                value: "no"
-                                      - show: "לא"
+                                        steps: 
+                                        - say: מה היה התאריך?
+                                        - wait:
+                                            variable: insulation_exposure_date
+                                            placeholder: "תאריך: dd.mm.yy"
+                                            input-kind: date
+                                      - show: "לא זכור לי"
                                         value: "no"
+                              - show: "לא"
+                                value: "no"
                       - show: אני נמצא בבידוד כי חוויתי תסמינים
                         value: has_symptoms
                       - show: אני נמצא בבידוד מרצוני האישי                    
