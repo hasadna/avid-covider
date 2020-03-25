@@ -1,4 +1,4 @@
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/core';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    this.setupSync().then(() => { console.log('done!'); })
+    this.setupSync().then(() => { console.log('done!'); });
   }
 
   async setupSync() {
