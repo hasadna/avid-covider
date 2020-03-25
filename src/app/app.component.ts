@@ -16,6 +16,19 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
+  }
+
+  getPermission() {
+    Notification.requestPermission()
+      .then((response) => {
+        console.log('Got response', response);
+        this.registerServiceWorker();
+      }, (err) => {
+        console.log('Failed to get notification permissions');
+      });
+  }
+
+  registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
         window.navigator.serviceWorker.register('/assets/sw.js')
@@ -31,7 +44,8 @@ export class AppComponent implements OnInit, AfterViewInit  {
             () => {
               console.log('failed to register');
             }
-          ).then((result) => {
+          )
+          .then((result) => {
             console.log('added notification', result);
           }, (err) => {
             console.log('failed to add notification', err);
@@ -63,6 +77,9 @@ export class AppComponent implements OnInit, AfterViewInit  {
   set tab(value) {
     console.log('TAB=', value);
     this._tab = value;
+    if (value === 'chat') {
+      this.getPermission();
+    }
   }
 
   get tab(): string {
