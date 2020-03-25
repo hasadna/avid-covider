@@ -226,6 +226,9 @@
                   variable: temperature
                   placeholder: מעלות חום, 32-43
                   input-kind: number
+                  input-min: 32
+                  input-max: 43
+                  input-step: 0.1
             - show: "לא"
               value: "no"
     
