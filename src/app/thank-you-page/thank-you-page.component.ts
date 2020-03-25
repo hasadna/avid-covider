@@ -68,7 +68,7 @@ export class ThankYouPageComponent implements OnInit {
     }
   }
 
-  getPermission() {
+  addNotification() {
     console.log('showtrigger?', 'showTrigger' in Notification.prototype);
     console.log('permission?', Notification.permission);
     try {
