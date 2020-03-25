@@ -70,31 +70,23 @@ export class ThankYouPageComponent implements OnInit {
   }
 
   addNotification() {
+    this.addNotificationA().then(() => { console.log('setNotification!'); });
+  }
+
+  async addNotificationA() {
     try {
       console.log('showtrigger?', 'showTrigger' in Notification.prototype);
       console.log('permission?', Notification.permission);
-      Notification.requestPermission()
-      .then((response) => {
-        console.log('Got response', response);
-        return navigator.serviceWorker.getRegistration();
-      }, (err) => {
-        console.log('Failed to get notification permissions');
-      })
-      .then((registration) => {
-        console.log('got registration', registration);
-        if (registration) {
-          return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
+      const permission = await Notification.requestPermission();
+      console.log('Got permission', permission);
+      const registration = await navigator.serviceWorker.getRegistration();
+      console.log('got registration', registration);
+      if (registration) {
+        await registration.showNotification('Hey, welcome back!', <NotificationOptions>{
             tag: 'corona-predict',
             body: 'הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!',
             showTrigger: new window['TimestampTrigger'](Date.now() + 10000)});
-        }
-      }, (err) => {
-        console.log('failed to get registration');
-      }).then((result) => {
-        console.log('added notification', result);
-      }, (err) => {
-        console.log('failed to add notification', err);
-      });
+      }
     } catch (e) {
       console.log('Failed to set notification');
     }
