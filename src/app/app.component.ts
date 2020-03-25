@@ -16,15 +16,32 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
+    this.registerServiceWorker();
   }
 
   getPermission() {
+    console.log('showtrigger?', 'showTrigger' in Notification.prototype);
+    console.log('permission?', Notification.permission);
     Notification.requestPermission()
       .then((response) => {
         console.log('Got response', response);
-        this.registerServiceWorker();
+        return navigator.serviceWorker.getRegistration();
       }, (err) => {
         console.log('Failed to get notification permissions');
+      })
+      .then((registration) => {
+        if (registration) {
+          return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
+            tag: 'corona-predict',
+            body: 'Your appointment is due in ten minutes!',
+            showTrigger: new window['TimestampTrigger'](Date.now().valueOf() + 10000)});
+        }
+      }, (err) => {
+        console.log('failed to get registration');
+      }).then((result) => {
+        console.log('added notification', result);
+      }, (err) => {
+        console.log('failed to add notification', err);
       });
   }
 
@@ -35,21 +52,11 @@ export class AppComponent implements OnInit, AfterViewInit  {
           .then(
             (registration) => {
               console.log('registered serviceWorker', registration);
-              return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
-                tag: 'corona-predict',
-                body: 'Your appointment is due in ten minutes!',
-                showTrigger: {timestamp: Date.now().valueOf() + 10000}
-              });
             },
             () => {
               console.log('failed to register');
             }
-          )
-          .then((result) => {
-            console.log('added notification', result);
-          }, (err) => {
-            console.log('failed to add notification', err);
-          });
+          );
       } catch (e) {
         console.log('Failed to register serviceWorker', e);
       }
