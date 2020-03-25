@@ -392,7 +392,7 @@
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
-            placholder: מספר האנשים
+            placeholder: מספר האנשים
             validation: "[0-9]+"
             input-kind: number
             input-min: 0
@@ -401,7 +401,7 @@
         - say: וכמה מעל גיל 18?
         - wait:
             variable: met_above_18
-            placholder: מספר האנשים
+            placeholder: מספר האנשים
             validation: "[0-9]+"
             input-kind: number
             input-min: 0
