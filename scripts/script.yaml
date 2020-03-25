@@ -10,11 +10,13 @@
       - goto: exposures
       - goto: end-of-report
 
+		# 1st REPORT ON DEVICE ##############################
     - name: personal-details
       steps:
         - say: טוב שבאת,
         - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
         - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
+        - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
         - say: קודם כל, מה גילך?
         - wait:
             variable: age
@@ -23,14 +25,14 @@
             input-min: 0
             input-max: 120
             
-        - say: בן? בת?
+        - say: בת {age}? או בן {age}?
         - wait:      
             variable: sex
             options:
-              - show: בן
-                value: male
-              - show: בת
+              - show: בת {age}
                 value: female
+              - show: בן {age}
+                value: male
               
         - say: מה הוא מקום מגוריך?
         - wait:
@@ -42,6 +44,54 @@
             variable: street
             placeholder: שם הרחוב
 
+        - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט
+        ״{sex = male ? "בן" : "בת"} {age} מ{street}״ # is this ok?  <------------------------------- this is the USERID 
+        
+      # END 1st REPORT ON DEVICE
+        
+		# 2nd+ NEW REPORT ON DEVICE ##############################
+    
+    -name: return-user
+      steps:
+          - say: הי! טוב לראותך שוב
+          - say: הדיווחים שלך ושל אחרים עד עכשיו ממש מקדמים אותנו במאבק בקורונה
+          - say: עבור מי ברצונך לדווח עכשיו?
+          - wait:      
+              variable: entry       
+              options:
+                - show: USERID-1		# Like: "בת 41 משד׳ בן ציון" 
+                	value: user1			# <--------- Whatever
+                - show: USERID-2
+                  value: user2
+                - show: דיווח חדש ב{street}
+                  value: new-entry-in-address
+                - show: דיווח חדש בכתובת אחרת
+                  value: new-entry
+        
+    - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
+    - say: אבל אם זה לא מסתדר, אפשר או להקריא להם את השאלות או פשוט לענות בשמם
+    
+    # ---> age
+    # ---> sex
+    # ---> city?
+    # ---> street?
+    
+    - say: מצויין, בדיווחים הבאים נשאל על
+     ״{sex = male ? "בן" : "בת"} {age} מ{street}״ # is this ok?  <------------------------------- this is the USERID 
+        
+    # END 2nd+ NEW REPORT ON DEVICE
+    
+		# EXISTING USER 2nd+ REPORT ##############################
+    
+    -name: return-user
+      steps:
+          - say: הי! טוב לראותך שוב
+          - say: הדיווחים שלך ושל אחרים עד עכשיו ממש מקדמים אותנו במאבק בקורונה
+          
+    
+    # END EXISTING USER 2nd+ REPORT 
+
+        
     - name: preconditions
       steps:
         - goto: preconditions-diseases-loop
@@ -414,4 +464,8 @@
         - wait:
             options:
               - show: בטח!
-                class: other
+                class: other- yalla
+                value: done
+              - show: רגע, אני רוצה לדווח עבור עוד מישהו
+                class: other- yalla
+                value: another-report
