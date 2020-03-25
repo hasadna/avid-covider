@@ -9,7 +9,7 @@ import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/co
 
 export class AppComponent implements OnInit, AfterViewInit  {
   ftab = 'intro';
-  _tab = 'intro';
+  _tab = 'thankyou';
 
   constructor(@Inject(LOCALE_ID) private locale) {
     console.log('LOCALE=', locale);
