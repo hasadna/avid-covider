@@ -24,6 +24,7 @@ export class ThankYouPageComponent implements OnInit {
     } catch (e) {
       console.log('Failed to check if notification is available');
     }
+    this.notificationAvailable = false;
   }
 
   share() {
