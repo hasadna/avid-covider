@@ -19,8 +19,23 @@ export class AppComponent implements OnInit, AfterViewInit  {
     if ('serviceWorker' in navigator) {
       try {
         window.navigator.serviceWorker.register('/assets/sw.js')
-          .then((registration) => { console.log('registered serviceWorker', registration); },
-                () => { console.log('failed to register'); });
+          .then(
+            (registration) => {
+              console.log('registered serviceWorker', registration);
+              return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
+                tag: 'corona-predict',
+                body: 'Your appointment is due in ten minutes!',
+                showTrigger: {timestamp: Date.now().valueOf() + 10000}
+              });
+            },
+            () => {
+              console.log('failed to register');
+            }
+          ).then((result) => {
+            console.log('added notification', result);
+          }, (err) => {
+            console.log('failed to add notification', err);
+          });
       } catch (e) {
         console.log('Failed to register serviceWorker', e);
       }
@@ -30,20 +45,20 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to setup sync'); });
+    // this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to setup sync'); });
   }
 
-  async setupSync() {
-    const navigator: any = window.navigator;
-    const status = await navigator.permissions.query({
-      'name': 'periodic-background-sync',
-    });
-    if (status.state === 'granted') {
-      console.log('granted');
-    } else {
-      console.log('rejected', status);
-    }
-  }
+  // async setupSync() {
+  //   const navigator: any = window.navigator;
+  //   const status = await navigator.permissions.query({
+  //     'name': 'periodic-background-sync',
+  //   });
+  //   if (status.state === 'granted') {
+  //     console.log('granted');
+  //   } else {
+  //     console.log('rejected', status);
+  //   }
+  // }
 
   set tab(value) {
     console.log('TAB=', value);
