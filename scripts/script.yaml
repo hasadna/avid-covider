@@ -20,6 +20,8 @@
             variable: age
             placeholder: "גיל"
             input-kind: number
+            input-min: 0
+            input-max: 120
             
         - say: בן? בת?
         - wait:      
@@ -393,6 +395,8 @@
             placholder: מספר האנשים
             validation: "[0-9]+"
             input-kind: number
+            input-min: 0
+            input-max: 99
 
         - say: וכמה מעל גיל 18?
         - wait:
@@ -400,6 +404,8 @@
             placholder: מספר האנשים
             validation: "[0-9]+"
             input-kind: number
+            input-min: 0
+            input-max: 99
 
     - name: end-of-report
       steps:
