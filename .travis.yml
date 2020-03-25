@@ -18,8 +18,8 @@ script:
 - ng build --prod -c ar
 - ng build --prod -c en
 - ng build --prod -c ru
-- ng build --prod -c am
 - ng build --prod -c es
+# - ng build --prod -c am
 deploy:
   - provider: s3
     secret_access_key:
