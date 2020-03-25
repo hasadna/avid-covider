@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'app-intro-page',
@@ -10,7 +10,7 @@ export class IntroPageComponent implements OnInit {
   @Output() info = new EventEmitter<void>();
   @Output() chat = new EventEmitter<void>();
 
-  constructor() { }
+  constructor(@Inject(LOCALE_ID) public locale) { }
 
   ngOnInit() {
   }
