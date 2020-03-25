@@ -9,20 +9,22 @@ export class ThankYouPageComponent implements OnInit {
 
   @Output() restart = new EventEmitter<void>();
 
-  // clipboardCopySupported = false;
+  clipboardCopySupported = false;
+  copied = false;
 
   constructor() {
-    // this.clipsboardCopySupported = document.queryCommandSupported && document.queryCommandSupported('copy');
+    this.clipboardCopySupported = document.queryCommandSupported && document.queryCommandSupported('copy');
   }
 
   ngOnInit() {
+    this.copied = false;
   }
 
   share() {
     const navigator = window.navigator;
     if (navigator['share']) {
       try {
-        navigator['share']({ title: 'Corona Predict', url: window.location.href })
+        navigator['share']({ title: 'Daily Corona Report', url: window.location.href })
           .then((res) => {
             console.log('success');
         }, (err) => {
@@ -30,29 +32,34 @@ export class ThankYouPageComponent implements OnInit {
         });
       } catch {
         console.log('Failed to share, alas 2');
+        this.clipboardCopy();
       }
     } else {
       console.log('no share...');
+      this.clipboardCopy();
     }
   }
 
-  // clipboardCopy(text: string, owner: HTMLElement): boolean {
-  //   if (!this.clipboardCopySupported) {
-  //     return false;
-  //   }
-  //   const txt = document.createElement('textarea');
-  //   txt.setAttribute(contentAttrs.name, getName(owner));
-  //   txt.textContent = text;
-  //   txt.classList.add('visually-hidden');
-  //   document.body.appendChild(txt);
-  //   txt.select();
-  //   try {
-  //     return document.execCommand('copy');
-  //   } catch (ex) {
-  //     return false;
-  //   } finally {
-  //     document.body.removeChild(txt);
-  //   }
-  // }
+  clipboardCopy(): boolean {
+    const text = window.location.href;
+    if (!this.clipboardCopySupported) {
+      return false;
+    }
+    const txt = document.createElement('textarea');
+    txt.textContent = text;
+    txt.classList.add('visually-hidden');
+    document.body.appendChild(txt);
+    txt.select();
+    try {
+      document.execCommand('copy');
+      console.log('copied');
+      this.copied = true;
+      return true;
+    } catch (ex) {
+      return false;
+    } finally {
+      document.body.removeChild(txt);
+    }
+  }
 
 }
