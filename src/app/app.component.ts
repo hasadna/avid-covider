@@ -18,8 +18,9 @@ export class AppComponent implements OnInit, AfterViewInit  {
   ngOnInit() {
     if ('serviceWorker' in navigator) {
       try {
-        window.navigator.serviceWorker.register('/assets/sw.js');
-        console.log('Registered serviceWorker');
+        window.navigator.serviceWorker.register('/assets/sw.js')
+          .then((registration) => { console.log('registered serviceWorker', registration); },
+                () => { console.log('failed to register'); });
       } catch (e) {
         console.log('Failed to register serviceWorker', e);
       }
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    this.setupSync().then(() => { console.log('done!'); });
+    this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to install'); });
   }
 
   async setupSync() {

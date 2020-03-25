@@ -9,7 +9,11 @@ export class ReportStoreService {
   reports: any[];
 
   constructor() {
-    this.storage = window.localStorage;
+    try {
+      this.storage = window.localStorage;
+    } catch (e) {
+      console.log('no local storage');
+    }
     this.readReports();
   }
 
