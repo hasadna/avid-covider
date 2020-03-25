@@ -9,7 +9,7 @@ import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/co
 
 export class AppComponent implements OnInit, AfterViewInit  {
   ftab = 'intro';
-  _tab = 'thankyou';
+  _tab = 'intro';
 
   constructor(@Inject(LOCALE_ID) private locale) {
     console.log('LOCALE=', locale);
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
   registerServiceWorker() {
     if ('serviceWorker' in navigator) {
       try {
-        window.navigator.serviceWorker.register('/assets/sw.js')
+        window.navigator.serviceWorker.register('/sw.js')
           .then(
             (registration) => {
               console.log('registered serviceWorker', registration);
