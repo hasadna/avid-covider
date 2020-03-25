@@ -9,7 +9,7 @@ import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/co
 
 export class AppComponent implements OnInit, AfterViewInit  {
   ftab = 'intro';
-  _tab = 'intro';
+  _tab = 'thankyou';
 
   constructor(@Inject(LOCALE_ID) private locale) {
     console.log('LOCALE=', locale);
@@ -17,32 +17,6 @@ export class AppComponent implements OnInit, AfterViewInit  {
 
   ngOnInit() {
     this.registerServiceWorker();
-  }
-
-  getPermission() {
-    console.log('showtrigger?', 'showTrigger' in Notification.prototype);
-    console.log('permission?', Notification.permission);
-    Notification.requestPermission()
-      .then((response) => {
-        console.log('Got response', response);
-        return navigator.serviceWorker.getRegistration();
-      }, (err) => {
-        console.log('Failed to get notification permissions');
-      })
-      .then((registration) => {
-        if (registration) {
-          return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
-            tag: 'corona-predict',
-            body: 'Your appointment is due in ten minutes!',
-            showTrigger: new window['TimestampTrigger'](Date.now().valueOf() + 10000)});
-        }
-      }, (err) => {
-        console.log('failed to get registration');
-      }).then((result) => {
-        console.log('added notification', result);
-      }, (err) => {
-        console.log('failed to add notification', err);
-      });
   }
 
   registerServiceWorker() {
@@ -84,9 +58,6 @@ export class AppComponent implements OnInit, AfterViewInit  {
   set tab(value) {
     console.log('TAB=', value);
     this._tab = value;
-    if (value === 'chat') {
-      this.getPermission();
-    }
   }
 
   get tab(): string {
