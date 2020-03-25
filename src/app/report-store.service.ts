@@ -37,7 +37,6 @@ export class ReportStoreService {
 
   readReports() {
     this.reports = this.getItem('reports', []);
-    console.log('PAST REPORTS', this.reports);
   }
 
   addReport(report) {

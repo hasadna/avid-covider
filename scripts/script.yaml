@@ -276,7 +276,7 @@
                   - say: יש עוד כאבים?
                   - goto: symptoms_pains_questions
                   - say: סוג נוסף של כאב?
-                  - goto: symptoms_pains_question
+                  - goto: symptoms_pains_questions
               - show: בעיות קיבה
                 unless: toplevel_symptoms_stomach
                 value: toplevel_symptoms_stomach

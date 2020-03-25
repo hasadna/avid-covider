@@ -95,6 +95,14 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
+        try {
+          payload['numPreviousReports'] = this.storage.reports.length;
+          if (this.storage.reports.length > 0) {
+            payload['dateFirstReport'] = this.storage.reports[0][0];
+          }
+        } catch (e) {
+          console.log('Failed to add stats');
+        }
         this.storage.addReport(payload);
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
