@@ -7,7 +7,7 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit, AfterViewInit  {
   ftab = 'intro';
   _tab = 'intro';
 
@@ -25,6 +25,22 @@ export class AppComponent implements OnInit  {
       }
     } else {
       console.log('No serviceworker');
+    }
+  }
+
+  ngAfterViewInit() {
+    this.setupSync().then(() => { console.log('done!'); })
+  }
+
+  async setupSync() {
+    const navigator: any = window.navigator;
+    const status = await navigator.permissions.query({
+      'name': 'periodic-background-sync',
+    });
+    if (status.state === 'granted') {
+      console.log('granted');
+    } else {
+      console.log('rejected');
     }
   }
 
