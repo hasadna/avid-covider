@@ -69,9 +69,9 @@ export class ThankYouPageComponent implements OnInit {
   }
 
   addNotification() {
-    console.log('showtrigger?', 'showTrigger' in Notification.prototype);
-    console.log('permission?', Notification.permission);
     try {
+      console.log('showtrigger?', 'showTrigger' in Notification.prototype);
+      console.log('permission?', Notification.permission);
       Notification.requestPermission()
       .then((response) => {
         console.log('Got response', response);
@@ -84,7 +84,7 @@ export class ThankYouPageComponent implements OnInit {
         if (registration) {
           return registration.showNotification('Hey, welcome back!', <NotificationOptions>{
             tag: 'corona-predict',
-            body: 'Your appointment is due in ten minutes!',
+            body: 'הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!',
             showTrigger: new window['TimestampTrigger'](Date.now() + 10000)});
         }
       }, (err) => {
