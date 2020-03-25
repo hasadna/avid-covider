@@ -97,7 +97,5 @@ export class ThankYouPageComponent implements OnInit {
     } catch (e) {
       console.log('Failed to set notification');
     }
-    }
   }
-
 }
