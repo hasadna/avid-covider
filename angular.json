@@ -30,6 +30,7 @@
               "src/android-chrome-512x512.png",
               "src/apple-touch-icon.png",
               "src/favicon.ico",
+              "src/sw.js",
               "src/assets"
             ],
             "styles": [
@@ -253,6 +254,7 @@
               "src/android-chrome-512x512.png",
               "src/apple-touch-icon.png",
               "src/favicon.ico",
+              "src/sw.js",
               "src/assets"
             ]
           }
