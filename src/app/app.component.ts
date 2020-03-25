@@ -30,7 +30,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to install'); });
+    this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to setup sync'); });
   }
 
   async setupSync() {
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
     if (status.state === 'granted') {
       console.log('granted');
     } else {
-      console.log('rejected');
+      console.log('rejected', status);
     }
   }
 
