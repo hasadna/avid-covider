@@ -249,6 +249,10 @@
         - goto: current-report-top-level-symptoms
         - say: עוד משהו שגורם לך להרגיש לא טוב?
         - goto: current-report-top-level-symptoms          
+        - say: משהו נוסף שכדאי שנכיר?
+        - goto: current-report-top-level-symptoms
+        -  say: סימפטום נוסף?
+        - goto: current-report-top-level-symptoms
 
     - name: current-report-top-level-symptoms
       steps:
@@ -265,10 +269,12 @@
                   - goto: symptoms_cough_questions
                   - say: עוד תופעה מאלו?
                   - goto: symptoms_cough_questions
-                  - say: משהו נוסף שכדאי שנכיר?
-                  - goto: symptoms_cough_questions
-                  -  say: סימפטום נוסף?
-                  - goto: symptoms_cough_questions
+              - show: כאבי גרון
+                value: symptoms_sore_throat
+                unless: symptoms_sore_throat
+              - show: קוצר נשימה
+                value: symptoms_breath_shortness
+                unless: symptoms_breath_shortness
               - show: כאבים
                 unless: toplevel_symptoms_pains
                 value: toplevel_symptoms_pains
@@ -276,8 +282,6 @@
                   - say: מה כואב בדיוק?
                   - goto: symptoms_pains_questions
                   - say: יש עוד כאבים?
-                  - goto: symptoms_pains_questions
-                  - say: סוג נוסף של כאב?
                   - goto: symptoms_pains_questions
               - show: בעיות קיבה
                 unless: toplevel_symptoms_stomach
@@ -317,18 +321,12 @@
           - show: נזלת או גודש באף
             value: symptoms_clogged_nose
             unless: symptoms_clogged_nose
-          - show: כאבי גרון
-            value: symptoms_sore_throat
-            unless: symptoms_sore_throat
           - show: שיעול יבש
             value: symptoms_dry_cough
             unless: symptoms_dry_cough
           - show: שיעול לח, או שיעול עם כיח
             value: symptoms_moist_cough
             unless: symptoms_moist_cough          
-          - show: קוצר נשימה
-            value: symptoms_breath_shortness
-            unless: symptoms_breath_shortness
           - show: זהו
             class: other
             steps:
@@ -349,9 +347,6 @@
           - show: כאבי ראש
             value: symptoms_headache
             unless: symptoms_headache
-          - show: כאבי גרון
-            value: symptoms_sore_throat
-            unless: symptoms_sore_throat
           - show: זהו
             class: other
             steps:
