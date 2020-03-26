@@ -228,7 +228,7 @@
               - say: "ומה המדחום אומר?"
               - wait:
                   variable: temperature
-                  placeholder: מעלות חום, 32-43
+                  placeholder: מעלות חום, 35-43
                   input-kind: number
                   input-min: 35
                   input-max: 43

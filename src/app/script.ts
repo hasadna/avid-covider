@@ -572,7 +572,7 @@ export const script = {
                           "input-max": 43,
                           "input-min": 35,
                           "input-step": 0.1,
-                          "placeholder": "מעלות חום, 32-43",
+                          "placeholder": "מעלות חום, 35-43",
                           "variable": "temperature"
                         }
                       }
