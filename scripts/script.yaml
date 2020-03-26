@@ -122,7 +122,7 @@
         - wait:
             variable: exposure_status
             options:
-              - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים"
+              - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
                 value: insulation_with_family
               - show: אני בבידוד מבני משפחה, ובחדר סגור
                 value: "insulation"
