@@ -634,6 +634,21 @@ export const script = {
                           "options": [
                             {
                               "show": "אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים",
+                              "steps": [
+                                {
+                                  "say": "באיזה תאריך התחיל הבידוד?",
+                                  "uid": "f1818f4f2d"
+                                },
+                                {
+                                  "uid": "645528a738",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "insulation_start_date"
+                                  }
+                                }
+                              ],
+                              "uid": "f14e63ab7b",
                               "value": "insulation_with_family"
                             },
                             {

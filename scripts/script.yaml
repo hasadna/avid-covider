@@ -255,6 +255,12 @@
                     options:
                       - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
                         value: insulation_with_family
+                        steps:
+                          - say: "באיזה תאריך התחיל הבידוד?"
+                          - wait:
+                              variable: insulation_start_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
                       - show: אני בבידוד מבני משפחה, ובחדר סגור
                         value: "insulation"
                         steps:
