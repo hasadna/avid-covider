@@ -454,6 +454,8 @@
                   - goto: symptoms_pains_questions
                   - say: יש עוד כאבים?
                   - goto: symptoms_pains_questions
+                  - say: עוד משהו כואב?
+                  - goto: symptoms_pains_questions
               - show: בעיות קיבה
                 unless: toplevel_symptoms_stomach
                 value: toplevel_symptoms_stomach
@@ -518,6 +520,9 @@
           - show: כאבי ראש
             value: symptoms_headache
             unless: symptoms_headache
+          - show: כאבי גרון
+            value: symptoms_sore_throat
+            unless: symptoms_sore_throat            
           - show: זהו
             class: other
             steps:
