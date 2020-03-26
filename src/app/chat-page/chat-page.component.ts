@@ -125,7 +125,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           const aliases = {};
           const sliceIdx = window.location.hostname === 'coronaisrael.org' ? 10 : 15;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
-          const today_aliases = {}
+          const today_aliases = {};
           for (const report of this.storage.reports) {
             if (!report[1].alias) {
               continue;
