@@ -21,11 +21,13 @@ export class NotificationService {
     }
   }
 
-  addNotification() {
-    this.addNotificationA().then(() => { console.log('setNotification!'); });
+  addNotification(
+    title, body, action
+  ) {
+    this.addNotificationA(title, body, action).then(() => { console.log('setNotification!'); });
   }
 
-  async addNotificationA() {
+  async addNotificationA(title, body, action) {
     try {
       console.log('showtrigger?', 'showTrigger' in Notification.prototype);
       console.log('permission?', Notification.permission);
@@ -36,15 +38,15 @@ export class NotificationService {
       const timeout = (window.location.hostname === 'avid-covider.phonaris.com') ?
         300 : 85500;
       if (registration) {
-        await registration.showNotification('זמן לדיווח הבריאות היומי!', <NotificationOptions>{
+        await registration.showNotification(title, <NotificationOptions>{
             tag: 'corona-predict',
             actions: [
               {
-                action: 'open', title: 'דווח עכשיו'
+                action: 'open', title: action
               }
             ],
             data: window.location.href,
-            body: 'הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!',
+            body: body,
             requireInteraction: true,
             icon: '/apple-touch-icon.png',
             showTrigger: new window['TimestampTrigger'](Date.now() + timeout * 1000)});

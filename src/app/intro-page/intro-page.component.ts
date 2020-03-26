@@ -15,9 +15,7 @@ export class IntroPageComponent implements OnInit {
               @Inject(LOCALE_ID) public locale) { }
 
   ngOnInit() {
-    if (this.notifications.canAddNotification) {
-      this.notifications.addNotification();
-    }
+    this.notifications.init();
   }
 
 }

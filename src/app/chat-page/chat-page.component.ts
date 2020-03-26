@@ -6,6 +6,7 @@ import { VERSION } from '../constants';
 import { script } from '../script';
 import { of } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -23,11 +24,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
   @ViewChild('notUploadedFileText') notUploadedFileText: ElementRef;
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
+  @ViewChild('notificationTitle') notificationTitle: ElementRef;
+  @ViewChild('notificationBody') notificationBody: ElementRef;
+  @ViewChild('notificationAction') notificationAction: ElementRef;
 
   @Output() done = new EventEmitter<void>();
 
   constructor(private http: HttpClient,
               private storage: ReportStoreService,
+              private notifications: NotificationService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -53,6 +58,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
     this.content.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
     this.content.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
+
+    if (this.notifications.canAddNotification) {
+      this.notifications.addNotification(
+        this.notificationTitle.nativeElement.innerHTML,
+        this.notificationBody.nativeElement.innerHTML,
+        this.notificationAction.nativeElement.innerHTML
+      );
+    }
+
     setTimeout(() => {
       this.start();
     }, 0);
