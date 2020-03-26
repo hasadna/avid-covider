@@ -570,7 +570,7 @@ export const script = {
                         "wait": {
                           "input-kind": "number",
                           "input-max": 43,
-                          "input-min": 32,
+                          "input-min": 35,
                           "input-step": 0.1,
                           "placeholder": "מעלות חום, 32-43",
                           "variable": "temperature"
