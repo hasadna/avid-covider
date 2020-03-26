@@ -123,14 +123,24 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         fetch_previous_reports: (same_address_text, new_address_text) => {
           const aliases = {};
+          const sliceIdx = window.location.hostname === 'coronaisrael.org' ? 10 : 15;
+          const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
+          const today_aliases = {}
           for (const report of this.storage.reports) {
             if (!report[1].alias) {
               continue;
             }
-            aliases[report[1].alias] = report;
+            const alias = report[1].alias;
+            aliases[alias] = report;
+            if (report[0].indexOf(today_prefix) === 0) {
+              today_aliases[alias] = true;
+            }
           }
           const options = [];
           for (const alias of Object.keys(aliases)) {
+            if (today_aliases[alias]) {
+              continue;
+            }
             options.push({
               show: alias,
               value: this.selectFields(aliases[alias][1], [
