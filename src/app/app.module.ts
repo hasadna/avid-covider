@@ -43,7 +43,7 @@ export class SentryErrorHandler implements ErrorHandler {
     HttpClientModule,
     HatoolLibModule,
   ],
-  providers: [
+  providers: window.location.protocol === 'http:' ? [] : [
     {provide: ErrorHandler, useClass: SentryErrorHandler}
   ],
   bootstrap: [AppComponent]

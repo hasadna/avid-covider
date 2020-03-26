@@ -36,7 +36,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
     this.runner.timeout = 250;
-    this.runner.debug = false;
+    this.runner.debug = true;
   }
 
   prepareToSave(record) {
@@ -74,6 +74,40 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.start();
   }
 
+  get(obj: any, field) {
+    const parts = field.split('.');
+    for (const part of parts) {
+        obj = obj[part] || {};
+    }
+    if (Object.entries(obj).length > 0) {
+        return obj;
+    }
+    return null;
+  }
+
+  fillIn(record: any, message: string) {
+    return message.replace(
+        RegExp('({{([a-zA-Z_.0-9]+)}})', 'g'),
+        (match, p1, p2) => {
+            return this.get(record, p2) || p2;
+        }
+    );
+}
+
+  selectFields(record, fields) {
+    const ret = {};
+    for (const re of fields) {
+      const regexp = new RegExp('^' + re + '$');
+      const keys = Object.keys(record);
+      for (const key of keys) {
+        if (regexp.test(key)) {
+          ret[key] = record[key];
+        }
+      }
+    }
+    return ret;
+  }
+
   start() {
     if (this.started) {
       return;
@@ -84,6 +118,39 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       script,
       0,
       {
+        load_local_storage: (record: any) => {
+          record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
+        },
+        fetch_previous_reports: (same_address_text, new_address_text) => {
+          const aliases = {};
+          for (const report of this.storage.reports) {
+            if (!report[1].alias) {
+              continue;
+            }
+            aliases[report[1].alias] = report;
+          }
+          const options = [];
+          for (const alias of Object.keys(aliases)) {
+            options.push({
+              show: alias,
+              value: this.selectFields(aliases[alias][1], [
+                'alias', 'age', 'sex', 'city_town', 'street', 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling'
+              ])
+            });
+          }
+          options.push({
+            show: this.fillIn(this.storage.reports[0][1], same_address_text),
+            value: this.selectFields(this.storage.reports[0][1], [
+              'city_town', 'street'
+            ])
+          });
+          options.push({
+            show: new_address_text,
+            value: {}
+          });
+          console.log('OPTIONS', options);
+          return options;
+        },
         set_flag: (record: any, varname) => {
           record[varname] = true;
         },
@@ -98,7 +165,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           Object.assign(record, record[varname]);
           delete record[varname];
         },
-        clear_fields: (record: any, fields: string[]) => {
+        clear_fields: (record: any, ...fields: string[]) => {
           for (const re of fields) {
             const regexp = new RegExp('^' + re + '$');
             const keys = Object.keys(record);
@@ -108,7 +175,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               }
             }
           }
-        }
+        },
+        calculate_alias: (record, male_alias, female_alias) => {
+          if (record.sex === 'male') {
+            return this.fillIn(record, male_alias);
+          } else {
+            return this.fillIn(record, female_alias);
+          }
+        },
+
       },
       (key, value, record) => {}
     ).pipe(
