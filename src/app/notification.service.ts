@@ -37,6 +37,7 @@ export class NotificationService {
       console.log('got registration', registration);
       const timeout = (window.location.hostname === 'avid-covider.phonaris.com') ?
         300 : 85500;
+      console.log('got timeout', timeout);
       if (registration) {
         await registration.showNotification(title, <NotificationOptions>{
             tag: 'corona-predict',
