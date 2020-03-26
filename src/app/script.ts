@@ -82,8 +82,8 @@ export const script = {
                         "uid": "29db961015"
                       },
                       {
-                        "say": "הדיווחים שלך ושל אחרים עד עכשיו ממש מקדמים אותנו במאבק בקורונה",
-                        "uid": "b695ad7e33"
+                        "say": "הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה",
+                        "uid": "b40745dc26"
                       },
                       {
                         "say": "עבור מי ברצונך לדווח עכשיו?",
@@ -122,8 +122,8 @@ export const script = {
                         "uid": "34f7fd91ef"
                       },
                       {
-                        "say": "אבל אם זה לא מסתדר, אפשר או להקריא להם את השאלות או פשוט לענות בשמם",
-                        "uid": "d81574b95f"
+                        "say": "אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
+                        "uid": "a46ed1d5ca"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -769,11 +769,11 @@ export const script = {
                                         "value": "contact-with-patient"
                                       },
                                       {
-                                        "show": "אני נמצא בבידוד כי חוויתי תסמינים",
+                                        "show": "אני בבידוד כי חוויתי תסמינים",
                                         "value": "has_symptoms"
                                       },
                                       {
-                                        "show": "אני נמצא בבידוד מרצוני האישי",
+                                        "show": "אני בבידוד מרצוני האישי",
                                         "value": "voluntary"
                                       }
                                     ],
@@ -845,8 +845,8 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": "ומה שלומך היום?",
-                        "uid": "bff55239ff"
+                        "say": "ומה נשמע היום?",
+                        "uid": "a8ade6b2ba"
                       },
                       {
                         "uid": "8bd1462742",
@@ -860,8 +860,8 @@ export const script = {
                                   "uid": "c56fee8f07"
                                 },
                                 {
-                                  "say": "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:",
-                                  "uid": "e401e8a7ac"
+                                  "say": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
+                                  "uid": "6145fe48e5"
                                 }
                               ],
                               "uid": "2ff5d05446",
@@ -905,8 +905,8 @@ export const script = {
                                   "uid": "2936c148b0"
                                 },
                                 {
-                                  "say": "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:",
-                                  "uid": "126cfea861"
+                                  "say": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
+                                  "uid": "fac1c21d48"
                                 }
                               ],
                               "uid": "3b21d2175a",
@@ -934,8 +934,8 @@ export const script = {
                     "match": "feel_bad",
                     "steps": [
                       {
-                        "say": "אני מקווה שהמרגש טוב יותר מהדיווח הקודם...",
-                        "uid": "c879cdcbb6"
+                        "say": "אני מקווה שהמצב השתפר מהדיווח האחרון..?",
+                        "uid": "8c4adf385a"
                       },
                       {
                         "uid": "98c766d9cb",
@@ -949,8 +949,8 @@ export const script = {
                                   "uid": "b9cde574b8"
                                 },
                                 {
-                                  "say": "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:",
-                                  "uid": "0a3ddd4457"
+                                  "say": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
+                                  "uid": "38b8805a2d"
                                 }
                               ],
                               "uid": "75d8ef3565",
@@ -1066,8 +1066,8 @@ export const script = {
               "uid": "14ed40aca4"
             },
             {
-              "say": "עוד משהו שגורם הרגשה לא טובה?",
-              "uid": "9d52d56607"
+              "say": "עוד משהו שמפריע או גורם להרגשה לא טובה?",
+              "uid": "73a0967d13"
             },
             {
               "goto": "current-report-top-level-symptoms",
@@ -1106,12 +1106,20 @@ export const script = {
               "uid": "41c512be93"
             },
             {
-              "say": "סימפטום נוסף?",
-              "uid": "72fb298cc8"
+              "say": "מה עוד?",
+              "uid": "3aa9495d57"
             },
             {
               "goto": "current-report-top-level-symptoms",
               "uid": "f93e6f6244"
+            },
+            {
+              "say": "תסמין נוסף?",
+              "uid": "f1993e315f"
+            },
+            {
+              "goto": "current-report-top-level-symptoms",
+              "uid": "bbc2a1431e"
             }
           ],
           "uid": "529f6c7050"
@@ -1198,28 +1206,14 @@ export const script = {
                     "value": "toplevel_symptoms_pains"
                   },
                   {
-                    "show": "בעיות קיבה",
-                    "steps": [
-                      {
-                        "say": "מה לא בסדר בקיבה?",
-                        "uid": "1a6c6ab4c0"
-                      },
-                      {
-                        "goto": "symptoms_stomach_questions",
-                        "uid": "c6a58971e8"
-                      },
-                      {
-                        "say": "יש עוד בעיות קיבה?",
-                        "uid": "f1dbf23100"
-                      },
-                      {
-                        "goto": "symptoms_stomach_questions",
-                        "uid": "79bae95b83"
-                      }
-                    ],
-                    "uid": "d7c56d4226",
-                    "unless": "toplevel_symptoms_stomach",
-                    "value": "toplevel_symptoms_stomach"
+                    "show": "שלשול",
+                    "unless": "symptoms_diarrhea",
+                    "value": "symptoms_diarrhea"
+                  },
+                  {
+                    "show": "בחילה או הקאות",
+                    "unless": "symptoms_nausea_and_vomiting",
+                    "value": "symptoms_nausea_and_vomiting"
                   },
                   {
                     "show": "צמרמורת",
@@ -1368,50 +1362,6 @@ export const script = {
           "uid": "772a2e75d8"
         },
         {
-          "name": "symptoms_stomach_questions",
-          "steps": [
-            {
-              "uid": "a139b80a58",
-              "wait": {
-                "options": [
-                  {
-                    "show": "שלשול",
-                    "unless": "symptoms_diarrhea",
-                    "value": "symptoms_diarrhea"
-                  },
-                  {
-                    "show": "בחילה או הקאות",
-                    "unless": "symptoms_nausea_and_vomiting",
-                    "value": "symptoms_nausea_and_vomiting"
-                  },
-                  {
-                    "class": "other",
-                    "show": "זהו",
-                    "steps": [
-                      {
-                        "pop": "current-report-top-level-symptoms",
-                        "uid": "7520ab7652"
-                      }
-                    ],
-                    "uid": "b05b2629c0"
-                  }
-                ],
-                "variable": "_var"
-              }
-            },
-            {
-              "do": {
-                "cmd": "flag_from_var",
-                "params": [
-                  "record"
-                ]
-              },
-              "uid": "899c548a20"
-            }
-          ],
-          "uid": "8c5fbdf740"
-        },
-        {
           "name": "symptoms_other_questions",
           "steps": [
             {
@@ -1432,12 +1382,12 @@ export const script = {
           "name": "exposures",
           "steps": [
             {
-              "say": "חשוב לנו לדעת -",
-              "uid": "1700fdb725"
+              "say": "חשוב לנו לדעת",
+              "uid": "8a4526029f"
             },
             {
-              "say": "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ15 דקות ובמרחק של פחות מ2 מטרים,",
-              "uid": "61274d1e01"
+              "say": "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים,",
+              "uid": "933db4184c"
             },
             {
               "say": "כמה מהם מתחת לגיל 18?",
@@ -1476,8 +1426,8 @@ export const script = {
           "name": "end-of-report",
           "steps": [
             {
-              "say": "המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.",
-              "uid": "8d11a569f1"
+              "say": "המון תודה, המידע ששלחת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.",
+              "uid": "e317217c7e"
             },
             {
               "say": "אז נתראה מחר?",
