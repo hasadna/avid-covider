@@ -253,6 +253,8 @@
         - goto: current-report-top-level-symptoms          
         - say: משהו נוסף שכדאי שנכיר?
         - goto: current-report-top-level-symptoms
+        - say: משהו נוסף שמפריע לך?
+        - goto: current-report-top-level-symptoms
         -  say: סימפטום נוסף?
         - goto: current-report-top-level-symptoms
 
@@ -285,14 +287,12 @@
                   - goto: symptoms_pains_questions
                   - say: יש עוד כאבים?
                   - goto: symptoms_pains_questions
-              - show: בעיות קיבה
-                unless: toplevel_symptoms_stomach
-                value: toplevel_symptoms_stomach
-                steps:
-                  - say: מה לא בסדר בקיבה?
-                  - goto: symptoms_stomach_questions
-                  - say: יש עוד בעיות קיבה?
-                  - goto: symptoms_stomach_questions
+              - show: שלשול
+                value: symptoms_diarrhea
+                unless: symptoms_diarrhea
+              - show: בחילה או הקאות
+                value: symptoms_nausea_and_vomiting
+                unless: symptoms_nausea_and_vomiting
               - show: צמרמורת
                 unless: symptoms_chills
                 value: symptoms_chills
@@ -358,25 +358,6 @@
           params:
             - record
 
-    - name: symptoms_stomach_questions
-      steps:
-      - wait:
-          variable: _var
-          options:
-          - show: שלשול
-            value: symptoms_diarrhea
-            unless: symptoms_diarrhea
-          - show: בחילה או הקאות
-            value: symptoms_nausea_and_vomiting
-            unless: symptoms_nausea_and_vomiting
-          - show: זהו
-            class: other
-            steps:
-              - pop: current-report-top-level-symptoms
-      - do:
-          cmd: flag_from_var
-          params:
-            - record
 
     - name: symptoms_other_questions
       steps:
