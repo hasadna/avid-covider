@@ -24,9 +24,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
   @ViewChild('notUploadedFileText') notUploadedFileText: ElementRef;
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
-  @ViewChild('notificationTitle') notificationTitle: ElementRef;
-  @ViewChild('notificationBody') notificationBody: ElementRef;
-  @ViewChild('notificationAction') notificationAction: ElementRef;
 
   @Output() done = new EventEmitter<void>();
 
@@ -58,14 +55,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
     this.content.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
     this.content.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
-
-    if (this.notifications.canAddNotification) {
-      this.notifications.addNotification(
-        this.notificationTitle.nativeElement.innerHTML,
-        this.notificationBody.nativeElement.innerHTML,
-        this.notificationAction.nativeElement.innerHTML
-      );
-    }
 
     setTimeout(() => {
       this.start();

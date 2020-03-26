@@ -49,6 +49,7 @@ export class NotificationService {
             data: window.location.href,
             body: body,
             requireInteraction: true,
+            badge: '/apple-touch-icon.png',
             icon: '/apple-touch-icon.png',
             showTrigger: new window['TimestampTrigger'](Date.now() + timeout * 1000)});
       }
