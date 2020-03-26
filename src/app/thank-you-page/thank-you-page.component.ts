@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-thank-you-page',
@@ -10,20 +11,18 @@ export class ThankYouPageComponent implements OnInit {
   @Output() restart = new EventEmitter<void>();
 
   clipboardCopySupported = false;
-  notificationAvailable = false;
   copied = false;
 
-  constructor() {
-    this.clipboardCopySupported = document.queryCommandSupported && document.queryCommandSupported('copy');
+  constructor(public notifications: NotificationService) {
+    try {
+      this.clipboardCopySupported = document.queryCommandSupported && document.queryCommandSupported('copy');
+    } catch (e) {
+      console.log('Failed to check if copy clipboard is available');
+    }
   }
 
   ngOnInit() {
     this.copied = false;
-    try {
-      this.notificationAvailable = 'showTrigger' in Notification.prototype;
-    } catch (e) {
-      console.log('Failed to check if notification is available');
-    }
   }
 
   share() {
@@ -68,34 +67,4 @@ export class ThankYouPageComponent implements OnInit {
     }
   }
 
-  addNotification() {
-    this.addNotificationA().then(() => { console.log('setNotification!'); });
-  }
-
-  async addNotificationA() {
-    try {
-      console.log('showtrigger?', 'showTrigger' in Notification.prototype);
-      console.log('permission?', Notification.permission);
-      const permission = await Notification.requestPermission();
-      console.log('Got permission', permission);
-      const registration = await navigator.serviceWorker.getRegistration();
-      console.log('got registration', registration);
-      if (registration) {
-        await registration.showNotification('זמן לדיווח הבריאות היומי!', <NotificationOptions>{
-            tag: 'corona-predict',
-            actions: [
-              {
-                action: 'open', title: 'דווח עכשיו'
-              }
-            ],
-            data: window.location.href,
-            body: 'הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!',
-            requireInteraction: true,
-            icon: '/assets/img/apple-touch-icon.png',
-            showTrigger: new window['TimestampTrigger'](Date.now() + 10000)});
-      }
-    } catch (e) {
-      console.log('Failed to set notification');
-    }
-  }
 }

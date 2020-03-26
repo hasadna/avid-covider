@@ -9,7 +9,6 @@
 כדאי לשתף את הקישור עם בני משפחה וחברים, חשוב שכולם יתרגלו לדווח כל יום.
 זה המעט שאנחנו יכולים לעשות…
     </h2>
-    <a (click)='addNotification()' *ngIf='notificationAvailable'><h2 i18n>הזכר לי למלא את השאלון מחר</h2></a>
 
     <div class='copybox'>
       <div class='url'>https://coronaisrael.org</div>
@@ -17,10 +16,19 @@
     </div>
     <div class='copied-text' i18n [class.copied]='copied'>הועתק ללוח</div>
 
-    <div class='share-text' i18n>ילדים? מבוגרים?</div>
+    <ng-container *ngIf='!notifications.showNotificationBox'>
+      <div class='share-text' i18n>ילדים? מבוגרים?</div>
 
-    <div class='cta'>
-      <span class='button' (click)='restart.emit()' i18n>מלאו עבורם שאלון נוסף</span>
-    </div>
+      <div class='cta'>
+        <span class='button' (click)='restart.emit()' i18n>מלאו עבורם שאלון נוסף</span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf='notifications.showNotificationBox'>
+      <div class='share-text'>&nbsp;</div>
+
+      <div class='cta'>
+        <span class='button' (click)='notifications.addNotification()' i18n>הזכירו לי למלא את השאלון מחר</span>
+      </div>
+    </ng-container>
   </div>
 </div>

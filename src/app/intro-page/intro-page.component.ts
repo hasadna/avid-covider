@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID } from '@angular/core';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-intro-page',
@@ -10,9 +11,13 @@ export class IntroPageComponent implements OnInit {
   @Output() info = new EventEmitter<void>();
   @Output() chat = new EventEmitter<void>();
 
-  constructor(@Inject(LOCALE_ID) public locale) { }
+  constructor(private notifications: NotificationService,
+              @Inject(LOCALE_ID) public locale) { }
 
   ngOnInit() {
+    if (this.notifications.canAddNotification) {
+      this.notifications.addNotification();
+    }
   }
 
 }
