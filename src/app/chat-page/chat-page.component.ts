@@ -84,11 +84,29 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       script,
       0,
       {
+        set_flag: (record: any, varname) => {
+          record[varname] = true;
+        },
         flag_from_var: (record: any, varname) => {
           varname = varname || '_var';
           if (record[varname]) {
             record[record[varname]] = true;
             record[varname] = null;
+          }
+        },
+        update_from_selection: (record: any, varname) => {
+          Object.assign(record, record[varname]);
+          delete record[varname];
+        },
+        clear_fields: (record: any, fields: string[]) => {
+          for (const re of fields) {
+            const regexp = new RegExp('^' + re + '$');
+            const keys = Object.keys(record);
+            for (const key of keys) {
+              if (regexp.test(key)) {
+                delete record[key];
+              }
+            }
           }
         }
       },

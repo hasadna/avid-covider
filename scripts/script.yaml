@@ -12,40 +12,128 @@
 
     - name: personal-details
       steps:
-        - say: טוב שבאת,
-        - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
-        - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
-        - say: קודם כל, מה גילך?
-        - wait:
-            variable: age
-            placeholder: "גיל"
-            input-kind: number
-            input-min: 0
-            input-max: 120
-            
-        - say: בן? בת?
-        - wait:      
-            variable: sex
-            options:
-              - show: בן
-                value: male
-              - show: בת
-                value: female
-              
-        - say: מה הוא מקום מגוריך?
-        - wait:
-            variable: city_town
-            placeholder: "שם העיר או הישוב"
 
-        - say: שם הרחוב?
-        - wait:
-            variable: street
-            placeholder: שם הרחוב
+        - do:
+            cmd: load_local_storage
+            params:
+            - record
+  
+        - switch:
+            arg: _existing_user
+            cases:
+            - match: new
+              steps:
+              - say: טוב שבאת,
+              - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
+              - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
+              - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
+            - natch: returning
+              steps:
+              - say: הי! טוב לראותך שוב
+              - say: הדיווחים שלך ושל אחרים עד עכשיו ממש מקדמים אותנו במאבק בקורונה
+              - say: עבור מי ברצונך לדווח עכשיו?
+              - do:
+                  cmd: fetch_previous_reports
+                  variable: _report_options
+                  params:
+                    - "דיווח חדש ב-"
+                    - "דיווח חדש בכתובת אחרת"
+              - wait:
+                  options-from: _options
+                  variable: _report_selection
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _report_selection
+
+        - switch:
+            arg: sex
+            cases:
+            - undefined: true
+              steps:
+              - say: בן? בת?
+              - wait:
+                  variable: sex
+                  options:
+                  - show: בן
+                    value: male
+                  - show: בת
+                    value: female
+            - default: true
+
+        - switch:
+            arg: age
+            cases:
+            - undefined: true
+              steps:
+              - switch:
+                  arg: sex
+                  cases:
+                  - match: male
+                    steps:
+                    - say: בן כמה?
+                  - match: female
+                    steps:
+                    - say: בת כמה?
+              - wait:
+                  variable: age
+                  placeholder: "גיל"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 120
+            - default: true
+
+        - switch:
+            arg: city_town
+            cases:
+            - undefined: true
+              steps:   
+              - say: מה הוא מקום מגוריך?
+              - wait:
+                  variable: city_town
+                  placeholder: "שם העיר או הישוב"
+            - default: true
+
+        - switch:
+            arg: street
+            cases:
+            - undefined: true
+              steps:   
+              - say: שם הרחוב?
+              - wait:
+                  variable: street
+                  placeholder: שם הרחוב
+            - default: true
+
+        - switch:
+            arg: alias
+            cases:
+            - undefined: true
+              steps:
+              - do:
+                  cmd: calculate_alias
+                  params:
+                    - record
+              - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
+            - default: true
+        
 
     - name: preconditions
       steps:
-        - goto: preconditions-diseases-loop
-        - goto: preconditions-smoking
+        - switch:
+            arg: preconditions_received
+            cases:
+              - undefined: true
+                steps:
+                - goto: preconditions-diseases-loop      
+                - goto: preconditions-smoking
+                - do:
+                    cmd: set_flag
+                    params:
+                      - record
+                      - preconditions_received
+              - default: true
 
     - name: preconditions-diseases-loop
       steps:
@@ -70,26 +158,26 @@
             variable: _var
             options:
             - show: "סוכרת"
-              value: chronic_diabetes
-              unless: chronic_diabetes
+              value: precondition_chronic_diabetes
+              unless: precondition_chronic_diabetes
             - show: "בעיית יתר לחץ דם"
-              value: chronic_hypertension
-              unless: chronic_hypertension
+              value: precondition_chronic_hypertension
+              unless: precondition_chronic_hypertension
             - show: מחלת לב, כלי דם או שבץ
-              value: chronic_ischemic_heart_disease_or_stroke
-              unless: chronic_ischemic_heart_disease_or_stroke
+              value: precondition_chronic_ischemic_heart_disease_or_stroke
+              unless: precondition_chronic_ischemic_heart_disease_or_stroke
             - show: מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)
-              value: chronic_lung_disease
-              unless: chronic_lung_disease
+              value: precondition_chronic_lung_disease
+              unless: precondition_chronic_lung_disease
             - show: סרטן
-              value: chronic_cancer
-              unless: chronic_cancer
+              value: precondition_chronic_cancer
+              unless: precondition_chronic_cancer
             - show: אי ספיקת כליות
-              value: chronic_kidney_failure
-              unless: chronic_kidney_failure
+              value: precondition_chronic_kidney_failure
+              unless: precondition_chronic_kidney_failure
             - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
-              value: chronic_immune_system_suppression
-              unless: chronic_immune_system_suppression
+              value: precondition_chronic_immune_system_suppression
+              unless: precondition_chronic_immune_system_suppression
             - show: לא אובחנתי באף אחת מאלה
               class: other
               steps:
@@ -103,7 +191,7 @@
       steps:
         - say: מה לגבי עישון?
         - wait:
-            variable: smoking
+            variable: precondition_smoking
             options:
               - show: עישון יומיומי
                 value: daily_smoker
@@ -117,99 +205,165 @@
 
     - name: insulation
       steps:
-        - say: אוקיי, עברנו את זה...
-        - say: עכשיו, מה בנוגע לבידוד?
-        - wait:
-            variable: exposure_status
-            options:
-              - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
-                value: insulation_with_family
-              - show: אני בבידוד מבני משפחה, ובחדר סגור
-                value: "insulation"
+        - switch:
+            arg: exposure_status
+            cases:
+              - undefined: true
                 steps:
-                  - say: "באיזה תאריך התחיל הבידוד?"
-                  - wait:
-                      variable: insulation_start_date
-                      placeholder: "תאריך: dd.mm.yy"
-                      input-kind: date
-                  - say: מה הסיבה לשהות שלך בבידוד?
-                  - wait:
-                      variable: insulation_reason
-                      options:
-                      - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
-                        value: back-from-abroad
-                        steps: 
-                          - say: "מתי חזרת לארץ?"
+                  - say: אוקיי, עברנו את זה...
+                  - say: עכשיו, מה בנוגע לבידוד?
+              - regexp: "(insulation_with_family|insulation|diagnosed)" 
+                steps:
+                  - say: "בדיווח הקודם היה על בידוד או אישפוז. האם משהו השתנה?"
+              - default: true
+                steps:
+                  - say: "בדיווח הקודם לא הוזכר בידוד או אשפוז. האם משהו השתנה?"
+        - wait:
+            options:
+              - show: לא
+              - show: כן
+                steps:
+                  - do:
+                      cmd: clear_fields
+                      params:
+                        - exposure.*
+                        - insulation.*
+
+        - switch:
+            arg: exposure_status
+            cases:
+              - default: true
+              - undefined: true
+                steps:
+                - wait:
+                    variable: exposure_status
+                    options:
+                      - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
+                        value: insulation_with_family
+                      - show: אני בבידוד מבני משפחה, ובחדר סגור
+                        value: "insulation"
+                        steps:
+                          - say: "באיזה תאריך התחיל הבידוד?"
                           - wait:
-                              variable: insulation_returned_from_abroad_date
+                              variable: insulation_start_date
                               placeholder: "תאריך: dd.mm.yy"
                               input-kind: date
-                              options:
-                      - show: אני בבידוד כי נחשפתי לחולה מאומת
-                        value: contact-with-patient
-                        steps:
-                          - say: ידוע לך מה מספר החולה שפגשת?
+                          - say: מה הסיבה לשהות שלך בבידוד?
                           - wait:
+                              variable: insulation_reason
                               options:
-                              - show: "כן"
-                                value: "yes"
-                                steps:
-                                  - say: מצויין. מה המספר?
+                              - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                                value: back-from-abroad
+                                steps: 
+                                  - say: "מתי חזרת לארץ?"
                                   - wait:
-                                      variable: insulation_patient_number
-                                      placeholder: "מספר החולה שפגשתי"
-                                  - say: האם זכור לך היום שבו נפגשתם?
+                                      variable: insulation_returned_from_abroad_date
+                                      placeholder: "תאריך: dd.mm.yy"
+                                      input-kind: date
+                                      options:
+                              - show: אני בבידוד כי נחשפתי לחולה מאומת
+                                value: contact-with-patient
+                                steps:
+                                  - say: ידוע לך מה מספר החולה שפגשת?
                                   - wait:
                                       options:
                                       - show: "כן"
                                         value: "yes"
-                                        steps: 
-                                        - say: מה היה התאריך?
-                                        - wait:
-                                            variable: insulation_exposure_date
-                                            placeholder: "תאריך: dd.mm.yy"
-                                            input-kind: date
-                                      - show: "לא זכור לי"
+                                        steps:
+                                          - say: מצויין. מה המספר?
+                                          - wait:
+                                              variable: insulation_patient_number
+                                              placeholder: "מספר החולה שפגשתי"
+                                          - say: האם זכור לך היום שבו נפגשתם?
+                                          - wait:
+                                              options:
+                                              - show: "כן"
+                                                value: "yes"
+                                                steps: 
+                                                - say: מה היה התאריך?
+                                                - wait:
+                                                    variable: insulation_exposure_date
+                                                    placeholder: "תאריך: dd.mm.yy"
+                                                    input-kind: date
+                                              - show: "לא זכור לי"
+                                                value: "no"
+                                      - show: "לא"
                                         value: "no"
-                              - show: "לא"
-                                value: "no"
-                      - show: אני נמצא בבידוד כי חוויתי תסמינים
-                        value: has_symptoms
-                      - show: אני נמצא בבידוד מרצוני האישי                    
-                        value: voluntary
-              - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
-                value: diagnosed
-                steps:
-                  - wait:
-                      variable: diagnosed_location
-                      options:                 
-                      - show: אשפוז בבית חולים
-                        value: hospital
-                      - show: בבית מלון
-                        value: hotel
-                      - show: בבית
-                        value: home
-                      - show: החלמתי ואני בבית
-                        value: recovered
-              - show: "אני לא בבידוד"
-                class: other
-                value: "none"
+                              - show: אני נמצא בבידוד כי חוויתי תסמינים
+                                value: has_symptoms
+                              - show: אני נמצא בבידוד מרצוני האישי                    
+                                value: voluntary
+                      - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
+                        value: diagnosed
+                        steps:
+                          - wait:
+                              variable: diagnosed_location
+                              options:                 
+                              - show: אשפוז בבית חולים
+                                value: hospital
+                              - show: בבית מלון
+                                value: hotel
+                              - show: בבית
+                                value: home
+                              - show: החלמתי ואני בבית
+                                value: recovered
+                      - show: "אני לא בבידוד"
+                        class: other
+                        value: "none"
 
     - name: current-report
       steps:
-        - say: ומה שלומך היום?
-        - wait:
-            variable: general_feeling
-            options:
-            - show: בסדר גמור
-              value: feel_good
-              steps:
-                - say: נהדר לשמוע!
-                - say: "ליתר בטחון, האם יש לך אלו מהתסמינים הללו:"
-            - show: לא כל כך טוב
-              value: feel_bad
-              steps:
-              - say: "אוייש… איך זה בא לידי ביטוי?"
+        - switch:
+            arg: general_feeling
+            cases:
+              - undefined: true
+                steps:
+                - say: ומה שלומך היום?
+                - wait:
+                    variable: general_feeling
+                    options:
+                    - show: בסדר גמור
+                      value: feel_good
+                      steps:
+                        - say: נהדר לשמוע!
+                        - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                    - show: לא כל כך טוב
+                      value: feel_bad
+                      steps:
+                      - say: "אוייש… איך זה בא לידי ביטוי?"
+      
+              - match: feel_good
+                steps:
+                  - say: אני מקווה שהמרגש עדיין טוב כמו בדיווח הקודם
+                  - wait:
+                      variable: general_feeling
+                      options:
+                      - show: כן, בסדר גמור
+                        value: feel_good
+                        steps:
+                          - say: נהדר לשמוע!
+                          - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                      - show: לצערי לא כל כך טוב
+                        value: feel_bad
+                        steps:
+                        - say: "אוייש… איך זה בא לידי ביטוי?"
+        
+              - match: feel_bad
+                steps:
+                  - say: אני מקווה שהמרגש טוב יותר מהדיווח הקודם...
+                  - wait:
+                      variable: general_feeling
+                      options:
+                      - show: כן, עכשיו הכל בסדר
+                        value: feel_good
+                        steps:
+                          - say: נהדר לשמוע!
+                          - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                      - show: לא, עדיין לא משהו
+                        value: feel_bad
+                        steps:
+                        - say: "אוייש… איך זה בא לידי ביטוי?"
+
         - goto: current-report-symptoms
 
     - name: current-report-symptoms
@@ -219,7 +373,7 @@
 
     - name: current-report-temperature
       steps:
-        - say: האם מדדת חום ביממה האחרונה?
+        - say: האם נמדד חום ביממה האחרונה?
         - wait:
             options:
             - show: "כן"
@@ -228,9 +382,9 @@
               - say: "ומה המדחום אומר?"
               - wait:
                   variable: temperature
-                  placeholder: מעלות חום, 32-43
+                  placeholder: מעלות חום, 35-43
                   input-kind: number
-                  input-min: 32
+                  input-min: 35
                   input-max: 43
                   input-step: 0.1
             - show: "לא"
@@ -243,13 +397,13 @@
         - goto: current-report-top-level-symptoms
         - say: עוד תופעות שכדאי שנכיר?
         - goto: current-report-top-level-symptoms
-        - say: עוד משהו שגורם לך להרגיש לא טוב?
+        - say: עוד משהו שגורם הרגשה לא טובה?
         - goto: current-report-top-level-symptoms
         - say: מה עוד?
         - goto: current-report-top-level-symptoms
-        - say: יש עוד משהו שמפריע לך?
+        - say: יש עוד משהו שמפריע?
         - goto: current-report-top-level-symptoms
-        - say: עוד משהו שגורם לך להרגיש לא טוב?
+        - say: עוד משהו שגורם הרגשה לא טובה?
         - goto: current-report-top-level-symptoms          
         - say: משהו נוסף שכדאי שנכיר?
         - goto: current-report-top-level-symptoms
