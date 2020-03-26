@@ -24,7 +24,6 @@ export class ThankYouPageComponent implements OnInit {
     } catch (e) {
       console.log('Failed to check if notification is available');
     }
-    // this.notificationAvailable = false;
   }
 
   share() {
@@ -82,9 +81,17 @@ export class ThankYouPageComponent implements OnInit {
       const registration = await navigator.serviceWorker.getRegistration();
       console.log('got registration', registration);
       if (registration) {
-        await registration.showNotification('Hey, welcome back!', <NotificationOptions>{
+        await registration.showNotification('זמן לדיווח הבריאות היומי!', <NotificationOptions>{
             tag: 'corona-predict',
+            actions: [
+              {
+                action: 'open', title: 'דווח עכשיו'
+              }
+            ],
+            data: window.location.href,
             body: 'הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!',
+            requireInteraction: true,
+            icon: '/assets/img/apple-touch-icon.png',
             showTrigger: new window['TimestampTrigger'](Date.now() + 10000)});
       }
     } catch (e) {
