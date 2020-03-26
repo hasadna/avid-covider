@@ -19,16 +19,16 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
               @Inject(LOCALE_ID) public locale) { }
 
   ngOnInit() {
-    this.notifications.init();
   }
 
   ngAfterViewInit() {
+    this.notifications.init(
+      this.notificationTitle.nativeElement.innerHTML,
+      this.notificationBody.nativeElement.innerHTML,
+      this.notificationAction.nativeElement.innerHTML
+    );
     if (this.notifications.canAddNotification) {
-      this.notifications.addNotification(
-        this.notificationTitle.nativeElement.innerHTML,
-        this.notificationBody.nativeElement.innerHTML,
-        this.notificationAction.nativeElement.innerHTML
-      );
+      this.notifications.addNotification();
     }
   }
 }

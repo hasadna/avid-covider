@@ -7,10 +7,16 @@ export class NotificationService {
 
   public showNotificationBox = false;
   public canAddNotification = false;
+  title: string;
+  body: string;
+  action: string;
 
   constructor() { }
 
-  init() {
+  init(title, body, action) {
+    this.title = title;
+    this.body = body;
+    this.action = action;
     try {
       const notificationAvailable = 'showTrigger' in Notification.prototype;
       const notificationPermissionNeeded = Notification.permission !== 'granted';
@@ -21,10 +27,8 @@ export class NotificationService {
     }
   }
 
-  addNotification(
-    title, body, action
-  ) {
-    this.addNotificationA(title, body, action).then(() => { console.log('setNotification!'); });
+  addNotification() {
+    this.addNotificationA(this.title, this.body, this.action).then(() => { console.log('setNotification!'); });
   }
 
   async addNotificationA(title, body, action) {
