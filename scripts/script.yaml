@@ -261,7 +261,7 @@
                           - say: "באיזה תאריך התחיל הבידוד?"
                           - wait:
                               variable: insulation_start_date
-                              placeholder: "תאריך: dd.mm.yy"
+                              placeholder: "תאריך: dd/mm/yy"
                               input-kind: date
                           - say: מה הסיבה לשהות שלך בבידוד?
                           - wait:
@@ -273,7 +273,7 @@
                                   - say: "מתי חזרת לארץ?"
                                   - wait:
                                       variable: insulation_returned_from_abroad_date
-                                      placeholder: "תאריך: dd.mm.yy"
+                                      placeholder: "תאריך: dd/mm/yy"
                                       input-kind: date
                                       options:
                               - show: אני בבידוד כי נחשפתי לחולה מאומת
@@ -298,7 +298,7 @@
                                                 - say: מה היה התאריך?
                                                 - wait:
                                                     variable: insulation_exposure_date
-                                                    placeholder: "תאריך: dd.mm.yy"
+                                                    placeholder: "תאריך: dd/mm/yy"
                                                     input-kind: date
                                               - show: "לא זכור לי"
                                                 value: "no"

@@ -647,7 +647,7 @@ export const script = {
                                   "uid": "5f298814b6",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": "תאריך: dd.mm.yy",
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "insulation_start_date"
                                   }
                                 },
@@ -671,7 +671,7 @@ export const script = {
                                             "wait": {
                                               "input-kind": "date",
                                               "options": null,
-                                              "placeholder": "תאריך: dd.mm.yy",
+                                              "placeholder": "תאריך: dd/mm/yy",
                                               "variable": "insulation_returned_from_abroad_date"
                                             }
                                           }
@@ -723,7 +723,7 @@ export const script = {
                                                                 "uid": "2a2b823bb9",
                                                                 "wait": {
                                                                   "input-kind": "date",
-                                                                  "placeholder": "תאריך: dd.mm.yy",
+                                                                  "placeholder": "תאריך: dd/mm/yy",
                                                                   "variable": "insulation_exposure_date"
                                                                 }
                                                               }
