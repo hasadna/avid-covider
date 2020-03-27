@@ -14,31 +14,31 @@
       steps:
 
         - do:
-            cmd: load_local_storage
+            cmd: load_local_storage                 # Load the data of preious reports on device
             params:
             - record
   
         - switch:
             arg: _existing_user
             cases:
-            - match: new
+            - match: new                                                           # <--- First report on device
               steps:
               - say: טוב שבאת,
               - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
               - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
-            - match: returning
+            - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: הי! טוב לראותך שוב
-              - say: הדיווחים שלך ושל אחרים עד עכשיו ממש מקדמים אותנו במאבק בקורונה
+              - say: הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה
               - say: עבור מי ברצונך לדווח עכשיו?
               - do:
-                  cmd: fetch_previous_reports
+                  cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show
                   variable: _report_options
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
                     - "דיווח חדש בכתובת אחרת"
-              - wait:
+              - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
               - do:
@@ -47,12 +47,12 @@
                     - record
                     - _report_selection
               - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
-              - say: אבל אם זה לא מסתדר, אפשר או להקריא להם את השאלות או פשוט לענות בשמם
+              - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
 
         - switch:
             arg: sex
             cases:
-            - undefined: true
+            - undefined: true                          # <---- for new reporters, ask for sex
               steps:
               - say: בן? בת?
               - wait:
@@ -62,12 +62,12 @@
                     value: male
                   - show: בת
                     value: female
-            - default: true
+            - default: true                          # <---- for returning reporters, pass
 
         - switch:
             arg: age
             cases:
-            - undefined: true
+            - undefined: true                       # <---- for new reporters, ask for age
               steps:
               - switch:
                   arg: sex
@@ -84,34 +84,34 @@
                   input-kind: number
                   input-min: 0
                   input-max: 120
-            - default: true
+            - default: true                       # <---- for returning reporters, pass
 
         - switch:
             arg: city_town
             cases:
-            - undefined: true
+            - undefined: true                    # <---- for new reporters, ask for city
               steps:   
               - say: מה הוא מקום המגורים?
               - wait:
                   variable: city_town
                   placeholder: "שם העיר או הישוב"
-            - default: true
+            - default: true                     # <---- for returning reporters, pass
 
         - switch:
             arg: street
             cases:
-            - undefined: true
+            - undefined: true                 # <---- for new reporters, ask for street name
               steps:   
               - say: שם הרחוב?
               - wait:
                   variable: street
                   placeholder: שם הרחוב
-            - default: true
+            - default: true                   # <---- for returning reporters, pass
 
         - switch:
-            arg: alias
+            arg: alias                         # alias is our user identifier (age+sex+street+city)
             cases:
-            - undefined: true
+            - undefined: true                            #<--- for new users, create alias
               steps:
               - do:
                   cmd: calculate_alias
@@ -121,7 +121,7 @@
                     - "בן {{age}} מ{{street}} {{city_town}}"
                     - "בת {{age}} מ{{street}} {{city_town}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
-            - default: true
+            - default: true                 # <---- for returning users, we already have saved alias
         
 
     - name: preconditions-check
@@ -129,10 +129,10 @@
         - switch:
             arg: preconditions_received
             cases:
-              - undefined: true
+              - undefined: true                  # <---- for new reporters, ask for preconditions (go to relevant block)
                 steps:
                 - goto: preconditions
-              - default: true
+              - default: true                    # <---- for returning reporters, pass
 
     - name: preconditions
       steps:
@@ -217,7 +217,7 @@
         - switch:
             arg: exposure_status
             cases:
-              - undefined: true
+              - undefined: true           
                 steps:
                   - say: אוקיי, עברנו את זה...
                   - say: עכשיו, מה בנוגע לבידוד?
@@ -255,13 +255,19 @@
                     options:
                       - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
                         value: insulation_with_family
+                        steps:
+                          - say: "באיזה תאריך התחיל הבידוד?"
+                          - wait:
+                              variable: insulation_start_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
                       - show: אני בבידוד מבני משפחה, ובחדר סגור
                         value: "insulation"
                         steps:
                           - say: "באיזה תאריך התחיל הבידוד?"
                           - wait:
                               variable: insulation_start_date
-                              placeholder: "תאריך: dd.mm.yy"
+                              placeholder: "תאריך: dd/mm/yy"
                               input-kind: date
                           - say: מה הסיבה לשהות שלך בבידוד?
                           - wait:
@@ -273,7 +279,7 @@
                                   - say: "מתי חזרת לארץ?"
                                   - wait:
                                       variable: insulation_returned_from_abroad_date
-                                      placeholder: "תאריך: dd.mm.yy"
+                                      placeholder: "תאריך: dd/mm/yy"
                                       input-kind: date
                                       options:
                               - show: אני בבידוד כי נחשפתי לחולה מאומת
@@ -298,15 +304,15 @@
                                                 - say: מה היה התאריך?
                                                 - wait:
                                                     variable: insulation_exposure_date
-                                                    placeholder: "תאריך: dd.mm.yy"
+                                                    placeholder: "תאריך: dd/mm/yy"
                                                     input-kind: date
                                               - show: "לא זכור לי"
                                                 value: "no"
                                       - show: "לא"
                                         value: "no"
-                              - show: אני נמצא בבידוד כי חוויתי תסמינים
+                              - show: אני בבידוד כי חוויתי תסמינים
                                 value: has_symptoms
-                              - show: אני נמצא בבידוד מרצוני האישי                    
+                              - show: אני בבידוד מרצוני האישי                    
                                 value: voluntary
                       - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
                         value: diagnosed
@@ -329,11 +335,11 @@
     - name: current-report
       steps:
         - switch:
-            arg: general_feeling
+            arg: general_feeling                                      
             cases:
-              - undefined: true
+              - undefined: true                                          #<--- for new reporters, ask how they fell
                 steps:
-                - say: ומה שלומך היום?
+                - say: ומה נשמע היום?
                 - wait:
                     variable: general_feeling
                     options:
@@ -341,13 +347,13 @@
                       value: feel_good
                       steps:
                         - say: נהדר לשמוע!
-                        - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                        - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
                     - show: לא כל כך טוב
                       value: feel_bad
                       steps:
                       - say: "אוייש… איך זה בא לידי ביטוי?"
       
-              - match: feel_good
+              - match: feel_good                                      #<--- for returning users who felt good on their previous report
                 steps:
                   - say: אני מקווה שהמרגש עדיין טוב כמו בדיווח הקודם
                   - wait:
@@ -357,15 +363,15 @@
                         value: feel_good
                         steps:
                           - say: נהדר לשמוע!
-                          - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                          - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
                       - show: לצערי לא כל כך טוב
                         value: feel_bad
                         steps:
                         - say: "אוייש… איך זה בא לידי ביטוי?"
         
-              - match: feel_bad
+              - match: feel_bad                                    #<--- for returning users who felt bad on their previous report
                 steps:
-                  - say: אני מקווה שהמרגש טוב יותר מהדיווח הקודם...
+                  - say: אני מקווה שהמצב השתפר מהדיווח האחרון..?
                   - wait:
                       variable: general_feeling
                       options:
@@ -373,7 +379,7 @@
                         value: feel_good
                         steps:
                           - say: נהדר לשמוע!
-                          - say: "ליתר בטחון, האם יש אי אלו מהתסמינים הללו:"
+                          - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
                       - show: לא, עדיין לא משהו
                         value: feel_bad
                         steps:
@@ -412,7 +418,7 @@
         - goto: current-report-top-level-symptoms
         - say: עוד תופעות שכדאי שנכיר?
         - goto: current-report-top-level-symptoms
-        - say: עוד משהו שגורם הרגשה לא טובה?
+        - say: עוד משהו שמפריע או גורם להרגשה לא טובה?
         - goto: current-report-top-level-symptoms
         - say: מה עוד?
         - goto: current-report-top-level-symptoms
@@ -422,7 +428,9 @@
         - goto: current-report-top-level-symptoms          
         - say: משהו נוסף שכדאי שנכיר?
         - goto: current-report-top-level-symptoms
-        -  say: סימפטום נוסף?
+        - say: מה עוד?
+        - goto: current-report-top-level-symptoms        
+        -  say: תסמין נוסף?
         - goto: current-report-top-level-symptoms
 
     - name: current-report-top-level-symptoms
@@ -454,14 +462,14 @@
                   - goto: symptoms_pains_questions
                   - say: יש עוד כאבים?
                   - goto: symptoms_pains_questions
-              - show: בעיות קיבה
-                unless: toplevel_symptoms_stomach
-                value: toplevel_symptoms_stomach
-                steps:
-                  - say: מה לא בסדר בקיבה?
-                  - goto: symptoms_stomach_questions
-                  - say: יש עוד בעיות קיבה?
-                  - goto: symptoms_stomach_questions
+                  - say: עוד משהו כואב?
+                  - goto: symptoms_pains_questions
+              - show: שלשול
+                value: symptoms_diarrhea
+                unless: symptoms_diarrhea
+              - show: בחילה או הקאות
+                value: symptoms_nausea_and_vomiting
+                unless: symptoms_nausea_and_vomiting
               - show: צמרמורת
                 unless: symptoms_chills
                 value: symptoms_chills
@@ -518,26 +526,9 @@
           - show: כאבי ראש
             value: symptoms_headache
             unless: symptoms_headache
-          - show: זהו
-            class: other
-            steps:
-              - pop: current-report-top-level-symptoms
-      - do:
-          cmd: flag_from_var
-          params:
-            - record
-
-    - name: symptoms_stomach_questions
-      steps:
-      - wait:
-          variable: _var
-          options:
-          - show: שלשול
-            value: symptoms_diarrhea
-            unless: symptoms_diarrhea
-          - show: בחילה או הקאות
-            value: symptoms_nausea_and_vomiting
-            unless: symptoms_nausea_and_vomiting
+          - show: כאבי גרון
+            value: symptoms_sore_throat
+            unless: symptoms_sore_throat            
           - show: זהו
             class: other
             steps:
@@ -556,8 +547,8 @@
     
     - name: exposures
       steps:
-        - say: "חשוב לנו לדעת -"
-        - say: ",אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ15 דקות ובמרחק של פחות מ2 מטרים"
+        - say: "חשוב לנו לדעת"
+        - say: "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים,"
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
@@ -578,7 +569,7 @@
 
     - name: end-of-report
       steps:
-        - say: המון תודה, המידע שנתת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולטפל בהן לפני שהן מתפשטות.
+        - say: המון תודה, המידע ששלחת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.
         - say: אז נתראה מחר?
         - wait:
             options:
