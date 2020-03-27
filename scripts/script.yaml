@@ -237,6 +237,7 @@
                         - show: לא
                         - show: כן
                           steps:
+                            - say: אז מה השתנה?
                             - do:
                                 cmd: clear_fields
                                 params:

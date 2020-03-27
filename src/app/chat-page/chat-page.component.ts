@@ -138,15 +138,17 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           }
           const options = [];
           for (const alias of Object.keys(aliases)) {
+            const option: any = {};
             if (today_aliases[alias]) {
-              continue;
+              option.class = 'disabled';
             }
-            options.push({
+            Object.assign(option, {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling'
               ])
             });
+            options.push(option);
           }
           options.push({
             show: this.fillIn(this.storage.reports[this.storage.reports.length - 1][1], same_address_text),

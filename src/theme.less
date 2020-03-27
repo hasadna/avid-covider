@@ -70,12 +70,13 @@ htl-hatool {
                         flex-flow: column !important;
                         align-items: flex-start;
                         min-width: 70%;
+                        padding-top: 16px;
 
                         button {
                             padding: 5px 20px;
                             border-radius: 18px;
                             border: solid 1px #6ededa;
-                            margin: 6px 10px;
+                            margin: 2px 0px;
                             min-width: 30%;
                             color: #1a7f4e;
                             background-color: #f6f6f6;
@@ -84,9 +85,13 @@ htl-hatool {
                             &.other {
                                 background-color: #d9f2f1
                             }
+                            &.disabled {
+                                color: #888;
+                                pointer-events: none;
+                            }
     
                             &.selected {
-                                margin: 8px 0;
+                                margin: 0;
                                 padding: 11px 16px;
                                 min-width: 0;
                                 border: none;
@@ -104,6 +109,8 @@ htl-hatool {
                             &.not-selected {
                                 display: none;
                             }
+
+                            /* &:tap ?? */
                         }
 
                         &.selected {
