@@ -1,94 +1,94 @@
 @import url('../../common.less');
 
-.thank-you-box {
-
-    .content {
-        background-color: #fff;
-        padding: 0;
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-start;
-        align-items: center;
-            
-        h1 {
-            font-size: 28px;
-            font-weight: normal;
-            text-align: right;
-            color: #480a35;
-
-            &.ltr {
-                text-align: left;
-            }
-        }
-
-        h2 {
-            font-size: 20px;
-            font-weight: 300;
-            line-height: 1.2;
-            text-align: justify;
-            color: #480a35;
-        }
-
-        .copybox {
-            display: flex;
-            flex-flow: row;
-            direction: ltr;
-            width: 100%;
-            border-radius: 4px;
-            overflow: hidden;
-            background-color: #f6f6f6;
-            height: 32px;
-            align-items: center;
-            margin-top: auto;
-            box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-
-            .url {
-                font-weight: 300;                 
-                color: #2c3c3b;
-                margin: 0 5px;
-            }
-
-            .ic {
-                height: 32px;
-                width: 40px;
-                margin-left: auto;
-                display: flex;
-                flex-flow: row;
-                align-items: center;
-                justify-content: center;
-                background-color: #00807c;
-                cursor: pointer;
-
-                img {
-                    height: 20px;
-                }
-            }
-        }
-
-        .copied-text {
-            opacity: 0;
-            font-size: 16px;
-            font-weight: 300;
-            transition-property: opacity;
-            transition-duration: 0.5s;
-            transition-delay: 0.5s;
-            color: #2c3c3b;
-            align-self: flex-start;
-
-            &.copied {
-                opacity: 0.5;
-            }
-        }
+.content {
+    background-color: #fff;
+    padding: 0;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 150px;
         
-        .share-text {
-            margin-top: 36px;
-            font-size: 16px;
-            font-weight: 300;
-            color: #89a9a8;
-        }
+    h1 {
+        font-size: 28px;
+        font-weight: normal;
+        text-align: right;
+        color: #480a35;
 
-        .cta {
-            margin-top: 8px;
+        &.ltr {
+            text-align: left;
         }
     }
+
+    h2 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.2;
+        text-align: justify;
+        color: #480a35;
+    }
+
+    .copybox {
+        display: flex;
+        flex-flow: row;
+        direction: ltr;
+        width: 100%;
+        border-radius: 4px;
+        overflow: hidden;
+        background-color: #f6f6f6;
+        height: 32px;
+        align-items: center;
+        margin-top: auto;
+        box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+
+        .url {
+            font-weight: 300;                 
+            color: #2c3c3b;
+            margin: 0 5px;
+        }
+
+        .ic {
+            height: 32px;
+            width: 40px;
+            margin-left: auto;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+            background-color: #00807c;
+            cursor: pointer;
+
+            img {
+                height: 20px;
+            }
+        }
+    }
+
+    .copied-text {
+        opacity: 0;
+        font-size: 16px;
+        font-weight: 300;
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        transition-delay: 0.5s;
+        color: #2c3c3b;
+        align-self: flex-start;
+
+        &.copied {
+            opacity: 0.5;
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .share-text {
+        font-size: 16px;
+        font-weight: 300;
+        color: #89a9a8;
+    }
+
 }

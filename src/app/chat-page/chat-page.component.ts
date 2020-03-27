@@ -149,7 +149,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           }
           options.push({
-            show: this.fillIn(this.storage.reports[0][1], same_address_text),
+            show: this.fillIn(this.storage.reports[this.storage.reports.length - 1][1], same_address_text),
             value: this.selectFields(this.storage.reports[0][1], [
               'city_town', 'street'
             ])
@@ -181,7 +181,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             const keys = Object.keys(record);
             for (const key of keys) {
               if (regexp.test(key)) {
-                delete record[key];
+                try {
+                  delete record[key];
+                } catch (e) {
+                  console.log('Failed to delete key', key, 'from', record, ':', e);
+                }
               }
             }
           }

@@ -1,5 +1,4 @@
-<div class='thank-you-box'>
-  <app-header></app-header>
+<app-generic-page>
   <div class='content'>
     <h1 i18n appLtr>
 תודה רבה,<br/>
@@ -16,19 +15,19 @@
     </div>
     <div class='copied-text' i18n [class.copied]='copied'>הועתק ללוח</div>
 
-    <ng-container *ngIf='!notifications.showNotificationBox'>
-      <div class='share-text' i18n>ילדים? מבוגרים?</div>
+  </div>
 
-      <div class='cta'>
-        <span class='button' (click)='restart.emit()' i18n>מלאו עבורם שאלון נוסף</span>
-      </div>
-    </ng-container>
+  <div class='footer'>
+    <div class='share-text' i18n>ילדים? מבוגרים?</div>
+
+    <div class='cta'>
+      <span class='button' (click)='restart.emit()' i18n>מלאו עבורם שאלון נוסף</span>
+    </div>
+    
     <ng-container *ngIf='notifications.showNotificationBox'>
-      <div class='share-text'>&nbsp;</div>
-
       <div class='cta'>
         <span class='button' (click)='notifications.addNotification()' i18n>הזכירו לי למלא את השאלון מחר</span>
       </div>
     </ng-container>
   </div>
-</div>
+</app-generic-page>

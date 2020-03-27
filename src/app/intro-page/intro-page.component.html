@@ -1,24 +1,27 @@
-<div class='introduction'>
-  <app-header></app-header>
-  <div class='hero'>
-    <h1 i18n appLtr>הי,<br/>
-    חשוב לנו לדעת מה שלומך, באמת.</h1>
-    <h2 i18n>
-    כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
-    </h2>
-    <h2 *ngIf='locale==="he"'><strong>התשובות שלך נשמרות על המכשיר כדי להקל על הדיווחים החוזרים בעתיד</strong></h2>
-    <h2 class='moreinfo' (click)='info.emit()' i18n>עוד על המחקר…</h2>
+<app-generic-page>
+  <div class='content'>
+    <div class='hero'>
+      <h1 i18n appLtr>הי,<br/>
+      חשוב לנו לדעת מה שלומך, באמת.</h1>
+      <h2 i18n>
+      כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
+      </h2>
+      <h2 *ngIf='locale==="he"'><strong>התשובות שלך נשמרות על המכשיר כדי להקל על הדיווחים החוזרים בעתיד</strong></h2>
+      <h2 class='moreinfo' (click)='info.emit()' i18n>עוד על המחקר…</h2>
+      <div class='logos'>
+        <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
+        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
+        <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+      </div>
+
+    </div>
+  </div>
+  <div class='footer'>
     <div class='cta'>
       <span class='button' (click)='chat.emit()' i18n>בהחלט, בואו נתחיל</span>
     </div>
-    <div class='logos'>
-      <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
-      <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
-      <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
-    </div>
-
   </div>
-</div>
+</app-generic-page>
 
 <span class='placeholder-tx' i18n #notificationTitle>זמן לדיווח הבריאות היומי!</span>
 <span class='placeholder-tx' i18n #notificationAction>לדיווח היומי</span>

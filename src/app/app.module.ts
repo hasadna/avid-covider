@@ -13,6 +13,7 @@ import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component
 import { HeaderComponent } from './header/header.component';
 import { VERSION } from './constants';
 import { LtrDirective } from './ltr.directive';
+import { GenericPageComponent } from './generic-page/generic-page.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -36,7 +37,8 @@ export class SentryErrorHandler implements ErrorHandler {
     InfoPageComponent,
     ThankYouPageComponent,
     HeaderComponent,
-    LtrDirective
+    LtrDirective,
+    GenericPageComponent
   ],
   imports: [
     BrowserModule,

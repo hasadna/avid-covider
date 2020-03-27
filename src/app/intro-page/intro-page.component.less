@@ -1,53 +1,41 @@
 @import url('../../common.less');
 
-.introduction {
+.hero {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    flex: 1 1 100%;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+    padding: 0 10px;
+    
+    // margin: 0 30px;
+    h1 {
+        margin-top: 0;
+        font-size: 40px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.2;
+        letter-spacing: normal;
+        text-align: right;
+        color: #480a35;
 
-    .header {
-        flex: 0 0 auto;
-        box-shadow: none;            
+        &.ltr {
+            text-align: left;
+        }
     }
 
-    .hero {
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-start;
-        flex: 1 1 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        padding: 0 10px;
-        
-        // margin: 0 30px;
-        h1 {
-            margin-top: 0;
-            font-size: 40px;
-            font-weight: normal;
-            font-stretch: normal;
-            font-style: normal;
-            line-height: 1.2;
-            letter-spacing: normal;
-            text-align: right;
-            color: #480a35;
+    h2 {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 1.2;
+        color: #480a35;
+        text-align: justify;
 
-            &.ltr {
-                text-align: left;
-            }
-        }
-
-        h2 {
-            font-size: 20px;
-            font-weight: 300;
-            line-height: 1.2;
-            color: #480a35;
-            text-align: justify;
-
-            &.moreinfo {
-                color: rgba(72, 10, 53, 0.5);
-                cursor: pointer;
-            }    
-        }
-
-        .cta {
-            margin: 10px 0;
-        }
+        &.moreinfo {
+            color: rgba(72, 10, 53, 0.5);
+            cursor: pointer;
+        }    
     }
 }
