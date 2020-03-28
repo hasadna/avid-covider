@@ -15,8 +15,10 @@
     .scrollable-content {
         flex: 1 1 auto;
         overflow-y: scroll;
-        overflow-x: hidden;
+        overflow-x: visible;
         padding: 0 16px;
+        scrollbar-width: none;
+        width: 100%;
 
         ::ng-deep & > * {
             padding-bottom: 80px;
