@@ -126,7 +126,15 @@ END:VALARM
 END:VEVENT
 END:VCALENDAR`;
     try {
-      FileSaver.saveAs(new Blob([ics],  {type: 'text/calendar;charset=utf-8'}), 'corona.ics');
+      const blob = new Blob([ics],  {type: 'text/calendar;charset=utf-8'});
+      const data = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = data;
+      // link.download = 'corona.ics'';
+      link.click();
+      setTimeout(function() {
+        window.URL.revokeObjectURL(data);
+      }, 100);
     } catch (e) {
       console.log('Failed to set calendar');
     }
