@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { NotificationService } from '../notification.service';
 
 import * as FileSaver from 'file-saver';
@@ -11,6 +11,9 @@ import * as FileSaver from 'file-saver';
 export class ThankYouPageComponent implements OnInit {
 
   @Output() restart = new EventEmitter<void>();
+
+  @ViewChild('calendarTitle') notificationTitle: ElementRef;
+  @ViewChild('calendarBody') notificationBody: ElementRef;
 
   clipboardCopySupported = false;
   calendarSupported = false;
@@ -76,6 +79,10 @@ export class ThankYouPageComponent implements OnInit {
   }
 
   downloadCalendar() {
+    const calendarHref = window.location.href.split('?')[0] + '?from=calendar';
+    const title = this.notificationTitle.nativeElement.innerHTML;
+    const body = this.notificationBody.nativeElement.innerHTML;
+
     const ics = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//coronaisrael.org//
@@ -105,15 +112,15 @@ UID:corona-israel-0001
 DTSTART;TZID=Asia/Jerusalem:20200328T080000
 RRULE:FREQ=DAILY
 DTEND;TZID=Asia/Jerusalem:20200328T081500
-SUMMARY:זמן לדיווח הבריאות היומי!
-URL:https://coronaisrael.org/?source=calendar
-DESCRIPTION:הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!
-LOCATION:https://coronaisrael.org/?source=calendar
+SUMMARY:${title}
+URL:${calendarHref}
+DESCRIPTION:${body}
+LOCATION:${calendarHref}
 TRANSP:TRANSPARENT
 X-MICROSOFT-CDO-BUSYSTATUS:FREE
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:זמן לדיווח הבריאות היומי!
+DESCRIPTION:${title}
 TRIGGER:-PT0M
 END:VALARM
 END:VEVENT
