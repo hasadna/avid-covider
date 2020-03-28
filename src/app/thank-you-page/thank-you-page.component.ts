@@ -12,8 +12,8 @@ export class ThankYouPageComponent implements OnInit {
 
   @Output() restart = new EventEmitter<void>();
 
-  @ViewChild('calendarTitle') notificationTitle: ElementRef;
-  @ViewChild('calendarBody') notificationBody: ElementRef;
+  @ViewChild('calendarTitle') calendarTitle: ElementRef;
+  @ViewChild('calendarBody') calendarBody: ElementRef;
 
   clipboardCopySupported = false;
   calendarSupported = false;
@@ -80,8 +80,8 @@ export class ThankYouPageComponent implements OnInit {
 
   downloadCalendar() {
     const calendarHref = window.location.href.split('?')[0] + '?from=calendar';
-    const title = this.notificationTitle.nativeElement.innerHTML;
-    const body = this.notificationBody.nativeElement.innerHTML;
+    const title = this.calendarTitle.nativeElement.innerHTML;
+    const body = this.calendarBody.nativeElement.innerHTML;
 
     const ics = `BEGIN:VCALENDAR
 VERSION:2.0
