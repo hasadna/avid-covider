@@ -78,12 +78,12 @@ export class ThankYouPageComponent implements OnInit {
   downloadCalendar() {
     const ics = `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//ical.marudot.com//iCal Event Maker
+PRODID:-//coronaisrael.org//
 CALSCALE:GREGORIAN
 BEGIN:VTIMEZONE
-TZID:Asia/Beirut
-TZURL:http://tzurl.org/zoneinfo-outlook/Asia/Beirut
-X-LIC-LOCATION:Asia/Beirut
+TZID:Asia/Jerusalem
+TZURL:http://tzurl.org/zoneinfo-outlook/Asia/Jerusalem
+X-LIC-LOCATION:Asia/Jerusalem
 BEGIN:DAYLIGHT
 TZOFFSETFROM:+0200
 TZOFFSETTO:+0300
@@ -100,20 +100,20 @@ RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
 END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
-DTSTAMP:20200326T131636Z
-UID:20200326T131636Z-398819644@marudot.com
-DTSTART;TZID=Asia/Beirut:20200326T080000
+DTSTAMP:20200328T131636Z
+UID:corona-israel-0001
+DTSTART;TZID=Asia/Jerusalem:20200328T080000
 RRULE:FREQ=DAILY
-DTEND;TZID=Asia/Beirut:20200326T081500
-SUMMARY:כוצרצ
-URL:https%3A%2F%2Fcoronaisrael.org
-DESCRIPTION:זמן להילחם בקורונה
-LOCATION:https://coronaisrael.org/#location
+DTEND;TZID=Asia/Jerusalem:20200328T081500
+SUMMARY:זמן לדיווח הבריאות היומי!
+URL:https://coronaisrael.org/?source=calendar
+DESCRIPTION:הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!
+LOCATION:https://coronaisrael.org/?source=calendar
 TRANSP:TRANSPARENT
 X-MICROSOFT-CDO-BUSYSTATUS:FREE
 BEGIN:VALARM
 ACTION:DISPLAY
-DESCRIPTION:כוצרצ
+DESCRIPTION:זמן לדיווח הבריאות היומי!
 TRIGGER:-PT0M
 END:VALARM
 END:VEVENT
