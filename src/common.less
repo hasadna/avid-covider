@@ -30,6 +30,9 @@
     width: 100%;
 
     .button {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
 
         border-radius: 18px;
         border: solid 1px #6ededa;                
@@ -43,7 +46,21 @@
         margin: 10px 0;
         cursor: pointer;
         width: 100%;
+
+        img {
+            margin: 0 5px;   
+        }
+
     }
+
+    &.calendar {
+        .button {
+            border-color: #480a35;
+            color: #480a35;
+            background-color: rgba(72, 10, 53, 0.1);
+        }
+    }
+
 }
 
 .visually-hidden {
