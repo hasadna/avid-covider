@@ -42,6 +42,7 @@ export class NotificationService {
       const timeout = (window.location.hostname === 'avid-covider.phonaris.com') ?
         300 : 85500;
       console.log('got timeout', timeout);
+      const notificationHref = window.location.href.split('?')[0] + '?from=notification';
       if (registration) {
         await registration.showNotification(title, <NotificationOptions>{
             tag: 'corona-predict',
@@ -50,7 +51,7 @@ export class NotificationService {
                 action: 'open', title: action
               }
             ],
-            data: window.location.href,
+            data: notificationHref,
             body: body,
             requireInteraction: true,
             badge: '/apple-touch-icon.png',

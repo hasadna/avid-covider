@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable, ErrorHandler } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HatoolLibModule } from 'hatool';
@@ -14,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { VERSION } from './constants';
 import { LtrDirective } from './ltr.directive';
 import { GenericPageComponent } from './generic-page/generic-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -29,6 +31,10 @@ export class SentryErrorHandler implements ErrorHandler {
   }
 }
 
+const appRoutes: Routes = [
+  { path: '', component: MainPageComponent },
+]
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,12 +44,16 @@ export class SentryErrorHandler implements ErrorHandler {
     ThankYouPageComponent,
     HeaderComponent,
     LtrDirective,
-    GenericPageComponent
+    GenericPageComponent,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     HatoolLibModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   providers: window.location.protocol === 'http:' ? [] : [
     {provide: ErrorHandler, useClass: SentryErrorHandler}

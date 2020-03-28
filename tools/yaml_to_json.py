@@ -91,7 +91,7 @@ def assign_translations(x, stack, parent=None, parentkey=None, translations=None
                 translations=translations, fields=fields, field_in_key=field_in_key
             )
     elif isinstance(x, str):
-        if parent and parentkey and has_hebrew(x):
+        if parent and parentkey is not None and has_hebrew(x):
             if isinstance(parentkey, str) and parentkey not in fields:
                 return
             if field_in_key:

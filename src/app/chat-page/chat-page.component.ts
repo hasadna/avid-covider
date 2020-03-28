@@ -7,6 +7,7 @@ import { script } from '../script';
 import { of } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
+import { SourceService } from '../source.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -30,6 +31,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   constructor(private http: HttpClient,
               private storage: ReportStoreService,
               private notifications: NotificationService,
+              private source: SourceService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -214,6 +216,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           console.log('Failed to add stats');
         }
         payload['notificationsEnabled'] = this.notifications.canAddNotification;
+        payload['engagementSource'] = this.source.getSource();
         this.storage.addReport(payload);
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
