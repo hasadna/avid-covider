@@ -29,5 +29,11 @@
         <span class='button' (click)='notifications.addNotification()' i18n>הזכירו לי למלא את השאלון מחר</span>
       </div>
     </ng-container>
+
+    <ng-container *ngIf='calendarSupported'>
+      <div class='cta'>
+        <span class='button' (click)='downloadCalendar()' i18n>הוספת תזכורת יומית ביומן</span>
+      </div>
+    </ng-container>
   </div>
 </app-generic-page>
