@@ -33,7 +33,7 @@ export class SentryErrorHandler implements ErrorHandler {
 
 const appRoutes: Routes = [
   { path: '', component: MainPageComponent },
-]
+];
 
 @NgModule({
   declarations: [
