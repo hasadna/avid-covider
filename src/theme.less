@@ -85,6 +85,10 @@ htl-hatool {
                             &.other {
                                 background-color: #d9f2f1
                             }
+                            &.disabled {
+                                color: #888;
+                                pointer-events: none;
+                            }
     
                             &.selected {
                                 margin: 0;
@@ -105,6 +109,8 @@ htl-hatool {
                             &.not-selected {
                                 display: none;
                             }
+
+                            /* &:tap ?? */
                         }
 
                         &.selected {

@@ -150,7 +150,15 @@ export const script = {
                           "cmd": "fetch_previous_reports",
                           "params": [
                             "דיווח חדש ב{{street}} {{city_town}}",
-                            "דיווח חדש בכתובת אחרת"
+                            {
+                              ".tx": {
+                                "_": "דיווח חדש בכתובת אחרת",
+                                "ar": "إستبيان جديد بمكان سكن آخر",
+                                "en": "New report in a different address",
+                                "es": "Nuevo informe en otra dirección",
+                                "ru": "Новый отчет по другому адресу"
+                              }
+                            }
                           ],
                           "variable": "_report_options"
                         },
@@ -443,8 +451,24 @@ export const script = {
                           "cmd": "calculate_alias",
                           "params": [
                             "record",
-                            "בן {{age}} מ{{street}} {{city_town}}",
-                            "בת {{age}} מ{{street}} {{city_town}}"
+                            {
+                              ".tx": {
+                                "_": "בן {{age}} מ{{street}} {{city_town}}",
+                                "ar": "بن {{age}} من{{street}} {{city_town}}",
+                                "en": "{{age}} years old from {{street}} {{city_town}}",
+                                "es": "Hombre {{age}} מ{{street}} {{city_town}}",
+                                "ru": "{{age}} лет, с улици {{street}} в городе {{city_town}}"
+                              }
+                            },
+                            {
+                              ".tx": {
+                                "_": "בת {{age}} מ{{street}} {{city_town}}",
+                                "ar": "بنت {{age}} من{{street}} {{city_town}}",
+                                "en": "{{age}} years old from {{street}} {{city_town}}",
+                                "es": " Mujer {{age}} מ{{street}} {{city_town}}",
+                                "ru": "{{age}} лет, с улици {{street}} в городе {{city_town}}"
+                              }
+                            }
                           ],
                           "variable": "alias"
                         },
@@ -964,6 +988,10 @@ export const script = {
                               },
                               "steps": [
                                 {
+                                  "say": "אז מה השתנה?",
+                                  "uid": "bb97b45171"
+                                },
+                                {
                                   "do": {
                                     "cmd": "clear_fields",
                                     "params": [
@@ -972,7 +1000,7 @@ export const script = {
                                       "insulation.*"
                                     ]
                                   },
-                                  "uid": "8ed4a9cee1"
+                                  "uid": "96fa9bb21d"
                                 }
                               ],
                               "uid": "34c09cceb0"
