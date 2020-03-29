@@ -171,7 +171,8 @@ def write_ical(title, body, path):
     with open(path, 'w', encoding='utf8') as ics:
         ics.write('''BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//coronaisrael.org//
+PRODID:-//Microsoft Corporation//Outlook 12.0 MIMEDIR//EN
+METHOD:PUBLISH
 CALSCALE:GREGORIAN
 BEGIN:VTIMEZONE
 TZID:Asia/Jerusalem
