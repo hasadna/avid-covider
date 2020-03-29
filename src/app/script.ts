@@ -61,7 +61,7 @@ export const script = {
                             "_": "טוב שבאת,",
                             "ar": "ممتاز انك جيت/ي,",
                             "en": "How good of you to drop by,",
-                            "es": "Que bueno que viniste,",
+                            "es": "Qué bueno que viniste,",
                             "ru": "Как хорошо что вы здесь,"
                           }
                         },
@@ -97,7 +97,7 @@ export const script = {
                             "_": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
                             "ar": "أولا إستبيانك انت, ولاحقا ممكن تعبئة إستبيان لأشخاص آخرين من عائلتك",
                             "en": "Let's start with reporting how you are feeling. Later you can submit another report for your family members",
-                            "es": "Comenzaremos con su informe, al final será posible informar también para otros miembros de la familia",
+                            "es": "Comenzaremos con tu informe, al finalizarlo también será posible informar acerca de otros miembros de la familia",
                             "ru": "Начнем с отчета за вас. После него, будет возможно также заполнить отчет и за других членов семьи."
                           }
                         },
@@ -115,7 +115,7 @@ export const script = {
                             "_": "הי! טוב לראותך שוב",
                             "ar": "مرحبا! مبسوطين انك رجعت/ي",
                             "en": "Hi! Nice to see you here again",
-                            "es": "Hola, ¡que bueno verte de nuevo!",
+                            "es": "Hola, ¡qué bueno verte de nuevo!",
                             "ru": "Здравствуйте, рады вас снова видеть!"
                           }
                         },
@@ -127,7 +127,7 @@ export const script = {
                             "_": "הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה",
                             "ar": "إستباينك وإستبيانات الآخرين بتساعدنا كثير بالبحث وبمحاولة محاربة الكورونا",
                             "en": "The reports that you and others have submitted go a long way to support the research and the battle against the Corona Virus",
-                            "es": "Su informe y el de los demás nos resultan de gran ayuda en la investigación y en el intento de combatir el coronavirus",
+                            "es": "Tu informe y el de los demás nos son de gran ayuda en la investigación y en el intento de combatir el coronavirus",
                             "ru": "Ваши отчеты и отчеты других очень помогают нам в исследовании и попытке борьбы с Короной"
                           }
                         },
@@ -149,7 +149,15 @@ export const script = {
                         "do": {
                           "cmd": "fetch_previous_reports",
                           "params": [
-                            "דיווח חדש ב{{street}} {{city_town}}",
+                            {
+                              ".tx": {
+                                "_": "דיווח חדש ב{{street}} {{city_town}}",
+                                "ar": "تعبئة إستبيان جديد ب {{street}} مدينة {{city_town}}",
+                                "en": "a new report in {{street}}, at {{city_town}}",
+                                "es": "Nuevo informe en{{street}} {{city_town}}",
+                                "ru": "новый отчет, с улици {{street}} в городе {{city_town}}"
+                              }
+                            },
                             {
                               ".tx": {
                                 "_": "דיווח חדש בכתובת אחרת",
@@ -454,18 +462,18 @@ export const script = {
                             {
                               ".tx": {
                                 "_": "בן {{age}} מ{{street}} {{city_town}}",
-                                "ar": "بن {{age}} من{{street}} {{city_town}}",
+                                "ar": "بن {{age}} من{{street}} مدينة {{city_town}}",
                                 "en": "{{age}} years old from {{street}} {{city_town}}",
-                                "es": "Hombre {{age}} מ{{street}} {{city_town}}",
+                                "es": "Hombre {{age}} de{{street}} {{city_town}}",
                                 "ru": "{{age}} лет, с улици {{street}} в городе {{city_town}}"
                               }
                             },
                             {
                               ".tx": {
                                 "_": "בת {{age}} מ{{street}} {{city_town}}",
-                                "ar": "بنت {{age}} من{{street}} {{city_town}}",
+                                "ar": "بنت {{age}} من{{street}} مدينة {{city_town}}",
                                 "en": "{{age}} years old from {{street}} {{city_town}}",
-                                "es": " Mujer {{age}} מ{{street}} {{city_town}}",
+                                "es": " Mujer {{age}} de{{street}} {{city_town}}",
                                 "ru": "{{age}} лет, с улици {{street}} в городе {{city_town}}"
                               }
                             }
@@ -480,7 +488,7 @@ export const script = {
                             "_": "נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}",
                             "ar": "ممتاز, من أجل المحافظة على خصوصيتك, في المرات القادمة رح نسميك {{alias}}",
                             "en": "Great. In the interest of privacy, in your following daily reports we'll address you as  {{alias}}",
-                            "es": "Excelente, para preservar tu privacidsad, en los próximos informes, te llamaremos simplemente  {{alias}}",
+                            "es": "Excelente, para preservar tu privacidad, en los próximos informes, te llamaremos simplemente  {{alias}}",
                             "ru": "Отлично. Чтобы сохранить вашу конфиденциальность, в следующих отчетах мы просто вас будем называть {{alias}}"
                           }
                         },
@@ -559,7 +567,7 @@ export const script = {
                 ".tx": {
                   "_": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
                   "ar": "بدي أسألك عن شوية أمراض, اللي مهم لإلنا نعرف إذا كانوا عندك بالماضي:",
-                  "en": "It's time for a few questions about illnesses you may have been diagnoses with in the past:",
+                  "en": "It's time for a few questions about illnesses you may have been diagnosed with in the past:",
                   "es": "Te preguntaré sobre algunas enfermedades que es importante que sepamos si te las han diagnosticado en el pasado:",
                   "ru": "Я спрошу у вас а некоторых заболеваниях, о которых нам важно знать был ли вам когда либо поставлен диагноз:"
                 }
@@ -948,7 +956,7 @@ export const script = {
                                       "_": "בדיווח הקודם לא הוזכר בידוד או אשפוז. האם משהו השתנה?",
                                       "ar": "في آخر إستبيان لم يُذكر عزل أو علاج في المستشفى. في إشي تغير؟",
                                       "en": "Last time you did not report quarantine or hospitalization. Did that change?",
-                                      "es": "El informe anterior no fueron mencionados aislamiento u hospitalización. ¿Algo de esto ha cambiado?",
+                                      "es": "En el informe anterior no se mencionó aislamiento ni hospitalización. ¿Algo de esto ha cambiado?",
                                       "ru": "В предыдущем отчете вы не упомянали крантин или госпитализацию. Что-нибудь изменилось? "
                                     }
                                   },
@@ -988,7 +996,15 @@ export const script = {
                               },
                               "steps": [
                                 {
-                                  "say": "אז מה השתנה?",
+                                  "say": {
+                                    ".tx": {
+                                      "_": "אז מה השתנה?",
+                                      "ar": "وشو تغير؟",
+                                      "en": "So what changed?",
+                                      "es": "¿Qué ha cambiado?",
+                                      "ru": "И что нового?"
+                                    }
+                                  },
                                   "uid": "bb97b45171"
                                 },
                                 {
@@ -1045,7 +1061,7 @@ export const script = {
                                       "_": "באיזה תאריך התחיל הבידוד?",
                                       "ar": "في أي تاريخ بدأ العزل؟",
                                       "en": "At what date did your quarantine begin?",
-                                      "es": "¿Desde qué fecha comenzó la cuarentena?",
+                                      "es": "¿En qué fecha comenzó el aislamiento?",
                                       "ru": "Какого числа начался карантин?"
                                     }
                                   },
@@ -1088,7 +1104,7 @@ export const script = {
                                       "_": "באיזה תאריך התחיל הבידוד?",
                                       "ar": "في أي تاريخ بدأ العزل؟",
                                       "en": "At what date did your quarantine begin?",
-                                      "es": "¿Desde qué fecha comenzó la cuarentena?",
+                                      "es": "¿En qué fecha comenzó la cuarentena?",
                                       "ru": "Какого числа начался карантин?"
                                     }
                                   },
@@ -1268,7 +1284,7 @@ export const script = {
                                                                     "_": "מה היה התאריך?",
                                                                     "ar": "شو كان التاريخ؟",
                                                                     "en": "What was the date?",
-                                                                    "es": "¿En qué fecha?",
+                                                                    "es": "¿En qué fecha fue?",
                                                                     "ru": "Какого это было числа?"
                                                                   }
                                                                 },
@@ -1505,7 +1521,7 @@ export const script = {
                                       "_": "נהדר לשמוע!",
                                       "ar": "ابسطنا نسمع!",
                                       "en": "That's great!",
-                                      "es": "¡Nos alegramos de escuchar!",
+                                      "es": "¡Nos alegra saber eso!",
                                       "ru": "Рады слышать!"
                                     }
                                   },
@@ -1571,7 +1587,7 @@ export const script = {
                             "_": "אני מקווה שהמרגש עדיין טוב כמו בדיווח הקודם",
                             "ar": "منتأمل أنك منيح كيف كنت بآخر إستبيان",
                             "en": "Hopefully, still feeling well like last time",
-                            "es": "Espero que aún se sienta con la última vez que nos informó",
+                            "es": "Espero que aún te sientas bien, como en el último informe enviado",
                             "ru": "Я надеюсь, что вы себя чувствуете по-прежнему так же хорошо, как в предыдущем докладе"
                           }
                         },
@@ -1610,7 +1626,7 @@ export const script = {
                                       "_": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
                                       "ar": "فقط للتأكد, هل عندك أحد هاي الأعراض؟",
                                       "en": "To be on the safe side: is any of these symptoms showing?",
-                                      "es": "Sólo para estar seguros, sufres de algunos de estos síntomas:",
+                                      "es": "Sólo para estar seguros, ¿sufres de algunos de estos síntomas?",
                                       "ru": "На всякий случай, есть ли у вас какие-либо из следующих симптомов:"
                                     }
                                   },
@@ -1690,7 +1706,7 @@ export const script = {
                                       "_": "נהדר לשמוע!",
                                       "ar": "ابسطنا نسمع!",
                                       "en": "That's great!",
-                                      "es": "¡Nos alegramos de escuchar!",
+                                      "es": "¡Nos alegra saber eso!",
                                       "ru": "Рады слышать!"
                                     }
                                   },
@@ -1702,7 +1718,7 @@ export const script = {
                                       "_": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
                                       "ar": "فقط للتأكد, هل عندك أحد هاي الأعراض؟",
                                       "en": "To be on the safe side: is any of these symptoms showing?",
-                                      "es": "Sólo para estar seguros, sufres de algunos de estos síntomas:",
+                                      "es": "Sólo para estar seguros, ¿sufres de algunos de estos síntomas?",
                                       "ru": "На всякий случай, есть ли у вас какие-либо из следующих симптомов:"
                                     }
                                   },
@@ -1915,7 +1931,7 @@ export const script = {
                   "_": "מה עוד?",
                   "ar": "شو كمان؟",
                   "en": "What else?",
-                  "es": "¿Qué más?<br>",
+                  "es": "¿Qué más?",
                   "ru": "Что-то ещё?"
                 }
               },
@@ -1979,7 +1995,7 @@ export const script = {
                   "_": "מה עוד?",
                   "ar": "شو كمان؟",
                   "en": "What else?",
-                  "es": "¿Qué más?<br>",
+                  "es": "¿Qué más?",
                   "ru": "Что-то ещё?"
                 }
               },
@@ -2487,7 +2503,7 @@ export const script = {
                   "_": "חשוב לנו לדעת",
                   "ar": "مهم إلنا نعرف",
                   "en": "Another piece of important information",
-                  "es": "Nos es importante saber -",
+                  "es": "Nos es importante saber",
                   "ru": "Нам важно знать"
                 }
               },
@@ -2498,8 +2514,8 @@ export const script = {
                 ".tx": {
                   "_": "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים,",
                   "ar": "إذا كنت بقرب ناس مختلفين في آخر يومين لأكثر من 15 دقيقة وبمسافة أقل من مترين,",
-                  "en": "if any other people were within 2 meters from your for more than 15 minutes in the last 24 hours",
-                  "es": "si has estado con personas diferentes durante el último día,  más de 15 minutos y a una distancia menor a 2 metros",
+                  "en": "if any other people have been within 2 meters of your for more than 15 minutes in the past 24 hours",
+                  "es": "Si has estado con personas diferentes durante el último día,  más de 15 minutos y a una distancia inferior a 2 metros",
                   "ru": "рядом с каким количеством человек вы находились за последние сутки, более 15 минут, на расстоянии менее 2-ух метров"
                 }
               },
@@ -2578,7 +2594,7 @@ export const script = {
                 ".tx": {
                   "_": "המון תודה, המידע ששלחת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.",
                   "ar": "شكرًا كثير, المعلومات اللي قدمتها/قدمتيها رح تفيد كثير باحثينا في معهد وايزمان وشركاؤنا في بلاد أخرى لمعرفة بؤر تفشي المرض ومحاولة معالجتها قبل الإنتشار.",
-                  "en": "Thanks a lot. The information you have sent would help the Weizmann Institution researchers as well as colleagues from other countries to try and locate disease hot-spots and take care of them before they spread.",
+                  "en": "Thanks a lot. The information you have sent will help the Weizmann Institution researchers as well as colleagues from other countries to try and locate disease hot-spots and deal with of them before they spread.",
                   "es": "Muchas gracias, la información que nos has brindado ayudará enormemente a nuestros investigadores en el Instituto Weizmann, así como a nuestros colegas en otros países, a identificar brotes puntuales de la enfermedad y a tratarlos antes de que se propaguen. ",
                   "ru": "Огромное спасибо, предоставленная вами информация очень поможет нашим исследователям из Института Вейцмана и нашим зарубежным коллегам выявлять вспышки эпидемии и предупреждать их распространение."
                 }
@@ -2620,6 +2636,35 @@ export const script = {
           "uid": "a92af82c81"
         }
       ]
+    },
+    {
+      "keys": [
+        {
+          "name": "calendarTitle",
+          "show": {
+            ".tx": {
+              "_": "זמן לדיווח הבריאות היומי!",
+              "ar": "وقت التبليغ اليومي عن وضعنا الصحي!",
+              "en": "Time for your Daily Health Report!",
+              "es": "¡Ha llegado tu cita diaria para informar sobre tu estado de salud!",
+              "ru": "Время для ежедневного отчета о состоянии вашего здоровья! "
+            }
+          }
+        },
+        {
+          "name": "calendarBody",
+          "show": {
+            ".tx": {
+              "_": "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!",
+              "ar": "أجى وقت تخبرونا مجددًا كيف حالكم! معًا فقط سوف نهزم الكورونا💪🏽!",
+              "en": "Time to report again about how you're doing! It takes all of us to beat the Corona virus 💪🏽!",
+              "es": "¡Llegó la hora de nos vuelvas a contar cómo te sientes! Sólo juntos venceremos a Coronavirus 💪🏽!",
+              "ru": "Пора снова заполнить отчет о здоровье! Вместе мы победим Корону! "
+            }
+          }
+        }
+      ],
+      "name": "generic-translation-assets"
     }
   ]
 };

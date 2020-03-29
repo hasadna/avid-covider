@@ -576,3 +576,11 @@
             options:
               - show: בטח!
                 class: other
+
+
+- name: generic-translation-assets ## <-- keep me last!
+  keys:
+    - name: calendarTitle
+      show: זמן לדיווח הבריאות היומי!
+    - name: calendarBody
+      show: "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה \U0001F4AA\U0001F3FD!"

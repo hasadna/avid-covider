@@ -19,6 +19,7 @@ script:
 - ng build --prod -c en
 - ng build --prod -c ru
 - ng build --prod -c es
+- python tools/yaml_to_json.py
 # - ng build --prod -c am
 deploy:
   - provider: s3

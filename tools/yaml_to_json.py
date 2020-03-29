@@ -166,6 +166,67 @@ def pull_translations(lang, filename):
     translations = dict((k, v) for k, v in translations.items() if v)
     return translations
 
+def write_ical(title, body, path):
+    path = 'dist/avid-covider/{}assets/corona_reminder.ics'.format(path)
+    with open(path, 'w', encoding='utf8') as ics:
+        ics.write('''BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//coronaisrael.org//
+CALSCALE:GREGORIAN
+BEGIN:VTIMEZONE
+TZID:Asia/Jerusalem
+TZURL:http://tzurl.org/zoneinfo-outlook/Asia/Jerusalem
+X-LIC-LOCATION:Asia/Jerusalem
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0300
+TZNAME:EEST
+DTSTART:19700329T000000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0300
+TZOFFSETTO:+0200
+TZNAME:EET
+DTSTART:19701025T000000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20200328T131636Z
+UID:corona-israel-0001
+DTSTART;TZID=Asia/Jerusalem:20200328T080000
+RRULE:FREQ=DAILY
+DTEND;TZID=Asia/Jerusalem:20200328T081500
+SUMMARY:{title}
+URL:https://coronaisrael.org/?source=calendar
+DESCRIPTION:{body}
+LOCATION:https://coronaisrael.org/?source=calendar
+TRANSP:TRANSPARENT
+X-MICROSOFT-CDO-BUSYSTATUS:FREE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:{title}
+TRIGGER:-PT0M
+END:VALARM
+END:VEVENT
+END:VCALENDAR'''.format(title=title, body=body))
+
+def create_assets(script):
+    translations = {}
+    for x in script['keys']:
+        translations[x['name']] = x['show'].get('.tx',{})
+
+    languages = [(x, x+'/') for x in LANGUAGES] + [('_', '')]
+    for lang, path in languages:
+        calendarTitle = translations['calendarTitle']
+        calendarTitle=calendarTitle.get(lang, calendarTitle.get('_'))
+        calendarBody = translations['calendarBody']
+        calendarBody=calendarBody.get(lang, calendarBody.get('_'))
+        try:
+            write_ical(calendarTitle, calendarBody, path)
+        except Exception as e:
+            print('Failed to write ical %s' % e)
 
 if __name__=='__main__':
     f_in = Path('scripts/script.yaml')
@@ -183,7 +244,10 @@ if __name__=='__main__':
             for k, v in assign_translations(script, [], translations=rx_translations, fields=('show', 'say', 'placeholder')):
                 assert tx_translations.get(k, v) == v, 'Duplicate key %s (v=%r, tx[k]==%r)' % (k, v, tx_translations[k])
                 tx_translations[k] = v
+                print(k, v)
         push_translations(f_in, tx_translations)
+
+        create_assets(scripts[-1])
 
     scripts = dict(s=scripts)
     f_out = Path('src/app/script.ts')
