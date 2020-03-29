@@ -13,12 +13,13 @@ script:
 - ng lint
 - ". extract_i18n.sh"
 - tx push --source
-- tx pull --mode sourceastranslation -l ar,en,am,ru,es
+- tx pull --mode sourceastranslation -l ar,en,am,ru,es,fr
 - ng build --prod -c production
 - ng build --prod -c ar
 - ng build --prod -c en
 - ng build --prod -c ru
 - ng build --prod -c es
+- ng build --prod -c fr
 - python tools/yaml_to_json.py
 # - ng build --prod -c am
 deploy:

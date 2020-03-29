@@ -13,12 +13,20 @@
       <div class='url'>https://coronaisrael.org</div>
       <div class='ic' (click)='share()'><img src='assets/img/copy-icon.svg'></div>
     </div>
-    <div class='copied-text' i18n [class.copied]='copied'>הועתק ללוח</div>
+    <div class='copied-text' i18n [class.active]='copied'>הועתק ללוח</div>
 
     <ng-container>
-      <div class='cta calendar'>
-        <a class='button' href='assets/corona_reminder.ics' target='_blank' i18n><img src='assets/img/calendar.svg'>הוספת תזכורת יומית ביומן</a>
+      <div class='cta calendar' [class.added]='calendar_added'>
+        <a class='button' href='assets/corona_reminder.ics'
+          (click)='calendar_added=true' target='_blank'>
+          <ng-container *ngIf='!calendar_added'>
+            <img src='assets/img/calendar.svg'>
+            <span i18n>הוספת תזכורת יומית ביומן</span>
+          </ng-container>
+          <span i18n *ngIf='calendar_added'>מעולה, נתראה מחר!</span>
+        </a>
       </div>
+      <div class='added-text' i18n [class.active]='calendar_added' i18n>אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״</div>
     </ng-container>
 
   </div>
@@ -27,12 +35,12 @@
     <div class='share-text' i18n>ילדים? מבוגרים?</div>
 
     <div class='cta'>
-      <span class='button' (click)='restart.emit()' i18n>מלאו עבורם שאלון נוסף</span>
+      <span class='button' (click)='restart.emit()'><span i18n>מלאו עבורם שאלון נוסף</span></span>
     </div>
     
     <ng-container *ngIf='notifications.showNotificationBox'>
       <div class='cta'>
-        <span class='button' (click)='notifications.addNotification()' i18n>הזכירו לי למלא את השאלון מחר</span>
+        <span class='button' (click)='notifications.addNotification()'><span i18n>הזכירו לי למלא את השאלון מחר</span></span>
       </div>
     </ng-container>
 

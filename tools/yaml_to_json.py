@@ -60,7 +60,7 @@ def assign_ids(x, stack=[]):
         return
 
 TRANSIFEX_TOKEN = os.environ.get('TRANSIFEX_TOKEN') or  os.environ.get('TX_TOKEN')
-LANGUAGES = ('ar', 'am', 'en', 'ru', 'es')
+LANGUAGES = ('ar', 'am', 'en', 'ru', 'es', 'fr')
 
 def assign_translations(x, stack, parent=None, parentkey=None, translations=None, fields=(), field_in_key=False):
     if isinstance(x, dict):

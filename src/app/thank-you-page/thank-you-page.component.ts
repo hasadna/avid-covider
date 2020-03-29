@@ -18,6 +18,7 @@ export class ThankYouPageComponent implements OnInit {
   clipboardCopySupported = false;
   calendarSupported = false;
   copied = false;
+  calendar_added = false;
 
   constructor(public notifications: NotificationService) {
     try {

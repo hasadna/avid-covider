@@ -64,7 +64,7 @@
         }
     }
 
-    .copied-text {
+    .copied-text, .added-text {
         opacity: 0;
         font-size: 16px;
         font-weight: 300;
@@ -74,10 +74,39 @@
         color: #2c3c3b;
         align-self: flex-start;
 
-        &.copied {
+        &.active {
             opacity: 0.5;
         }
     }
+
+    .added-text {
+        text-align: center;;
+        position: relative;
+        top: -2px;
+        &.active {
+            opacity: 0.8;
+        }
+    }
+
+    .cta {
+        &.calendar {
+            .button {
+                border-color: #480a35;
+                color: #480a35;
+                background-color: rgba(72, 10, 53, 0.1);
+            }
+
+            &.added {
+                .button {
+                    border-color: #00807c;
+                    color: #2c3c3b;
+                    background-color: #6ededa;
+                    pointer-events: none;
+                }
+            }
+        } 
+    }
+
 }
 
 .footer {
