@@ -38,7 +38,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
     this.runner.timeout = 250;
-    this.runner.debug = true;
+    this.runner.debug = false;
   }
 
   prepareToSave(record) {
