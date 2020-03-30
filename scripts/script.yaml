@@ -80,7 +80,7 @@
                     - say: בת כמה?
               - wait:
                   variable: age
-                  placeholder: "גיל"
+                  placeholder: "גיל, 0-120"
                   input-kind: number
                   input-min: 0
                   input-max: 120
@@ -105,7 +105,7 @@
               - say: שם הרחוב?
               - wait:
                   variable: street
-                  placeholder: שם הרחוב
+                  placeholder: שם הרחוב, אם ידוע
                   required: false
             - default: true                   # <---- for returning reporters, pass
 
@@ -296,7 +296,7 @@
                                           - say: מצויין. מה המספר?
                                           - wait:
                                               variable: insulation_patient_number
-                                              placeholder: "מספר החולה שפגשתי"
+                                              placeholder: "מספר החולה שפגשתי, בספרות"
                                           - say: האם זכור לך היום שבו נפגשתם?
                                           - wait:
                                               options:
@@ -554,7 +554,7 @@
         - say: כמה מהם מתחת לגיל 18?
         - wait:
             variable: met_under_18
-            placeholder: מספר האנשים
+            placeholder: מספר האנשים, 0-99
             validation: "[0-9]+"
             input-kind: number
             input-min: 0
@@ -563,7 +563,7 @@
         - say: וכמה מעל גיל 18?
         - wait:
             variable: met_above_18
-            placeholder: מספר האנשים
+            placeholder: מספר האנשים, 0-99
             validation: "[0-9]+"
             input-kind: number
             input-min: 0
