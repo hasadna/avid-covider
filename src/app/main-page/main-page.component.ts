@@ -8,7 +8,7 @@ import { SourceService } from '../source.service';
 })
 export class MainPageComponent implements OnInit {
   ftab = 'intro';
-  _tab = 'intro';
+  _tab = 'thankyou';
 
   constructor(private source: SourceService) { }
 

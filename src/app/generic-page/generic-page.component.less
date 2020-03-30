@@ -17,9 +17,13 @@
         overflow-y: scroll;
         overflow-x: visible;
         padding: 0 16px;
-        scrollbar-width: none;
         width: 100%;
-
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    
         ::ng-deep & > * {
             padding-bottom: 120px;
         }
