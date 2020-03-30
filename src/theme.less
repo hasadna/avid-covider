@@ -241,35 +241,48 @@ htl-hatool {
                     border-top-right-radius: 8px;
                     border-bottom-right-radius: 8px;
                     border: solid 1px #89a9a8;
-                    border-left: none;
                     background-color: #f6f6f6;
 
                     font-size: 16px;
                     padding: 7px 12px;
+
+                    border-left: none;
+                }
+
+                button {
+
+                    border: none;
+                    width: 46px;
+                    height: auto;
+                    min-height: 100%;
+                    margin-right: 0;
+                    border-top-left-radius: 8px;
+                    border-bottom-left-radius: 8px;
+    
+                    background-color: #00807c;
+                    background-image: url('assets/img/send.svg');
+                    background-position: center center;
+                    background-size: 20px;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+
+                &.invalid {
+                    input {
+                        border: solid 1px #959d9d;
+                        background-color: #f6f6f6;    
+                        border-left: none;
+                    }
+
+                    button {
+                        border: solid 1px #959d9d;
+                        background-color: #f6f6f6;
+                        background-image: url('assets/img/send-disabled.svg');
+                        border-right: none;
+                    }
                 }
             }
 
-            button {
-
-                border: none;
-                width: 46px;
-                height: auto;
-                min-height: 100%;
-                margin-right: 0;
-                border-top-left-radius: 8px;
-                border-bottom-left-radius: 8px;
-
-                background-color: #00807c;
-                background-image: url('assets/img/send.svg');
-                background-position: center center;
-                background-size: 20px;
-                background-repeat: no-repeat;
-                cursor: pointer;
-
-                &:disabled {
-                    background-image: url('assets/img/send-disabled.svg');
-                }
-            }
 
             .textarea {
                 border-radius: 5px;
@@ -317,11 +330,22 @@ htl-hatool {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
                         border-left: solid 1px #89a9a8;
-                        border-right: none;
+                        &:disabled {
+                            border: solid 1px #959d9d;
+                            background-color: #f6f6f6;    
+                        }
+                        border-right: none;    
                     }
-                }
-                button {
-                    transform: scaleX(-1);
+                    button {
+                        transform: scaleX(-1);
+                    }
+
+                    &.invalid {
+                        input {
+                            border: solid 1px #959d9d;
+                            border-right: none;    
+                        }
+                    }
                 }
             }
         }
