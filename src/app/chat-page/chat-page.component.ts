@@ -228,7 +228,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         payload['engagementSource'] = this.source.getSource();
         this.storage.addReport(payload);
         if (window.location.hostname === 'coronaisrael.org') {
-          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider', payload);
+          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
         } else {
           return of({success: true});
         }
