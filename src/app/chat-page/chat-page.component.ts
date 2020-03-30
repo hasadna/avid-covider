@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { VERSION } from '../constants';
 import { script } from '../script';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
@@ -17,7 +17,7 @@ import { SourceService } from '../source.service';
 export class ChatPageComponent implements OnInit, AfterViewInit {
 
   started = false;
-  created = false;
+  subscription: Subscription = null;
   content: ContentManager;
   runner: ScriptRunnerImpl;
 
@@ -25,6 +25,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
   @ViewChild('notUploadedFileText') notUploadedFileText: ElementRef;
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
+  @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
   @Output() done = new EventEmitter<void>();
 
@@ -39,6 +40,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
     this.runner.timeout = 250;
     this.runner.debug = false;
+    this.runner.fixme = () => {
+      this.restart();
+    };
   }
 
   prepareToSave(record) {
@@ -53,10 +57,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.content.sendButtonText = '';
     this.content.uploadFileText = this.uploadFileText.nativeElement.innerHTML;
     this.content.uploadedFileText = this.uploadedFileText.nativeElement.innerHTML;
     this.content.notUploadedFileText = this.notUploadedFileText.nativeElement.innerHTML;
     this.content.inputPlaceholder = this.inputPlaceholder.nativeElement.innerHTML;
+    this.content.fixmeMessage = this.fixmeMessage.nativeElement.innerHTML;
 
     setTimeout(() => {
       this.start();
@@ -66,14 +72,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.init();
-    this.content.sendButtonText = '';
   }
 
   restart() {
-    this.ngOnInit();
+    const state = this.runner.state;
+    this.subscription.unsubscribe();
+    this.started = false;
+    this.init();
+    this.runner.state = state;
     this.ngAfterViewInit();
-    this.runner.state = {};
-    this.start();
   }
 
   get(obj: any, field) {
@@ -115,8 +122,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       return;
     }
     this.started = true;
-    this.created = false;
-    this.runner.run(
+    this.subscription = this.runner.run(
       script,
       0,
       {
