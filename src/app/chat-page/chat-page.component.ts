@@ -98,7 +98,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     return message.replace(
         RegExp('({{([a-zA-Z_.0-9]+)}})', 'g'),
         (match, p1, p2) => {
-            return this.get(record, p2) || p2;
+            return this.get(record, p2) || '';
         }
     );
 }

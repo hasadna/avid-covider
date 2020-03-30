@@ -106,6 +106,7 @@
               - wait:
                   variable: street
                   placeholder: שם הרחוב
+                  required: false
             - default: true                   # <---- for returning reporters, pass
 
         - switch:
