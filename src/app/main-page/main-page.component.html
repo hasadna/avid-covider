@@ -1,13 +1,13 @@
 <div class='container' appLtr>
   <div class='pane first'>
-    <app-intro-page class='desktop' *ngIf='ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"' [autostart]='true'></app-intro-page>
-    <app-info-page class='desktop' *ngIf='ftab=="info"' (start)='tab="chat"; ftab="intro"'></app-info-page>
-    <app-thank-you-page class='desktop' *ngIf='tab==="thankyou"' (restart)='tab="chat"; ftab="intro"'></app-thank-you-page>
+    <app-intro-page *ngIf='desktop && ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"' [autostart]='true'></app-intro-page>
+    <app-info-page *ngIf='desktop && ftab=="info"' (start)='tab="chat"; ftab="intro"'></app-info-page>
+    <app-thank-you-page *ngIf='desktop && tab==="thankyou"' (restart)='tab="chat"; ftab="intro"'></app-thank-you-page>
   </div>
   <div class='pane second'>
-    <app-intro-page class='mobile' *ngIf='tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
-    <app-info-page class='mobile' *ngIf='tab==="info"' (start)='tab="chat"'></app-info-page>
+    <app-intro-page *ngIf='mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
+    <app-info-page *ngIf='mobile && tab==="info"' (start)='tab="chat"'></app-info-page>
     <app-chat-page *ngIf='tab==="chat"' (done)='tab="thankyou"; ftab="thankyou"'></app-chat-page>
-    <app-thank-you-page class='mobile' *ngIf='tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
+    <app-thank-you-page *ngIf='mobile && tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
   </div>
 </div>
