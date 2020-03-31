@@ -16,7 +16,6 @@ htl-hatool {
                 padding: 0 20px;
                 padding-bottom: 35px;
                 background-color: #f6f6f6;
-                scroll-behavior: smooth;
 
                 color: black;
         
@@ -85,8 +84,6 @@ htl-hatool {
                     }
 
                     animation: button-appearance 0.25s ease-in-out both;
-                    // transition-duration: 0.5s;
-                    // transition-timing-function: ease;
                 }
 
                 htl-message-options {
@@ -327,7 +324,6 @@ htl-hatool {
         htl-chatbox {
             htl-messages {
                 .container {
-                    scroll-behavior: smooth;
                     text-align: right;
                     htl-message-from {
                         .speech-bubble {
@@ -381,23 +377,19 @@ htl-hatool {
 }
 
 @keyframes button-appearance {
-    // 0%   { height: 0; overflow: hidden; opacity: 0; }
-    // 1%   { height: auto; display: inherit }
-    // 100% { opacity: 1; }
     0% {
         transform: translateY(10px);
-        // transform-origin: 50% 100%;
-        // filter: blur(10px);
         opacity: 0;
         height: 0;
         overflow: hidden;
       }
+    1% {
+        height: auto;
+        display: inherit;
+    }
     100% {
         transform: translateY(0);
-        // transform-origin: 50% 50%;
-        filter: blur(0);
         opacity: 1;
-        height: auto;
         overflow: auto;
       }
     }
