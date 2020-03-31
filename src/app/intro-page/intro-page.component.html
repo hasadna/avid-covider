@@ -54,7 +54,7 @@
     </div>
   </div>
   <div class='footer'>
-    <div class='cta'>
+    <div class='cta' *ngIf='!autostart'>
       <span class='button' (click)='chat.emit()'><span i18n>בהחלט, בואו נתחיל</span></span>
     </div>
   </div>
