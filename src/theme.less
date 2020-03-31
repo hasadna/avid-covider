@@ -24,7 +24,7 @@ htl-hatool {
 
                 .speech-bubble {
                     position: relative;
-                    margin: 2px 0;
+                    margin: 0;
                 }
 
                 .fixme {
@@ -64,8 +64,12 @@ htl-hatool {
                 }
                
                 htl-message-to {
+                    padding: 0 2px 4px;
+                    overflow: visible;
+
                     p {
                         padding: 11px 16px;
+                        font-size: 18px;
                     }
 
                     .message-to-wrapper {
@@ -79,6 +83,10 @@ htl-hatool {
                             color: #2c3c3b;
                         }
                     }
+
+                    animation: button-appearance 0.75s cubic-bezier(0.190, 1.000, 0.220, 1.000) both;
+                    // transition-duration: 0.5s;
+                    // transition-timing-function: ease;
                 }
 
                 htl-message-options {
@@ -99,16 +107,16 @@ htl-hatool {
                             border: solid 1px #6ededa;
                             margin: 2px 0px;
                             min-width: 30%;
-                            color: #1a7f4e;
+                            color: #00807C;
                             background-color: #f6f6f6;
                             width: 100%;
-                            animation: button-appearance linear 250ms 1 normal both;
+                            animation: button-appearance 0.75s cubic-bezier(0.190, 1.000, 0.220, 1.000) both;
 
                             .button-delays(20);
 
                             .button-delays(@n, @i: 1) when (@i =< @n) {
                                 &:nth-child(@{i}) {
-                                    animation-delay: ((@i - 1) * 250ms);
+                                    animation-delay: ((@i - 1) * 100ms);
                                 }
                                 .button-delays(@n, (@i + 1));
                             }
@@ -135,10 +143,17 @@ htl-hatool {
                                 background-color: #2c3c3b;
                                 color: #fff;
                                 width: auto;
+                                text-align: right;
                             }
 
                             &.not-selected {
                                 display: none;
+                            }
+
+                            &:active {
+                                background-color: #2c3c3b;
+                                color: #fff;
+                                border-color: #2c3c3b;
                             }
 
                             /* &:tap ?? */
@@ -170,7 +185,7 @@ htl-hatool {
                         padding: 18px;
                         margin-top: 5px;
                         margin-bottom: 5px;
-                        color: #1a7f4e;
+                        color: #00807C;
                         cursor: pointer;
                         position: relative;
 
@@ -227,6 +242,7 @@ htl-hatool {
                     .typing__bullet {
                         background-color: #6ddea1 !important;
                     }
+                    display: none;
                 }
             }
         }
@@ -242,12 +258,17 @@ htl-hatool {
                     border-top-right-radius: 8px;
                     border-bottom-right-radius: 8px;
                     border: solid 1px #89a9a8;
-                    background-color: #f6f6f6;
+                    background-color: #fff;
 
                     font-size: 16px;
                     padding: 7px 12px;
 
                     border-left: none;
+
+                    &:focus {
+                        outline: none;
+                        background: #fff;
+                    }
                 }
 
                 button {
@@ -306,6 +327,7 @@ htl-hatool {
         htl-chatbox {
             htl-messages {
                 .container {
+                    scroll-behavior: smooth;
                     text-align: right;
                     htl-message-from {
                         .speech-bubble {
@@ -321,6 +343,11 @@ htl-hatool {
                             }
                         }
                     }
+                }
+            }
+            htl-message-options {
+                button.active.selected {
+                    text-align: left;
                 }
             }
             htl-input {
@@ -354,7 +381,23 @@ htl-hatool {
 }
 
 @keyframes button-appearance {
-    0%   { height: 0; overflow: hidden; ; opacity: 0; }
-    1%   { height: auto; display: inherit }
-    100% { opacity: 1; }
-}
+    // 0%   { height: 0; overflow: hidden; opacity: 0; }
+    // 1%   { height: auto; display: inherit }
+    // 100% { opacity: 1; }
+    0% {
+        transform: translateY(20px);
+        // transform-origin: 50% 100%;
+        // filter: blur(10px);
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+    100% {
+        transform: translateY(0);
+        // transform-origin: 50% 50%;
+        filter: blur(0);
+        opacity: 1;
+        height: auto;
+        overflow: auto;
+      }
+    }
