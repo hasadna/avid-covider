@@ -25,6 +25,7 @@
     "file-saver": "^2.0.2",
     "hatool": "^0.3.45",
     "rxjs": "~6.3.3",
+    "smoothscroll-polyfill": "^0.4.4",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
