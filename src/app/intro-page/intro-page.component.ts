@@ -35,7 +35,9 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       this.notifications.addNotification();
     }
     if (this.autostart) {
-      this.chat.emit();
+      window.setTimeout(() => {
+        this.chat.emit();
+      }, 0);
     }
   }
 }
