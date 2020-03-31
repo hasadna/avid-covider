@@ -1,6 +1,6 @@
 <div class='container' appLtr>
   <div class='pane first'>
-    <app-intro-page class='desktop' *ngIf='ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"'></app-intro-page>
+    <app-intro-page class='desktop' *ngIf='ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"' [autostart]='true'></app-intro-page>
     <app-info-page class='desktop' *ngIf='ftab=="info"' (start)='tab="chat"; ftab="intro"'></app-info-page>
     <app-thank-you-page class='desktop' *ngIf='tab==="thankyou"' (restart)='tab="chat"; ftab="intro"'></app-thank-you-page>
   </div>

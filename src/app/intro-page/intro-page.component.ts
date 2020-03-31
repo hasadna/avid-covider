@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NotificationService } from '../notification.service';
 import { VERSION } from '../constants';
 
@@ -9,6 +9,7 @@ import { VERSION } from '../constants';
 })
 export class IntroPageComponent implements OnInit, AfterViewInit {
 
+  @Input() autostart = false;
   @Output() info = new EventEmitter<void>();
   @Output() chat = new EventEmitter<void>();
 
@@ -32,6 +33,9 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
     );
     if (this.notifications.canAddNotification) {
       this.notifications.addNotification();
+    }
+    if (this.autostart) {
+      this.chat.emit();
     }
   }
 }
