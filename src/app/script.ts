@@ -313,6 +313,53 @@ export const script = {
                 ]
               },
               "uid": "65a50a6980"
+            },
+            {
+              "do": {
+                "cmd": "isAdult",
+                "params": [
+                  "record"
+                ],
+                "variable": "_isAdult"
+              },
+              "uid": "92dd5295a0"
+            },
+            {
+              "switch": {
+                "arg": "_isAdult",
+                "cases": [
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "say": "האם העבודה שלך כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
+                        "uid": "a9bf93fbe3"
+                      },
+                      {
+                        "uid": "6843cfd54b",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן",
+                              "value": "true"
+                            },
+                            {
+                              "show": "לא",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": "medical_staff_member"
+                        }
+                      }
+                    ],
+                    "uid": "d25325b47f"
+                  },
+                  {
+                    "default": true
+                  }
+                ]
+              },
+              "uid": "09d1a47992"
             }
           ],
           "uid": "ab5b28894d"
