@@ -186,6 +186,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           Object.assign(record, record[varname]);
           delete record[varname];
         },
+        isAdult: (record: any) => {
+          let age = parseInt(record.age)
+          console.log(`age: ${age}`)
+          if (age >=18) {
+            return true
+          }
+          else {
+            return false
+          }
+        },
         clear_fields: (record: any, ...fields: string[]) => {
           for (const re of fields) {
             const regexp = new RegExp('^' + re + '$');
