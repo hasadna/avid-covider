@@ -332,8 +332,8 @@ export const script = {
                     "match": true,
                     "steps": [
                       {
-                        "say": "האם העבודה שלך כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                        "uid": "a9bf93fbe3"
+                        "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
+                        "uid": "2e3e52fcb9"
                       },
                       {
                         "uid": "6843cfd54b",
@@ -1339,14 +1339,14 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו",
+                    "show": "אף אחד מאלה",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
-                        "uid": "531dfedf08"
+                        "uid": "316bff0029"
                       }
                     ],
-                    "uid": "75c9bb8e35"
+                    "uid": "a6c5a6a966"
                   }
                 ],
                 "variable": "_var"
@@ -1388,14 +1388,14 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו",
+                    "show": "אף אחד מאלה",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
-                        "uid": "e77490142c"
+                        "uid": "9102f1a39d"
                       }
                     ],
-                    "uid": "aab6481f0a"
+                    "uid": "fe8b9151b5"
                   }
                 ],
                 "variable": "_var"
