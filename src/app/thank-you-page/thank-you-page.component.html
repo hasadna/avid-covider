@@ -15,6 +15,12 @@
     </div>
     <div class='copied-text' i18n [class.active]='copied'>הועתק ללוח</div>
 
+    <ng-container *ngIf='notifications.showNotificationBox'>
+      <div class='cta calendar'>
+        <span class='button' (click)='notifications.addNotification()'><span i18n>הזכירו לי למלא את השאלון מחר</span></span>
+      </div>
+    </ng-container>
+
     <ng-container>
       <div class='cta calendar' [class.added]='calendar_added'>
         <a class='button' href='assets/corona_reminder.ics'
@@ -38,11 +44,5 @@
       <span class='button' (click)='restart.emit()'><span i18n>מלאו עבורם שאלון נוסף</span></span>
     </div>
     
-    <ng-container *ngIf='notifications.showNotificationBox'>
-      <div class='cta'>
-        <span class='button' (click)='notifications.addNotification()'><span i18n>הזכירו לי למלא את השאלון מחר</span></span>
-      </div>
-    </ng-container>
-
   </div>
 </app-generic-page>
