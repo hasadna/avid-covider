@@ -883,6 +883,20 @@ export const script = {
                 ]
               },
               "uid": "7a791ac067"
+            },
+            {
+              "say": "בדיקת פונקציית בידוד",
+              "uid": "f86e27e5c2"
+            },
+            {
+              "do": {
+                "cmd": "inInclusion",
+                "params": [
+                  "record"
+                ],
+                "variable": "_inclusion"
+              },
+              "uid": "50e6f43292"
             }
           ],
           "uid": "ebd966ac43"
