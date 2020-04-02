@@ -231,7 +231,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       },
       (key, value, record) => {}
     ).pipe(
-      switchMap(() => {
+      map(() => {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
@@ -246,9 +246,31 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         payload['notificationsEnabled'] = this.notifications.canAddNotification;
         payload['engagementSource'] = this.source.getSource();
         this.storage.addReport(payload);
+        return payload;
+      }),
+      switchMap((payload) => {
+        return new Promise((resolve, reject) => {
+          try {
+            window['grecaptcha'].execute(window['RECAPTCHA_SITE_KEY'], {action: 'submit'})
+            .then(
+              (token) => {
+                payload['recaptcha'] = token;
+                resolve(payload);
+              },
+              () => {
+                resolve(payload);
+              }
+            );
+          } catch (e) {
+            resolve(payload);
+          }
+        });
+      }),
+      switchMap((payload) => {
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
         } else {
+          console.log('WOULD SEND', payload);
           return of({success: true});
         }
       }),
