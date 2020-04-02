@@ -187,13 +187,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           delete record[varname];
         },
         isAdult: (record: any) => {
-          let age = parseInt(record.age)
-          if (age >=18) {
-            return true
-          }
-          else {
-            return false
-          }
+          try {
+            let age = parseInt(record.age)
+            return age >=18;
+            }
+          catch(err) {
+            console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
+            }
         },
         inInclusion: (record: any) => {
           let age = parseInt(record.age)
