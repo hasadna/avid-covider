@@ -121,10 +121,23 @@ htl-hatool {
                             &.other {
                                 background-color: #d9f2f1
                             }
-                            &.disabled {
+                            &.disabled, &.unless {
                                 color: #888;
                                 border-color: #888;
                                 pointer-events: none;
+                                display: flex;
+                                flex-flow: row;
+                                align-items: center;
+                                justify-content: center;
+
+                                &::before {
+                                    content: '';
+                                    background-image: url(assets/img/gray-check.svg);
+                                    display: inline-block;
+                                    width: 18px;
+                                    height: 18px;
+                                    margin: 0 6px;
+                                }
                             }
     
                             &.selected {

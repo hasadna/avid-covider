@@ -36,9 +36,10 @@
   <script>
   RECAPTCHA_SITE_KEY = '6LeTE-YUAAAAAKDzyaJu479k_wBIfKRro-Qbirh3';
   grecaptcha.ready(function() {
-      grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'load'}).then(function(token) {
-        console.log(token);
-      });
+    grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'load'}).then(function(token) {
+    }, function(error) {
+      console.log('recaptcha not loaded', error);
+    });
   });
   </script>
 </head>
