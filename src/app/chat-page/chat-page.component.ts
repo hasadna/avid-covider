@@ -8,6 +8,7 @@ import { of, Subscription } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
+import { citySuggestions } from '../city-suggestions';
 
 @Component({
   selector: 'app-chat-page',
@@ -208,7 +209,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             return this.fillIn(record, female_alias);
           }
         },
-
+        prepare_city_town_suggestions: () => {
+          return citySuggestions[this.locale] || citySuggestions['en'];
+        }
       },
       (key, value, record) => {}
     ).pipe(

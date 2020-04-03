@@ -91,10 +91,14 @@
             cases:
             - undefined: true                    # <---- for new reporters, ask for city
               steps:   
+              - do:
+                  cmd: prepare_city_town_suggestions
+                  variable: _cityTownSuggestions
               - say: מה הוא מקום המגורים?
               - wait:
                   variable: city_town
                   placeholder: "שם העיר או הישוב"
+                  suggestionsFrom: _cityTownSuggestions
             - default: true                     # <---- for returning reporters, pass
 
         - switch:

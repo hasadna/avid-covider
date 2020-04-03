@@ -231,13 +231,21 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": "מה הוא מקום המגורים?",
-                        "uid": "25eb69e559"
+                        "do": {
+                          "cmd": "prepare_city_town_suggestions",
+                          "variable": "_cityTownSuggestions"
+                        },
+                        "uid": "b9d21cf202"
                       },
                       {
-                        "uid": "9b02b5bdde",
+                        "say": "מה הוא מקום המגורים?",
+                        "uid": "4c0abfecc9"
+                      },
+                      {
+                        "uid": "174bb25fa7",
                         "wait": {
                           "placeholder": "שם העיר או הישוב",
+                          "suggestionsFrom": "_cityTownSuggestions",
                           "variable": "city_town"
                         }
                       }
