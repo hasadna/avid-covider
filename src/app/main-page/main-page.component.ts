@@ -11,6 +11,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   _tab = 'intro';
   mobile = false;
   desktop = false;
+  layout = null;
 
   constructor(private source: SourceService, private el: ElementRef) { }
 
@@ -27,6 +28,7 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     const e: HTMLElement = this.el.nativeElement;
     this.mobile = e.offsetWidth < 600;
     this.desktop = e.offsetWidth >= 600;
+    this.layout = this.mobile ? 'mobile' : 'desktop';
   }
 
   @HostListener('window:resize', ['$event'])

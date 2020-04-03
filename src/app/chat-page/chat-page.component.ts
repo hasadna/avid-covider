@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output, Input } from '@angular/core';
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -28,6 +28,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
   @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
+  @Input() layout: string = null;;
   @Output() done = new EventEmitter<void>();
 
   constructor(private http: HttpClient,
@@ -219,6 +220,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         const payload = this.prepareToSave(this.runner.record);
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
+        payload['layout'] = this.layout;
         try {
           payload['numPreviousReports'] = this.storage.reports.length;
           if (this.storage.reports.length > 0) {

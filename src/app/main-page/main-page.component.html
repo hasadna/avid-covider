@@ -7,7 +7,7 @@
   <div class='pane second'>
     <app-intro-page *ngIf='mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
     <app-info-page *ngIf='mobile && tab==="info"' (start)='tab="chat"'></app-info-page>
-    <app-chat-page *ngIf='tab==="chat"' (done)='tab="thankyou"; ftab="thankyou"'></app-chat-page>
+    <app-chat-page *ngIf='tab==="chat"' [layout]='layout' (done)='tab="thankyou"; ftab="thankyou"'></app-chat-page>
     <app-thank-you-page *ngIf='mobile && tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
   </div>
 </div>
