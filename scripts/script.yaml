@@ -148,9 +148,9 @@
                         - wait:
                             variable: medical_staff_member
                             options:
-                            - show: כן
+                            - show: כן, אני חלק מצוות רפואה
                               value: "true" 
-                            - show: לא
+                            - show: לא, איני חלק מצוות רפואי
                               value: "false"
                     - default: true            # <---- for returning users past info about the kind work, pass
 
@@ -264,8 +264,8 @@
                           - say: "בדיווח הקודם לא הוזכר בידוד או אשפוז. האם משהו השתנה?"
                   - wait:
                       options:
-                        - show: לא
-                        - show: כן
+                        - show: לא, המצב דומה
+                        - show: כן, השתנו דברים
                           steps:
                             - say: אז מה השתנה?
                             - do:
@@ -319,7 +319,7 @@
                                   - say: ידוע לך מה מספר החולה שפגשת?
                                   - wait:
                                       options:
-                                      - show: "כן"
+                                      - show: "כן, ידוע לי מספר החולה"
                                         value: "yes"
                                         steps:
                                           - say: מצויין. מה המספר?
@@ -329,7 +329,7 @@
                                           - say: האם זכור לך היום שבו נפגשתם?
                                           - wait:
                                               options:
-                                              - show: "כן"
+                                              - show: "כן, זכור לי התאריך"
                                                 value: "yes"
                                                 steps: 
                                                 - say: מה היה התאריך?
@@ -339,7 +339,7 @@
                                                     input-kind: date
                                               - show: "לא זכור לי"
                                                 value: "no"
-                                      - show: "לא"
+                                      - show: "לא ידוע לי"
                                         value: "no"
                               - show: אני בבידוד כי חוויתי תסמינים
                                 value: has_symptoms
@@ -428,7 +428,7 @@
         - say: האם נמדד חום ביממה האחרונה?
         - wait:
             options:
-            - show: "כן"
+            - show: "כן, מדדתי חום"
               value: "yes"
               steps:
               - say: "ומה המדחום אומר?"
@@ -439,7 +439,7 @@
                   input-min: 35
                   input-max: 43
                   input-step: 0.1
-            - show: "לא"
+            - show: "לא מדדתי חום"
               value: "no"
     
     - name: current-report-symptoms-loop
