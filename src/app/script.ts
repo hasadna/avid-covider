@@ -321,6 +321,53 @@ export const script = {
                 ]
               },
               "uid": "65a50a6980"
+            },
+            {
+              "do": {
+                "cmd": "isAdult",
+                "params": [
+                  "record"
+                ],
+                "variable": "_isAdult"
+              },
+              "uid": "92dd5295a0"
+            },
+            {
+              "switch": {
+                "arg": "_isAdult",
+                "cases": [
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
+                        "uid": "2e3e52fcb9"
+                      },
+                      {
+                        "uid": "6843cfd54b",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן",
+                              "value": "true"
+                            },
+                            {
+                              "show": "לא",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": "medical_staff_member"
+                        }
+                      }
+                    ],
+                    "uid": "d25325b47f"
+                  },
+                  {
+                    "default": true
+                  }
+                ]
+              },
+              "uid": "09d1a47992"
             }
           ],
           "uid": "ab5b28894d"
@@ -844,6 +891,20 @@ export const script = {
                 ]
               },
               "uid": "7a791ac067"
+            },
+            {
+              "say": "בדיקת פונקציית בידוד",
+              "uid": "f86e27e5c2"
+            },
+            {
+              "do": {
+                "cmd": "inInclusion",
+                "params": [
+                  "record"
+                ],
+                "variable": "_inclusion"
+              },
+              "uid": "50e6f43292"
             }
           ],
           "uid": "ebd966ac43"
@@ -1300,14 +1361,14 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו",
+                    "show": "אף אחד מאלה",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
-                        "uid": "531dfedf08"
+                        "uid": "316bff0029"
                       }
                     ],
-                    "uid": "75c9bb8e35"
+                    "uid": "a6c5a6a966"
                   }
                 ],
                 "variable": "_var"
@@ -1349,14 +1410,14 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו",
+                    "show": "אף אחד מאלה",
                     "steps": [
                       {
                         "pop": "current-report-top-level-symptoms",
-                        "uid": "e77490142c"
+                        "uid": "9102f1a39d"
                       }
                     ],
-                    "uid": "aab6481f0a"
+                    "uid": "fe8b9151b5"
                   }
                 ],
                 "variable": "_var"

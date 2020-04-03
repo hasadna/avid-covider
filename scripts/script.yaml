@@ -128,6 +128,27 @@
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
         
+        - do:
+            cmd: isAdult
+            params: 
+              - record
+            variable: _isAdult
+            
+        - switch:
+            arg: _isAdult 
+            cases:
+              - match: true 
+                steps:
+                  - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
+                  - wait:
+                      variable: medical_staff_member
+                      options:
+                        - show: כן
+                          value: "true" 
+                        - show: לא
+                          value: "false"
+              - default: true
+        
 
     - name: preconditions-check
       steps:
@@ -512,7 +533,7 @@
           - show: שיעול לח, או שיעול עם כיח
             value: symptoms_moist_cough
             unless: symptoms_moist_cough          
-          - show: זהו
+          - show: אף אחד מאלה
             class: other
             steps:
               - pop: current-report-top-level-symptoms
@@ -535,7 +556,7 @@
           - show: כאבי גרון
             value: symptoms_sore_throat
             unless: symptoms_sore_throat            
-          - show: זהו
+          - show: אף אחד מאלה
             class: other
             steps:
               - pop: current-report-top-level-symptoms
