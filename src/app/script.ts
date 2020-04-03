@@ -340,30 +340,44 @@ export const script = {
                     "match": true,
                     "steps": [
                       {
-                        "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                        "uid": "2e3e52fcb9"
-                      },
-                      {
-                        "uid": "6843cfd54b",
-                        "wait": {
-                          "options": [
+                        "switch": {
+                          "arg": "medical_staff_member",
+                          "cases": [
                             {
-                              "show": "כן",
-                              "value": "true"
+                              "steps": [
+                                {
+                                  "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
+                                  "uid": "9e47401a4a"
+                                },
+                                {
+                                  "uid": "0ee0343dc4",
+                                  "wait": {
+                                    "options": [
+                                      {
+                                        "show": "כן",
+                                        "value": "true"
+                                      },
+                                      {
+                                        "show": "לא",
+                                        "value": "false"
+                                      }
+                                    ],
+                                    "variable": "medical_staff_member"
+                                  }
+                                }
+                              ],
+                              "uid": "bcac3a1b7e",
+                              "undefined": true
                             },
                             {
-                              "show": "לא",
-                              "value": "false"
+                              "default": true
                             }
-                          ],
-                          "variable": "medical_staff_member"
-                        }
+                          ]
+                        },
+                        "uid": "bdf9c485b5"
                       }
                     ],
                     "uid": "d25325b47f"
-                  },
-                  {
-                    "default": true
                   }
                 ]
               },
@@ -891,20 +905,6 @@ export const script = {
                 ]
               },
               "uid": "7a791ac067"
-            },
-            {
-              "say": "בדיקת פונקציית בידוד",
-              "uid": "f86e27e5c2"
-            },
-            {
-              "do": {
-                "cmd": "inInclusion",
-                "params": [
-                  "record"
-                ],
-                "variable": "_inclusion"
-              },
-              "uid": "50e6f43292"
             }
           ],
           "uid": "ebd966ac43"
