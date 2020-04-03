@@ -190,25 +190,14 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         isAdult: (record: any) => {
           try {
-            let age = parseInt(record.age)
-            return age >=18;
-            }
-          catch(err) {
+            const age = parseInt(record.age, 10);
+            return age >= 18;
+          } catch (err) {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
-            }
+          }
         },
-        inInclusion: (record: any) => {
-          try {
-            if (record.exposure_status == 'insulation_with_family' || record.exposure_status == 'insulation') {
-              return true;
-              }
-            else {
-              return false;
-             }
-            }
-          catch(err) {
-            console.error(`exposure status check error: ${err}.\n Exposure status value: ${record.exposure_status}`);
-            }
+        inInsulation: (record: any) => {
+          return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
         },
         clear_fields: (record: any, ...fields: string[]) => {
           for (const re of fields) {
