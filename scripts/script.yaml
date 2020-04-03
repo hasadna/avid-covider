@@ -153,22 +153,6 @@
                             - show: לא
                               value: "false"
                     - default: true            # <---- for returning users past info about the kind work, pass
-                                
-        - switch:
-            arg: _isAdult 
-            cases:
-              - match: true 
-                steps:
-                  - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
-                  - wait:
-                      variable: medical_staff_member
-                      options:
-                        - show: כן
-                          value: "true" 
-                        - show: לא
-                          value: "false"
-              - default: true
-        
 
     - name: preconditions-check
       steps:

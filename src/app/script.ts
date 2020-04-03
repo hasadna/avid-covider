@@ -382,43 +382,6 @@ export const script = {
                 ]
               },
               "uid": "09d1a47992"
-            },
-            {
-              "switch": {
-                "arg": "_isAdult",
-                "cases": [
-                  {
-                    "match": true,
-                    "steps": [
-                      {
-                        "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                        "uid": "8a263f3167"
-                      },
-                      {
-                        "uid": "ab2b1dd68b",
-                        "wait": {
-                          "options": [
-                            {
-                              "show": "כן",
-                              "value": "true"
-                            },
-                            {
-                              "show": "לא",
-                              "value": "false"
-                            }
-                          ],
-                          "variable": "medical_staff_member"
-                        }
-                      }
-                    ],
-                    "uid": "b1e37efe24"
-                  },
-                  {
-                    "default": true
-                  }
-                ]
-              },
-              "uid": "efa80cb583"
             }
           ],
           "uid": "ab5b28894d"
