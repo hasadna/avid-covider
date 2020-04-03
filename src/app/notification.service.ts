@@ -54,7 +54,7 @@ export class NotificationService {
             data: notificationHref,
             body: body,
             requireInteraction: true,
-            badge: '/android-chrome-96x96.png',
+            badge: '/favicon-32x32.png',
             icon: '/android-chrome-96x96.png',
             showTrigger: new window['TimestampTrigger'](Date.now() + timeout * 1000)});
       }
