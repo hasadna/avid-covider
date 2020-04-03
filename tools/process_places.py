@@ -5,7 +5,7 @@ from pathlib import Path
 
 if __name__ == '__main__':
     # How to get places.csv from a nominatim server?
-    # # kubectl exec -it nominatim-5d6889fd59-lxps7 -- su nominatim -c "psql -c \"\\copy (select hstore_to_json(name) from place where type in ('village', 'neighbourhood', 'town', 'city', 'locality')) to stdout with csv\"" > places.csv
+    # # kubectl exec -it nominatim-5d6889fd59-lxps7 -- su nominatim -c "psql -c \"\\copy (select hstore_to_json(name) from place where type in ('village', 'town', 'city', 'locality')) to stdout with csv\"" > places.csv
     # How to get official list of towns?
     # # https://data.gov.il/dataset/citiesandsettelments
     s = tabulator.Stream('tools/places.csv')
