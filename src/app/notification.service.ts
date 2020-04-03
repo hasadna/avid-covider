@@ -54,8 +54,8 @@ export class NotificationService {
             data: notificationHref,
             body: body,
             requireInteraction: true,
-            badge: '/apple-touch-icon.png',
-            icon: '/apple-touch-icon.png',
+            badge: '/android-chrome-96x96.png',
+            icon: '/android-chrome-96x96.png',
             showTrigger: new window['TimestampTrigger'](Date.now() + timeout * 1000)});
       }
     } catch (e) {
