@@ -28,7 +28,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
   @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
-  @Input() layout: string = null;;
+  @Input() layout: string = null;
   @Output() done = new EventEmitter<void>();
 
   constructor(private http: HttpClient,
