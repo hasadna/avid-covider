@@ -148,9 +148,9 @@
                         - wait:
                             variable: medical_staff_member
                             options:
-                            - show: כן, אני חלק מצוות רפואה
+                            - show: כן, אני חלק מצוות רםואי
                               value: "true" 
-                            - show: לא, איני חלק מצוות רפואי
+                            - show: לא, אני לא
                               value: "false"
                     - default: true            # <---- for returning users past info about the kind work, pass
 
@@ -265,7 +265,7 @@
                   - wait:
                       options:
                         - show: לא, המצב דומה
-                        - show: כן, השתנו דברים
+                        - show: כן, משהו השתנה
                           steps:
                             - say: אז מה השתנה?
                             - do:
@@ -428,7 +428,7 @@
         - say: האם נמדד חום ביממה האחרונה?
         - wait:
             options:
-            - show: "כן, מדדתי חום"
+            - show: "כן, נמדד חום"
               value: "yes"
               steps:
               - say: "ומה המדחום אומר?"
@@ -439,7 +439,7 @@
                   input-min: 35
                   input-max: 43
                   input-step: 0.1
-            - show: "לא מדדתי חום"
+            - show: "לא נמדד חום"
               value: "no"
     
     - name: current-report-symptoms-loop
