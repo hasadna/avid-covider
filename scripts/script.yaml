@@ -148,7 +148,7 @@
                         - wait:
                             variable: medical_staff_member
                             options:
-                            - show: כן, אני חלק מצוות רםואי
+                            - show: כן, אני חלק מצוות רפואי
                               value: "true" 
                             - show: לא, אני לא
                               value: "false"
