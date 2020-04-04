@@ -8,6 +8,8 @@ import yaml
 import json
 import requests
 
+PROJECT = 'avid-covider'
+
 def calc_hash(s):
     ret = md5(s.encode('utf8')).hexdigest()[:10]
     return ret
@@ -122,7 +124,7 @@ def push_translations(filename: Path, translations):
 
     slug = transifex_slug(filename)
     s = transifex_session()
-    resp = s.get(f'https://www.transifex.com/api/2/project/avid-covider/resource/{slug}/')
+    resp = s.get(f'https://www.transifex.com/api/2/project/{PROJECT}/resource/{slug}/')
 
     if resp.status_code == requests.codes.ok:
         print('Update file:')
@@ -131,7 +133,7 @@ def push_translations(filename: Path, translations):
         )
 
         resp = s.put(
-            f'https://www.transifex.com/api/2/project/avid-covider/resource/{slug}/content/',
+            f'https://www.transifex.com/api/2/project/{PROJECT}/resource/{slug}/content/',
             json=data
         )
         print(resp.status_code, resp.content[:50])
@@ -147,7 +149,7 @@ def push_translations(filename: Path, translations):
         )
 
         resp = s.post(
-            'https://www.transifex.com/api/2/project/avid-covider/resources/',
+            f'https://www.transifex.com/api/2/project/{PROJECT}/resources/',
             json=data
         ) 
         print(resp.status_code, resp.content[:100])
@@ -156,7 +158,7 @@ def push_translations(filename: Path, translations):
 def pull_translations(lang, filename):
     s = transifex_session()
     slug = transifex_slug(filename)
-    url = f'https://www.transifex.com/api/2/project/avid-covider/resource/{slug}/translation/{lang}/'
+    url = f'https://www.transifex.com/api/2/project/{PROJECT}/resource/{slug}/translation/{lang}/'
     try:
         translations = s.get(url).json()
     except json.decoder.JSONDecodeError:
