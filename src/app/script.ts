@@ -354,11 +354,11 @@ export const script = {
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": "כן, אני חלק מצוות רפואה",
+                                        "show": "כן, אני חלק מצוות רפואי",
                                         "value": "true"
                                       },
                                       {
-                                        "show": "לא, איני חלק מצוות רפואי",
+                                        "show": "לא, אני לא",
                                         "value": "false"
                                       }
                                     ],
@@ -663,11 +663,11 @@ export const script = {
                               "show": "לא, המצב דומה"
                             },
                             {
-                              "show": "כן, השתנו דברים",
+                              "show": "כן, משהו השתנה",
                               "steps": [
                                 {
                                   "say": "אז מה השתנה?",
-                                  "uid": "3f8902ddb3"
+                                  "uid": "bf3ed6cbac"
                                 },
                                 {
                                   "do": {
@@ -678,10 +678,10 @@ export const script = {
                                       "insulation.*"
                                     ]
                                   },
-                                  "uid": "f173654dc4"
+                                  "uid": "d3ca934033"
                                 }
                               ],
-                              "uid": "128142e060"
+                              "uid": "f811b01bd5"
                             }
                           ]
                         }
@@ -1085,14 +1085,14 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": "כן, מדדתי חום",
+                    "show": "כן, נמדד חום",
                     "steps": [
                       {
                         "say": "ומה המדחום אומר?",
-                        "uid": "7a0e138d23"
+                        "uid": "fd6d8a43b5"
                       },
                       {
-                        "uid": "b9cc2edc94",
+                        "uid": "928f10b036",
                         "wait": {
                           "input-kind": "number",
                           "input-max": 43,
@@ -1103,11 +1103,11 @@ export const script = {
                         }
                       }
                     ],
-                    "uid": "fcbbed7d5d",
+                    "uid": "7a92ab58eb",
                     "value": "yes"
                   },
                   {
-                    "show": "לא מדדתי חום",
+                    "show": "לא נמדד חום",
                     "value": "no"
                   }
                 ]
