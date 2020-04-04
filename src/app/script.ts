@@ -354,11 +354,11 @@ export const script = {
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": "כן",
+                                        "show": "כן, אני חלק מצוות רפואה",
                                         "value": "true"
                                       },
                                       {
-                                        "show": "לא",
+                                        "show": "לא, איני חלק מצוות רפואי",
                                         "value": "false"
                                       }
                                     ],
@@ -660,14 +660,14 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "show": "לא"
+                              "show": "לא, המצב דומה"
                             },
                             {
-                              "show": "כן",
+                              "show": "כן, השתנו דברים",
                               "steps": [
                                 {
                                   "say": "אז מה השתנה?",
-                                  "uid": "bb97b45171"
+                                  "uid": "3f8902ddb3"
                                 },
                                 {
                                   "do": {
@@ -678,10 +678,10 @@ export const script = {
                                       "insulation.*"
                                     ]
                                   },
-                                  "uid": "96fa9bb21d"
+                                  "uid": "f173654dc4"
                                 }
                               ],
-                              "uid": "34c09cceb0"
+                              "uid": "128142e060"
                             }
                           ]
                         }
@@ -780,14 +780,14 @@ export const script = {
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן",
+                                                  "show": "כן, ידוע לי מספר החולה",
                                                   "steps": [
                                                     {
                                                       "say": "מצויין. מה המספר?",
-                                                      "uid": "d75278ca87"
+                                                      "uid": "0e021aac7c"
                                                     },
                                                     {
-                                                      "uid": "ce66e394f1",
+                                                      "uid": "4ff35e1c83",
                                                       "wait": {
                                                         "placeholder": "מספר החולה שפגשתי, בספרות",
                                                         "variable": "insulation_patient_number"
@@ -795,21 +795,21 @@ export const script = {
                                                     },
                                                     {
                                                       "say": "האם זכור לך היום שבו נפגשתם?",
-                                                      "uid": "fddfffd461"
+                                                      "uid": "b1e097d57b"
                                                     },
                                                     {
-                                                      "uid": "da26dd517c",
+                                                      "uid": "58f49c26f5",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": "כן",
+                                                            "show": "כן, זכור לי התאריך",
                                                             "steps": [
                                                               {
                                                                 "say": "מה היה התאריך?",
-                                                                "uid": "dc079acad2"
+                                                                "uid": "9f06440aec"
                                                               },
                                                               {
-                                                                "uid": "2a2b823bb9",
+                                                                "uid": "759844494b",
                                                                 "wait": {
                                                                   "input-kind": "date",
                                                                   "placeholder": "תאריך: dd/mm/yy",
@@ -817,7 +817,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "ea17565621",
+                                                            "uid": "72b4e523bf",
                                                             "value": "yes"
                                                           },
                                                           {
@@ -828,11 +828,11 @@ export const script = {
                                                       }
                                                     }
                                                   ],
-                                                  "uid": "ca8eeb8cd6",
+                                                  "uid": "a6fdd5ed5d",
                                                   "value": "yes"
                                                 },
                                                 {
-                                                  "show": "לא",
+                                                  "show": "לא ידוע לי",
                                                   "value": "no"
                                                 }
                                               ]
@@ -1085,14 +1085,14 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": "כן",
+                    "show": "כן, מדדתי חום",
                     "steps": [
                       {
                         "say": "ומה המדחום אומר?",
-                        "uid": "c6ab019b33"
+                        "uid": "7a0e138d23"
                       },
                       {
-                        "uid": "414c51b83b",
+                        "uid": "b9cc2edc94",
                         "wait": {
                           "input-kind": "number",
                           "input-max": 43,
@@ -1103,11 +1103,11 @@ export const script = {
                         }
                       }
                     ],
-                    "uid": "a49ea50c43",
+                    "uid": "fcbbed7d5d",
                     "value": "yes"
                   },
                   {
-                    "show": "לא",
+                    "show": "לא מדדתי חום",
                     "value": "no"
                   }
                 ]
