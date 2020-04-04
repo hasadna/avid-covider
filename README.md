@@ -1,4 +1,4 @@
-# AvidCovider
+# ![](https://github.com/hasadna/avid-covider/raw/master/src/favicon-32x32.png) Avid Covider ![](https://github.com/hasadna/avid-covider/raw/master/src/favicon-32x32.png)
 
 The project aims to support gathering daily information on the spread of the corona virus.
 
