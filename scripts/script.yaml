@@ -485,7 +485,7 @@
     - name: current-report-pain-symptoms
       steps:
       - switch:
-          arg: toplevel_symptoms_cough
+          arg: toplevel_symptoms_pains
           cases:
             - default: true
             - match: true
