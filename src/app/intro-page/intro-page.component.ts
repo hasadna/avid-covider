@@ -42,5 +42,4 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       }, 0);
     }
   }
-
-
+}
