@@ -23,5 +23,6 @@
           "url": "https://play.google.com/store/apps/details?id=il.ac.weizmann.corona",
           "id": "il.ac.weizmann.corona"
         }
-    ]
+    ],
+    "prefer_related_applications": true
 }
