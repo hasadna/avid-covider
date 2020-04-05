@@ -7,8 +7,8 @@
       כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
       </h2>
       <div class='appinstall' appLtr *ngIf='appinstall.showButton()'>
-        <a (click)='appinstall.prompt()' *ngIf='appinstall.androidAvailable()'><img src='assets/img/google-play-badge.png'/></a>
-        <a (click)='appinstall.prompt()' *ngIf='appinstall.iphoneAvailable()'><img src='assets/img/apple-appstore-badge.png'/></a>
+        <a (click)='appinstall.prompt("play")' *ngIf='appinstall.androidAvailable()'><img src='assets/img/google-play-badge.png'/></a>
+        <a (click)='appinstall.prompt("itunes")' *ngIf='appinstall.iphoneAvailable()' class='iphone'><img src='assets/img/apple-appstore-badge.png'/></a>
       </div>
       <div class='logos' appLtr>
         <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
