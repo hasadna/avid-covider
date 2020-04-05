@@ -14,7 +14,7 @@
       steps:
 
         - do:
-            cmd: load_local_storage                 # Load the data of preious reports on device
+            cmd: load_local_storage                 # Load the data of previous reports on device
             params:
             - record
   
