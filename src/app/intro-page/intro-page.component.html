@@ -12,6 +12,7 @@
         <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
       </div>
       <div class='logos' appLtr *ngIf='!!appinstall.showButton()'>
+        <a (click)='appinstall.prompt()'><img src='assets/img/clalit-logo.png'/></a>
         <button (click)='appinstall.prompt()'>Install</button>
       </div>
       <p i18n>
