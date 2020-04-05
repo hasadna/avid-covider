@@ -13,6 +13,7 @@ export class AppinstallService {
   beforeinstallprompt($event) {
     $event.preventDefault();
     this.installPrompt = $event;
+    console.log('Revceived beforeinstallprompt', $event);
   }
 
   showButton() {
