@@ -12,12 +12,24 @@ export class AppinstallService {
     fromEvent(window, 'beforeinstallprompt').subscribe(($event) => {
       $event.preventDefault();
       this.installPrompt = $event;
-      console.log('Revceived beforeinstallprompt', $event);
     });
   }
 
   showButton() {
-    return !!this.installPrompt;
+    return this.androidAvailable() || this.iphoneAvailable() || true;
+  }
+
+  platformAvailable(platform) {
+    return this.installPrompt && this.installPrompt.platforms &&
+      Array.isArray(this.installPrompt.platforms) && this.installPrompt.platforms.indexOf(platform) >= 0;
+  }
+
+  androidAvailable() {
+    return this.platformAvailable('play');
+  }
+
+  iphoneAvailable() {
+    return this.platformAvailable('itunes');
   }
 
   prompt() {

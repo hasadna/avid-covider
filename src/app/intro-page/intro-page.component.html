@@ -6,14 +6,14 @@
       <h2 i18n>
       כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
       </h2>
+      <div class='appinstall' appLtr *ngIf='appinstall.showButton()'>
+        <a (click)='appinstall.prompt()' *ngIf='appinstall.androidAvailable()'><img src='assets/img/google-play-badge.png'/></a>
+        <a (click)='appinstall.prompt()' *ngIf='appinstall.iphoneAvailable()'><img src='assets/img/apple-appstore-badge.png'/></a>
+      </div>
       <div class='logos' appLtr>
         <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
         <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
         <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
-      </div>
-      <div class='logos' appLtr *ngIf='!!appinstall.showButton()'>
-        <a (click)='appinstall.prompt()'><img src='assets/img/clalit-logo.png'/></a>
-        <button (click)='appinstall.prompt()'>Install</button>
       </div>
       <p i18n>
 חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
