@@ -1,4 +1,5 @@
-import { Injectable, HostListener } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +8,12 @@ export class AppinstallService {
 
   installPrompt: any;
 
-  constructor() { }
-
-  @HostListener('window:beforeinstallprompt', ['$event'])
-  beforeinstallprompt($event) {
-    $event.preventDefault();
-    this.installPrompt = $event;
-    console.log('Revceived beforeinstallprompt', $event);
+  constructor() {
+    fromEvent(window, 'beforeinstallprompt').subscribe(($event) => {
+      $event.preventDefault();
+      this.installPrompt = $event;
+      console.log('Revceived beforeinstallprompt', $event);
+    });
   }
 
   showButton() {
