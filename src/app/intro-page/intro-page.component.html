@@ -11,6 +11,9 @@
         <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
         <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
       </div>
+      <div class='logos' appLtr *ngIf='!!appinstall.showButton()'>
+        <button (click)='appinstall.prompt()'>Install</button>
+      </div>
       <p i18n>
 חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
       </p>

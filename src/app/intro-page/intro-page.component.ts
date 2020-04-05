@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NotificationService } from '../notification.service';
 import { VERSION } from '../constants';
+import { AppinstallService } from '../appinstall.service';
 
 @Component({
   selector: 'app-intro-page',
@@ -20,6 +21,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   @ViewChild('notificationAction') notificationAction: ElementRef;
 
   constructor(private notifications: NotificationService,
+              public appinstall: AppinstallService,
               @Inject(LOCALE_ID) public locale) {}
 
   ngOnInit() {
@@ -40,4 +42,5 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       }, 0);
     }
   }
-}
+
+

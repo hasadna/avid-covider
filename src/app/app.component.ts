@@ -1,4 +1,5 @@
-import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit, HostListener } from '@angular/core';
+import { AppinstallService } from './appinstall.service';
 
 
 @Component({
@@ -8,7 +9,8 @@ import { Component, Inject, LOCALE_ID, OnInit, AfterViewInit } from '@angular/co
 })
 
 export class AppComponent implements OnInit, AfterViewInit  {
-  constructor(@Inject(LOCALE_ID) private locale) {
+  installPrompt: any;
+  constructor(@Inject(LOCALE_ID) private locale, private appinstall: AppinstallService) {
     console.log('LOCALE=', locale);
   }
 
@@ -51,5 +53,4 @@ export class AppComponent implements OnInit, AfterViewInit  {
   //     console.log('rejected', status);
   //   }
   // }
-
 }
