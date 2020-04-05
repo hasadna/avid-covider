@@ -417,12 +417,16 @@ export const script = {
           "name": "preconditions",
           "steps": [
             {
-              "goto": "preconditions-diseases-loop",
-              "uid": "b63b4db678"
+              "say": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
+              "uid": "adf992b1c0"
+            },
+            {
+              "goto": "preconditions-diseases",
+              "uid": "2e29f0c171"
             },
             {
               "goto": "preconditions-smoking",
-              "uid": "2e29f0c171"
+              "uid": "c3bd210c40"
             },
             {
               "do": {
@@ -432,72 +436,10 @@ export const script = {
                   "preconditions_received"
                 ]
               },
-              "uid": "cafc8bd838"
+              "uid": "8159f08bcb"
             }
           ],
           "uid": "d96a2bfad6"
-        },
-        {
-          "name": "preconditions-diseases-loop",
-          "steps": [
-            {
-              "say": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
-              "uid": "3b1b905fff"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "ade3b992a5"
-            },
-            {
-              "say": "מחלות נוספות?",
-              "uid": "90ed58a48c"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "07e85460da"
-            },
-            {
-              "say": "עוד משהו?",
-              "uid": "7da48d9dba"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "03e166a37b"
-            },
-            {
-              "say": "האם ישנן מחלות רקע נוספות בהן אובחנת?",
-              "uid": "3337d3489a"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "ff913f4be2"
-            },
-            {
-              "say": "עוד משהו?",
-              "uid": "ebeb9fc029"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "593bd58fad"
-            },
-            {
-              "say": "מחלות נוספות?",
-              "uid": "4e7519c646"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "fb727c4c8b"
-            },
-            {
-              "say": "עוד משהו?",
-              "uid": "8c4196787f"
-            },
-            {
-              "goto": "preconditions-diseases",
-              "uid": "3d6501c445"
-            }
-          ],
-          "uid": "d14be6bcf5"
         },
         {
           "name": "preconditions-diseases",
@@ -505,52 +447,39 @@ export const script = {
             {
               "uid": "8188eb0451",
               "wait": {
+                "multi": true,
                 "options": [
                   {
-                    "show": "סוכרת",
-                    "unless": "precondition_chronic_diabetes",
-                    "value": "precondition_chronic_diabetes"
+                    "field": "precondition_chronic_diabetes",
+                    "show": "סוכרת"
                   },
                   {
-                    "show": "בעיית יתר לחץ דם",
-                    "unless": "precondition_chronic_hypertension",
-                    "value": "precondition_chronic_hypertension"
+                    "field": "precondition_chronic_hypertension",
+                    "show": "בעיית יתר לחץ דם"
                   },
                   {
-                    "show": "מחלת לב, כלי דם או שבץ",
-                    "unless": "precondition_chronic_ischemic_heart_disease_or_stroke",
-                    "value": "precondition_chronic_ischemic_heart_disease_or_stroke"
+                    "field": "precondition_chronic_ischemic_heart_disease_or_stroke",
+                    "show": "מחלת לב, כלי דם או שבץ"
                   },
                   {
-                    "show": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)",
-                    "unless": "precondition_chronic_lung_disease",
-                    "value": "precondition_chronic_lung_disease"
+                    "field": "precondition_chronic_lung_disease",
+                    "show": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)"
                   },
                   {
-                    "show": "סרטן",
-                    "unless": "precondition_chronic_cancer",
-                    "value": "precondition_chronic_cancer"
+                    "field": "precondition_chronic_cancer",
+                    "show": "סרטן"
                   },
                   {
-                    "show": "אי ספיקת כליות",
-                    "unless": "precondition_chronic_kidney_failure",
-                    "value": "precondition_chronic_kidney_failure"
+                    "field": "precondition_chronic_kidney_failure",
+                    "show": "אי ספיקת כליות"
                   },
                   {
-                    "show": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון",
-                    "unless": "precondition_chronic_immune_system_suppression",
-                    "value": "precondition_chronic_immune_system_suppression"
+                    "field": "precondition_chronic_immune_system_suppression",
+                    "show": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון"
                   },
                   {
                     "class": "other",
-                    "show": "לא אובחנתי באף אחת מאלה",
-                    "steps": [
-                      {
-                        "pop": "preconditions",
-                        "uid": "76ca4b7ea0"
-                      }
-                    ],
-                    "uid": "7a4fd9e2c9"
+                    "show": "זהו"
                   }
                 ],
                 "variable": "_var"
@@ -558,12 +487,13 @@ export const script = {
             },
             {
               "do": {
-                "cmd": "flag_from_var",
+                "cmd": "update_from_selection",
                 "params": [
-                  "record"
+                  "record",
+                  "_var"
                 ]
               },
-              "uid": "b90814dc30"
+              "uid": "d9eddffe93"
             }
           ],
           "uid": "56dc1eb702"
@@ -1063,12 +993,20 @@ export const script = {
           "name": "current-report-symptoms",
           "steps": [
             {
-              "goto": "current-report-symptoms-loop",
+              "goto": "current-report-top-level-symptoms",
               "uid": "b19e056d7d"
             },
             {
-              "goto": "current-report-temperature",
+              "goto": "current-report-cough-symptoms",
               "uid": "cb252a9f1a"
+            },
+            {
+              "goto": "current-report-pain-symptoms",
+              "uid": "03cd72e122"
+            },
+            {
+              "goto": "current-report-temperature",
+              "uid": "4cd7908fba"
             }
           ],
           "uid": "ee520e19a7"
@@ -1117,340 +1055,197 @@ export const script = {
           "uid": "89a20e8104"
         },
         {
-          "name": "current-report-symptoms-loop",
-          "steps": [
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "63755ce1aa"
-            },
-            {
-              "say": "האם יש עוד סוגים של סימפטומים?",
-              "uid": "203b61a17e"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "f53bc4c82a"
-            },
-            {
-              "say": "עוד תופעות שכדאי שנכיר?",
-              "uid": "44e2026d1a"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "14ed40aca4"
-            },
-            {
-              "say": "עוד משהו שמפריע או גורם להרגשה לא טובה?",
-              "uid": "73a0967d13"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "0bad6900a2"
-            },
-            {
-              "say": "מה עוד?",
-              "uid": "b6fb5b4c3c"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "281a379675"
-            },
-            {
-              "say": "יש עוד משהו שמפריע?",
-              "uid": "dff92584db"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "e7ebec4dda"
-            },
-            {
-              "say": "עוד משהו שגורם הרגשה לא טובה?",
-              "uid": "fb1eb9cd42"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "f06c342959"
-            },
-            {
-              "say": "משהו נוסף שכדאי שנכיר?",
-              "uid": "43f4918f1c"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "41c512be93"
-            },
-            {
-              "say": "מה עוד?",
-              "uid": "3aa9495d57"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "f93e6f6244"
-            },
-            {
-              "say": "תסמין נוסף?",
-              "uid": "f1993e315f"
-            },
-            {
-              "goto": "current-report-top-level-symptoms",
-              "uid": "bbc2a1431e"
-            }
-          ],
-          "uid": "529f6c7050"
-        },
-        {
           "name": "current-report-top-level-symptoms",
           "steps": [
             {
-              "uid": "939745f377",
+              "uid": "536a638700",
               "wait": {
+                "multi": true,
                 "options": [
                   {
-                    "show": "שיעולים או נזלת",
-                    "steps": [
-                      {
-                        "say": "נשמח לעוד כמה פרטים לגבי השיעול והנזלת.",
-                        "uid": "ba134f7deb"
-                      },
-                      {
-                        "goto": "symptoms_cough_questions",
-                        "uid": "52bf71f303"
-                      },
-                      {
-                        "say": "יש עוד בעיות שקשורות בשיעולים או נזלת?",
-                        "uid": "eba3372b9e"
-                      },
-                      {
-                        "goto": "symptoms_cough_questions",
-                        "uid": "83e63b4189"
-                      },
-                      {
-                        "say": "עוד תופעה מאלו?",
-                        "uid": "42d6c4e645"
-                      },
-                      {
-                        "goto": "symptoms_cough_questions",
-                        "uid": "70b6fb49a9"
-                      }
-                    ],
-                    "uid": "19fa8cbd16",
-                    "unless": "toplevel_symptoms_cough",
-                    "value": "toplevel_symptoms_cough"
+                    "field": "toplevel_symptoms_cough",
+                    "show": "שיעולים או נזלת"
                   },
                   {
-                    "show": "כאבי גרון",
-                    "unless": "symptoms_sore_throat",
-                    "value": "symptoms_sore_throat"
+                    "field": "symptoms_sore_throat",
+                    "show": "כאבי גרון"
                   },
                   {
-                    "show": "קוצר נשימה",
-                    "unless": "symptoms_breath_shortness",
-                    "value": "symptoms_breath_shortness"
+                    "field": "symptoms_breath_shortness",
+                    "show": "קוצר נשימה"
                   },
                   {
-                    "show": "כאבים",
-                    "steps": [
-                      {
-                        "say": "מה כואב בדיוק?",
-                        "uid": "5225dcb4e0"
-                      },
-                      {
-                        "goto": "symptoms_pains_questions",
-                        "uid": "f19ded6166"
-                      },
-                      {
-                        "say": "יש עוד כאבים?",
-                        "uid": "240cdbad54"
-                      },
-                      {
-                        "goto": "symptoms_pains_questions",
-                        "uid": "347e27709f"
-                      },
-                      {
-                        "say": "עוד משהו כואב?",
-                        "uid": "03ccb73712"
-                      },
-                      {
-                        "goto": "symptoms_pains_questions",
-                        "uid": "6000c71548"
-                      }
-                    ],
-                    "uid": "f0f2b86dfa",
-                    "unless": "toplevel_symptoms_pains",
-                    "value": "toplevel_symptoms_pains"
+                    "field": "toplevel_symptoms_pains",
+                    "show": "כאבים"
                   },
                   {
-                    "show": "שלשול",
-                    "unless": "symptoms_diarrhea",
-                    "value": "symptoms_diarrhea"
+                    "field": "symptoms_diarrhea",
+                    "show": "שלשול"
                   },
                   {
-                    "show": "בחילה או הקאות",
-                    "unless": "symptoms_nausea_and_vomiting",
-                    "value": "symptoms_nausea_and_vomiting"
+                    "field": "symptoms_nausea_and_vomiting",
+                    "show": "בחילה או הקאות"
                   },
                   {
-                    "show": "צמרמורת",
-                    "unless": "symptoms_chills",
-                    "value": "symptoms_chills"
+                    "field": "symptoms_chills",
+                    "show": "צמרמורת"
                   },
                   {
-                    "show": "בלבול",
-                    "unless": "symptoms_confusion",
-                    "value": "symptoms_confusion"
+                    "field": "symptoms_confusion",
+                    "show": "בלבול"
                   },
                   {
-                    "show": "עייפות או חולשה",
-                    "unless": "symptoms_tiredness_or_fatigue",
-                    "value": "symptoms_tiredness_or_fatigue"
+                    "field": "symptoms_tiredness_or_fatigue",
+                    "show": "עייפות או חולשה"
                   },
                   {
-                    "show": "איבדתי את חוש הטעם או הריח",
-                    "unless": "symptoms_smell_taste_loss",
-                    "value": "symptoms_smell_taste_loss"
+                    "field": "symptoms_smell_taste_loss",
+                    "show": "איבדתי את חוש הטעם או הריח"
                   },
                   {
                     "class": "other",
-                    "show": "אף אחד מאלה",
-                    "steps": [
-                      {
-                        "pop": "current-report-symptoms",
-                        "uid": "4714c37cc0"
-                      }
-                    ],
-                    "uid": "e2aa3f16be"
+                    "show": "זהו"
                   }
                 ],
-                "variable": "_var_symptoms"
+                "variable": "_var"
               }
             },
             {
               "do": {
-                "cmd": "flag_from_var",
+                "cmd": "update_from_selection",
                 "params": [
                   "record",
-                  "_var_symptoms"
+                  "_var"
                 ]
               },
-              "uid": "f1f9b45aa1"
+              "uid": "e478a0d84a"
             }
           ],
           "uid": "6c5d380604"
         },
         {
-          "name": "symptoms_cough_questions",
+          "name": "current-report-cough-symptoms",
           "steps": [
             {
-              "uid": "d2f57ce59f",
-              "wait": {
-                "options": [
+              "switch": {
+                "arg": "toplevel_symptoms_cough",
+                "cases": [
                   {
-                    "show": "נזלת או גודש באף",
-                    "unless": "symptoms_clogged_nose",
-                    "value": "symptoms_clogged_nose"
+                    "default": true
                   },
                   {
-                    "show": "שיעול יבש",
-                    "unless": "symptoms_dry_cough",
-                    "value": "symptoms_dry_cough"
-                  },
-                  {
-                    "show": "שיעול לח, או שיעול עם כיח",
-                    "unless": "symptoms_moist_cough",
-                    "value": "symptoms_moist_cough"
-                  },
-                  {
-                    "class": "other",
-                    "show": "אף אחד מאלה",
+                    "match": true,
                     "steps": [
                       {
-                        "pop": "current-report-top-level-symptoms",
-                        "uid": "316bff0029"
+                        "say": "נשמח לעוד כמה פרטים לגבי השיעול והנזלת.",
+                        "uid": "4498417043"
+                      },
+                      {
+                        "uid": "ba485b7226",
+                        "wait": {
+                          "multi": true,
+                          "options": [
+                            {
+                              "field": "symptoms_clogged_nose",
+                              "show": "נזלת או גודש באף"
+                            },
+                            {
+                              "field": "symptoms_dry_cough",
+                              "show": "שיעול יבש"
+                            },
+                            {
+                              "field": "symptoms_moist_cough",
+                              "show": "שיעול לח, או שיעול עם כיח"
+                            },
+                            {
+                              "class": "other",
+                              "show": "זהו"
+                            }
+                          ],
+                          "variable": "_var"
+                        }
+                      },
+                      {
+                        "do": {
+                          "cmd": "update_from_selection",
+                          "params": [
+                            "record",
+                            "_var"
+                          ]
+                        },
+                        "uid": "e45da0ef7d"
                       }
                     ],
-                    "uid": "a6c5a6a966"
+                    "uid": "16bd40e2dc"
                   }
-                ],
-                "variable": "_var"
-              }
-            },
-            {
-              "do": {
-                "cmd": "flag_from_var",
-                "params": [
-                  "record"
                 ]
               },
-              "uid": "0d76702fa4"
+              "uid": "f90ece8c4b"
             }
           ],
-          "uid": "84c66049b6"
+          "uid": "a7a1bb4959"
         },
         {
-          "name": "symptoms_pains_questions",
+          "name": "current-report-pain-symptoms",
           "steps": [
             {
-              "uid": "ff7f218ccc",
-              "wait": {
-                "options": [
+              "switch": {
+                "arg": "toplevel_symptoms_cough",
+                "cases": [
                   {
-                    "show": "כאבי שרירים",
-                    "unless": "symptoms_muscles_pain",
-                    "value": "symptoms_muscles_pain"
+                    "default": true
                   },
                   {
-                    "show": "כאבי ראש",
-                    "unless": "symptoms_headache",
-                    "value": "symptoms_headache"
-                  },
-                  {
-                    "show": "כאבי גרון",
-                    "unless": "symptoms_sore_throat",
-                    "value": "symptoms_sore_throat"
-                  },
-                  {
-                    "class": "other",
-                    "show": "אף אחד מאלה",
+                    "match": true,
                     "steps": [
                       {
-                        "pop": "current-report-top-level-symptoms",
-                        "uid": "9102f1a39d"
+                        "say": "מה כואב בדיוק?",
+                        "uid": "d592ad5db6"
+                      },
+                      {
+                        "uid": "31fc600341",
+                        "wait": {
+                          "multi": true,
+                          "options": [
+                            {
+                              "field": "symptoms_muscles_pain",
+                              "show": "כאבי שרירים"
+                            },
+                            {
+                              "field": "symptoms_headache",
+                              "show": "כאבי ראש"
+                            },
+                            {
+                              "field": "symptoms_sore_throat",
+                              "show": "כאבי גרון"
+                            },
+                            {
+                              "class": "other",
+                              "show": "זהו"
+                            }
+                          ],
+                          "variable": "_var"
+                        }
+                      },
+                      {
+                        "do": {
+                          "cmd": "update_from_selection",
+                          "params": [
+                            "record",
+                            "_var"
+                          ]
+                        },
+                        "uid": "7bbd6f3e3a"
                       }
                     ],
-                    "uid": "fe8b9151b5"
+                    "uid": "6c9931a28a"
                   }
-                ],
-                "variable": "_var"
-              }
-            },
-            {
-              "do": {
-                "cmd": "flag_from_var",
-                "params": [
-                  "record"
                 ]
               },
-              "uid": "4066f83acb"
+              "uid": "7d332e2f3d"
             }
           ],
-          "uid": "772a2e75d8"
-        },
-        {
-          "name": "symptoms_other_questions",
-          "steps": [
-            {
-              "say": "מהם התופעות או הסימפטומים הנוספים שכדאי שנדע עליהם?",
-              "uid": "a81805f857"
-            },
-            {
-              "uid": "7d68d617f8",
-              "wait": {
-                "placeholder": "שם המחלה או הסימפטום",
-                "variable": "symptoms_other"
-              }
-            }
-          ],
-          "uid": "9d045969e3"
+          "uid": "7ca6e7b00e"
         },
         {
           "name": "exposures",

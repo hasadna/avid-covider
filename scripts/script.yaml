@@ -166,7 +166,8 @@
 
     - name: preconditions
       steps:
-        - goto: preconditions-diseases-loop      
+        - say: "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:"
+        - goto: preconditions-diseases
         - goto: preconditions-smoking
         - do:
             cmd: set_flag
@@ -174,57 +175,33 @@
               - record
               - preconditions_received
 
-    - name: preconditions-diseases-loop
-      steps:
-        - say: "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:"
-        - goto: preconditions-diseases
-        - say: "מחלות נוספות?"
-        - goto: preconditions-diseases
-        - say: "עוד משהו?"
-        - goto: preconditions-diseases
-        - say: "האם ישנן מחלות רקע נוספות בהן אובחנת?"
-        - goto: preconditions-diseases
-        - say: "עוד משהו?"
-        - goto: preconditions-diseases
-        - say: "מחלות נוספות?"
-        - goto: preconditions-diseases
-        - say: "עוד משהו?"
-        - goto: preconditions-diseases
-
     - name: preconditions-diseases
       steps:
         - wait:
             variable: _var
+            multi: true
             options:
             - show: "סוכרת"
-              value: precondition_chronic_diabetes
-              unless: precondition_chronic_diabetes
+              field: precondition_chronic_diabetes
             - show: "בעיית יתר לחץ דם"
-              value: precondition_chronic_hypertension
-              unless: precondition_chronic_hypertension
+              field: precondition_chronic_hypertension
             - show: מחלת לב, כלי דם או שבץ
-              value: precondition_chronic_ischemic_heart_disease_or_stroke
-              unless: precondition_chronic_ischemic_heart_disease_or_stroke
+              field: precondition_chronic_ischemic_heart_disease_or_stroke
             - show: מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)
-              value: precondition_chronic_lung_disease
-              unless: precondition_chronic_lung_disease
+              field: precondition_chronic_lung_disease
             - show: סרטן
-              value: precondition_chronic_cancer
-              unless: precondition_chronic_cancer
+              field: precondition_chronic_cancer
             - show: אי ספיקת כליות
-              value: precondition_chronic_kidney_failure
-              unless: precondition_chronic_kidney_failure
+              field: precondition_chronic_kidney_failure
             - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
-              value: precondition_chronic_immune_system_suppression
-              unless: precondition_chronic_immune_system_suppression
-            - show: לא אובחנתי באף אחת מאלה
+              field: precondition_chronic_immune_system_suppression
+            - show: זהו
               class: other
-              steps:
-                - pop: preconditions
         - do:
-            cmd: flag_from_var
+            cmd: update_from_selection
             params:
               - record
+              - _var
     
     - name: preconditions-smoking
       steps:
@@ -420,7 +397,9 @@
 
     - name: current-report-symptoms
       steps:
-        - goto: current-report-symptoms-loop
+        - goto: current-report-top-level-symptoms
+        - goto: current-report-cough-symptoms
+        - goto: current-report-pain-symptoms
         - goto: current-report-temperature
 
     - name: current-report-temperature
@@ -442,140 +421,94 @@
             - show: "לא נמדד חום"
               value: "no"
     
-    - name: current-report-symptoms-loop
-      steps:
-        - goto: current-report-top-level-symptoms
-        - say: האם יש עוד סוגים של סימפטומים?
-        - goto: current-report-top-level-symptoms
-        - say: עוד תופעות שכדאי שנכיר?
-        - goto: current-report-top-level-symptoms
-        - say: עוד משהו שמפריע או גורם להרגשה לא טובה?
-        - goto: current-report-top-level-symptoms
-        - say: מה עוד?
-        - goto: current-report-top-level-symptoms
-        - say: יש עוד משהו שמפריע?
-        - goto: current-report-top-level-symptoms
-        - say: עוד משהו שגורם הרגשה לא טובה?
-        - goto: current-report-top-level-symptoms          
-        - say: משהו נוסף שכדאי שנכיר?
-        - goto: current-report-top-level-symptoms
-        - say: מה עוד?
-        - goto: current-report-top-level-symptoms        
-        -  say: תסמין נוסף?
-        - goto: current-report-top-level-symptoms
-
     - name: current-report-top-level-symptoms
       steps:
-        - wait:
-            variable: _var_symptoms
-            options:
-              - show: שיעולים או נזלת
-                unless: toplevel_symptoms_cough
-                value: toplevel_symptoms_cough
-                steps:
-                  - say: נשמח לעוד כמה פרטים לגבי השיעול והנזלת. 
-                  - goto: symptoms_cough_questions
-                  - say: יש עוד בעיות שקשורות בשיעולים או נזלת?
-                  - goto: symptoms_cough_questions
-                  - say: עוד תופעה מאלו?
-                  - goto: symptoms_cough_questions
-              - show: כאבי גרון
-                value: symptoms_sore_throat
-                unless: symptoms_sore_throat
-              - show: קוצר נשימה
-                value: symptoms_breath_shortness
-                unless: symptoms_breath_shortness
-              - show: כאבים
-                unless: toplevel_symptoms_pains
-                value: toplevel_symptoms_pains
-                steps:
-                  - say: מה כואב בדיוק?
-                  - goto: symptoms_pains_questions
-                  - say: יש עוד כאבים?
-                  - goto: symptoms_pains_questions
-                  - say: עוד משהו כואב?
-                  - goto: symptoms_pains_questions
-              - show: שלשול
-                value: symptoms_diarrhea
-                unless: symptoms_diarrhea
-              - show: בחילה או הקאות
-                value: symptoms_nausea_and_vomiting
-                unless: symptoms_nausea_and_vomiting
-              - show: צמרמורת
-                unless: symptoms_chills
-                value: symptoms_chills
-              - show: בלבול
-                unless: symptoms_confusion
-                value: symptoms_confusion
-              - show: עייפות או חולשה
-                unless: symptoms_tiredness_or_fatigue
-                value: symptoms_tiredness_or_fatigue
-              - show: איבדתי את חוש הטעם או הריח
-                unless: symptoms_smell_taste_loss
-                value: symptoms_smell_taste_loss
-              - show: אף אחד מאלה
-                class: other
-                steps:
-                  - pop: current-report-symptoms
-        - do:
-            cmd: flag_from_var
-            params:
-              - record
-              - _var_symptoms
-
-    - name: symptoms_cough_questions
-      steps:
       - wait:
           variable: _var
+          multi: true
           options:
-          - show: נזלת או גודש באף
-            value: symptoms_clogged_nose
-            unless: symptoms_clogged_nose
-          - show: שיעול יבש
-            value: symptoms_dry_cough
-            unless: symptoms_dry_cough
-          - show: שיעול לח, או שיעול עם כיח
-            value: symptoms_moist_cough
-            unless: symptoms_moist_cough          
-          - show: אף אחד מאלה
-            class: other
-            steps:
-              - pop: current-report-top-level-symptoms
+            - show: שיעולים או נזלת
+              field: toplevel_symptoms_cough
+            - show: כאבי גרון
+              field: symptoms_sore_throat
+            - show: קוצר נשימה
+              field: symptoms_breath_shortness
+            - show: כאבים
+              field: toplevel_symptoms_pains
+            - show: שלשול
+              field: symptoms_diarrhea
+            - show: בחילה או הקאות
+              field: symptoms_nausea_and_vomiting
+            - show: צמרמורת
+              field: symptoms_chills
+            - show: בלבול
+              field: symptoms_confusion
+            - show: עייפות או חולשה
+              field: symptoms_tiredness_or_fatigue
+            - show: איבדתי את חוש הטעם או הריח
+              field: symptoms_smell_taste_loss
+            - show: זהו
+              class: other
       - do:
-          cmd: flag_from_var
+          cmd: update_from_selection
           params:
             - record
+            - _var
 
-    - name: symptoms_pains_questions
+    - name: current-report-cough-symptoms
       steps:
-      - wait:
-          variable: _var
-          options:
-          - show: כאבי שרירים
-            value: symptoms_muscles_pain
-            unless: symptoms_muscles_pain
-          - show: כאבי ראש
-            value: symptoms_headache
-            unless: symptoms_headache
-          - show: כאבי גרון
-            value: symptoms_sore_throat
-            unless: symptoms_sore_throat            
-          - show: אף אחד מאלה
-            class: other
-            steps:
-              - pop: current-report-top-level-symptoms
-      - do:
-          cmd: flag_from_var
-          params:
-            - record
+      - switch:
+          arg: toplevel_symptoms_cough
+          cases:
+            - default: true
+            - match: true
+              steps:
+              - say: נשמח לעוד כמה פרטים לגבי השיעול והנזלת. 
+              - wait:
+                  variable: _var
+                  multi: true
+                  options:
+                  - show: נזלת או גודש באף
+                    field: symptoms_clogged_nose
+                  - show: שיעול יבש
+                    field: symptoms_dry_cough
+                  - show: שיעול לח, או שיעול עם כיח
+                    field: symptoms_moist_cough
+                  - show: זהו
+                    class: other
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _var
 
-    - name: symptoms_other_questions
+    - name: current-report-pain-symptoms
       steps:
-      - say: מהם התופעות או הסימפטומים הנוספים שכדאי שנדע עליהם?
-      - wait:
-          variable: symptoms_other
-          placeholder: "שם המחלה או הסימפטום"
-    
+      - switch:
+          arg: toplevel_symptoms_cough
+          cases:
+            - default: true
+            - match: true
+              steps:
+              - say: מה כואב בדיוק?
+              - wait:
+                  variable: _var
+                  multi: true
+                  options:
+                  - show: כאבי שרירים
+                    field: symptoms_muscles_pain
+                  - show: כאבי ראש
+                    field: symptoms_headache
+                  - show: כאבי גרון
+                    field: symptoms_sore_throat
+                  - show: זהו
+                    class: other
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _var
+
     - name: exposures
       steps:
         - say: "חשוב לנו לדעת"
