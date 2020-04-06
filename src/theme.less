@@ -243,14 +243,19 @@ htl-hatool {
                             align-items: flex-start;
                             justify-content: flex-start;
 
-                            button.selected {
-                                margin-bottom: 8px;
-                            }
-                            button.other {
-                                display: flex;
-                                > span.empty { display: none; }
-                                > span.not-empty { display: none; }
-                                > span.none-selected { display: inline; }
+                            button {
+                                &::before {
+                                    display: none;
+                                }
+                                &.selected {
+                                    margin-bottom: 8px;
+                                }
+                                &.other {
+                                    display: flex;
+                                    > span.empty { display: none; }
+                                    > span.not-empty { display: none; }
+                                    > span.none-selected { display: inline; }
+                                }
                             }
                             &.checked {
                                 button.not-selected {
