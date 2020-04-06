@@ -189,6 +189,18 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           Object.assign(record, record[varname]);
           delete record[varname];
         },
+        hasHouseholdData: (record: any) => {
+          try {
+            if (record.hasOwnProperty('_household_adults') && record.hasOwnProperty('_household_minors')) {
+              console.log(`found past data hosehold  ${record._household_adults} and ${record._household_minors}`)
+              return (parseInt(record._household_adults) >=0 && parseInt(record._household_minors)>=0)
+            } else {
+              return false
+            }            
+          } catch (err) {
+            console.error(`household past data check failed: ${err}`)
+          }
+        },
         isAdult: (record: any) => {
           try {
             const age = parseInt(record.age, 10);

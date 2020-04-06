@@ -333,6 +333,114 @@ export const script = {
               "uid": "92dd5295a0"
             },
             {
+              "do": {
+                "cmd": "hasHouseholdData",
+                "params": [
+                  "record"
+                ],
+                "variable": "_has_household_data"
+              },
+              "uid": "c925c36603"
+            },
+            {
+              "switch": {
+                "arg": "_has_household_data",
+                "cases": [
+                  {
+                    "match": false,
+                    "steps": [
+                      {
+                        "say": "כמה אנשים גרים איתך ב {{street}} {{city_town}}",
+                        "uid": "21bf46f5bc"
+                      },
+                      {
+                        "switch": {
+                          "arg": "_isAdult",
+                          "cases": [
+                            {
+                              "match": true,
+                              "steps": [
+                                {
+                                  "say": "כמה מבוגרים מעל לגיל 18, חוץ ממך, יש בבית?",
+                                  "uid": "ca39d16fa6"
+                                },
+                                {
+                                  "uid": "d7222b8c2d",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר האנשים הנוספים, 0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_adults"
+                                  }
+                                },
+                                {
+                                  "say": "וכמה ילדים מתחת לגיל 18?",
+                                  "uid": "bb546484e4"
+                                },
+                                {
+                                  "uid": "caee62e4df",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר האנשים הנוספים, 0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_minors"
+                                  }
+                                }
+                              ],
+                              "uid": "7a3a2c1626"
+                            },
+                            {
+                              "match": false,
+                              "steps": [
+                                {
+                                  "say": "כמה מבוגרים מעל לגיל 18 יש בבית?",
+                                  "uid": "cf2a205834"
+                                },
+                                {
+                                  "uid": "1da1d6228a",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר האנשים הנוספים, 0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_adults"
+                                  }
+                                },
+                                {
+                                  "say": "וכמה ילדים מתחת לגיל 18, חוץ ממך?",
+                                  "uid": "f9bf57bd28"
+                                },
+                                {
+                                  "uid": "f0f797ceb7",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר האנשים הנוספים, 0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_minors"
+                                  }
+                                }
+                              ],
+                              "uid": "a3e16fa600"
+                            }
+                          ]
+                        },
+                        "uid": "b0ad5911df"
+                      }
+                    ],
+                    "uid": "8a5cada047"
+                  }
+                ]
+              },
+              "uid": "4abe60f7f6"
+            },
+            {
               "switch": {
                 "arg": "_isAdult",
                 "cases": [
@@ -347,10 +455,10 @@ export const script = {
                               "steps": [
                                 {
                                   "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                                  "uid": "9e47401a4a"
+                                  "uid": "f21abaa60d"
                                 },
                                 {
-                                  "uid": "0ee0343dc4",
+                                  "uid": "a193745d13",
                                   "wait": {
                                     "options": [
                                       {
@@ -366,7 +474,7 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "bcac3a1b7e",
+                              "uid": "fd54eca6a5",
                               "undefined": true
                             },
                             {
@@ -374,14 +482,14 @@ export const script = {
                             }
                           ]
                         },
-                        "uid": "bdf9c485b5"
+                        "uid": "bfe332a80b"
                       }
                     ],
-                    "uid": "d25325b47f"
+                    "uid": "688c92f408"
                   }
                 ]
               },
-              "uid": "09d1a47992"
+              "uid": "98aa0df139"
             }
           ],
           "uid": "ab5b28894d"

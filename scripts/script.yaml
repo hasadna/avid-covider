@@ -127,13 +127,71 @@
                     - "בת {{age}} מ{{street}} {{city_town}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
-        
-        - do:
+
+        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
             cmd: isAdult
             params: 
               - record
             variable: _isAdult
-            
+
+
+        - do:                                       # <---- check if we already have the household data from past reports
+            cmd: hasHouseholdData
+            params: 
+              - record
+            variable: _has_household_data
+
+        - switch:
+            arg: _has_household_data
+            cases:
+
+            - match: false
+              steps:
+              - say:  "כמה אנשים גרים איתך ב {{street}} {{city_town}}"
+              - switch: 
+                  arg: _isAdult
+                  cases:
+                  - match: true
+                    steps:
+                    - say: כמה מבוגרים מעל לגיל 18, חוץ ממך, יש בבית?
+                    - wait:
+                        variable: _household_adults
+                        placeholder: מספר האנשים הנוספים, 0-99
+                        validation: "[0-9]+"
+                        input-kind: number
+                        input-min: 0
+                        input-max: 99
+                  
+                    - say: וכמה ילדים מתחת לגיל 18?
+                    - wait:
+                        variable: _household_minors
+                        placeholder: מספר האנשים הנוספים, 0-99
+                        validation: "[0-9]+"
+                        input-kind: number
+                        input-min: 0
+                        input-max: 99
+
+                  - match: false
+                    steps:
+                    - say: כמה מבוגרים מעל לגיל 18 יש בבית?
+                    - wait:
+                        variable: _household_adults
+                        placeholder: מספר האנשים הנוספים, 0-99
+                        validation: "[0-9]+"
+                        input-kind: number
+                        input-min: 0
+                        input-max: 99
+                  
+                    - say: וכמה ילדים מתחת לגיל 18, חוץ ממך?
+                    - wait:
+                        variable: _household_minors
+                        placeholder: מספר האנשים הנוספים, 0-99
+                        validation: "[0-9]+"
+                        input-kind: number
+                        input-min: 0
+                        input-max: 99
+
+
         - switch:
             arg: _isAdult
             cases:
