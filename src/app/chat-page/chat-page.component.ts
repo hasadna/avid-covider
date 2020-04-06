@@ -259,24 +259,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         return payload;
       }),
       switchMap((payload) => {
-        return new Promise((resolve, reject) => {
-          try {
-            window['grecaptcha'].execute(window['RECAPTCHA_SITE_KEY'], {action: 'submit'})
-            .then(
-              (token) => {
-                payload['recaptcha'] = token;
-                resolve(payload);
-              },
-              () => {
-                resolve(payload);
-              }
-            );
-          } catch (e) {
-            resolve(payload);
-          }
-        });
-      }),
-      switchMap((payload) => {
         if (window.location.hostname === 'coronaisrael.org') {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
         } else {
