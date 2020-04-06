@@ -485,8 +485,8 @@ export const script = {
           "name": "preconditions",
           "steps": [
             {
-              "say": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
-              "uid": "adf992b1c0"
+              "say": "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום?",
+              "uid": "d2be3bc37f"
             },
             {
               "goto": "preconditions-diseases",
