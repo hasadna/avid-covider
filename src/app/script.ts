@@ -479,7 +479,7 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "<span class='empty'>לא אובחנתי באף אחד מאלה</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>ללא מחלות רקע</span>"
+                    "show": "<span class='empty'>אף אחת ממחלות הרקע הללו</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>ללא מחלות רקע</span>"
                   }
                 ],
                 "variable": "_var"
@@ -1104,7 +1104,7 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו"
+                    "show": "<span class='empty'>אף אחד מהתסמינים האלה</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין תסמינים</span>"
                   }
                 ],
                 "variable": "_var"
@@ -1159,7 +1159,7 @@ export const script = {
                             },
                             {
                               "class": "other",
-                              "show": "זהו"
+                              "show": "<span class='empty'>אף אחד מהתסמינים האלה</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>"
                             }
                           ],
                           "variable": "_var"
@@ -1221,7 +1221,7 @@ export const script = {
                             },
                             {
                               "class": "other",
-                              "show": "זהו"
+                              "show": "<span class='empty'>אף אחד מהתסמינים האלה</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>      "
                             }
                           ],
                           "variable": "_var"

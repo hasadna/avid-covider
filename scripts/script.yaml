@@ -450,7 +450,7 @@
               field: symptoms_tiredness_or_fatigue
             - show: איבדתי את חוש הטעם או הריח
               field: symptoms_smell_taste_loss
-              - show: |-
+            - show: |-
                 <span class='empty'>אף אחד מהתסמינים האלה</span>
                 <span class='not-empty'>זהו</span>
                 <span class='none-selected'>אין תסמינים</span>
@@ -481,10 +481,10 @@
                   - show: שיעול לח, או שיעול עם כיח
                     field: symptoms_moist_cough
                   - show: |-
-                    <span class='empty'>אף אחד מהתסמינים האלה</span>
-                    <span class='not-empty'>זהו</span>
-                    <span class='none-selected'>אין פרטים נוספים</span>
-                        class: other
+                      <span class='empty'>אף אחד מהתסמינים האלה</span>
+                      <span class='not-empty'>זהו</span>
+                      <span class='none-selected'>אין פרטים נוספים</span>
+                    class: other
               - do:
                   cmd: update_from_selection
                   params:
