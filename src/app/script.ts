@@ -417,8 +417,8 @@ export const script = {
           "name": "preconditions",
           "steps": [
             {
-              "say": "אני אשאל אותך על כמה מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר:",
-              "uid": "adf992b1c0"
+              "say": "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:",
+              "uid": "6861e5ea76"
             },
             {
               "goto": "preconditions-diseases",
@@ -1190,7 +1190,7 @@ export const script = {
           "steps": [
             {
               "switch": {
-                "arg": "toplevel_symptoms_cough",
+                "arg": "toplevel_symptoms_pains",
                 "cases": [
                   {
                     "default": true
@@ -1242,7 +1242,7 @@ export const script = {
                   }
                 ]
               },
-              "uid": "7d332e2f3d"
+              "uid": "8f88af58ea"
             }
           ],
           "uid": "7ca6e7b00e"
