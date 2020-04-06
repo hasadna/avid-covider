@@ -479,7 +479,7 @@ export const script = {
                   },
                   {
                     "class": "other",
-                    "show": "זהו"
+                    "show": "<span class='empty'>לא אובחנתי באף אחד מאלה</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>ללא מחלות רקע</span>"
                   }
                 ],
                 "variable": "_var"
@@ -1190,7 +1190,7 @@ export const script = {
           "steps": [
             {
               "switch": {
-                "arg": "toplevel_symptoms_cough",
+                "arg": "toplevel_symptoms_pains",
                 "cases": [
                   {
                     "default": true
@@ -1242,7 +1242,7 @@ export const script = {
                   }
                 ]
               },
-              "uid": "7d332e2f3d"
+              "uid": "8f88af58ea"
             }
           ],
           "uid": "7ca6e7b00e"

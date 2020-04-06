@@ -195,7 +195,10 @@
               field: precondition_chronic_kidney_failure
             - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
               field: precondition_chronic_immune_system_suppression
-            - show: זהו
+            - show: |-
+                <span class='empty'>אף אחת ממחלות הרקע הללו</span>
+                <span class='not-empty'>זהו</span>
+                <span class='none-selected'>ללא מחלות רקע</span>
               class: other
         - do:
             cmd: update_from_selection
@@ -447,7 +450,10 @@
               field: symptoms_tiredness_or_fatigue
             - show: איבדתי את חוש הטעם או הריח
               field: symptoms_smell_taste_loss
-            - show: זהו
+              - show: |-
+                <span class='empty'>אף אחד מהתסמינים האלה</span>
+                <span class='not-empty'>זהו</span>
+                <span class='none-selected'>אין תסמינים</span>
               class: other
       - do:
           cmd: update_from_selection
@@ -474,8 +480,11 @@
                     field: symptoms_dry_cough
                   - show: שיעול לח, או שיעול עם כיח
                     field: symptoms_moist_cough
-                  - show: זהו
-                    class: other
+                  - show: |-
+                    <span class='empty'>אף אחד מהתסמינים האלה</span>
+                    <span class='not-empty'>זהו</span>
+                    <span class='none-selected'>אין פרטים נוספים</span>
+                        class: other
               - do:
                   cmd: update_from_selection
                   params:
@@ -501,7 +510,10 @@
                     field: symptoms_headache
                   - show: כאבי גרון
                     field: symptoms_sore_throat
-                  - show: זהו
+                  - show: |-
+                      <span class='empty'>אף אחד מהתסמינים האלה</span>
+                      <span class='not-empty'>זהו</span>
+                      <span class='none-selected'>אין פרטים נוספים</span>      
                     class: other
               - do:
                   cmd: update_from_selection

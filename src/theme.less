@@ -226,6 +226,15 @@ htl-hatool {
                                     display: none;
                                 }
                             }
+                            > span.empty { display: inline; }
+                            > span.not-empty { display: none; }
+                            > span.none-selected { display: none; }
+                        }
+                        &.checked {
+                            button {
+                                > span.empty { display: none; }
+                                > span.not-empty { display: inline; }
+                            }
                         }
                         &.selected {
                             flex-flow: column !important;
@@ -234,6 +243,17 @@ htl-hatool {
 
                             button.selected {
                                 margin-bottom: 8px;
+                            }
+                            button.other {
+                                display: flex;
+                                > span.empty { display: none; }
+                                > span.not-empty { display: none; }
+                                > span.none-selected { display: inline; }
+                            }
+                            &.checked {
+                                button.not-selected {
+                                    display: none;
+                                }
                             }
                         }
                     }
