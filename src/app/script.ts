@@ -324,13 +324,81 @@ export const script = {
             },
             {
               "do": {
+                "cmd": "hasHouseholdData",
+                "params": [
+                  "record"
+                ],
+                "variable": "_has_household_data"
+              },
+              "uid": "2a943c084e"
+            },
+            {
+              "switch": {
+                "arg": "_has_household_data",
+                "cases": [
+                  {
+                    "match": false,
+                    "steps": [
+                      {
+                        "say": "כעת נשאל כמה אנשים גרים איתך בבית או בדירה -",
+                        "uid": "e7cc3908ff"
+                      },
+                      {
+                        "say": "כמה מבוגרים מעל לגיל 18?",
+                        "uid": "8bd422e516"
+                      },
+                      {
+                        "uid": "0ac89ac07f",
+                        "wait": {
+                          "input-kind": "number",
+                          "input-max": 99,
+                          "input-min": 0,
+                          "placeholder": "מספר האנשים מעל גיל 18 שמתגוררים איתך, (0-99)",
+                          "validation": "[0-9]+",
+                          "variable": "_household_adults"
+                        }
+                      },
+                      {
+                        "say": "וכמה ילדים מתחת לגיל 18?",
+                        "uid": "9615db2ea9"
+                      },
+                      {
+                        "uid": "f5bc044445",
+                        "wait": {
+                          "input-kind": "number",
+                          "input-max": 99,
+                          "input-min": 0,
+                          "placeholder": "מספר האנשים מתחת לגיל 18 שמתגוררים איתך, (0-99)",
+                          "validation": "[0-9]+",
+                          "variable": "_household_minors"
+                        }
+                      }
+                    ],
+                    "uid": "12a8d142c9"
+                  },
+                  {
+                    "default": true,
+                    "steps": [
+                      {
+                        "say": "אוקיי, יש לך בניבית",
+                        "uid": "1fd1a221d6"
+                      }
+                    ],
+                    "uid": "383e3704f9"
+                  }
+                ]
+              },
+              "uid": "4ea4372375"
+            },
+            {
+              "do": {
                 "cmd": "isAdult",
                 "params": [
                   "record"
                 ],
                 "variable": "_isAdult"
               },
-              "uid": "92dd5295a0"
+              "uid": "ff88ebf6ca"
             },
             {
               "switch": {
@@ -347,10 +415,10 @@ export const script = {
                               "steps": [
                                 {
                                   "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                                  "uid": "9e47401a4a"
+                                  "uid": "f21abaa60d"
                                 },
                                 {
-                                  "uid": "0ee0343dc4",
+                                  "uid": "a193745d13",
                                   "wait": {
                                     "options": [
                                       {
@@ -366,7 +434,7 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "bcac3a1b7e",
+                              "uid": "fd54eca6a5",
                               "undefined": true
                             },
                             {
@@ -374,14 +442,14 @@ export const script = {
                             }
                           ]
                         },
-                        "uid": "bdf9c485b5"
+                        "uid": "bfe332a80b"
                       }
                     ],
-                    "uid": "d25325b47f"
+                    "uid": "688c92f408"
                   }
                 ]
               },
-              "uid": "09d1a47992"
+              "uid": "98aa0df139"
             }
           ],
           "uid": "ab5b28894d"
@@ -1190,7 +1258,7 @@ export const script = {
           "steps": [
             {
               "switch": {
-                "arg": "toplevel_symptoms_cough",
+                "arg": "toplevel_symptoms_pains",
                 "cases": [
                   {
                     "default": true
@@ -1242,7 +1310,7 @@ export const script = {
                   }
                 ]
               },
-              "uid": "7d332e2f3d"
+              "uid": "8f88af58ea"
             }
           ],
           "uid": "7ca6e7b00e"

@@ -200,6 +200,18 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         inInsulation: (record: any) => {
           return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
         },
+        hasHouseholdData: (record: any) => {
+          try {
+            if (record.hasOwnProperty('_household_adults') && record.hasOwnProperty('_household_minors')) {
+              console.log(`found past data hosehold  ${record._household_adults} and ${record._household_minors}`)
+              return (parseInt(record._household_adults) >=0 && parseInt(record._household_minors)>=0)
+            } else {
+              return false
+            }            
+          } catch (err) {
+            console.error(`household past data check failed: ${err}`)
+          }
+        },
         clear_fields: (record: any, ...fields: string[]) => {
           for (const re of fields) {
             const regexp = new RegExp('^' + re + '$');

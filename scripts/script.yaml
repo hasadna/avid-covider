@@ -127,7 +127,40 @@
                     - "בת {{age}} מ{{street}} {{city_town}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
-        
+            
+        - do:
+            cmd: hasHouseholdData
+            params: 
+              - record
+            variable: _has_household_data
+
+        - switch:
+            arg: _has_household_data
+            cases:
+            - match: false
+              steps:
+              - say: כעת נשאל כמה אנשים גרים איתך בבית או בדירה - 
+              - say: כמה מבוגרים מעל לגיל 18?
+              - wait:
+                  variable: _household_adults
+                  placeholder: מספר האנשים מעל גיל 18 שמתגוררים איתך, (0-99)
+                  validation: "[0-9]+"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 99
+              - say: וכמה ילדים מתחת לגיל 18?
+              - wait:
+                  variable: _household_minors
+                  placeholder: מספר האנשים מתחת לגיל 18 שמתגוררים איתך, (0-99)
+                  validation: "[0-9]+"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 99
+
+            - default: true
+              steps:
+              - say: "אוקיי, יש לך בניבית"
+
         - do:
             cmd: isAdult
             params: 
