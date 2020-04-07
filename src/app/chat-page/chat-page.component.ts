@@ -133,7 +133,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         fetch_previous_reports: (same_address_text, new_address_text) => {
           const aliases = {};
-          const sliceIdx = PRODUCTION ? 10 : 15;
+          const sliceIdx = PRODUCTION ? 10 : 16;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
           const today_aliases = {};
           for (const report of this.storage.reports) {
@@ -207,6 +207,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 }
               }
             }
+            console.log('HOUSEHOLD', _household_adults, 'ADULTS', _household_minors, 'MINORS');
             Object.assign(record, {_household_adults, _household_minors, _household_data_available});
           } catch (err) {
             console.error(`household past data check failed: ${err}`);
@@ -229,7 +230,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               }
             }
             console.log('PSD', _public_service_last_answer, _public_service_last_reported);
-            const timeout = PRODUCTION ? 86400 * 7 * 1000 : 10 * 60 * 1000;
+            const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
+            if (_public_service_last_reported) {
+              console.log('LAST REPORT TIME', new Date(_public_service_last_reported).toISOString());
+              console.log('NEXT REPORT TIME', new Date(_public_service_last_reported + timeout).toISOString());
+            }
             if (!_public_service_last_reported || ((Date.now().valueOf() - _public_service_last_reported) > timeout)) {
               console.log('PSD required');
               _public_service_status = 'required';
@@ -275,6 +280,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         is_adult: (record: any) => {
           try {
             const age = parseInt(record.age, 10);
+            console.log('IS ADULT', age, '->', age >= 18);
             return age >= 18;
           } catch (err) {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
