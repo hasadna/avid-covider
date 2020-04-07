@@ -9,7 +9,6 @@ import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
-import { parse } from 'querystring';
 
 @Component({
   selector: 'app-chat-page',
@@ -157,7 +156,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
-                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling'
+                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling', '_household.*'
               ])
             });
             options.push(option);
@@ -190,41 +189,51 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           Object.assign(record, record[varname]);
           delete record[varname];
         },
-        hasHouseholdData: (record: any) => {
+        fetch_household_data: (record: any) => {
           try {
-            if (record.hasOwnProperty('_household_adults') && record.hasOwnProperty('_household_minors')) {
-              console.log(`found past data hosehold  ${record._household_adults} and ${record._household_minors}`)
-              return (parseInt(record._household_adults) >=0 && parseInt(record._household_minors)>=0)
-            } else {
-              return false
-            }            
+            let _household_adults = null;
+            let _household_minors = null;
+            let _household_data_available = null;
+            for (const report of this.storage.reports) {
+              const r = report[1];
+              if ((r.city_town === record.city_town) && (r.street === record.street) ) {
+                try {
+                  _household_adults = parseInt(r._household_adults, 10);
+                  _household_minors = parseInt(r._household_minors, 10);
+                  _household_data_available = !!r._household_data_available;
+                } catch (e) {
+                  console.log('Bad old report data', r);
+                }
+              }
+            }
+            Object.assign(record, {_household_adults, _household_minors, _household_data_available});
           } catch (err) {
             console.error(`household past data check failed: ${err}`)
           }
         },
-        calculateMetDailyAdults: (record: any) => {
+        calculate_met_daily: (record: any) => {
           try {
-            console.log(record._household_adults);
-            console.log(record._met_above_18);
-            const total = parseInt(record._household_adults) + parseInt(record._met_above_18)
-            console.log(`calculated met adults: ${total}`)
-            return total
-          }
-          catch (err) {
-            console.error(`error while trying to calculate household adults: ${err}`)
+            const _household_data_available = true;
+            let met_above_18 =
+              parseInt(record._household_adults || 0, 10) +
+              parseInt(record._met_above_18 || 0, 10);
+            let met_under_18 =
+              parseInt(record._household_minors || 0, 10) +
+              parseInt(record._met_under_18 || 0, 10);
+            if (!!record._is_adult) {
+              met_above_18 -= 1;
+            } else {
+              met_under_18 -= 1;
+            }
+            Object.assign(record, {met_under_18, met_above_18, _household_data_available});
+            console.log(`calculated met adults:`,
+                        'met:', record.met_above_18, record.met_under_18,
+                        'household:', record._household_adults, record._household_minors, record._household_data_available)
+          } catch (e) {
+            console.log('Failed to calculate met daily', e);
           }
         },
-        calculateMetDailyMinors: (record: any) => {
-          try {
-            const total = parseInt(record._household_minors) + parseInt(record._met_under_18)
-            console.log(`calculated met minors ${total}`)
-            return total
-          }
-          catch (err) {
-            console.error(`error while trying to calculate household adults: ${err}`)
-          }
-        },
-        isAdult: (record: any) => {
+        is_adult: (record: any) => {
           try {
             const age = parseInt(record.age, 10);
             return age >= 18;
@@ -232,7 +241,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
           }
         },
-        inInsulation: (record: any) => {
+        in_insulation: (record: any) => {
           return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
         },
         clear_fields: (record: any, ...fields: string[]) => {
@@ -264,7 +273,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       (key, value, record) => {}
     ).pipe(
       map(() => {
-        const payload = this.prepareToSave(this.runner.record);
+        const payload = this.runner.record;
         payload['version'] = VERSION;
         payload['locale'] = this.locale;
         payload['layout'] = this.layout;
@@ -278,8 +287,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         }
         payload['notificationsEnabled'] = this.notifications.canAddNotification;
         payload['engagementSource'] = this.source.getSource();
+        payload['_cityTownSuggestions'] = null;
         this.storage.addReport(payload);
-        return payload;
+        return this.prepareToSave(payload);
       }),
       switchMap((payload) => {
         if (window.location.hostname === 'coronaisrael.org') {
