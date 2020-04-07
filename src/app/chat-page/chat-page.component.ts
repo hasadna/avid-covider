@@ -215,22 +215,24 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         fetch_public_service_data: (record: any) => {
           try {
-            let _public_service_last_answer = null;
+            let _public_service_last_reported_yes = null;
             let _public_service_last_reported = null;
             let _public_service_status = null;
             for (const report of this.storage.reports) {
               const r = report[1];
               if (r.alias === record.alias) {
                 try {
-                  _public_service_last_answer = !!r._public_service_last_answer;
+                  _public_service_last_reported_yes = parseInt(r._public_service_last_reported_yes, 10);
                   _public_service_last_reported = parseInt(r._public_service_last_reported, 10);
                 } catch (e) {
                   console.log('Bad old report data', r);
                 }
               }
             }
-            console.log('PSD', _public_service_last_answer, _public_service_last_reported);
             const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
+            if (_public_service_last_reported_yes) {
+              console.log('LAST YES REPORT TIME', new Date(_public_service_last_reported_yes).toISOString());
+            }
             if (_public_service_last_reported) {
               console.log('LAST REPORT TIME', new Date(_public_service_last_reported).toISOString());
               console.log('NEXT REPORT TIME', new Date(_public_service_last_reported + timeout).toISOString());
@@ -241,20 +243,24 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             } else {
               _public_service_status = 'valid';
               console.log('PSD valid');
-              if (!!_public_service_last_answer) {
+              if (!!_public_service_last_reported_yes &&
+                  ((Date.now().valueOf() - _public_service_last_reported_yes) < 2 * timeout)) {
                 record.served_public_last_fortnight = true;
-                console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
+                console.log('SERVED MORE THAN 10 PEOPLE IN PAST 2 WEEKS:', record.served_public_last_fortnight);
               }
             }
-            Object.assign(record, {_public_service_status, _public_service_last_reported});
+            Object.assign(record, {_public_service_status, _public_service_last_reported, _public_service_last_reported_yes});
           } catch (err) {
-            console.error(`household past data check failed: ${err}`);
+            console.error(`psd past data check failed: ${err}`);
           }
         },
         save_public_service_data: (record: any) => {
           record._public_service_last_reported = Date.now().valueOf();
-          record._public_service_last_answer = record.served_public_last_fortnight;
+          if (record.served_public_last_fortnight) {
+            record._public_service_last_reported_yes = Date.now().valueOf();
+          }
           console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
+          console.log('LAST YES REPORT TIME', new Date(record._public_service_last_reported_yes).toISOString());
         },
         calculate_met_daily: (record: any) => {
           try {
