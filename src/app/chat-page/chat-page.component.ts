@@ -228,12 +228,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 }
               }
             }
+            console.log('PSD', _public_service_last_answer, _public_service_last_reported);
             const timeout = PRODUCTION ? 86400 * 7 * 1000 : 10 * 60 * 1000;
-            if (!_public_service_last_reported || (Date.now().valueOf() - _public_service_last_reported) > timeout) {
+            if (!_public_service_last_reported || ((Date.now().valueOf() - _public_service_last_reported) > timeout)) {
+              console.log('PSD required');
               _public_service_status = 'required';
             } else {
               _public_service_status = 'valid';
+              console.log('PSD valid');
               if (!!_public_service_last_answer) {
+                console.log('PSD setting value to true');
                 record.served_public_last_fortnight = true;
               }
             }
@@ -245,6 +249,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         save_public_service_data: (record: any) => {
           record._public_service_last_reported = Date.now().valueOf();
           record._public_service_last_answer = record.served_public_last_fortnight;
+          console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
         },
         calculate_met_daily: (record: any) => {
           try {
@@ -261,9 +266,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               met_under_18 -= 1;
             }
             Object.assign(record, {met_under_18, met_above_18, _household_data_available});
-            console.log(`calculated met adults:`,
-                        'met:', record.met_above_18, record.met_under_18,
-                        'household:', record._household_adults, record._household_minors, record._household_data_available);
+            console.log('MET WITH ADULTS:', record.met_above_18);
+            console.log('MET WITH KIDS:', record.met_under_18);
           } catch (e) {
             console.log('Failed to calculate met daily', e);
           }

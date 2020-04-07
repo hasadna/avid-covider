@@ -612,7 +612,7 @@
               - record
 
         - switch:
-            arg: is_adult
+            arg: _is_adult
             cases:
               - default: true
               - match: true

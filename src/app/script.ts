@@ -1432,7 +1432,7 @@ export const script = {
             },
             {
               "switch": {
-                "arg": "is_adult",
+                "arg": "_is_adult",
                 "cases": [
                   {
                     "default": true
@@ -1500,7 +1500,7 @@ export const script = {
                   }
                 ]
               },
-              "uid": "a121cc1891"
+              "uid": "aced4d907f"
             }
           ],
           "uid": "ce7628ae51"
