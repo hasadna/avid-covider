@@ -116,14 +116,6 @@ export const script = {
                           ]
                         },
                         "uid": "8c6d2e311f"
-                      },
-                      {
-                        "say": "הכי טוב כשכולם מדווחים על עצמם בכל יום",
-                        "uid": "34f7fd91ef"
-                      },
-                      {
-                        "say": "אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
-                        "uid": "a46ed1d5ca"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -324,18 +316,143 @@ export const script = {
             },
             {
               "do": {
-                "cmd": "isAdult",
+                "cmd": "is_adult",
                 "params": [
                   "record"
                 ],
-                "variable": "_isAdult"
+                "variable": "_is_adult"
               },
-              "uid": "92dd5295a0"
+              "uid": "32853d136a"
+            },
+            {
+              "do": {
+                "cmd": "fetch_household_data",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "895892c2cc"
             },
             {
               "switch": {
-                "arg": "_isAdult",
+                "arg": "_household_data_available",
                 "cases": [
+                  {
+                    "match": true
+                  },
+                  {
+                    "default": true,
+                    "steps": [
+                      {
+                        "say": "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{street}} {{city_town}} -",
+                        "uid": "621928ce03"
+                      },
+                      {
+                        "say": "כמה מבוגרים מעל לגיל 18 גרים בבית?",
+                        "uid": "8a0382e6c1"
+                      },
+                      {
+                        "switch": {
+                          "arg": "_is_adult",
+                          "cases": [
+                            {
+                              "match": true,
+                              "steps": [
+                                {
+                                  "uid": "b9df1b176f",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 1,
+                                    "placeholder": "מספר המבוגרים ,1-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_adults"
+                                  }
+                                }
+                              ],
+                              "uid": "5ba08ebdef"
+                            },
+                            {
+                              "match": false,
+                              "steps": [
+                                {
+                                  "uid": "9ddb38850f",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר המבוגרים ,0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_adults"
+                                  }
+                                }
+                              ],
+                              "uid": "4e36d11757"
+                            }
+                          ]
+                        },
+                        "uid": "3c567f5b5b"
+                      },
+                      {
+                        "say": "וכמה ילדים מתחת לגיל 18?",
+                        "uid": "cadc9957e0"
+                      },
+                      {
+                        "switch": {
+                          "arg": "_is_adult",
+                          "cases": [
+                            {
+                              "match": true,
+                              "steps": [
+                                {
+                                  "uid": "b4ae1ceaaa",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 0,
+                                    "placeholder": "מספר הילדים, 0-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_minors"
+                                  }
+                                }
+                              ],
+                              "uid": "0c96d5c98c"
+                            },
+                            {
+                              "match": false,
+                              "steps": [
+                                {
+                                  "uid": "72f2ec1bbb",
+                                  "wait": {
+                                    "input-kind": "number",
+                                    "input-max": 99,
+                                    "input-min": 1,
+                                    "placeholder": "מספר הילדים, 1-99",
+                                    "validation": "[0-9]+",
+                                    "variable": "_household_minors"
+                                  }
+                                }
+                              ],
+                              "uid": "7a718c6c40"
+                            }
+                          ]
+                        },
+                        "uid": "f5416b3eb6"
+                      }
+                    ],
+                    "uid": "1e14d30084"
+                  }
+                ]
+              },
+              "uid": "6409f67795"
+            },
+            {
+              "switch": {
+                "arg": "_is_adult",
+                "cases": [
+                  {
+                    "default": true
+                  },
                   {
                     "match": true,
                     "steps": [
@@ -347,10 +464,10 @@ export const script = {
                               "steps": [
                                 {
                                   "say": "האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?",
-                                  "uid": "9e47401a4a"
+                                  "uid": "f21abaa60d"
                                 },
                                 {
-                                  "uid": "0ee0343dc4",
+                                  "uid": "a193745d13",
                                   "wait": {
                                     "options": [
                                       {
@@ -366,7 +483,7 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "bcac3a1b7e",
+                              "uid": "fd54eca6a5",
                               "undefined": true
                             },
                             {
@@ -374,14 +491,14 @@ export const script = {
                             }
                           ]
                         },
-                        "uid": "bdf9c485b5"
+                        "uid": "bfe332a80b"
                       }
                     ],
-                    "uid": "d25325b47f"
+                    "uid": "688c92f408"
                   }
                 ]
               },
-              "uid": "09d1a47992"
+              "uid": "6379bd7362"
             }
           ],
           "uid": "ab5b28894d"
@@ -1251,42 +1368,67 @@ export const script = {
           "name": "exposures",
           "steps": [
             {
-              "say": "חשוב לנו לדעת",
-              "uid": "8a4526029f"
+              "say": "חשוב לנו לדעת -",
+              "uid": "1700fdb725"
             },
             {
-              "say": "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים,",
-              "uid": "933db4184c"
+              "say": "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים",
+              "uid": "9f918e739e"
             },
             {
-              "say": "כמה מהם מתחת לגיל 18?",
-              "uid": "d6876d7311"
-            },
-            {
-              "uid": "16311dae71",
+              "uid": "e1add559ab",
               "wait": {
-                "input-kind": "number",
-                "input-max": 99,
-                "input-min": 0,
-                "placeholder": "מספר האנשים, 0-99",
-                "validation": "[0-9]+",
-                "variable": "met_under_18"
+                "options": [
+                  {
+                    "show": "כן, שהיתי בקרבת אנשים נוספים",
+                    "steps": [
+                      {
+                        "say": "כמה מהם מבוגרים מעל גיל 18?",
+                        "uid": "db34667715"
+                      },
+                      {
+                        "uid": "b2e4827138",
+                        "wait": {
+                          "input-kind": "number",
+                          "input-max": 99,
+                          "input-min": 0,
+                          "placeholder": "מספר המבוגרים, 0-99",
+                          "validation": "[0-9]+",
+                          "variable": "_met_above_18"
+                        }
+                      },
+                      {
+                        "say": "ןכמה ילדים מתחת לגיל 18?",
+                        "uid": "3d9b335ba0"
+                      },
+                      {
+                        "uid": "a52138305e",
+                        "wait": {
+                          "input-kind": "number",
+                          "input-max": 99,
+                          "input-min": 0,
+                          "placeholder": "מספר הילדים, 0-99",
+                          "validation": "[0-9]+",
+                          "variable": "_met_under_18"
+                        }
+                      }
+                    ],
+                    "uid": "e169d07c3b"
+                  },
+                  {
+                    "show": "לא, רק עם בני ביתי"
+                  }
+                ]
               }
             },
             {
-              "say": "וכמה מעל גיל 18?",
-              "uid": "c5118716df"
-            },
-            {
-              "uid": "a9b1fc2c72",
-              "wait": {
-                "input-kind": "number",
-                "input-max": 99,
-                "input-min": 0,
-                "placeholder": "מספר האנשים, 0-99",
-                "validation": "[0-9]+",
-                "variable": "met_above_18"
-              }
+              "do": {
+                "cmd": "calculate_met_daily",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "f2d49a4869"
             }
           ],
           "uid": "ce7628ae51"
