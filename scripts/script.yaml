@@ -573,7 +573,7 @@
         - say: "אם שהית בקרבת אנשים שונים ביממה האחרונה למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים,"
         - say: כמה מהם מתחת לגיל 18?
         - wait:
-            variable: met_under_18
+            variable: _met_under_18
             placeholder: מספר האנשים, 0-99
             validation: "[0-9]+"
             input-kind: number
@@ -582,12 +582,22 @@
 
         - say: וכמה מעל גיל 18?
         - wait:
-            variable: met_above_18
+            variable: _met_above_18
             placeholder: מספר האנשים, 0-99
             validation: "[0-9]+"
             input-kind: number
             input-min: 0
             input-max: 99
+
+        - do:
+            cmd: calculateMetDailyAdults
+            params: record
+            variable: met_above_18
+
+        - do:
+            cmd: calculateMetDailyMinors
+            params: record
+            variable: met_under_18              
 
     - name: end-of-report
       steps:

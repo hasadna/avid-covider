@@ -1371,14 +1371,14 @@ export const script = {
               "uid": "d6876d7311"
             },
             {
-              "uid": "16311dae71",
+              "uid": "2b04440465",
               "wait": {
                 "input-kind": "number",
                 "input-max": 99,
                 "input-min": 0,
                 "placeholder": "מספר האנשים, 0-99",
                 "validation": "[0-9]+",
-                "variable": "met_under_18"
+                "variable": "_met_under_18"
               }
             },
             {
@@ -1386,15 +1386,31 @@ export const script = {
               "uid": "c5118716df"
             },
             {
-              "uid": "a9b1fc2c72",
+              "uid": "58e1949802",
               "wait": {
                 "input-kind": "number",
                 "input-max": 99,
                 "input-min": 0,
                 "placeholder": "מספר האנשים, 0-99",
                 "validation": "[0-9]+",
-                "variable": "met_above_18"
+                "variable": "_met_above_18"
               }
+            },
+            {
+              "do": {
+                "cmd": "calculateMetDailyAdults",
+                "params": "record",
+                "variable": "met_above_18"
+              },
+              "uid": "5cdc079123"
+            },
+            {
+              "do": {
+                "cmd": "calculateMetDailyMinors",
+                "params": "record",
+                "variable": "met_under_18"
+              },
+              "uid": "2439be45ea"
             }
           ],
           "uid": "ce7628ae51"

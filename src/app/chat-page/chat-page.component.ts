@@ -9,6 +9,7 @@ import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
+import { parse } from 'querystring';
 
 @Component({
   selector: 'app-chat-page',
@@ -199,6 +200,28 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }            
           } catch (err) {
             console.error(`household past data check failed: ${err}`)
+          }
+        },
+        calculateMetDailyAdults: (record: any) => {
+          try {
+            console.log(record._household_adults);
+            console.log(record._met_above_18);
+            const total = parseInt(record._household_adults) + parseInt(record._met_above_18)
+            console.log(`calculated met adults: ${total}`)
+            return total
+          }
+          catch (err) {
+            console.error(`error while trying to calculate household adults: ${err}`)
+          }
+        },
+        calculateMetDailyMinors: (record: any) => {
+          try {
+            const total = parseInt(record._household_minors) + parseInt(record._met_under_18)
+            console.log(`calculated met minors ${total}`)
+            return total
+          }
+          catch (err) {
+            console.error(`error while trying to calculate household adults: ${err}`)
           }
         },
         isAdult: (record: any) => {
