@@ -208,7 +208,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
             Object.assign(record, {_household_adults, _household_minors, _household_data_available});
           } catch (err) {
-            console.error(`household past data check failed: ${err}`)
+            console.error(`household past data check failed: ${err}`);
           }
         },
         calculate_met_daily: (record: any) => {
@@ -228,7 +228,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(record, {met_under_18, met_above_18, _household_data_available});
             console.log(`calculated met adults:`,
                         'met:', record.met_above_18, record.met_under_18,
-                        'household:', record._household_adults, record._household_minors, record._household_data_available)
+                        'household:', record._household_adults, record._household_minors, record._household_data_available);
           } catch (e) {
             console.log('Failed to calculate met daily', e);
           }
