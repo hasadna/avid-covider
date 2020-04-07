@@ -237,8 +237,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               _public_service_status = 'valid';
               console.log('PSD valid');
               if (!!_public_service_last_answer) {
-                console.log('PSD setting value to true');
                 record.served_public_last_fortnight = true;
+                console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
               }
             }
             Object.assign(record, {_public_service_status, _public_service_last_reported});
