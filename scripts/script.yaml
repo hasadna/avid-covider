@@ -611,6 +611,37 @@
             params:
               - record
 
+        - switch:
+            arg: is_adult
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: fetch_public_service_data
+                      params:
+                        - record
+                  - switch:
+                      arg: _public_service_status
+                      cases:
+                        - match: valid
+                        - match: required
+                          steps:
+                            - say: האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?
+                            - wait:
+                                variable: served_public_last_fortnight
+                                options:
+                                  - show: כן, נתתי שירות
+                                    value: true
+                                  - show: לא נתתי שירות
+                                    value: false
+                            - do:
+                                cmd: save_public_service_data
+                                params:
+                                  - record
+
+
+
     - name: end-of-report
       steps:
         - say: המון תודה, המידע ששלחת יעזור מאוד לחוקרים שלנו במכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.

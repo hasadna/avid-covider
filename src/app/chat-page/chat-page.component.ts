@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { VERSION } from '../constants';
+import { VERSION, PRODUCTION } from '../constants';
 import { script } from '../script';
 import { of, Subscription } from 'rxjs';
 import { ReportStoreService } from '../report-store.service';
@@ -133,7 +133,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         fetch_previous_reports: (same_address_text, new_address_text) => {
           const aliases = {};
-          const sliceIdx = window.location.hostname === 'coronaisrael.org' ? 10 : 15;
+          const sliceIdx = PRODUCTION ? 10 : 15;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
           const today_aliases = {};
           for (const report of this.storage.reports) {
@@ -156,7 +156,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
-                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling', '_household.*'
+                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
+                '_household.*', '_public_service.*'
               ])
             });
             options.push(option);
@@ -210,6 +211,40 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           } catch (err) {
             console.error(`household past data check failed: ${err}`);
           }
+        },
+        fetch_public_service_data: (record: any) => {
+          try {
+            let _public_service_last_answer = null;
+            let _public_service_last_reported = null;
+            let _public_service_status = null;
+            for (const report of this.storage.reports) {
+              const r = report[1];
+              if (r.alias === record.alias) {
+                try {
+                  _public_service_last_answer = !!r._public_service_last_answer;
+                  _public_service_last_reported = parseInt(r._public_service_last_reported, 10);
+                } catch (e) {
+                  console.log('Bad old report data', r);
+                }
+              }
+            }
+            const timeout = PRODUCTION ? 86400 * 7 * 1000 : 10 * 60 * 1000;
+            if (!_public_service_last_reported || (Date.now().valueOf() - _public_service_last_reported) > timeout) {
+              _public_service_status = 'required';
+            } else {
+              _public_service_status = 'valid';
+              if (!!_public_service_last_answer) {
+                record.served_public_last_fortnight = true;
+              }
+            }
+            Object.assign(record, {_public_service_status, _public_service_last_reported});
+          } catch (err) {
+            console.error(`household past data check failed: ${err}`);
+          }
+        },
+        save_public_service_data: (record: any) => {
+          record._public_service_last_reported = Date.now().valueOf();
+          record._public_service_last_answer = record.served_public_last_fortnight;
         },
         calculate_met_daily: (record: any) => {
           try {
@@ -292,7 +327,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         return this.prepareToSave(payload);
       }),
       switchMap((payload) => {
-        if (window.location.hostname === 'coronaisrael.org') {
+        if (PRODUCTION) {
           return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
         } else {
           console.log('WOULD SEND', payload);

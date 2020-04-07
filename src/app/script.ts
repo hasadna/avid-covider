@@ -1398,8 +1398,8 @@ export const script = {
                         }
                       },
                       {
-                        "say": "ןכמה ילדים מתחת לגיל 18?",
-                        "uid": "3d9b335ba0"
+                        "say": "וכמה ילדים מתחת לגיל 18?",
+                        "uid": "3d21f8a809"
                       },
                       {
                         "uid": "a52138305e",
@@ -1416,7 +1416,7 @@ export const script = {
                     "uid": "e169d07c3b"
                   },
                   {
-                    "show": "לא, רק עם בני ביתי"
+                    "show": "לא, רק עם בני הבית"
                   }
                 ]
               }
@@ -1429,6 +1429,78 @@ export const script = {
                 ]
               },
               "uid": "f2d49a4869"
+            },
+            {
+              "switch": {
+                "arg": "is_adult",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "fetch_public_service_data",
+                          "params": [
+                            "record"
+                          ]
+                        },
+                        "uid": "897cae5e13"
+                      },
+                      {
+                        "switch": {
+                          "arg": "_public_service_status",
+                          "cases": [
+                            {
+                              "match": "valid"
+                            },
+                            {
+                              "match": "required",
+                              "steps": [
+                                {
+                                  "say": "האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?",
+                                  "uid": "07940bc67a"
+                                },
+                                {
+                                  "uid": "7b2cd205c7",
+                                  "wait": {
+                                    "options": [
+                                      {
+                                        "show": "כן, נתתי שירות",
+                                        "value": true
+                                      },
+                                      {
+                                        "show": "לא נתתי שירות",
+                                        "value": false
+                                      }
+                                    ],
+                                    "variable": "served_public_last_fortnight"
+                                  }
+                                },
+                                {
+                                  "do": {
+                                    "cmd": "save_public_service_data",
+                                    "params": [
+                                      "record"
+                                    ]
+                                  },
+                                  "uid": "d8a160a666"
+                                }
+                              ],
+                              "uid": "e44769b360"
+                            }
+                          ]
+                        },
+                        "uid": "4b35972d5a"
+                      }
+                    ],
+                    "uid": "a1a27bcaeb"
+                  }
+                ]
+              },
+              "uid": "a121cc1891"
             }
           ],
           "uid": "ce7628ae51"

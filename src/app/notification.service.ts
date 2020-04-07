@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PRODUCTION } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -39,8 +40,7 @@ export class NotificationService {
       console.log('Got permission', permission);
       const registration = await navigator.serviceWorker.getRegistration();
       console.log('got registration', registration);
-      const timeout = (window.location.hostname === 'avid-covider.phonaris.com') ?
-        300 : 85500;
+      const timeout = PRODUCTION ? 85500 : 300;
       console.log('got timeout', timeout);
       const notificationHref = window.location.href.split('?')[0] + '?source=notification';
       if (registration) {
