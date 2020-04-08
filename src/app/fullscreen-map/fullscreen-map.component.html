@@ -3,7 +3,7 @@
   </div>
   <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()'></div>
 </div>
-<div class='overlay' *ngIf='mapService.overlayOpen() && mapService.needsToReport()'>
+<div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
   <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שבכל יום מדווחים על מצב הרפואי ועוזרים לחוקרי מכון ויצמן לזהות מוקדם ריכוז תסמיני קורונה.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>

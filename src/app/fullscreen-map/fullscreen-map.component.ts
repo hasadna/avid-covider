@@ -12,6 +12,7 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
 
   @Output() chat = new EventEmitter<void>();
   @Output() thankyou = new EventEmitter<void>();
+  private map: any;
 
   constructor(public mapService: MapService) {
   }
@@ -20,7 +21,7 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: 'fullscreen-map',
       style: 'mapbox://styles/mushon/ck8iswl5301yh1iqvv1fwmoz5',
       center: [34.796, 31.984],

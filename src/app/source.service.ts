@@ -12,7 +12,7 @@ export class SourceService {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {
     this.activatedRoute.queryParamMap.subscribe((queryParamMap) => {
-      this.source = queryParamMap.get('source') || queryParamMap.get('utm') || queryParamMap.get('utm_source') || this.source || 'map';
+      this.source = queryParamMap.get('source') || queryParamMap.get('utm') || queryParamMap.get('utm_source') || this.source || 'direct';
       this.router.navigate([], { queryParams: {source: null} });
       this.sourceStream.next(this.source);
     });
