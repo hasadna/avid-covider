@@ -11,7 +11,7 @@ export class MapService {
   overlayOpen = false;
   reportedToday = false;
 
-  constructor(private source: SourceService, private storage: SourceService) {
+  constructor(private source: SourceService) {
     this.source.sourceStream.subscribe((_source) => {
       if (_source === 'map') {
         this.overlayOpen = true;
