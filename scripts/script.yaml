@@ -5,6 +5,7 @@
       steps:
       - goto: intro
       - goto: reporting-loop
+      - goto: promotion
       - goto: end-of-report
 
     - name: intro
