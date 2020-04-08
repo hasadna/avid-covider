@@ -249,11 +249,11 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             } else {
               _public_service_status = 'valid';
               console.log('PSD valid');
-              if (!!_public_service_last_reported_yes &&
+            }
+            if (!!_public_service_last_reported_yes &&
                   ((Date.now().valueOf() - _public_service_last_reported_yes) < 2 * timeout)) {
-                record.served_public_last_fortnight = true;
-                console.log('SERVED MORE THAN 10 PEOPLE IN PAST 2 WEEKS:', record.served_public_last_fortnight);
-              }
+              record.served_public_last_fortnight = true;
+              console.log('SERVED MORE THAN 10 PEOPLE IN PAST 2 WEEKS:', record.served_public_last_fortnight);
             }
             Object.assign(record, {_public_service_status, _public_service_last_reported, _public_service_last_reported_yes});
           } catch (err) {
