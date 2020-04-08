@@ -2,6 +2,43 @@
   <div id='fullscreen-map'>
   </div>
   <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()'></div>
+  <div class='legend'>
+    <div class='parts'>
+      <div class='scale'>
+        <div class='label' i18n>ריכוז תסמינים:</div>
+        <div class='scale-rows'>
+          <div class='numbers'>
+            <span>2%</span>
+            <span>4%</span>
+            <span>6%</span>
+            <span>8%</span>
+          </div>
+          <div class='colors'>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <div class='no-info'>
+        <div class='label' i18n>
+          חוסר מידע:
+        </div>
+        <div class='scale-rows'>
+          <div class='numbers'>
+          </div>        
+          <div class='colors'>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='small-print' style='display: none;' i18n>
+במפה המוצגת כל אזור צבוע על פי כמות התסמינים אשר דווחה בו משאלונים שמילא הציבור באופן אנונימי. במידה ותסמין מסויים דווח בכמות גבוהה באזור מסויים צבעו יהיה בגוון סגול. לעומת זאת, תסמין אשר דווח ברמה מועטה באזור מסויים יצבע בגוון ירוק. רק ערים ושכונות עם לפחות 50 משיבים מוצגות. מעל 500 משיבים בכל עיר ומעל 250 בשכונות מוצגות בצבע מלא. יודגש כי הנתונים מייצגים את דיווחי התסמינים בלבד. הנתונים אינם מייצגים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה עצמו. כמו כן, על אף שהתסמינים המוצגים נמצאו נפוצים אצל חולים בנגיף הקורונה הם אינם ספציפיים למחלה זו בלבד ויכולים להיות קשורים למחלות נוספות
 </div>
 <div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
