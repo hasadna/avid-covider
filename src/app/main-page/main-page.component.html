@@ -8,7 +8,7 @@
     <app-intro-page *ngIf='mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
     <app-info-page *ngIf='mobile && tab==="info"' (start)='tab="chat"'></app-info-page>
     <app-chat-page *ngIf='tab==="chat"' [layout]='layout' (done)='tab=$event; ftab="thankyou"'></app-chat-page>
-    <app-fullscreen-map *ngIf='tab==="fullscreenmap"' (thankyou)='tab="thankyou"; ftab="thankyou"' (chat)='tab="chat"; ftab="intro"'></app-fullscreen-map>
+    <app-fullscreen-map *ngIf='tab==="fullscreenmap"' (thankyou)='tab="thankyou"; ftab="thankyou"' (chat)='tab=desktop ? "chat" : "intro"; ftab="intro"'></app-fullscreen-map>
     <app-thank-you-page *ngIf='mobile && tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
   </div>
 </div>
