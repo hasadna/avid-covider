@@ -3,21 +3,16 @@
   snippets:
     - name: default
       steps:
-      - goto: personal-details
-      - goto: preconditions-check
-      - goto: insulation
-      - goto: current-report
-      - goto: exposures
+      - goto: intro
+      - goto: reporting-loop
       - goto: end-of-report
 
-    - name: personal-details
+    - name: intro
       steps:
-
         - do:
             cmd: load_local_storage                 # Load the data of previous reports on device
             params:
             - record
-  
         - switch:
             arg: _existing_user
             cases:
@@ -27,10 +22,50 @@
               - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
               - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
+              - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
+              - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: הי! טוב לראותך שוב
               - say: הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה
+
+    - name: reporting-loop
+      steps:
+        - do:
+            cmd: clear
+        - goto: personal-details
+        - goto: preconditions-check
+        - goto: insulation
+        - goto: current-report
+        - goto: exposures
+        - say: זהו, סיימנו את הדיווח עבור {{alias}}
+        - do:
+            cmd: save_report
+            params:
+              - record
+        - say: האם דיווחת כבר על כל בני ביתך?
+        - wait:
+            options:
+              - show: לא, עדיין לא סיימתי
+                steps:
+                  - goto: reporting-loop
+              - show: כן, דיווחתי עבור כל בני ביתי
+                steps:
+                  - pop: default
+              
+    - name: personal-details
+      steps:
+        - do:
+            cmd: load_local_storage                 # Load the data of previous reports on device
+            params:
+            - record
+
+        - switch:
+            arg: _existing_user
+            cases:
+            - match: new                                                           # <--- First report on device
+            - match: returning                                                     # <--- Previous reports found on device
+              steps:
               - say: עבור מי ברצונך לדווח עכשיו?
               - do:
                   cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show

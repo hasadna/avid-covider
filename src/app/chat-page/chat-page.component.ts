@@ -128,6 +128,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       script,
       0,
       {
+        clear: () => {
+          this.runner.record = {};
+        },
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
         },
@@ -259,7 +262,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           if (record._served_public_last_fortnight) {
             record._public_service_last_reported_yes = Date.now().valueOf();
           }
-          record._served_public_last_fortnight = record._served_public_last_fortnight || record.served_public_last_fortnight;
+          record.served_public_last_fortnight = record._served_public_last_fortnight || record.served_public_last_fortnight;
           console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
           console.log('LAST YES REPORT TIME', new Date(record._public_service_last_reported_yes).toISOString());
         },
@@ -320,42 +323,42 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
+        },
+        save_report: (record) => {
+          let payload = Object.assign({}, record);
+          payload['version'] = VERSION;
+          payload['locale'] = this.locale;
+          payload['layout'] = this.layout;
+          try {
+            payload['numPreviousReports'] = this.storage.reports.length;
+            if (this.storage.reports.length > 0) {
+              payload['dateFirstReport'] = this.storage.reports[0][0];
+            }
+          } catch (e) {
+            console.log('Failed to add stats');
+          }
+          payload['notificationsEnabled'] = this.notifications.canAddNotification;
+          payload['engagementSource'] = this.source.getSource();
+          payload['_cityTownSuggestions'] = null;
+          this.storage.addReport(payload);
+          payload = this.prepareToSave(payload);
+          let obs = null;
+          if (PRODUCTION) {
+            obs = this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
+          } else {
+            console.log('WOULD SEND', payload);
+            obs = of({success: true});
+          }
+          obs.pipe(
+            catchError(() => of({success: false})),
+            map((response: any) => response.success)
+          ).subscribe((success) => {
+            console.log('saved, success=' + success);
+          });
         }
       },
       (key, value, record) => {}
-    ).pipe(
-      map(() => {
-        const payload = this.runner.record;
-        payload['version'] = VERSION;
-        payload['locale'] = this.locale;
-        payload['layout'] = this.layout;
-        try {
-          payload['numPreviousReports'] = this.storage.reports.length;
-          if (this.storage.reports.length > 0) {
-            payload['dateFirstReport'] = this.storage.reports[0][0];
-          }
-        } catch (e) {
-          console.log('Failed to add stats');
-        }
-        payload['notificationsEnabled'] = this.notifications.canAddNotification;
-        payload['engagementSource'] = this.source.getSource();
-        payload['_cityTownSuggestions'] = null;
-        this.storage.addReport(payload);
-        return this.prepareToSave(payload);
-      }),
-      switchMap((payload) => {
-        if (PRODUCTION) {
-          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
-        } else {
-          console.log('WOULD SEND', payload);
-          return of({success: true});
-        }
-      }),
-      catchError(() => of({success: false})),
-      map((response: any) => response.success)
     ).subscribe((success) => {
-      console.log('done, success=' + success);
-      this.started = false;
       this.done.emit();
     });
   }

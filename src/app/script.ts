@@ -10,31 +10,162 @@ export const script = {
           "name": "default",
           "steps": [
             {
-              "goto": "personal-details",
+              "goto": "intro",
               "uid": "a06dfaf7c2"
             },
             {
-              "goto": "preconditions-check",
+              "goto": "reporting-loop",
               "uid": "e9acb54132"
             },
             {
-              "goto": "insulation",
-              "uid": "7a26c4124f"
-            },
-            {
-              "goto": "current-report",
-              "uid": "346d2a3795"
-            },
-            {
-              "goto": "exposures",
-              "uid": "ff9a2f5002"
-            },
-            {
               "goto": "end-of-report",
-              "uid": "91d138c403"
+              "uid": "7a26c4124f"
             }
           ],
           "uid": "898235e117"
+        },
+        {
+          "name": "intro",
+          "steps": [
+            {
+              "do": {
+                "cmd": "load_local_storage",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "85e1eca3bb"
+            },
+            {
+              "switch": {
+                "arg": "_existing_user",
+                "cases": [
+                  {
+                    "match": "new",
+                    "steps": [
+                      {
+                        "say": "טוב שבאת,",
+                        "uid": "432fe8e599"
+                      },
+                      {
+                        "say": "התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה",
+                        "uid": "724fd9e1ce"
+                      },
+                      {
+                        "say": "אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר",
+                        "uid": "c50fbc1b4d"
+                      },
+                      {
+                        "say": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
+                        "uid": "7fd1d1ea6d"
+                      },
+                      {
+                        "say": "הכי טוב כשכולם מדווחים על עצמם בכל יום",
+                        "uid": "2af5c3ecb3"
+                      },
+                      {
+                        "say": "אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
+                        "uid": "82dee13fa2"
+                      }
+                    ],
+                    "uid": "804186b089"
+                  },
+                  {
+                    "match": "returning",
+                    "steps": [
+                      {
+                        "say": "הי! טוב לראותך שוב",
+                        "uid": "a4f3f4c1ff"
+                      },
+                      {
+                        "say": "הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה",
+                        "uid": "a128f62aa8"
+                      }
+                    ],
+                    "uid": "5c21180fea"
+                  }
+                ]
+              },
+              "uid": "61e348b15f"
+            }
+          ],
+          "uid": "ec80178184"
+        },
+        {
+          "name": "reporting-loop",
+          "steps": [
+            {
+              "do": {
+                "cmd": "clear"
+              },
+              "uid": "1ae1bd84b2"
+            },
+            {
+              "goto": "personal-details",
+              "uid": "d4cbb25f4e"
+            },
+            {
+              "goto": "preconditions-check",
+              "uid": "df5de41a13"
+            },
+            {
+              "goto": "insulation",
+              "uid": "48accaa909"
+            },
+            {
+              "goto": "current-report",
+              "uid": "699a47659b"
+            },
+            {
+              "goto": "exposures",
+              "uid": "9def4af95e"
+            },
+            {
+              "say": "זהו, סיימנו את הדיווח עבור {{alias}}",
+              "uid": "aa5756f7c2"
+            },
+            {
+              "do": {
+                "cmd": "save_report",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "9133827a4d"
+            },
+            {
+              "say": "האם דיווחת כבר על כל בני ביתך?",
+              "uid": "0579996f0c"
+            },
+            {
+              "uid": "76a36a5d14",
+              "wait": {
+                "options": [
+                  {
+                    "show": "לא, עדיין לא סיימתי",
+                    "steps": [
+                      {
+                        "goto": "reporting-loop",
+                        "uid": "915c71c0f8"
+                      }
+                    ],
+                    "uid": "3ad2bc4384"
+                  },
+                  {
+                    "show": "כן, דיווחתי עבור כל בני ביתי",
+                    "steps": [
+                      {
+                        "pop": "default",
+                        "uid": "98483592e4"
+                      }
+                    ],
+                    "uid": "af054e7de4"
+                  }
+                ]
+              }
+            }
+          ],
+          "uid": "5002ab217a"
         },
         {
           "name": "personal-details",
@@ -53,41 +184,14 @@ export const script = {
                 "arg": "_existing_user",
                 "cases": [
                   {
-                    "match": "new",
-                    "steps": [
-                      {
-                        "say": "טוב שבאת,",
-                        "uid": "af5b77d3b6"
-                      },
-                      {
-                        "say": "התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה",
-                        "uid": "73613badb3"
-                      },
-                      {
-                        "say": "אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר",
-                        "uid": "fbbed77d3e"
-                      },
-                      {
-                        "say": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
-                        "uid": "208d7c05c2"
-                      }
-                    ],
-                    "uid": "7ad5fdc853"
+                    "match": "new"
                   },
                   {
                     "match": "returning",
                     "steps": [
                       {
-                        "say": "הי! טוב לראותך שוב",
-                        "uid": "29db961015"
-                      },
-                      {
-                        "say": "הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה",
-                        "uid": "b40745dc26"
-                      },
-                      {
                         "say": "עבור מי ברצונך לדווח עכשיו?",
-                        "uid": "37236f3712"
+                        "uid": "4c16166fd3"
                       },
                       {
                         "do": {
@@ -98,10 +202,10 @@ export const script = {
                           ],
                           "variable": "_report_options"
                         },
-                        "uid": "e278b6b866"
+                        "uid": "7c2d53066c"
                       },
                       {
-                        "uid": "c10cf2ab5a",
+                        "uid": "ef57e0c78d",
                         "wait": {
                           "optionsFrom": "_report_options",
                           "variable": "_report_selection"
@@ -115,7 +219,7 @@ export const script = {
                             "_report_selection"
                           ]
                         },
-                        "uid": "8c6d2e311f"
+                        "uid": "6b87cca59d"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -1464,7 +1568,7 @@ export const script = {
                                   "uid": "07940bc67a"
                                 },
                                 {
-                                  "uid": "7b2cd205c7",
+                                  "uid": "2df81cdb42",
                                   "wait": {
                                     "options": [
                                       {
@@ -1476,7 +1580,7 @@ export const script = {
                                         "value": false
                                       }
                                     ],
-                                    "variable": "served_public_last_fortnight"
+                                    "variable": "_served_public_last_fortnight"
                                   }
                                 },
                                 {
@@ -1529,6 +1633,31 @@ export const script = {
             }
           ],
           "uid": "a92af82c81"
+        },
+        {
+          "name": "promotion",
+          "steps": [
+            {
+              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב (Symptoms Map)",
+              "uid": "1f041cdaf8"
+            },
+            {
+              "say": "<link>",
+              "uid": "e1273cb541"
+            },
+            {
+              "uid": "3989d53fae",
+              "wait": {
+                "options": [
+                  {
+                    "class": "other",
+                    "show": "המשך"
+                  }
+                ]
+              }
+            }
+          ],
+          "uid": "4c6a26288b"
         }
       ]
     },
