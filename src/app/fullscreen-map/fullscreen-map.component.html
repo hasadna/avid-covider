@@ -3,35 +3,33 @@
   </div>
   <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()'></div>
   <div class='legend'>
-    <div class='parts'>
-      <div class='scale'>
-        <div class='label' i18n>ריכוז תסמינים:</div>
-        <div class='scale-rows'>
-          <div class='numbers'>
-            <span>2%</span>
-            <span>4%</span>
-            <span>6%</span>
-            <span>8%</span>
-          </div>
-          <div class='colors'>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+    <div class='scale'>
+      <div class='label' i18n>ריכוז<br/>תסמינים:</div>
+      <div class='scale-rows'>
+        <div class='numbers'>
+          <span>2%</span>
+          <span>4%</span>
+          <span>6%</span>
+          <span>8%</span>
+        </div>
+        <div class='colors'>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
-      <div class='no-info'>
-        <div class='label' i18n>
-          חוסר מידע:
-        </div>
-        <div class='scale-rows'>
-          <div class='numbers'>
-          </div>        
-          <div class='colors'>
-            <span></span>
-          </div>
+    </div>
+    <div class='no-info'>
+      <div class='label' i18n>
+        חוסר<br/>מידע:
+      </div>
+      <div class='scale-rows'>
+        <div class='numbers'>
+        </div>        
+        <div class='colors'>
+          <span></span>
         </div>
       </div>
     </div>
@@ -42,7 +40,7 @@
 </div>
 <div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
-  <h2 i18n>המפה הזו שותפה אחד על ידי אחד מאלפי האזרחים שבכל יום מדווחים על מצבם הרפואי. רק דיווח יומיומי יאפשר להמשיך להציג את הנתונים ויסייע לצוות המחקר ממכון ויצמן במחקר.</h2>
+  <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שמדווחים בכל יום על מצבם הרפואי. דיווח יומיומי קבוע שלך יבטיח את עדכניות ושיפור המפה ויסייע לצוות ממכון ויצמן במחקר.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
   <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
 </div>
