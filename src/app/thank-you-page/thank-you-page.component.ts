@@ -41,7 +41,7 @@ export class ThankYouPageComponent implements OnInit {
     const navigator = window.navigator;
     if (navigator['share']) {
       try {
-        navigator['share']({ title: 'Daily Corona Report', url: window.location.href })
+        navigator['share']({ title: 'Daily Corona Report', url: window.location.href + '?source=map' })
           .then((res) => {
             console.log('success');
         }, (err) => {
@@ -58,7 +58,7 @@ export class ThankYouPageComponent implements OnInit {
   }
 
   clipboardCopy(): boolean {
-    const text = window.location.href;
+    const text = window.location.href + '?source=map';
     if (!this.clipboardCopySupported) {
       return false;
     }
