@@ -256,9 +256,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         save_public_service_data: (record: any) => {
           record._public_service_last_reported = Date.now().valueOf();
-          if (record.served_public_last_fortnight) {
+          if (record._served_public_last_fortnight) {
             record._public_service_last_reported_yes = Date.now().valueOf();
           }
+          record._served_public_last_fortnight = record._served_public_last_fortnight || record.served_public_last_fortnight;
           console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
           console.log('LAST YES REPORT TIME', new Date(record._public_service_last_reported_yes).toISOString());
         },

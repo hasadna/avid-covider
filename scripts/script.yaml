@@ -629,7 +629,7 @@
                           steps:
                             - say: האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?
                             - wait:
-                                variable: served_public_last_fortnight
+                                variable: _served_public_last_fortnight
                                 options:
                                   - show: כן, נתתי שירות
                                     value: true
