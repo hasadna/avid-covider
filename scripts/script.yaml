@@ -652,6 +652,16 @@
                 class: other
 
 
+    - name: promotion
+      steps:
+        - say: רק למדווחים הנאמנים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק מחר
+        - say: <link>
+        - wait:
+            options:
+              - show: המשך
+                class: other
+
+
 - name: generic-translation-assets ## <-- keep me last!
   keys:
     - name: calendarTitle
