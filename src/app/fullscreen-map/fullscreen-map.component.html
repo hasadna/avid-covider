@@ -2,10 +2,46 @@
   <div id='fullscreen-map'>
   </div>
   <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()'></div>
+  <div class='legend'>
+    <div class='scale'>
+      <div class='label' i18n>ריכוז<br/>תסמינים:</div>
+      <div class='scale-rows'>
+        <div class='numbers'>
+          <span>2%</span>
+          <span>4%</span>
+          <span>6%</span>
+          <span>8%</span>
+        </div>
+        <div class='colors'>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <div class='no-info'>
+      <div class='label' i18n>
+        חוסר<br/>מידע:
+      </div>
+      <div class='scale-rows'>
+        <div class='numbers'>
+          <span>&nbsp;</span>
+        </div>        
+        <div class='colors'>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='small-print' style='display: none;' i18n>
+במפה המוצגת כל אזור צבוע על פי כמות התסמינים אשר דווחה בו משאלונים שמילא הציבור באופן אנונימי. במידה ותסמין מסויים דווח בכמות גבוהה באזור מסויים צבעו יהיה בגוון סגול. לעומת זאת, תסמין אשר דווח ברמה מועטה באזור מסויים יצבע בגוון צהוב. רק ערים ושכונות עם לפחות 50 משיבים מוצגות. מעל 500 משיבים בכל עיר ומעל 250 בשכונות מוצגות בצבע מלא. יודגש כי הנתונים מייצגים את דיווחי התסמינים בלבד. הנתונים אינם מייצגים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה עצמו. כמו כן, על אף שהתסמינים המוצגים נמצאו נפוצים אצל חולים בנגיף הקורונה הם אינם ספציפיים למחלה זו בלבד ויכולים להיות קשורים למחלות נוספות
 </div>
 <div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
-  <h2 i18n>המפה הזו שותפה אחד על ידי אחד מאלפי האזרחים שבכל יום מדווחים על מצבם הרפואי. רק דיווח יומיומי יאפשר להמשיך להציג את הנתונים ויסייע לצוות המחקר ממכון ויצמן במחקר.</h2>
+  <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שמדווחים בכל יום על מצבם הרפואי. דיווח יומיומי קבוע שלך יבטיח את עדכניות ושיפור המפה ויסייע לצוות ממכון ויצמן במחקר.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
   <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
 </div>

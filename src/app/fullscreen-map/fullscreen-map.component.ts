@@ -23,7 +23,7 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.map = new mapboxgl.Map({
       container: 'fullscreen-map',
-      style: 'mapbox://styles/mushon/ck8iswl5301yh1iqvv1fwmoz5',
+      style: 'mapbox://styles/mushon/ck8rcqetd12xy1ilmyq15ksj2',
       center: [34.796, 31.984],
       minZoom: 3,
       zoom: 8
