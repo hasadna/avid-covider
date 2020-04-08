@@ -16,6 +16,12 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   constructor(private source: SourceService, private el: ElementRef) { }
 
   ngOnInit() {
+    console.log('source.getSource', this.source.getSource());
+    this.source.sourceStream.subscribe((source) => {
+      if (source === 'map') {
+        this._tab = 'fullscreenmap';
+      }
+    });
   }
 
   ngAfterViewInit() {

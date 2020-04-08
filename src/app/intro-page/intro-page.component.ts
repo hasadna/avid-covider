@@ -11,6 +11,7 @@ import { AppinstallService } from '../appinstall.service';
 export class IntroPageComponent implements OnInit, AfterViewInit {
 
   @Input() autostart = false;
+  @Input() startButton = true;
   @Output() info = new EventEmitter<void>();
   @Output() chat = new EventEmitter<void>();
 

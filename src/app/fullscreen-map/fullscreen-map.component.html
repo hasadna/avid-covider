@@ -1,0 +1,16 @@
+<div class='map-wrapper'>
+  <div id='fullscreen-map'>
+  </div>
+</div>
+<div class='overlay' *ngIf='mapService.overlayOpen'>
+  <h1 i18n>קורונה:<br/>מפת חום</h1>
+  <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שבכל יום מדווחים על מצב הרפואי ועוזרים לחוקרי מכון ויצמן לזהות מוקדם ריכוז תסמיני קורונה.</h2>
+  <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
+  <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
+</div>
+<div class='cta' *ngIf='mapService.needsToReport()'>
+  <span class='button' (click)='chat.emit()'><span i18n>גם אני רוצה לדווח</span></span>
+</div>
+<div class='cta' *ngIf='!mapService.needsToReport()'> 
+  <span class='button' (click)='thankyou.emit()'><span i18n>שיתוף השאלון והמפה</span></span>
+</div>

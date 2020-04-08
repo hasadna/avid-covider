@@ -9,6 +9,7 @@ import { ReportStoreService } from '../report-store.service';
 import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
+import { MapService } from '../map.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -29,12 +30,14 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
   @Input() layout: string = null;
-  @Output() done = new EventEmitter<void>();
+  @Output() done = new EventEmitter<string>();
+  nextStep = 'thankyou';
 
   constructor(private http: HttpClient,
               private storage: ReportStoreService,
               private notifications: NotificationService,
               private source: SourceService,
+              private mapService: MapService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -262,7 +265,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           if (record._served_public_last_fortnight) {
             record._public_service_last_reported_yes = Date.now().valueOf();
           }
-          record.served_public_last_fortnight = record._served_public_last_fortnight || record.served_public_last_fortnight;
+          record.served_public_last_fortnight = !!record._served_public_last_fortnight || !!record.served_public_last_fortnight;
           console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
           console.log('LAST YES REPORT TIME', new Date(record._public_service_last_reported_yes).toISOString());
         },
@@ -324,6 +327,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
+        show_map: () => {
+          this.nextStep = 'fullscreenmap';
+        },
         save_report: (record) => {
           let payload = Object.assign({}, record);
           payload['version'] = VERSION;
@@ -355,11 +361,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           ).subscribe((success) => {
             console.log('saved, success=' + success);
           });
+          this.mapService.reportedToday = true;
         }
       },
       (key, value, record) => {}
     ).subscribe((success) => {
-      this.done.emit();
+      this.done.emit(this.nextStep);
     });
   }
 
