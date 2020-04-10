@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, HostListener } from '@angular/core';
 import { SourceService } from '../source.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'app-main-page',
@@ -9,11 +10,8 @@ import { SourceService } from '../source.service';
 export class MainPageComponent implements OnInit, AfterViewInit {
   ftab = 'intro';
   _tab = 'intro';
-  mobile = false;
-  desktop = false;
-  layout = null;
 
-  constructor(private source: SourceService, private el: ElementRef) { }
+  constructor(private source: SourceService, private el: ElementRef, public ls: LayoutService) { }
 
   ngOnInit() {
     console.log('source.getSource', this.source.getSource());
@@ -26,20 +24,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.updateView();
+      this.ls.updateView(this.el.nativeElement);
     }, 0);
-  }
-
-  updateView() {
-    const e: HTMLElement = this.el.nativeElement;
-    this.mobile = e.offsetWidth < 600;
-    this.desktop = e.offsetWidth >= 600;
-    this.layout = this.mobile ? 'mobile' : 'desktop';
-  }
-
-  @HostListener('window:resize', ['$event'])
-  resize(e) {
-    this.updateView();
   }
 
   set tab(value) {

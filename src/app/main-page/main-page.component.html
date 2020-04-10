@@ -1,14 +1,14 @@
 <div class='container' appLtr>
   <div class='pane first'>
-    <app-intro-page *ngIf='desktop && ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"' [autostart]='tab !== "fullscreenmap"' [startButton]='false'></app-intro-page>
-    <app-info-page *ngIf='desktop && ftab=="info"' (start)='tab="chat"; ftab="intro"'></app-info-page>
-    <app-thank-you-page *ngIf='desktop && tab==="thankyou"' (restart)='tab="chat"; ftab="intro"'></app-thank-you-page>
+    <app-intro-page *ngIf='ls.desktop && ftab==="intro"' (info)='ftab="info"' (chat)='tab="chat"' [autostart]='tab !== "fullscreenmap"' [startButton]='false'></app-intro-page>
+    <app-info-page *ngIf='ls.desktop && ftab=="info"' (start)='tab="chat"; ftab="intro"'></app-info-page>
+    <app-thank-you-page *ngIf='ls.desktop && tab==="thankyou"' (restart)='tab="chat"; ftab="intro"'></app-thank-you-page>
   </div>
   <div class='pane second'>
-    <app-intro-page *ngIf='mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
-    <app-info-page *ngIf='mobile && tab==="info"' (start)='tab="chat"'></app-info-page>
-    <app-chat-page *ngIf='tab==="chat"' [layout]='layout' (done)='tab=$event; ftab="thankyou"'></app-chat-page>
-    <app-fullscreen-map *ngIf='tab==="fullscreenmap"' (thankyou)='tab="thankyou"; ftab="thankyou"' (chat)='tab=desktop ? "chat" : "intro"; ftab="intro"'></app-fullscreen-map>
-    <app-thank-you-page *ngIf='mobile && tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
+    <app-intro-page *ngIf='ls.mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
+    <app-info-page *ngIf='ls.mobile && tab==="info"' (start)='tab="chat"'></app-info-page>
+    <app-chat-page *ngIf='tab==="chat"' [layout]='ls.layout' (done)='tab=$event; ftab="thankyou"'></app-chat-page>
+    <app-fullscreen-map *ngIf='tab==="fullscreenmap"' (thankyou)='tab="thankyou"; ftab="thankyou"' (chat)='tab=ls.desktop ? "chat" : "intro"; ftab="intro"'></app-fullscreen-map>
+    <app-thank-you-page *ngIf='ls.mobile && tab==="thankyou"' (restart)='tab="chat"'></app-thank-you-page>
   </div>
 </div>
