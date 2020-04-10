@@ -5,6 +5,8 @@
   <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='!overlayVisible()'>?</div>
   <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false'>
     <div class='infobox-content'>
+      <h3 i18n>קורונה:<br/>
+      מפת חום</h3>
       <p i18n>המפה מציגה מידע שנאסף משאלונים אנונימיים שמילאו תושבי כל אזור.</p>
       <p i18n>הצבע שבו צבוע האזור משקף את רמת התסמינים שדווחו באזור זה: סגול לרמת תסמינים גבוהה וצהוב לרמת תסמינים נמוכה.</p>
       <p i18n>המפה מציגה רק ערים ושכונות שיש בהם 50 משיבים לפחות. ערים שיש בהן 500 משיבים לפחות ושכונות שיש בהן 250 משיבים לפחות מוצגות בצבע מלא.</p>
