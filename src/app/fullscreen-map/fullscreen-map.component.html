@@ -1,7 +1,17 @@
 <div class='map-wrapper'>
   <div id='fullscreen-map'>
   </div>
-  <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()'></div>
+  <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()' *ngIf='!infoboxActive'></div>
+  <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive'>?</div>
+  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false'>
+    <div class='infobox-content'>
+      <p i18n>המפה מציגה מידע שנאסף משאלונים אנונימיים שמילאו תושבי כל אזור.</p>
+      <p i18n>הצבע שבו צבוע האזור משקף את רמת התסמינים שדווחו באזור זה: סגול לרמת תסמינים גבוהה וצהוב לרמת תסמינים נמוכה.</p>
+      <p i18n>המפה מציגה רק ערים ושכונות שיש בהם 50 משיבים לפחות. ערים שיש בהן 500 משיבים לפחות ושכונות שיש בהן 250 משיבים לפחות מוצגות בצבע מלא.</p>
+      <p i18n>חשוב לציין כי צבעי המפה משקפים רק את רמת הדיווח על התסמינים. הצבעים אינם משקפים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה באותו אזור.</p>
+      <p i18n>כמו כן, התסמינים המוצגים נפוצים אצל חולים בנגיף הקורונה אך אינם ספציפיים למחלה זו וייתכן שהם משקפים תחלואה במחלות אחרות.</p>
+    </div>
+  </div>
   <div class='legend'>
     <div class='scale'>
       <div class='label' i18n>ריכוז<br/>תסמינים:</div>
@@ -35,9 +45,6 @@
       </div>
     </div>
   </div>
-</div>
-<div class='small-print' style='display: none;' i18n>
-במפה המוצגת כל אזור צבוע על פי כמות התסמינים אשר דווחה בו משאלונים שמילא הציבור באופן אנונימי. במידה ותסמין מסויים דווח בכמות גבוהה באזור מסויים צבעו יהיה בגוון סגול. לעומת זאת, תסמין אשר דווח ברמה מועטה באזור מסויים יצבע בגוון צהוב. רק ערים ושכונות עם לפחות 50 משיבים מוצגות. מעל 500 משיבים בכל עיר ומעל 250 בשכונות מוצגות בצבע מלא. יודגש כי הנתונים מייצגים את דיווחי התסמינים בלבד. הנתונים אינם מייצגים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה עצמו. כמו כן, על אף שהתסמינים המוצגים נמצאו נפוצים אצל חולים בנגיף הקורונה הם אינם ספציפיים למחלה זו בלבד ויכולים להיות קשורים למחלות נוספות
 </div>
 <div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
