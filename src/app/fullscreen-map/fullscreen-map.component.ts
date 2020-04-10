@@ -36,4 +36,7 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
     }), 'top-left');
   }
 
+  overlayVisible() {
+    return this.mapService.overlayOpen && this.mapService.needsToReport();
+  }
 }

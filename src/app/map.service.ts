@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SourceService } from './source.service';
+import { first } from 'rxjs/operators';
 
 import * as mapboxgl from 'mapbox-gl';
 
@@ -12,7 +13,7 @@ export class MapService {
   reportedToday = false;
 
   constructor(private source: SourceService) {
-    this.source.sourceStream.subscribe((_source) => {
+    this.source.sourceStream.pipe(first()).subscribe((_source) => {
       if (_source === 'map') {
         this.overlayOpen = true;
       }

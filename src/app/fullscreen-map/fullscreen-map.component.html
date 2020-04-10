@@ -1,8 +1,8 @@
 <div class='map-wrapper'>
   <div id='fullscreen-map'>
   </div>
-  <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()' *ngIf='!infoboxActive'></div>
-  <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive'>?</div>
+  <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()' *ngIf='!infoboxActive && !overlayVisible()'></div>
+  <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='!overlayVisible()'>?</div>
   <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false'>
     <div class='infobox-content'>
       <p i18n>המפה מציגה מידע שנאסף משאלונים אנונימיים שמילאו תושבי כל אזור.</p>
@@ -47,7 +47,7 @@
     </div>
   </div>
 </div>
-<div class='overlay' *ngIf='mapService.overlayOpen && mapService.needsToReport()'>
+<div class='overlay' *ngIf='overlayVisible()'>
   <h1 i18n>קורונה:<br/>מפת חום</h1>
   <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שמדווחים בכל יום על מצבם הרפואי. דיווח יומיומי קבוע שלך יבטיח את עדכניות ושיפור המפה ויסייע לצוות ממכון ויצמן במחקר.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
