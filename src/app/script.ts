@@ -1242,44 +1242,103 @@ export const script = {
           "name": "current-report-temperature",
           "steps": [
             {
-              "say": "האם נמדד חום ביממה האחרונה?",
-              "uid": "a265cb3659"
-            },
-            {
-              "uid": "d8c6b1182c",
-              "wait": {
-                "options": [
+              "switch": {
+                "arg": "general_feeling",
+                "cases": [
                   {
-                    "show": "כן, נמדד חום",
+                    "default": true
+                  },
+                  {
+                    "match": "feel_good",
                     "steps": [
                       {
-                        "say": "ומה המדחום אומר?",
-                        "uid": "fd6d8a43b5"
+                        "say": "למרות שהרגשתך טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף האם כבר יצא לך למדוד חום היום?",
+                        "uid": "cdb832b32b"
                       },
                       {
-                        "uid": "928f10b036",
+                        "uid": "2507ccb9ee",
                         "wait": {
-                          "input-kind": "number",
-                          "input-max": 43,
-                          "input-min": 35,
-                          "input-step": 0.1,
-                          "placeholder": "מעלות חום, 35-43",
-                          "variable": "temperature"
+                          "options": [
+                            {
+                              "show": "כן, מדדתי",
+                              "steps": [
+                                {
+                                  "goto": "ask-body-temperature",
+                                  "uid": "281aab24ae"
+                                }
+                              ],
+                              "uid": "b9924183e9",
+                              "value": "yes"
+                            },
+                            {
+                              "show": "היום לא מדדתי חום",
+                              "value": "no"
+                            }
+                          ]
                         }
                       }
                     ],
-                    "uid": "7a92ab58eb",
-                    "value": "yes"
+                    "uid": "a968fdd528"
                   },
                   {
-                    "show": "לא נמדד חום",
-                    "value": "no"
+                    "match": "feel_bad",
+                    "steps": [
+                      {
+                        "say": "האם כבר יצא לך למדוד חום היום?",
+                        "uid": "0acb2374b2"
+                      },
+                      {
+                        "uid": "479a691d3a",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, מדדתי",
+                              "steps": [
+                                {
+                                  "goto": "ask-body-temperature",
+                                  "uid": "7f8033b570"
+                                }
+                              ],
+                              "uid": "9398fcc2d3",
+                              "value": "yes"
+                            },
+                            {
+                              "show": "עוד לא מדדתי חום",
+                              "value": "no"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "0d1cdea081"
                   }
                 ]
-              }
+              },
+              "uid": "78dbfac628"
             }
           ],
           "uid": "89a20e8104"
+        },
+        {
+          "name": "ask-body-temperature",
+          "steps": [
+            {
+              "say": "ומה המדחום אומר?",
+              "uid": "b394c43aa7"
+            },
+            {
+              "uid": "5b91e58a40",
+              "wait": {
+                "input-kind": "number",
+                "input-max": 43,
+                "input-min": 35,
+                "input-step": 0.1,
+                "placeholder": "מעלות חום, 35-43",
+                "variable": "temperature"
+              }
+            }
+          ],
+          "uid": "177fb00c4b"
         },
         {
           "name": "current-report-top-level-symptoms",
