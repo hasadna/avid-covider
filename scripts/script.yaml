@@ -44,15 +44,7 @@
             cmd: save_report
             params:
               - record
-        - say: האם דיווחת כבר על כל בני ביתך?
-        - wait:
-            options:
-              - show: לא, עדיין לא סיימתי
-                steps:
-                  - goto: reporting-loop
-              - show: כן, דיווחתי עבור כל בני ביתי
-                steps:
-                  - pop: default
+        - goto: reporting-loop
               
     - name: personal-details
       steps:
@@ -64,7 +56,7 @@
         - switch:
             arg: _existing_user
             cases:
-            - match: new                                                           # <--- First report on device
+            - match: new
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: עבור מי ברצונך לדווח עכשיו?
@@ -74,17 +66,26 @@
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
                     - "דיווח חדש בכתובת אחרת"
+                    - "סיימתי לדווח"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
-              - do:
-                  cmd: update_from_selection
-                  params:
-                    - record
-                    - _report_selection
-              # - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
-              # - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
+              - switch:
+                  arg: _report_selection
+                  cases:
+                    - match: "done"
+                      steps:
+                        - pop: default
+                        - goto: promotion
 
+                    - default: true
+                      steps:
+                      - do:
+                          cmd: update_from_selection
+                          params:
+                            - record
+                            - _report_selection                    
+                            
         - switch:
             arg: sex
             cases:

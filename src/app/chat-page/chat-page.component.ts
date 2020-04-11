@@ -137,7 +137,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
         },
-        fetch_previous_reports: (same_address_text, new_address_text) => {
+        fetch_previous_reports: (same_address_text, new_address_text, done_text) => {
           const aliases = {};
           const sliceIdx = PRODUCTION ? 10 : 16;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
@@ -178,6 +178,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           options.push({
             show: new_address_text,
             value: {}
+          });
+          options.push({
+            show: done_text,
+            value: "done"
           });
           console.log('OPTIONS', options);
           return options;

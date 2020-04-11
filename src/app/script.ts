@@ -138,35 +138,8 @@ export const script = {
               "uid": "9133827a4d"
             },
             {
-              "say": "האם דיווחת כבר על כל בני ביתך?",
-              "uid": "0579996f0c"
-            },
-            {
-              "uid": "76a36a5d14",
-              "wait": {
-                "options": [
-                  {
-                    "show": "לא, עדיין לא סיימתי",
-                    "steps": [
-                      {
-                        "goto": "reporting-loop",
-                        "uid": "915c71c0f8"
-                      }
-                    ],
-                    "uid": "3ad2bc4384"
-                  },
-                  {
-                    "show": "כן, דיווחתי עבור כל בני ביתי",
-                    "steps": [
-                      {
-                        "pop": "default",
-                        "uid": "98483592e4"
-                      }
-                    ],
-                    "uid": "af054e7de4"
-                  }
-                ]
-              }
+              "goto": "reporting-loop",
+              "uid": "ba2f58e355"
             }
           ],
           "uid": "5002ab217a"
@@ -202,7 +175,8 @@ export const script = {
                           "cmd": "fetch_previous_reports",
                           "params": [
                             "דיווח חדש ב{{street}} {{city_town}}",
-                            "דיווח חדש בכתובת אחרת"
+                            "דיווח חדש בכתובת אחרת",
+                            "סיימתי לדווח"
                           ],
                           "variable": "_report_options"
                         },
@@ -216,14 +190,42 @@ export const script = {
                         }
                       },
                       {
-                        "do": {
-                          "cmd": "update_from_selection",
-                          "params": [
-                            "record",
-                            "_report_selection"
+                        "switch": {
+                          "arg": "_report_selection",
+                          "cases": [
+                            {
+                              "match": "done",
+                              "steps": [
+                                {
+                                  "pop": "default",
+                                  "uid": "e06c3e8e73"
+                                },
+                                {
+                                  "goto": "promotion",
+                                  "uid": "1ad546bd3b"
+                                }
+                              ],
+                              "uid": "5942e1763c"
+                            },
+                            {
+                              "default": true,
+                              "steps": [
+                                {
+                                  "do": {
+                                    "cmd": "update_from_selection",
+                                    "params": [
+                                      "record",
+                                      "_report_selection"
+                                    ]
+                                  },
+                                  "uid": "195541873c"
+                                }
+                              ],
+                              "uid": "2e0e61d166"
+                            }
                           ]
                         },
-                        "uid": "6b87cca59d"
+                        "uid": "9187ba6b21"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -1642,8 +1644,8 @@ export const script = {
           "name": "promotion",
           "steps": [
             {
-              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב (Symptoms Map)",
-              "uid": "1f041cdaf8"
+              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב! (Symptoms Map)",
+              "uid": "6caeb0331f"
             },
             {
               "uid": "6cbd31edfa",
