@@ -202,6 +202,8 @@ htl-hatool {
                             justify-content: flex-start;
                             align-items: center;
                             text-align: initial;
+                            padding: 8px;
+                            border-radius: 8px;
 
                             &::before {
                                 content: '';
@@ -218,12 +220,15 @@ htl-hatool {
                             &.selected {
                                 background-color: #2c3c3b;
                                 color: #fff;
+                                border-color: #2c3c3b;
                                 &::before {
                                     background-image: url(assets/img/checked-option.svg);
+                                    border-color: #2c3c3b;
                                 }
                             }
                             &.other {
                                 justify-content: center;
+                                border-radius: 24px;
                                 &::before {
                                     display: none;
                                 }
