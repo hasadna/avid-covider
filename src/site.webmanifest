@@ -20,8 +20,8 @@
     "related_applications": [
         {
           "platform": "play",
-          "url": "https://play.google.com/store/apps/details?id=com.king.candycrushsaga",
-          "id": "com.king.candycrushsaga"
+          "url": "https://play.google.com/store/apps/details?id=il.ac.weizmann.corona",
+          "id": "il.ac.weizmann.corona"
         }
     ],
     "prefer_related_applications": true
