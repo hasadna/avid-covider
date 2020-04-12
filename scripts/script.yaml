@@ -21,7 +21,7 @@
               steps:
               - say: טוב שבאת,
               - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
-              - say: אם זה בסדר, נבקש לדעת כמה פרטים אנונימיים לטובת המחקר.
+              - say: אם זה בסדר, נבקש לדעת כמה פרטים אנונימיים לטובת המחקר
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה או דיירים נוספים בבית
             - match: returning                                                     # <--- Previous reports found on device
               steps:
@@ -58,15 +58,15 @@
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: עבור מי ברצונך לדווח עכשיו?
-              - say: (הכי טוב כשכולם מדווחים בעצמם
-              - say: אבל אם זה לא מסתדר, אפשר גם להקריא את השאלות או פשוט לענות בשמם של בני המשפחה או בני הבית)
+              - say: הכי טוב כשכולם מדווחים בעצמם
+              - say: אבל אם זה לא מסתדר, אפשר גם להקריא את השאלות או פשוט לענות בשמם של בני המשפחה או בני הבית
               - do:
                   cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show
                   variable: _report_options
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
-                    - "דיווח חדש עבור כתובת אחרת"
-                    - "כל בני ביתי כבר דיווחו"
+                    - "דיווח חדש עבור אדם בכתובת אחרת"
+                    - "סיימתי עם הדיווחים היום"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
@@ -152,7 +152,7 @@
                     - record
                     - "בן {{age}} מ{{street}} {{city_town}}"
                     - "בת {{age}} מ{{street}} {{city_town}}"
-              - say: נהדר, בכדי לשמור על הפרטיות, בדיווחים הבאים פשוט נקרא ל-{{alias}}
+              - say: נהדר, מהדיווח הבא, בכדי לשמור על הפרטיות, פשוט נקרא לך {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
         - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
@@ -380,7 +380,7 @@
                                       input-kind: date
                                       options:
                               - show: אני בבידוד כי נחשפתי לחולה מאומת
-                                value: contact-with-patient
+                                value:  
                                 steps:
                                   - say: ידוע לך מה מספר החולה שפגשת?
                                   - wait:
@@ -415,7 +415,7 @@
                         value: diagnosed
                         steps:
                           - say: רפואה שלמה, והחלמה מהירה.
-                          - say: והיכן עוברת עליך התקופה הלא פשוטה הזו?
+                          - say: ואיפה עוברת עליך התקופה הלא פשוטה הזו?
                           - wait:
                               variable: diagnosed_location
                               options:                 
@@ -500,7 +500,7 @@
             cases:
             - match: feel_good
               steps:
-                - say: "למרות שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף."
+                - say: "למרות שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף"
                 - say: "האם כבר נמדד חום היום?"
                 - wait:
                     options:
