@@ -519,10 +519,10 @@
 
     - name: ask-body-temperature
       steps:
-        - say: "ומה המדחום אומר?"
+        - say: "ומה בדיוק המדחום אומר?"
         - wait:
             variable: temperature
-            placeholder: מעלות חום, 35-43
+            placeholder: מעלות חום, 35.0-43.0
             input-kind: number
             input-min: 35
             input-max: 43
