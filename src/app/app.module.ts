@@ -9,7 +9,6 @@ import { HatoolLibModule } from 'hatool';
 import * as Sentry from '@sentry/browser';
 import { IntroPageComponent } from './intro-page/intro-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
-import { InfoPageComponent } from './info-page/info-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { HeaderComponent } from './header/header.component';
 import { VERSION } from './constants';
@@ -41,7 +40,6 @@ const appRoutes: Routes = [
     AppComponent,
     IntroPageComponent,
     ChatPageComponent,
-    InfoPageComponent,
     ThankYouPageComponent,
     HeaderComponent,
     LtrDirective,
