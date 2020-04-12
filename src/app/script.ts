@@ -56,20 +56,12 @@ export const script = {
                         "uid": "724fd9e1ce"
                       },
                       {
-                        "say": "אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר",
-                        "uid": "c50fbc1b4d"
+                        "say": "אם זה בסדר, נבקש לדעת כמה פרטים אנונימיים לטובת המחקר.",
+                        "uid": "69cd7ff25c"
                       },
                       {
-                        "say": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
-                        "uid": "7fd1d1ea6d"
-                      },
-                      {
-                        "say": "הכי טוב כשכולם מדווחים על עצמם בכל יום",
-                        "uid": "2af5c3ecb3"
-                      },
-                      {
-                        "say": "אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
-                        "uid": "82dee13fa2"
+                        "say": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה או דיירים נוספים בבית",
+                        "uid": "19c31eaf5c"
                       }
                     ],
                     "uid": "804186b089"
@@ -171,61 +163,41 @@ export const script = {
                         "uid": "4c16166fd3"
                       },
                       {
+                        "say": "(הכי טוב כשכולם מדווחים בעצמם",
+                        "uid": "16f5d448ce"
+                      },
+                      {
+                        "say": "אבל אם זה לא מסתדר, אפשר גם להקריא את השאלות או פשוט לענות בשמם של בני המשפחה או בני הבית)",
+                        "uid": "fd38bab2ba"
+                      },
+                      {
                         "do": {
                           "cmd": "fetch_previous_reports",
                           "params": [
                             "דיווח חדש ב{{street}} {{city_town}}",
-                            "דיווח חדש בכתובת אחרת",
-                            "סיימתי לדווח"
+                            "דיווח חדש עבור כתובת אחרת",
+                            "כל בני ביתי כבר דיווחו"
                           ],
                           "variable": "_report_options"
                         },
-                        "uid": "7c2d53066c"
+                        "uid": "e278b6b866"
                       },
                       {
-                        "uid": "ef57e0c78d",
+                        "uid": "c10cf2ab5a",
                         "wait": {
                           "optionsFrom": "_report_options",
                           "variable": "_report_selection"
                         }
                       },
                       {
-                        "switch": {
-                          "arg": "_report_selection",
-                          "cases": [
-                            {
-                              "match": "done",
-                              "steps": [
-                                {
-                                  "pop": "default",
-                                  "uid": "e06c3e8e73"
-                                },
-                                {
-                                  "goto": "promotion",
-                                  "uid": "1ad546bd3b"
-                                }
-                              ],
-                              "uid": "5942e1763c"
-                            },
-                            {
-                              "default": true,
-                              "steps": [
-                                {
-                                  "do": {
-                                    "cmd": "update_from_selection",
-                                    "params": [
-                                      "record",
-                                      "_report_selection"
-                                    ]
-                                  },
-                                  "uid": "195541873c"
-                                }
-                              ],
-                              "uid": "2e0e61d166"
-                            }
+                        "do": {
+                          "cmd": "update_from_selection",
+                          "params": [
+                            "record",
+                            "_report_selection"
                           ]
                         },
-                        "uid": "9187ba6b21"
+                        "uid": "8c6d2e311f"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -410,8 +382,8 @@ export const script = {
                         "uid": "8b55168adb"
                       },
                       {
-                        "say": "נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}",
-                        "uid": "bf62d4b8ec"
+                        "say": "נהדר, בכדי לשמור על הפרטיות, בדיווחים הבאים פשוט נקרא ל-{{alias}}",
+                        "uid": "4418348921"
                       }
                     ],
                     "uid": "1baea83011",
@@ -644,8 +616,8 @@ export const script = {
           "name": "preconditions",
           "steps": [
             {
-              "say": "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:",
-              "uid": "6861e5ea76"
+              "say": "נשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:",
+              "uid": "adebcef434"
             },
             {
               "goto": "preconditions-diseases",
@@ -1019,7 +991,15 @@ export const script = {
                               "show": "אני חולה קורונה (מאומת בבדיקת מעבדה)",
                               "steps": [
                                 {
-                                  "uid": "32b02ca38f",
+                                  "say": "רפואה שלמה, והחלמה מהירה.",
+                                  "uid": "1fb9c23edc"
+                                },
+                                {
+                                  "say": "והיכן עוברת עליך התקופה הלא פשוטה הזו?",
+                                  "uid": "214f4a093e"
+                                },
+                                {
+                                  "uid": "8e531b6373",
                                   "wait": {
                                     "options": [
                                       {
@@ -1246,33 +1226,32 @@ export const script = {
                 "arg": "general_feeling",
                 "cases": [
                   {
-                    "default": true
-                  },
-                  {
                     "match": "feel_good",
                     "steps": [
                       {
-                        "say": "למרות שהרגשתך טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף האם כבר יצא לך למדוד חום היום?",
-                        "uid": "cdb832b32b"
+                        "say": "למרות שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף.",
+                        "uid": "61a438deef"
                       },
                       {
-                        "uid": "2507ccb9ee",
+                        "say": "האם כבר נמדד חום היום?",
+                        "uid": "3c53fb2f06"
+                      },
+                      {
+                        "uid": "36d6b55ab9",
                         "wait": {
                           "options": [
                             {
-                              "show": "כן, מדדתי",
+                              "show": "כן, נמדד חום",
                               "steps": [
                                 {
                                   "goto": "ask-body-temperature",
-                                  "uid": "281aab24ae"
+                                  "uid": "14631f3588"
                                 }
                               ],
-                              "uid": "b9924183e9",
-                              "value": "yes"
+                              "uid": "949c507f00"
                             },
                             {
-                              "show": "היום לא מדדתי חום",
-                              "value": "no"
+                              "show": "היום לא נמדד חום"
                             }
                           ]
                         }
@@ -1284,27 +1263,25 @@ export const script = {
                     "match": "feel_bad",
                     "steps": [
                       {
-                        "say": "האם כבר יצא לך למדוד חום היום?",
-                        "uid": "0acb2374b2"
+                        "say": "האם נמדד חום היום?",
+                        "uid": "c930bb771f"
                       },
                       {
                         "uid": "479a691d3a",
                         "wait": {
                           "options": [
                             {
-                              "show": "כן, מדדתי",
+                              "show": "כן, נמדד חום",
                               "steps": [
                                 {
                                   "goto": "ask-body-temperature",
-                                  "uid": "7f8033b570"
+                                  "uid": "396b062283"
                                 }
                               ],
-                              "uid": "9398fcc2d3",
-                              "value": "yes"
+                              "uid": "1f8ef0a3d2"
                             },
                             {
-                              "show": "עוד לא מדדתי חום",
-                              "value": "no"
+                              "show": "היום לא נמדד חום"
                             }
                           ]
                         }
@@ -1485,8 +1462,8 @@ export const script = {
                     "match": true,
                     "steps": [
                       {
-                        "say": "מה כואב בדיוק?",
-                        "uid": "d592ad5db6"
+                        "say": "ומה כואב בדיוק?",
+                        "uid": "f78869b336"
                       },
                       {
                         "uid": "31fc600341",

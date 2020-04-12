@@ -21,10 +21,8 @@
               steps:
               - say: טוב שבאת,
               - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
-              - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
-              - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
-              - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
-              - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
+              - say: אם זה בסדר, נבקש לדעת כמה פרטים אנונימיים לטובת המחקר.
+              - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה או דיירים נוספים בבית
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: הי! טוב לראותך שוב
@@ -60,12 +58,14 @@
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: עבור מי ברצונך לדווח עכשיו?
+              - say: (הכי טוב כשכולם מדווחים בעצמם
+              - say: אבל אם זה לא מסתדר, אפשר גם להקריא את השאלות או פשוט לענות בשמם של בני המשפחה או בני הבית)
               - do:
                   cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show
                   variable: _report_options
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
-                    - "דיווח חדש בכתובת אחרת"
+                    - "דיווח חדש עבור כתובת אחרת"
                     - "כל בני ביתי כבר דיווחו"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
@@ -152,7 +152,7 @@
                     - record
                     - "בן {{age}} מ{{street}} {{city_town}}"
                     - "בת {{age}} מ{{street}} {{city_town}}"
-              - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
+              - say: נהדר, בכדי לשמור על הפרטיות, בדיווחים הבאים פשוט נקרא ל-{{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
         - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
@@ -252,7 +252,7 @@
 
     - name: preconditions
       steps:
-        - say: "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:"
+        - say: "נשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:"
         - goto: preconditions-diseases
         - goto: preconditions-smoking
         - do:
@@ -414,6 +414,8 @@
                       - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
                         value: diagnosed
                         steps:
+                          - say: רפואה שלמה, והחלמה מהירה.
+                          - say: והיכן עוברת עליך התקופה הלא פשוטה הזו?
                           - wait:
                               variable: diagnosed_location
                               options:                 
@@ -603,7 +605,7 @@
             - default: true
             - match: true
               steps:
-              - say: מה כואב בדיוק?
+              - say: ומה כואב בדיוק?
               - wait:
                   variable: _var
                   multi: true
