@@ -44,15 +44,7 @@
             cmd: save_report
             params:
               - record
-        - say: האם דיווחת כבר על כל בני ביתך?
-        - wait:
-            options:
-              - show: לא, עדיין לא סיימתי
-                steps:
-                  - goto: reporting-loop
-              - show: כן, דיווחתי עבור כל בני ביתי
-                steps:
-                  - pop: default
+        - goto: reporting-loop
               
     - name: personal-details
       steps:
@@ -64,7 +56,7 @@
         - switch:
             arg: _existing_user
             cases:
-            - match: new                                                           # <--- First report on device
+            - match: new
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: עבור מי ברצונך לדווח עכשיו?
@@ -74,17 +66,26 @@
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
                     - "דיווח חדש בכתובת אחרת"
+                    - "סיימתי לדווח"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
-              - do:
-                  cmd: update_from_selection
-                  params:
-                    - record
-                    - _report_selection
-              # - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
-              # - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
+              - switch:
+                  arg: _report_selection
+                  cases:
+                    - match: "done"
+                      steps:
+                        - pop: default
+                        - goto: promotion
 
+                    - default: true
+                      steps:
+                      - do:
+                          cmd: update_from_selection
+                          params:
+                            - record
+                            - _report_selection                    
+                            
         - switch:
             arg: sex
             cases:
@@ -502,23 +503,45 @@
 
     - name: current-report-temperature
       steps:
-        - say: האם נמדד חום ביממה האחרונה?
-        - wait:
-            options:
-            - show: "כן, נמדד חום"
-              value: "yes"
+        - switch:
+            arg: general_feeling
+            cases:
+            - default: true 
+            - match: feel_good
               steps:
-              - say: "ומה המדחום אומר?"
-              - wait:
-                  variable: temperature
-                  placeholder: מעלות חום, 35-43
-                  input-kind: number
-                  input-min: 35
-                  input-max: 43
-                  input-step: 0.1
-            - show: "לא נמדד חום"
-              value: "no"
-    
+                - say: "למרות שהרגשתך טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף האם כבר יצא לך למדוד חום היום?"
+                - wait:
+                    options:
+                      - show: "כן, מדדתי"
+                        value: "yes"
+                        steps:
+                          - goto: ask-body-temperature
+                      - show: "היום לא מדדתי חום"
+                        value: "no"
+
+            - match: feel_bad
+              steps:
+                - say: "האם כבר יצא לך למדוד חום היום?"
+                - wait:
+                    options:
+                      - show: "כן, מדדתי"
+                        value: "yes"
+                        steps:
+                          - goto: ask-body-temperature
+                      - show: "עוד לא מדדתי חום"
+                        value: "no"          
+
+    - name: ask-body-temperature
+      steps:
+        - say: "ומה המדחום אומר?"
+        - wait:
+            variable: temperature
+            placeholder: מעלות חום, 35-43
+            input-kind: number
+            input-min: 35
+            input-max: 43
+            input-step: 0.1
+              
     - name: current-report-top-level-symptoms
       steps:
       - wait:
@@ -700,7 +723,6 @@
                       cmd: show_map
                   - goto: complete
               - show: לא עכשיו
-
 
 - name: generic-translation-assets ## <-- keep me last!
   keys:

@@ -138,35 +138,8 @@ export const script = {
               "uid": "9133827a4d"
             },
             {
-              "say": "האם דיווחת כבר על כל בני ביתך?",
-              "uid": "0579996f0c"
-            },
-            {
-              "uid": "76a36a5d14",
-              "wait": {
-                "options": [
-                  {
-                    "show": "לא, עדיין לא סיימתי",
-                    "steps": [
-                      {
-                        "goto": "reporting-loop",
-                        "uid": "915c71c0f8"
-                      }
-                    ],
-                    "uid": "3ad2bc4384"
-                  },
-                  {
-                    "show": "כן, דיווחתי עבור כל בני ביתי",
-                    "steps": [
-                      {
-                        "pop": "default",
-                        "uid": "98483592e4"
-                      }
-                    ],
-                    "uid": "af054e7de4"
-                  }
-                ]
-              }
+              "goto": "reporting-loop",
+              "uid": "ba2f58e355"
             }
           ],
           "uid": "5002ab217a"
@@ -202,7 +175,8 @@ export const script = {
                           "cmd": "fetch_previous_reports",
                           "params": [
                             "דיווח חדש ב{{street}} {{city_town}}",
-                            "דיווח חדש בכתובת אחרת"
+                            "דיווח חדש בכתובת אחרת",
+                            "סיימתי לדווח"
                           ],
                           "variable": "_report_options"
                         },
@@ -216,14 +190,42 @@ export const script = {
                         }
                       },
                       {
-                        "do": {
-                          "cmd": "update_from_selection",
-                          "params": [
-                            "record",
-                            "_report_selection"
+                        "switch": {
+                          "arg": "_report_selection",
+                          "cases": [
+                            {
+                              "match": "done",
+                              "steps": [
+                                {
+                                  "pop": "default",
+                                  "uid": "e06c3e8e73"
+                                },
+                                {
+                                  "goto": "promotion",
+                                  "uid": "1ad546bd3b"
+                                }
+                              ],
+                              "uid": "5942e1763c"
+                            },
+                            {
+                              "default": true,
+                              "steps": [
+                                {
+                                  "do": {
+                                    "cmd": "update_from_selection",
+                                    "params": [
+                                      "record",
+                                      "_report_selection"
+                                    ]
+                                  },
+                                  "uid": "195541873c"
+                                }
+                              ],
+                              "uid": "2e0e61d166"
+                            }
                           ]
                         },
-                        "uid": "6b87cca59d"
+                        "uid": "9187ba6b21"
                       }
                     ],
                     "uid": "8cc3349ed1"
@@ -1240,44 +1242,103 @@ export const script = {
           "name": "current-report-temperature",
           "steps": [
             {
-              "say": "האם נמדד חום ביממה האחרונה?",
-              "uid": "a265cb3659"
-            },
-            {
-              "uid": "d8c6b1182c",
-              "wait": {
-                "options": [
+              "switch": {
+                "arg": "general_feeling",
+                "cases": [
                   {
-                    "show": "כן, נמדד חום",
+                    "default": true
+                  },
+                  {
+                    "match": "feel_good",
                     "steps": [
                       {
-                        "say": "ומה המדחום אומר?",
-                        "uid": "fd6d8a43b5"
+                        "say": "למרות שהרגשתך טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף האם כבר יצא לך למדוד חום היום?",
+                        "uid": "cdb832b32b"
                       },
                       {
-                        "uid": "928f10b036",
+                        "uid": "2507ccb9ee",
                         "wait": {
-                          "input-kind": "number",
-                          "input-max": 43,
-                          "input-min": 35,
-                          "input-step": 0.1,
-                          "placeholder": "מעלות חום, 35-43",
-                          "variable": "temperature"
+                          "options": [
+                            {
+                              "show": "כן, מדדתי",
+                              "steps": [
+                                {
+                                  "goto": "ask-body-temperature",
+                                  "uid": "281aab24ae"
+                                }
+                              ],
+                              "uid": "b9924183e9",
+                              "value": "yes"
+                            },
+                            {
+                              "show": "היום לא מדדתי חום",
+                              "value": "no"
+                            }
+                          ]
                         }
                       }
                     ],
-                    "uid": "7a92ab58eb",
-                    "value": "yes"
+                    "uid": "a968fdd528"
                   },
                   {
-                    "show": "לא נמדד חום",
-                    "value": "no"
+                    "match": "feel_bad",
+                    "steps": [
+                      {
+                        "say": "האם כבר יצא לך למדוד חום היום?",
+                        "uid": "0acb2374b2"
+                      },
+                      {
+                        "uid": "479a691d3a",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, מדדתי",
+                              "steps": [
+                                {
+                                  "goto": "ask-body-temperature",
+                                  "uid": "7f8033b570"
+                                }
+                              ],
+                              "uid": "9398fcc2d3",
+                              "value": "yes"
+                            },
+                            {
+                              "show": "עוד לא מדדתי חום",
+                              "value": "no"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "0d1cdea081"
                   }
                 ]
-              }
+              },
+              "uid": "78dbfac628"
             }
           ],
           "uid": "89a20e8104"
+        },
+        {
+          "name": "ask-body-temperature",
+          "steps": [
+            {
+              "say": "ומה המדחום אומר?",
+              "uid": "b394c43aa7"
+            },
+            {
+              "uid": "5b91e58a40",
+              "wait": {
+                "input-kind": "number",
+                "input-max": 43,
+                "input-min": 35,
+                "input-step": 0.1,
+                "placeholder": "מעלות חום, 35-43",
+                "variable": "temperature"
+              }
+            }
+          ],
+          "uid": "177fb00c4b"
         },
         {
           "name": "current-report-top-level-symptoms",
@@ -1642,8 +1703,8 @@ export const script = {
           "name": "promotion",
           "steps": [
             {
-              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב (Symptoms Map)",
-              "uid": "1f041cdaf8"
+              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב! (Symptoms Map)",
+              "uid": "6caeb0331f"
             },
             {
               "uid": "6cbd31edfa",
