@@ -33,7 +33,7 @@ export class AppinstallService {
   }
 
   showButton() {
-    return false && (this.androidAvailable() || this.iphoneAvailable());
+    return (this.androidAvailable() || this.iphoneAvailable());
   }
 
   platformAvailable(platform) {

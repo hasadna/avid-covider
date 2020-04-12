@@ -25,19 +25,23 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // We wait here to ensure we have the layout readonly
     setTimeout(() => {
-      this.map = new mapboxgl.Map({
-        container: 'fullscreen-map',
-        style: 'mapbox://styles/mushon/ck8rcqetd12xy1ilmyq15ksj2',
-        center: [34.785, 32.075],
-        minZoom: 3,
-        zoom: 11
-      });
-      if (this.layout.desktop) {
-        this.map.addControl(new mapboxgl.NavigationControl({
-          showCompass: false,
-          showZoom: true,
-          visualizePitch: false
-        }), 'top-left');
+      try {
+        this.map = new mapboxgl.Map({
+          container: 'fullscreen-map',
+          style: 'mapbox://styles/mushon/ck8rcqetd12xy1ilmyq15ksj2',
+          center: [34.785, 32.075],
+          minZoom: 3,
+          zoom: 11
+        });
+        if (this.layout.desktop) {
+          this.map.addControl(new mapboxgl.NavigationControl({
+            showCompass: false,
+            showZoom: true,
+            visualizePitch: false
+          }), 'top-left');
+        }
+      } catch (e) {
+        console.log('Failed to instantiate map');
       }
     }, 100);
   }
