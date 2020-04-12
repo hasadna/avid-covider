@@ -152,7 +152,7 @@
                     - record
                     - "בן {{age}} מ{{street}} {{city_town}}"
                     - "בת {{age}} מ{{street}} {{city_town}}"
-              - say: נהדר, מהדיווח הבא, בכדי לשמור על הפרטיות, פשוט נקרא לך {{alias}}
+              - say: נהדר, מהדיווח הבא, בכדי לשמור על הפרטיות, פשוט נשתמש בכינוי {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
         - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
