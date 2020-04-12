@@ -142,6 +142,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           const sliceIdx = PRODUCTION ? 10 : 16;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
           const today_aliases = {};
+          let reported_today = false;
           for (const report of this.storage.reports) {
             if (!report[1].alias) {
               continue;
@@ -157,6 +158,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             const option: any = {};
             if (today_aliases[alias]) {
               option.class = 'disabled';
+              reported_today = true;
             }
             Object.assign(option, {
               show: alias,
@@ -179,10 +181,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             show: new_address_text,
             value: {}
           });
-          options.push({
-            show: done_text,
-            value: "done"
-          });
+          if (reported_today) {
+            options.push({
+              show: done_text,
+              value: 'done',
+              steps: [
+                {pop: 'default'}
+              ]
+            });
+          }
           console.log('OPTIONS', options);
           return options;
         },

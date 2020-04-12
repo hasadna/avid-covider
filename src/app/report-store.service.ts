@@ -49,5 +49,4 @@ export class ReportStoreService {
     this.setItem('reports', this.reports);
   }
 
-
 }
