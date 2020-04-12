@@ -159,21 +159,19 @@ htl-hatool {
                             }
 
                             button {
-                                &.selected {
-                                    margin: 0;
-                                    padding: 11px 16px;
-                                    min-width: 0;
-                                    border: none;
-                                    border-top-right-radius: 8px;
-                                    border-bottom-left-radius: 8px;
-                                    border-bottom-right-radius: 0px;
-                                    border-top-left-radius: 8px;
-                                    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
-                                    background-color: #2c3c3b;
-                                    color: #fff;
-                                    width: auto;
-                                    text-align: right;
-                                }
+                                margin: 0;
+                                padding: 11px 16px;
+                                min-width: 0;
+                                border: none;
+                                border-top-right-radius: 8px;
+                                border-bottom-left-radius: 8px;
+                                border-bottom-right-radius: 0px;
+                                border-top-left-radius: 8px;
+                                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
+                                background-color: #2c3c3b;
+                                color: #fff;
+                                width: auto;
+                                text-align: right;
     
                                 &.not-selected {
                                     display: none;
@@ -196,6 +194,15 @@ htl-hatool {
 
                 htl-message-multi-options {
                     .options {
+                        &:not(.selected) {
+                            button {
+                                &.other {
+                                    justify-content: center;
+                                    border-radius: 24px;
+                                }
+                            }
+                        }
+
                         button {
                             display: flex;
                             flex-flow: row;
@@ -203,7 +210,6 @@ htl-hatool {
                             align-items: center;
                             text-align: initial;
                             padding: 8px;
-                            border-radius: 8px;
 
                             &::before {
                                 content: '';
@@ -228,7 +234,6 @@ htl-hatool {
                             }
                             &.other {
                                 justify-content: center;
-                                border-radius: 24px;
                                 &::before {
                                     display: none;
                                 }
@@ -244,8 +249,8 @@ htl-hatool {
                             }
                         }
                         &.selected {
-                            flex-flow: column !important;
-                            align-items: flex-start;
+                            flex-flow: row !important;
+                            align-items: center;
                             justify-content: flex-start;
 
                             button {
@@ -263,6 +268,10 @@ htl-hatool {
                                 }
                             }
                             &.checked {
+                                flex-flow: column !important;
+                                align-items: flex-start;
+                                justify-content: flex-start;
+
                                 button.not-selected {
                                     display: none;
                                 }
