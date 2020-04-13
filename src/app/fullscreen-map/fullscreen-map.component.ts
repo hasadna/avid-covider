@@ -10,7 +10,6 @@ export class FullscreenMapComponent implements OnInit, AfterViewInit {
 
   @Output() chat = new EventEmitter<void>();
   @Output() thankyou = new EventEmitter<void>();
-  infoboxActive = false;
 
   constructor(public mapService: MapService) {
   }

@@ -13,6 +13,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
   @Input() closeButton = true;
   @Input() infoButton = true;
   @Input() padding = 16;
+  infoboxActive = false;
 
   private map: mapboxgl.Map;
 

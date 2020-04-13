@@ -29,8 +29,8 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
 
   constructor(private notifications: NotificationService,
               public appinstall: AppinstallService,
-              private layout: LayoutService,
-              private mapService: MapService,
+              public layout: LayoutService,
+              public mapService: MapService,
               private el: ElementRef,
               @Inject(LOCALE_ID) public locale) {}
 
