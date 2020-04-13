@@ -1,3 +1,5 @@
+@import url('common.less');
+
 htl-hatool {
     flex: 1 1 100%;
     height: auto;
@@ -15,7 +17,7 @@ htl-hatool {
                 line-height: normal;
                 padding: 0 20px;
                 padding-bottom: 35px;
-                background-color: #f6f6f6;
+                background-color: @white;
 
                 color: black;
         
@@ -55,7 +57,7 @@ htl-hatool {
                             border-bottom-right-radius: 0px;
                             border-top-left-radius: 8px;
                             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
-                            background-color: #2c3c3b;
+                            background-color: @charcoal;
                             color: #fff;
                         }
                     }               
@@ -79,7 +81,7 @@ htl-hatool {
                             border-top-left-radius: 0px;
                             box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
                             background-color: #fff;
-                            color: #2c3c3b;
+                            color: @charcoal;
                         }
                     }
 
@@ -101,11 +103,11 @@ htl-hatool {
                         button {
                             padding: 5px 20px;
                             border-radius: 18px;
-                            border: solid 1px #6ededa;
+                            border: solid 1px @seafoam-blue;
                             margin: 2px 0px;
                             min-width: 30%;
-                            color: #00807C;
-                            background-color: #f6f6f6;
+                            color: @bluegreen;
+                            background-color: @white;
                             width: 100%;
                             animation: button-appearance 0.2s ease-in-out both;
 
@@ -119,7 +121,7 @@ htl-hatool {
                             }
 
                             &.other {
-                                background-color: #d9f2f1
+                                background-color: @pale-blue
                             }
                             &.disabled {
                                 color: #888;
@@ -141,9 +143,9 @@ htl-hatool {
                             }
     
                             &:active {
-                                background-color: #2c3c3b;
+                                background-color: @charcoal;
                                 color: #fff;
-                                border-color: #2c3c3b;
+                                border-color: @charcoal;
                             }
 
                             /* &:tap ?? */
@@ -168,7 +170,7 @@ htl-hatool {
                                 border-bottom-right-radius: 0px;
                                 border-top-left-radius: 8px;
                                 box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
-                                background-color: #2c3c3b;
+                                background-color: @charcoal;
                                 color: #fff;
                                 width: auto;
                                 text-align: right;
@@ -218,18 +220,18 @@ htl-hatool {
                                 height: 20px;
                                 border-radius: 4px;
                                 box-shadow: inset 0 4px 4px 0 rgba(0, 0, 0, 0.08);
-                                border: solid 1px #6ededa;
-                                background-color: #f6f6f6;
+                                border: solid 1px @seafoam-blue;
+                                background-color: @white;
                                 margin-left: 10px;
                                 flex: 0 0 auto;
                             }
                             &.selected {
-                                background-color: #2c3c3b;
+                                background-color: @charcoal;
                                 color: #fff;
-                                border-color: #2c3c3b;
+                                border-color: @charcoal;
                                 &::before {
                                     background-image: url(assets/img/checked-option.svg);
-                                    border-color: #2c3c3b;
+                                    border-color: @charcoal;
                                 }
                             }
                             &.other {
@@ -289,7 +291,7 @@ htl-hatool {
 
         htl-input {
             padding: 16px;
-            background-color: #f6f6f6;
+            background-color: @white;
 
             .suggestions-wrapper {
                 .suggestions {
@@ -306,7 +308,7 @@ htl-hatool {
                     border-radius: 0;
                     border-top-right-radius: 8px;
                     border-bottom-right-radius: 8px;
-                    border: solid 1px #89a9a8;
+                    border: solid 1px @cool-grey;
                     background-color: #fff;
 
                     font-size: 16px;
@@ -330,7 +332,7 @@ htl-hatool {
                     border-top-left-radius: 8px;
                     border-bottom-left-radius: 8px;
     
-                    background-color: #00807c;
+                    background-color: @bluegreen;
                     background-image: url('assets/img/send.svg');
                     background-position: center center;
                     background-size: 20px;
@@ -341,13 +343,13 @@ htl-hatool {
                 &.invalid {
                     input {
                         border: solid 1px #959d9d;
-                        background-color: #f6f6f6;    
+                        background-color: @white;    
                         border-left: none;
                     }
 
                     button {
                         border: solid 1px #959d9d;
-                        background-color: #f6f6f6;
+                        background-color: @white;
                         background-image: url('assets/img/send-disabled.svg');
                         border-right: none;
                     }
@@ -415,10 +417,10 @@ htl-hatool {
                         border-bottom-left-radius: 8px;
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
-                        border-left: solid 1px #89a9a8;
+                        border-left: solid 1px @cool-grey;
                         &:disabled {
                             border: solid 1px #959d9d;
-                            background-color: #f6f6f6;    
+                            background-color: @white;    
                         }
                         border-right: none;    
                     }

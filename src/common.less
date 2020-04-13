@@ -1,39 +1,17 @@
+@bluegreen: #00807c;
+@faded-bluegreen: #e5f2f1;
+@charcoal: #2c3c3b;
+@aubergine: #480a35;
+@seafoam-blue: #6ededa;
+@cool-grey: #89a9a8;
+@pale-blue: #d9f2f1;
+@white: #f6f6f6;
+
 
 .links {
     text-align: center;
     a, a:visited {
-        color: #480a35;
-    }
-}
-
-.logos {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 40px;
-    padding: 0;
-    overflow-x: scroll;
-    width: ~'calc(100% + 32px)';
-    position: relative;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    right: -16px;
-
-    &.ltr {
-        left: -16px;
-        right: auto;
-    }
-
-    img {
-        max-height: 44px;
-        margin: 16px;
-        max-width: 100px;
+        color: @aubergine;
     }
 }
 
@@ -53,10 +31,10 @@
         justify-content: center;
 
         border-radius: 18px;
-        border: solid 1px #6ededa;                
-        background-color: #d9f2f1;
+        border: solid 1px @seafoam-blue;                
+        background-color: @pale-blue;
         font-size: 18px;
-        color: #00807c;
+        color: @bluegreen;
         text-align: center;
 
         font-weight: normal;

@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
+import { fromEvent } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,23 @@ import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  _visible = false;
+
   constructor(@Inject(LOCALE_ID) public locale) { }
 
   ngOnInit() {
+  }
+
+  get visible() { return this._visible; }
+  set visible(value) {
+    this._visible = value;
+    if (value) {
+      fromEvent(window, 'mousedown').pipe(first()).subscribe(() => {
+        window.setTimeout(() => {
+          this._visible = false;
+        }, 0);
+      });
+    }
   }
 
 }

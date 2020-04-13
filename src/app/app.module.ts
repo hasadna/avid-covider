@@ -16,6 +16,7 @@ import { LtrDirective } from './ltr.directive';
 import { GenericPageComponent } from './generic-page/generic-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FullscreenMapComponent } from './fullscreen-map/fullscreen-map.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -45,7 +46,8 @@ const appRoutes: Routes = [
     LtrDirective,
     GenericPageComponent,
     MainPageComponent,
-    FullscreenMapComponent
+    FullscreenMapComponent,
+    HeatmapComponent
   ],
   imports: [
     BrowserModule,

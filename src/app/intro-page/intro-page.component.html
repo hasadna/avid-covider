@@ -1,8 +1,21 @@
-<app-generic-page>
-  <div class='content'>
+<div class='container' [class.locked]='fullMap'>
+  <div class='map-holder' *ngIf='layout.mobile'>
+    <app-heatmap [closeButton]='false' [padding]='0'></app-heatmap>
+  </div>
+  <div class='content' [style.margin-top]='top + "px"'  #content>
+    <div class='handle' (mousedown)='fullMap = !fullMap' (touchstart)='fullMap = !fullMap' *ngIf='layout.mobile'>
+      <span></span>
+    </div>
+    <div class='header'>
+      <h1 i18n>קורונה: מפת חום</h1>
+      <app-header *ngIf='!fullMap'></app-header>
+    </div>
     <div class='hero'>
-      <h1 i18n appLtr>הי,<br/>
-      חשוב לנו לדעת מה שלומך, באמת.</h1>
+      <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()'>
+        <span>Static map thumbnail will come here</span>
+      </div>
+      <h1 i18n appLtr>לפני הכל,<br/>
+      מה שלומך? באמת.</h1>
       <h2 i18n>
       כולנו מעדכנים כל יום על מצב בריאותנו כדי להגן על הורינו וילדנו, על הקהילות שלנו, כדי לעצור את התפרצות נגיף הקורונה ולהשיב במהרה את שגרת חיינו.
       </h2>
@@ -16,26 +29,26 @@
         <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
       </div>
       <p i18n>
-חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
+    חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
       </p>
       <p i18n>
-עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/>
-השאלון אנונימי לחלוטין. 
+    עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/>
+    השאלון אנונימי לחלוטין. 
       </p>
       <p i18n>
-תודה לך! 🙏
+    תודה לך! 🙏
       </p>
       <p i18n>
-*חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
+    *חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
       </p>
       <p i18n>
-פרופסור ערן סגל, מכון ויצמן למדע
-<br/>
-פרופסור יובל דור, האוניברסיטה העברית
-<br/>
-פרופסור בנימין גיגר, מכון ויצמן למדע
-<br/>
-פרופסור רן בליצר, שירותי בריאות כללית
+    פרופסור ערן סגל, מכון ויצמן למדע
+    <br/>
+    פרופסור יובל דור, האוניברסיטה העברית
+    <br/>
+    פרופסור בנימין גיגר, מכון ויצמן למדע
+    <br/>
+    פרופסור רן בליצר, שירותי בריאות כללית
       </p>
       <div class='logos' appLtr>
         <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
@@ -62,12 +75,13 @@
       ניתן לבדוק אם חל שינוי בנושא בכל עת בעמוד זה.</div>
     </div>
   </div>
-  <div class='footer'>
+
+  <div class='cta-holder' [class.hidden]='fullMap'>
     <div class='cta' *ngIf='startButton'>
-      <span class='button' (click)='chat.emit()'><span i18n>בהחלט, בואו נתחיל</span></span>
+      <span class='button' (click)='chat.emit()'><span i18n>עדכון הבריאות היומי שלי</span></span>
     </div>
   </div>
-</app-generic-page>
+<div>
 
 <span class='placeholder-tx' i18n #notificationTitle>זמן לדיווח הבריאות היומי!</span>
 <span class='placeholder-tx' i18n #notificationAction>לדיווח היומי</span>
