@@ -17,7 +17,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
 
   private map: mapboxgl.Map;
 
-  constructor(private layout: LayoutService, public mapService: MapService) { }
+  constructor(public layout: LayoutService, public mapService: MapService) { }
 
   ngOnInit() {
   }
