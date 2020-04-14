@@ -7,6 +7,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     display: block;
+    scroll-behavior: smooth;
 
     &.locked {
         overflow-y: hidden;
@@ -18,6 +19,15 @@
         position: fixed;
         top: 0;
         right: 0;
+    }
+
+    .map-interaction-overlay {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        right: 0;
+        opacity: 0;
     }
 
     > .content {
@@ -32,48 +42,48 @@
         padding: 0 16px;
         padding-bottom: 80px;
 
-        > .handle {
-            height: 32px;
-            margin-bottom: -16px;
-            padding: 0;
-            padding-bottom: 16px;
-            width: 100%;
-            display: flex;
-            flex-flow: row;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-
-            span {
-                width: 48px;
-                height: 4px;
-                border-radius: 2px;
-                background-color: #d8d8d8;
-            }
-            cursor: pointer;
+        > .sticky {
             position: sticky;
             top: 0;
+            background-color: #fff;
             z-index: 1;
-        }
-        > .header {
-            display: flex;
-            flex-flow: row;
-            justify-content: space-between;
-            align-items: center;
-            height: 50px;
-            background: #fff;
-            h1 {
-                font-family: Abraham;
-                font-size: 24px;
-                font-weight: normal;
-                color: @aubergine;
-                margin: 0;
+            > .handle {
+                height: 32px;
+                margin-bottom: -16px;
+                padding: 0;
+                padding-bottom: 16px;
+                width: 100%;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                justify-content: center;
+                background: #fff;
+    
+                span {
+                    width: 48px;
+                    height: 4px;
+                    border-radius: 2px;
+                    background-color: #d8d8d8;
+                }
+                cursor: pointer;
             }
-            margin-bottom: 12px;
-            position: sticky;
-            top: 16px;
-            z-index: 1;
-        }   
+            > .header {
+                display: flex;
+                flex-flow: row;
+                justify-content: space-between;
+                align-items: center;
+                height: 50px;
+                background: #fff;
+                h1 {
+                    font-family: Abraham;
+                    font-size: 24px;
+                    font-weight: normal;
+                    color: @aubergine;
+                    margin: 0;
+                }
+                margin-bottom: 12px;
+            }    
+        }
         .hero {
             display: flex;
             flex-flow: column;
@@ -206,13 +216,13 @@
         width: 100%;
         background-image: linear-gradient(to bottom, #fff0 0%, #fff 40px, #fff 100%);
         z-index: 40;
-        transition-property: opacity;
+        transition-property: bottom;
         transition-duration: 0.25s;
+        transition-delay: 0.25s;
         opacity: 1;
 
         &.hidden {
-            opacity: 0;
-            pointer-events: none;
+            bottom: -80px;
         }
     }
 

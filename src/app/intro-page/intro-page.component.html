@@ -1,14 +1,20 @@
-<div class='container' [class.locked]='fullMap'>
+<div class='container' [class.locked]='fullMap' 
+    (touchmove)='pullRefresh($event)' (touchstart)='pullRefreshStart($event)' #container>
   <div class='map-holder' *ngIf='layout.mobile'>
     <app-heatmap [closeButton]='false' [padding]='0'></app-heatmap>
   </div>
-  <div class='content' [style.margin-top]='top + "px"'  #content>
-    <div class='handle' (mousedown)='fullMap = !fullMap' (touchstart)='fullMap = !fullMap' *ngIf='layout.mobile'>
-      <span></span>
-    </div>
-    <div class='header'>
-      <h1 i18n>קורונה: מפת חום</h1>
-      <app-header *ngIf='!fullMap'></app-header>
+  <div class='map-interaction-overlay' *ngIf='layout.mobile && !fullMap' (mousedown)='fullMap=true'>    
+  </div>
+
+  <div class='content' [style.margin-top]='top + "px"'>
+    <div class='sticky'>
+      <div class='handle' (mousedown)='toggleIfScrolledDown($event, true)' (touchstart)='toggleIfScrolledDown($event, true)' *ngIf='layout.mobile'>
+        <span></span>
+      </div>
+      <div class='header' (mousedown)='toggleIfScrolledDown($event)' (touchstart)='toggleIfScrolledDown($event)' >
+        <h1 i18n>קורונה: מפת חום</h1>
+        <app-header *ngIf='!fullMap'></app-header>
+      </div>
     </div>
     <div class='hero'>
       <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()'>

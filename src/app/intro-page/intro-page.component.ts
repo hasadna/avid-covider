@@ -20,18 +20,18 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   version = VERSION;
   _fullMap = false;
   top = 0;
+  _startY = 0;
   breaks: any = {};
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
   @ViewChild('notificationAction') notificationAction: ElementRef;
-  @ViewChild('content') content: ElementRef;
+  @ViewChild('container') container: ElementRef;
 
   constructor(private notifications: NotificationService,
               public appinstall: AppinstallService,
               public layout: LayoutService,
               public mapService: MapService,
-              private el: ElementRef,
               @Inject(LOCALE_ID) public locale) {}
 
   ngOnInit() {
@@ -64,6 +64,29 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   set fullMap(value) {
     this._fullMap = value;
     this.top = value ? this.breaks.full : this.breaks.base;
-    this.el.nativeElement.scrollTo({left: 0, top: 0, behavior: 'smooth' });
+    const el: HTMLElement = this.container.nativeElement;
+    el.scrollTo({left: 0, top: 0, behavior: 'smooth' });
+  }
+
+  toggleIfScrolledDown(ev, scroll0?) {
+    console.log('toggleIfScrolledDown', this.fullMap, this.layout.mobile, scroll0, this.container.nativeElement.scrollTop);
+    if (this.layout.mobile && (scroll0 || this.container.nativeElement.scrollTop === 0)) {
+      window.setTimeout(() => {
+        this.fullMap = !this.fullMap;
+      }, 100);
+    }
+    ev.preventDefault();
+  }
+
+  pullRefreshStart(ev) {
+    this._startY = ev.touches[0].pageY;
+  }
+  pullRefresh(ev) {
+    const y = ev.touches[0].pageY;
+    // Activate custom pull-to-refresh effects when at the top of the container
+    // and user is scrolling up.
+    if (document.scrollingElement.scrollTop === 0 && y > this._startY) {
+      this.fullMap = true;
+    }
   }
 }

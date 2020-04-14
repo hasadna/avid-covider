@@ -2,7 +2,7 @@
   <img src='assets/img/language-selector.svg'>
   <img src='assets/img/language-selector-chevron.svg'>
 </div>
-<div class='lang-popup' *ngIf='visible'>
+<div class='lang-popup' *ngIf='visible' appLtr>
   <a class='lang-button' [class.active]='locale==="he"' href='/'>עברית</a>
   <a class='lang-button' [class.active]='locale==="ar"' href='/ar'>عربي</a>
   <a class='lang-button' [class.active]='locale==="en"' href='/en'>English</a>
