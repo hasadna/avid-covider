@@ -1,5 +1,7 @@
 @import url('../../common.less');
 
+@headerSize: 66px;
+
 .container {
     position: relative;
     width: 100%;
@@ -13,7 +15,7 @@
         overflow-y: hidden;
     }
 
-    .map-holder {
+    .map-holder, .map-interaction-overlay, .map-nudge-overlay {
         width: 100%;
         height: 100%;
         position: fixed;
@@ -21,13 +23,80 @@
         right: 0;
     }
 
-    .map-interaction-overlay {
+    .map-cta {
         width: 100%;
-        height: 100%;
         position: fixed;
-        top: 0;
+        top: -80px;
         right: 0;
+        transition-property: top;
+        transition-duration: 0.25s;
+        transition-delay: 0.25s;
+        background-image: linear-gradient(to bottom, rgba(44, 60, 59, 0.5), rgba(44, 60, 59, 0));
+        padding: 6px 40px;
+        
+        &.visible {
+            top: 0;
+        }
+    }
+
+    .map-interaction-overlay {
         opacity: 0;
+    }
+
+    .map-nudge-overlay {
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-end;
+        align-items: stretch;
+
+        .inner {
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-end;
+            align-items: flex-end;
+            background-image: linear-gradient(to bottom, rgba(44, 60, 59, 0), rgba(44, 60, 59, 0.5) 100px);
+            padding: 0 12px;
+            margin-bottom: @headerSize;
+
+            .close-button {
+                display: block;
+                width: 36px;
+                height: 36px;
+                border-radius: 18px;
+                border: solid 1px #ffffff;
+                background-image: url(../../assets/img/cross-white.svg);
+                background-position: center;
+                cursor: pointer;
+                margin: 16px 20px;
+                pointer-events: none;
+            }
+            
+            .from {
+                width: 75%;
+                font-family: Abraham;
+                font-size: 18px;
+                color: @charcoal;
+                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.08);
+                background-color: #ffffff;
+                border-radius: 8px;
+                padding: 10px 16px;
+                &.ltr {
+                    border-top-right-radius: 0;
+                }
+                &:not(.ltr) {
+                    border-top-left-radius: 0;
+                }
+            }
+
+            .cta {
+                align-self: center;
+                padding: 6px 28px;
+            }
+
+            .close-button {
+                align-self: flex-start;
+            }
+        }
     }
 
     > .content {
@@ -47,6 +116,9 @@
             top: 0;
             background-color: #fff;
             z-index: 1;
+            height: @headerSize;
+            overfloy-y: hidden;
+
             > .handle {
                 height: 32px;
                 margin-bottom: -16px;

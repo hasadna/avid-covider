@@ -22,6 +22,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   top = 0;
   _startY = 0;
   breaks: any = {};
+  seenNudge = false;
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
@@ -85,8 +86,16 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
     const y = ev.touches[0].pageY;
     // Activate custom pull-to-refresh effects when at the top of the container
     // and user is scrolling down.
-    if (this.container.nativeElement.scrollTop === 0 && y < this._startY) {
+    if (this.container.nativeElement.scrollTop === 0 && y < (this._startY - 50)) {
       this.fullMap = true;
     }
+  }
+
+  nudgeNeeded() {
+    return !this.mapService.reportedToday && !this.seenNudge;
+  }
+
+  closeNudge() {
+    this.seenNudge = true;
   }
 }

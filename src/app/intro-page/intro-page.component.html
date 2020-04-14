@@ -3,6 +3,21 @@
   <div class='map-holder' *ngIf='layout.mobile'>
     <app-heatmap [closeButton]='false' [padding]='0'></app-heatmap>
   </div>
+  <div class='map-cta' *ngIf='layout.mobile' [class.visible]='fullMap && !nudgeNeeded()'>
+    <div class='cta' *ngIf='startButton'>
+      <span class='button' (click)='chat.emit()'><span i18n>עדכון הבריאות היומי שלי</span></span>
+    </div>
+  </div>
+  <div class='map-nudge-overlay' *ngIf='layout.mobile && fullMap && nudgeNeeded()' (mousedown)='closeNudge()'>
+    <div class='inner'>
+      <div class='close-button'></div>
+      <div class='from' i18n>הי, המפה איננה שלמה בלעדיך…<br/>
+  רצינו רק להזכיר לך לשלוח לנו את העדכון היומי. טוב?</div>
+      <div class='cta'>
+        <span class='button' (click)='chat.emit()'><span i18n>הא, נכון! אעשה זאת עכשיו…</span></span>
+      </div>
+    </div>
+  </div>
   <div class='map-interaction-overlay' *ngIf='layout.mobile && !fullMap' (mousedown)='fullMap=true'>    
   </div>
 
@@ -64,6 +79,7 @@
       <div class='logos' appLtr>
         <img src='assets/img/migdal-logo.svg'/>
         <img src='assets/img/final-logo.svg'/>
+        <img src='assets/img/gfs-logo.svg'/>
       </div>
       <div class='links'>
         <a href='https://www.hasadna.org.il/coronabot/participant-form' i18n target='_blank'>תנאי ההשתתפות במחקר</a>&nbsp;|&nbsp;
