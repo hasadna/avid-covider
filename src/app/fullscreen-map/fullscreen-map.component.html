@@ -1,63 +1,16 @@
-<div class='map-wrapper'>
-  <div id='fullscreen-map'>
-  </div>
-  <div class='close-button' (click)='mapService.needsToReport() ? chat.emit() : thankyou.emit()' *ngIf='!infoboxActive && !overlayVisible()'></div>
-  <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='!overlayVisible()'>?</div>
-  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false'>
-    <div class='infobox-content'>
-      <h3 i18n>קורונה:<br/>
-      מפת חום</h3>
-      <p i18n>המפה מציגה מידע שנאסף משאלונים אנונימיים שמילאו תושבי כל אזור.</p>
-      <p i18n>הצבע שבו צבוע האזור משקף את רמת התסמינים שדווחו באזור זה: סגול לרמת תסמינים גבוהה וצהוב לרמת תסמינים נמוכה.</p>
-      <p i18n>המפה מציגה רק ערים ושכונות שיש בהם 50 משיבים לפחות. ערים שיש בהן 500 משיבים לפחות ושכונות שיש בהן 250 משיבים לפחות מוצגות בצבע מלא.</p>
-      <p i18n>ניתן לשנות את רמת המיקוד של התצוגה בהתאם לעיר או לשכונה שמעניינת אותך.<p>
-      <p i18n>חשוב לציין כי צבעי המפה משקפים רק את רמת הדיווח על התסמינים. הצבעים אינם משקפים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה באותו אזור.</p>
-      <p i18n>כמו כן, התסמינים המוצגים נפוצים אצל חולים בנגיף הקורונה אך אינם ספציפיים למחלה זו וייתכן שהם משקפים תחלואה במחלות אחרות.</p>
-    </div>
-  </div>
-  <div class='legend'>
-    <div class='scale'>
-      <div class='label' i18n>ריכוז<br/>תסמינים:</div>
-      <div class='scale-rows'>
-        <div class='numbers'>
-          <span>2%</span>
-          <span>4%</span>
-          <span>6%</span>
-          <span>8%</span>
-        </div>
-        <div class='colors'>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </div>
-    <div class='no-info'>
-      <div class='label' i18n>
-        חוסר<br/>מידע:
-      </div>
-      <div class='scale-rows'>
-        <div class='numbers'>
-          <span>&nbsp;</span>
-        </div>        
-        <div class='colors'>
-          <span></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-heatmap [closeButton]='!overlayVisible()' [infoButton]='!overlayVisible()'></app-heatmap>
 <div class='overlay' *ngIf='overlayVisible()'>
-  <h1 i18n>קורונה:<br/>מפת חום</h1>
+  <h1 i18n>למאבק בקורונה:<br/>דיווח יומי</h1>
   <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שמדווחים בכל יום על מצבם הרפואי. דיווח יומיומי קבוע שלך יבטיח את עדכניות ושיפור המפה ויסייע לצוות ממכון ויצמן במחקר.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
   <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
 </div>
-<div class='cta' *ngIf='mapService.needsToReport()'>
-  <span class='button' (click)='chat.emit()'><span i18n>גם אני רוצה לדווח</span></span>
+<div class='cta' *ngIf='mapService.needsToReport() && !layout.desktop'>
+  <span class='button' (click)='mapService.closeMap()'><span i18n>גם אני רוצה לדווח</span></span>
+</div>
+<div class='cta' *ngIf='mapService.needsToReport() && layout.desktop'>
+  <span class='button' (click)='mapService.closeMap()'><span i18n>להמשך הדיווח</span></span>
 </div>
 <div class='cta' *ngIf='!mapService.needsToReport()'> 
-  <span class='button' (click)='thankyou.emit()'><span i18n>שיתוף השאלון והמפה</span></span>
+  <span class='button' (click)='mapService.closeMap()'><span i18n>שיתוף השאלון והמפה</span></span>
 </div>

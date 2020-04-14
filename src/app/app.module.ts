@@ -9,7 +9,6 @@ import { HatoolLibModule } from 'hatool';
 import * as Sentry from '@sentry/browser';
 import { IntroPageComponent } from './intro-page/intro-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
-import { InfoPageComponent } from './info-page/info-page.component';
 import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { HeaderComponent } from './header/header.component';
 import { VERSION } from './constants';
@@ -17,6 +16,7 @@ import { LtrDirective } from './ltr.directive';
 import { GenericPageComponent } from './generic-page/generic-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { FullscreenMapComponent } from './fullscreen-map/fullscreen-map.component';
+import { HeatmapComponent } from './heatmap/heatmap.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -41,13 +41,13 @@ const appRoutes: Routes = [
     AppComponent,
     IntroPageComponent,
     ChatPageComponent,
-    InfoPageComponent,
     ThankYouPageComponent,
     HeaderComponent,
     LtrDirective,
     GenericPageComponent,
     MainPageComponent,
-    FullscreenMapComponent
+    FullscreenMapComponent,
+    HeatmapComponent
   ],
   imports: [
     BrowserModule,

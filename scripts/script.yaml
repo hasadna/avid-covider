@@ -521,10 +521,10 @@
 
     - name: ask-body-temperature
       steps:
-        - say: "ומה המדחום אומר?"
+        - say: "ומה בדיוק המדחום אומר?"
         - wait:
             variable: temperature
-            placeholder: מעלות חום, 35-43
+            placeholder: מעלות חום, 35.0-43.0
             input-kind: number
             input-min: 35
             input-max: 43
@@ -701,7 +701,7 @@
 
     - name: promotion
       steps:
-        - say: רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב! (Symptoms Map)
+        - say: סיימנו. רוצה להסתכל שוב במפת התסמינים?
         - wait:
             options:
               - show: כן, בטח

@@ -1,10 +1,12 @@
-<div class='header'>
-  <div class='lang-selector'>
-    <a class='lang-button' [class.active]='locale==="he"' href='/'>עב</a>
-    <a class='lang-button' [class.active]='locale==="ar"' href='/ar'>عر</a>
-    <a class='lang-button' [class.active]='locale==="en"' href='/en'>En</a>
-    <a class='lang-button' [class.active]='locale==="ru"' href='/ru'>Ру</a>
-    <a class='lang-button' [class.active]='locale==="es"' href='/es'>Es</a>
-    <a class='lang-button' [class.active]='locale==="fr"' href='/fr'>Fr</a>
-  </div>
+<div class='lang-selector' (click)='visible=!visible'>
+  <img src='assets/img/language-selector.svg'>
+  <img src='assets/img/language-selector-chevron.svg'>
+</div>
+<div class='lang-popup' *ngIf='visible' appLtr>
+  <a class='lang-button' [class.active]='locale==="he"' href='/'>עברית</a>
+  <a class='lang-button' [class.active]='locale==="ar"' href='/ar'>عربي</a>
+  <a class='lang-button' [class.active]='locale==="en"' href='/en'>English</a>
+  <a class='lang-button' [class.active]='locale==="ru"' href='/ru'>Русский</a>
+  <a class='lang-button' [class.active]='locale==="es"' href='/es'>Español</a>
+  <a class='lang-button' [class.active]='locale==="fr"' href='/fr'>Français</a>
 </div>

@@ -31,7 +31,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   @Input() layout: string = null;
   @Output() done = new EventEmitter<string>();
-  nextStep = 'thankyou';
 
   constructor(private http: HttpClient,
               private storage: ReportStoreService,
@@ -341,7 +340,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
         show_map: () => {
-          this.nextStep = 'fullscreenmap';
+          this.mapService.openMap();
         },
         save_report: (record) => {
           let payload = Object.assign({}, record);
@@ -379,7 +378,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       },
       (key, value, record) => {}
     ).subscribe((success) => {
-      this.done.emit(this.nextStep);
+      this.done.emit();
     });
   }
 

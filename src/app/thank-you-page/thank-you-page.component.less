@@ -13,7 +13,7 @@
         font-size: 28px;
         font-weight: normal;
         text-align: right;
-        color: #480a35;
+        color: @aubergine;
 
         &.ltr {
             text-align: left;
@@ -24,8 +24,7 @@
         font-size: 20px;
         font-weight: 300;
         line-height: 1.2;
-        text-align: justify;
-        color: #480a35;
+        color: @aubergine;
     }
 
     .copybox {
@@ -35,7 +34,7 @@
         width: 100%;
         border-radius: 4px;
         overflow: hidden;
-        background-color: #f6f6f6;
+        background-color: @white;
         height: 32px;
         align-items: center;
         margin-top: auto;
@@ -43,7 +42,7 @@
 
         .url {
             font-weight: 300;                 
-            color: #2c3c3b;
+            color: @charcoal;
             margin: 0 5px;
         }
 
@@ -55,7 +54,7 @@
             flex-flow: row;
             align-items: center;
             justify-content: center;
-            background-color: #00807c;
+            background-color: @bluegreen;
             cursor: pointer;
 
             img {
@@ -71,7 +70,7 @@
         transition-property: opacity;
         transition-duration: 0.5s;
         transition-delay: 0.5s;
-        color: #2c3c3b;
+        color: @charcoal;
         align-self: flex-start;
 
         &.active {
@@ -91,16 +90,16 @@
     .cta {
         &.calendar {
             .button {
-                border-color: #480a35;
-                color: #480a35;
+                border-color: @aubergine;
+                color: @aubergine;
                 background-color: rgba(72, 10, 53, 0.1);
             }
 
             &.added {
                 .button {
-                    border-color: #00807c;
-                    color: #2c3c3b;
-                    background-color: #6ededa;
+                    border-color: @bluegreen;
+                    color: @charcoal;
+                    background-color: @seafoam-blue;
                     pointer-events: none;
                 }
             }
@@ -117,7 +116,7 @@
     .share-text {
         font-size: 16px;
         font-weight: 300;
-        color: #89a9a8;
+        color: @cool-grey;
     }
 
 }

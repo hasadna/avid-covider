@@ -1,44 +1,58 @@
-:host {
-    width: 100%;
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: flex-start;
+@import url('../../common.less');
 
-    .header {
-        margin-top: 16px;
-        width: 100%;
+:host {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    position: relative;
+
+    .lang-selector {
+        direction: ltr;
         display: flex;
         flex-flow: row;
-        justify-content: center;
         align-items: center;
+        justify-content: space-evenly;
+        width: 56px;
+        height: 32px;
+        border-radius: 8px;
+        background-color: @faded-bluegreen;
+        cursor: pointer;
+    }
 
-        .lang-selector {
-            display: flex;
-            flex-flow: row wrap;
+    .lang-popup {
+        position: absolute;
+        top: 32px + 4px;
+        left: 0;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+        background: white;
+        background-color: @faded-bluegreen;
+        padding: 4px;
+
+        &.ltr {
+            left: auto;
+            right: 0;
+        }
+
+        a {
+            display: block;
+            padding: 4px 30px;
+            font-size: 16px;
+            text-decoration: none;
             width: 100%;
-            align-items: center;
-            justify-content: space-evenly;
-            background-color: rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 4px;
-                
-            .lang-button {
-                display: block;
-                padding: 4px 10px;
-                font-family: Abraham;
-                font-size: 16px;
-                color: #480a35;
-                text-decoration: none;
-                &:hover, &:visited {
-                    color: #480a35;
-                }
-                &.active {
-                    color: #ffffff;
-                    background-color: #480a35;
-                    border-radius: 5px;
-                }
-            }    
+            text-align: center;
+            &, &:visited {
+                color: @bluegreen;
+            }
+            &:hover, &:active {
+                color: #fff;
+                background-color: @bluegreen;
+                border-radius: 5px;
+            }
         }
     }
 }

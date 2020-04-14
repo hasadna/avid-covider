@@ -1300,8 +1300,8 @@ export const script = {
           "name": "ask-body-temperature",
           "steps": [
             {
-              "say": "ומה המדחום אומר?",
-              "uid": "b394c43aa7"
+              "say": "ומה בדיוק המדחום אומר?",
+              "uid": "da6e4c5a83"
             },
             {
               "uid": "5b91e58a40",
@@ -1310,7 +1310,7 @@ export const script = {
                 "input-max": 43,
                 "input-min": 35,
                 "input-step": 0.1,
-                "placeholder": "מעלות חום, 35-43",
+                "placeholder": "מעלות חום, 35.0-43.0",
                 "variable": "temperature"
               }
             }

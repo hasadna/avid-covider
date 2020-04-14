@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InfoPageComponent } from './info-page.component';
+import { HeatmapComponent } from './heatmap.component';
 
-describe('InfoPageComponent', () => {
-  let component: InfoPageComponent;
-  let fixture: ComponentFixture<InfoPageComponent>;
+describe('HeatmapComponent', () => {
+  let component: HeatmapComponent;
+  let fixture: ComponentFixture<HeatmapComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InfoPageComponent ]
+      declarations: [ HeatmapComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InfoPageComponent);
+    fixture = TestBed.createComponent(HeatmapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
