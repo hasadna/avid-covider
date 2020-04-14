@@ -110,6 +110,10 @@ htl-hatool {
                             width: 100%;
                             animation: button-appearance 0.2s ease-in-out both;
 
+                            > span {
+                                flex-basis: 100%;
+                            }
+
                             .button-delays(20);
 
                             .button-delays(@n, @i: 1) when (@i =< @n) {
@@ -235,18 +239,22 @@ htl-hatool {
                             }
                             &.other {
                                 justify-content: center;
+                                span {
+                                    flex-basis: 100%;
+                                    text-align: center;    
+                                }
                                 &::before {
                                     display: none;
                                 }
                             }
-                            > span.empty { display: inline; }
-                            > span.not-empty { display: none; }
-                            > span.none-selected { display: none; }
+                            span.empty { display: inline; }
+                            span.not-empty { display: none; }
+                            span.none-selected { display: none; }
                         }
                         &.checked {
                             button {
-                                > span.empty { display: none; }
-                                > span.not-empty { display: inline; }
+                                span.empty { display: none; }
+                                span.not-empty { display: inline; }
                             }
                         }
                         &.selected {
