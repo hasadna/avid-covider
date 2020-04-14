@@ -27,8 +27,8 @@
       <div class='handle' (mousedown)='toggleIfScrolledDown($event, true)' (touchstart)='toggleIfScrolledDown($event, true)' *ngIf='layout.mobile'>
         <span></span>
       </div>
-      <div class='header' (mousedown)='toggleIfScrolledDown($event)' (touchstart)='toggleIfScrolledDown($event)' >
-        <h1 i18n>קורונה: מפת חום</h1>
+      <div class='header'>
+        <h1 i18n  (mousedown)='toggleIfScrolledDown($event)' (touchstart)='toggleIfScrolledDown($event)'>קורונה: מפת חום</h1>
         <app-header *ngIf='!fullMap'></app-header>
       </div>
     </div>
