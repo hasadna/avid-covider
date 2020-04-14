@@ -8,7 +8,7 @@
       <span class='button' (click)='chat.emit()'><span i18n>עדכון הבריאות היומי שלי</span></span>
     </div>
   </div>
-  <div class='map-nudge-overlay' *ngIf='layout.mobile && fullMap && nudgeNeeded()' (mousedown)='closeNudge()'>
+  <div class='map-nudge-overlay' *ngIf='layout.mobile && fullMap && nudgeNeeded()' (click)='closeNudge()'>
     <div class='inner'>
       <div class='close-button'></div>
       <div class='from' i18n>הי, המפה איננה שלמה בלעדיך…<br/>
