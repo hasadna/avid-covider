@@ -36,7 +36,6 @@
             cmd: clear
         - goto: personal-details
         - goto: preconditions-check
-        - say: אוקיי, עברנו את זה...     
         - goto: corvid-checks
         - goto: insulation
         - goto: current-report
@@ -262,6 +261,7 @@
             params:
               - record
               - preconditions_received
+        - say: אוקיי, עברנו את זה...     
 
     - name: preconditions-diseases
       steps:
@@ -311,17 +311,42 @@
                 value: never
 
     - name: corvid-checks
-      steps:                    
-        - do:
-            cmd: corvid_check_reask
-            params: 
+      steps:  
+        - do: 
+            cmd: fetch_corvid_check_question_data   ## load the relevant reporter's data, return the plan for the current report
+            variable: _corvid_check_ask_or_not             # swtich values: "first time" (new users), "ask again", "don't ask", "ask for missing check results"
+
+                                                            ## logic:
+                                                            ## - no date of asking the question before (and new user) --> "first time" 
+                                                            ## - returning users with question date >= 7 days --> "ask again"
+                                                            ## - returning users with quesion date < 7 days OR returning users with POSITIVE check rsult ---> "don't ask"  
+                                                            ## -  if there is a missing result from the last two weeks --> "ask for missing check results"
+            params:
               - record
-            variable: _ask_corvid_check
-            
-        - switch:                                      # <---- check for data of past checks
-            arg: _ask_corvid_check
+        - switch:
+            arg: _corvid_check_ask_or_not                    
             cases:
-              - match: true                          # <---- for new reporters, ask for last check
+              - match: missing_result                                 ## check if there is a pending check result
+                steps:
+                  - do:
+                      cmd: build_corvid_check_missing_result_question    ## this function will build the (translateable) question, combining string and check date
+                      params:
+                        - record
+                        - סיפרת לנו בדיווח קודם שנבדקת לקורונה בתאריך
+                      variabe:
+                        missing_result_question_text
+                  - say: '{{missing_result_question_text}}'
+                  - say: האם כבר קיבלת את תוצאות הבדיקה?
+                  - wait:
+                      options:
+                        - show: "כן, הגיעו תוצאות הבדיקה"
+                          value: true 
+                          steps:
+                            - goto: corvid_check_ask_for_results
+                        - show: "לא"
+                          value: false
+
+              - match: "first time"                          # <---- for new reporters, ask for last check
                 steps:
                   - say: האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?
                   - wait:
@@ -334,36 +359,51 @@
                               variable: corvid_check_date
                               placeholder: "תאריך: dd/mm/yy"
                               input-kind: date
-                        
-                          - say: ומה היתה תוצאת הבדיקה?
-                          
-                          - wait:
-                              variable: corvid_check_result
-                              options:
-                                - show: אובחנתי כחולה בקורונה
-                                  value: positive
-                                  steps:
-                                    - say: אוי, זה בטח לא פשוט. מקווים שהכל בסדר
-                                - show: אין לי קורונה
-                                  value: negative
-                                  steps:
-                                    - say: משמח לשמוע, נקווה שימשיך ככה
-                                - show: עוד לא קיבלתי את תוצאות הבדיקה
-                                  value: result_missing
-                                  steps:
-                                    - say: אנחנו מחזיקים לך אצבעות
+                          - goto: corvid_check_ask_for_results
                       - show: לא
                         value: false
-              - match: false
-              - default: true                          # <---- for returning reporters, pass
+
+              - match: "ask again"                         # <---- for returning reporters, pass
+                steps:
+                  - say: האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?
+                  - wait:
+                      options:
+                      - show: כן, נבדקתי
+                        value: true
+                        steps:
+                          - say: באיזה יום זה היה?
+                          - wait:
+                              variable: corvid_check_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                          - goto: corvid_check_ask_for_results
+                      - show: לא
+                        value: false
             
         - do:
-            cmd: save_corvid_check_question_date
+            cmd: save_corvid_check_question_data         # <--- we are saving the question date, check date and the check result.
+                                                         ## in case of previous "positive" check result, the result and the check date to be submitted with the current report as well
             params:
               - record
-            variable: corvid_check_question_date
 
-      
+    - name: corvid_check_ask_for_results
+      steps:
+        - say: ומה היתה תוצאת הבדיקה?
+        - wait:
+            variable: corvid_check_result              
+            options:
+              - show: אובחנתי כחולה בקורונה
+                value: positive
+                steps:
+                  - say: אוי, זה בטח לא פשוט.  החלמה מהירה
+              - show: אין לי קורונה
+                value: negative
+                steps:
+                  - say: משמח לשמוע, נקווה שימשיך ככה
+              - show: עוד לא קיבלתי את תוצאות הבדיקה
+                value: result_missing
+                steps:
+                - say: אנחנו מחזיקים לך אצבעות
 
     - name: insulation
       steps:
