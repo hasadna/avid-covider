@@ -84,8 +84,8 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   pullRefresh(ev) {
     const y = ev.touches[0].pageY;
     // Activate custom pull-to-refresh effects when at the top of the container
-    // and user is scrolling up.
-    if (document.scrollingElement.scrollTop === 0 && y > this._startY) {
+    // and user is scrolling down.
+    if (this.container.nativeElement.scrollTop === 0 && y < this._startY) {
       this.fullMap = true;
     }
   }
