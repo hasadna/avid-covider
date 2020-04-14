@@ -23,7 +23,7 @@ export class MapService {
   init() {
     if (this._init) { return; }
     this._init = true;
-    
+
     this.source.sourceStream.pipe(first()).subscribe((_source) => {
       if (_source === 'map') {
         this.overlayOpen = true;
