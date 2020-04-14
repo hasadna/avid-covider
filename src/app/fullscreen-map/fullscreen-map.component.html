@@ -5,8 +5,11 @@
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
   <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
 </div>
-<div class='cta' *ngIf='mapService.needsToReport()'>
+<div class='cta' *ngIf='mapService.needsToReport() && !layout.desktop'>
   <span class='button' (click)='mapService.closeMap()'><span i18n>גם אני רוצה לדווח</span></span>
+</div>
+<div class='cta' *ngIf='mapService.needsToReport() && layout.desktop'>
+  <span class='button' (click)='mapService.closeMap()'><span i18n>להמשך הדיווח</span></span>
 </div>
 <div class='cta' *ngIf='!mapService.needsToReport()'> 
   <span class='button' (click)='mapService.closeMap()'><span i18n>שיתוף השאלון והמפה</span></span>
