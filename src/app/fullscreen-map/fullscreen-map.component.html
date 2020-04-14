@@ -1,6 +1,6 @@
 <app-heatmap [closeButton]='!overlayVisible()' [infoButton]='!overlayVisible()'></app-heatmap>
 <div class='overlay' *ngIf='overlayVisible()'>
-  <h1 i18n>קורונה:<br/>מפת חום</h1>
+  <h1 i18n>למאבק בקורונה:<br/>דיווח יומי</h1>
   <h2 i18n>המפה הזו שותפה על ידי אחד מאלפי האזרחים שמדווחים בכל יום על מצבם הרפואי. דיווח יומיומי קבוע שלך יבטיח את עדכניות ושיפור המפה ויסייע לצוות ממכון ויצמן במחקר.</h2>
   <div class='close-overlay' (click)='mapService.closeOverlay()' i18n>למפה</div>
   <h2 i18n>לא לשכוח לדווח ואנחנו מקווים לראותך גם מחר&hellip;</h2>
