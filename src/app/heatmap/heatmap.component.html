@@ -3,7 +3,8 @@
   </div>
   <div class='close-button' (click)='mapService.closeMap()' *ngIf='!infoboxActive && closeButton'></div>
   <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='infoButton'>?</div>
-  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false'>
+  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false' [class.desktop]='layout.desktop'>
+    <div class='close-button'></div>
     <div class='infobox-content'>
       <h3 i18n>קורונה:<br/>
       מפת חום</h3>
@@ -15,7 +16,7 @@
       <p i18n>כמו כן, התסמינים המוצגים נפוצים אצל חולים בנגיף הקורונה אך אינם ספציפיים למחלה זו וייתכן שהם משקפים תחלואה במחלות אחרות.</p>
     </div>
   </div>
-  <div class='legend'>
+  <div class='legend' [class.desktop]='layout.desktop'>
     <div class='scale'>
       <div class='label' i18n>ריכוז<br/>תסמינים:</div>
       <div class='scale-rows'>

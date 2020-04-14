@@ -23,6 +23,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   _startY = 0;
   breaks: any = {};
   seenNudge = false;
+  mapInit = false;
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
@@ -67,6 +68,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
     this.top = value ? this.breaks.full : this.breaks.base;
     const el: HTMLElement = this.container.nativeElement;
     el.scrollTo({left: 0, top: 0, behavior: 'smooth' });
+    this.mapInit = this.mapInit || value;
   }
 
   toggleIfScrolledDown(ev, scroll0?) {

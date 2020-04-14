@@ -1,7 +1,7 @@
 <div class='container' [class.locked]='fullMap' 
     (touchmove)='pullRefresh($event)' (touchstart)='pullRefreshStart($event)' #container>
   <div class='map-holder' *ngIf='layout.mobile'>
-    <app-heatmap [closeButton]='false' [padding]='0'></app-heatmap>
+    <app-heatmap [closeButton]='false' [padding]='0' *ngIf='mapInit'></app-heatmap>
   </div>
   <div class='map-cta' *ngIf='layout.mobile' [class.visible]='fullMap && !nudgeNeeded()'>
     <div class='cta' *ngIf='startButton'>
@@ -18,7 +18,8 @@
       </div>
     </div>
   </div>
-  <div class='map-interaction-overlay' *ngIf='layout.mobile && !fullMap' (mousedown)='fullMap=true'>    
+  <div class='map-interaction-overlay' *ngIf='layout.mobile && !fullMap' (mousedown)='fullMap=true' [class.map-init]='mapInit'
+       [style.background-image]='"url(" + mapService.static() + ")"'>  
   </div>
 
   <div class='content' [style.margin-top]='top + "px"'>
@@ -32,8 +33,7 @@
       </div>
     </div>
     <div class='hero'>
-      <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()'>
-        <span>Static map thumbnail will come here</span>
+      <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()' [style.background-image]='"url(" + mapService.static() + ")"'>
       </div>
       <h1 i18n appLtr>לפני הכל,<br/>
       מה שלומך? באמת.</h1>

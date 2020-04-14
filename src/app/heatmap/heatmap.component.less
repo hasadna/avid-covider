@@ -15,7 +15,7 @@
             border-radius: 8px;
         }
     
-        .close-button {
+        > .close-button {
             position: absolute;
             display: block;
             width: 36px;
@@ -47,15 +47,6 @@
             font-family: Abraham;
             font-weight: 500;
             font-size: 16px;
-            &.active {
-                color: #ffffff00;
-                background-color: none;
-                z-index: 21;
-                left: 40px;
-                top: 40px;
-                box-shadow: none;
-                background-image: url(../../assets/img/cross.svg);
-            }
         }
         .infobox {
             background-color: rgba(255, 255, 255, 0);
@@ -63,13 +54,31 @@
             flex-flow: column;
             align-items: stretch;
             justify-content: stretch;
-            padding: 32px 32px 131px;
+            padding: 64px 32px 131px 32px;
             position: absolute;
-            top: 0;
-            right: 0;
+            bottom: 0;
+            left: 0;
             z-index: 20;
             width: 100%;
             height: 100%;
+
+            &.desktop {
+                width: 364px;
+                max-height: 640px;
+            }
+    
+            .close-button {
+                position: absolute;
+                display: block;
+                width: 36px;
+                height: 36px;
+                background-color: #ffffff00;
+                background-image: url(../../assets/img/cross.svg);
+                background-position: center;
+                cursor: pointer;
+                top: 74px;
+                left: 42px;
+            }       
     
             .infobox-content {
                 flex: 1 1 auto;
@@ -104,7 +113,12 @@
             flex-flow: row;
             align-items: flex-end;
             justify-content: space-between;
-    
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+
+            &.desktop {
+                width: 300px;
+            }
+
             .scale, .no-info {
                 display: flex;
                 flex-flow: row;

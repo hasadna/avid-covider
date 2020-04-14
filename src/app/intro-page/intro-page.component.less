@@ -40,7 +40,12 @@
     }
 
     .map-interaction-overlay {
-        opacity: 0;
+        background-size: cover;
+        background-position: center;
+
+        &.map-init {
+            opacity: 0;
+        }
     }
 
     .map-nudge-overlay {
@@ -167,12 +172,11 @@
                 height: 200px;
                 cursor: pointer;
                 margin: 12px 0;
-                background: fade(@charcoal, 25);
-                color: charcoal;
                 display: flex;
-                flex-flow: row;
-                align-items: center;
-                justify-content: center;
+                background-size: cover;
+                background-position: center;
+                border-radius: 4px;
+                border: solid 4px @white;
             }
 
             h1 {

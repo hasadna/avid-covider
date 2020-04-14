@@ -27,12 +27,13 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
     // We wait here to ensure we have the layout readonly
     setTimeout(() => {
       try {
+        this.mapService.init();
         this.map = new mapboxgl.Map({
           container: 'fullscreen-map',
           style: 'mapbox://styles/wios/ck8xf8qi305nr1iqan5e50vcv',
-          center: [34.785, 32.075],
+          center: [this.mapService.lat, this.mapService.lng],
           minZoom: 3,
-          zoom: 11
+          zoom: this.mapService.zoom
         });
         if (this.layout.desktop) {
           this.map.addControl(new mapboxgl.NavigationControl({
