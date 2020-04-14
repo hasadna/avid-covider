@@ -75,8 +75,8 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       window.setTimeout(() => {
         this.fullMap = !this.fullMap;
       }, 100);
+      ev.preventDefault();
     }
-    ev.preventDefault();
   }
 
   pullRefreshStart(ev) {
