@@ -5,7 +5,7 @@
   </div>
   <div class='map-cta' *ngIf='layout.mobile' [class.visible]='fullMap && !nudgeNeeded()'>
     <div class='cta' *ngIf='startButton'>
-      <span class='button' (click)='chat.emit()'><span i18n>עדכון הבריאות היומי שלי</span></span>
+      <span class='button' (click)='chat.emit()'><span i18n>לדיווח הבריאות היומי שלי</span></span>
     </div>
   </div>
   <div class='map-nudge-overlay' *ngIf='layout.mobile && fullMap && nudgeNeeded()' (click)='closeNudge()'>
@@ -101,7 +101,7 @@
 
   <div class='cta-holder' [class.hidden]='fullMap'>
     <div class='cta' *ngIf='startButton'>
-      <span class='button' (click)='chat.emit()'><span i18n>עדכון הבריאות היומי שלי</span></span>
+      <span class='button' (click)='chat.emit()'><span i18n>לדיווח הבריאות היומי שלי</span></span>
     </div>
   </div>
 <div>
