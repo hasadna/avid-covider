@@ -20,11 +20,13 @@ export class HeaderComponent implements OnInit {
   set visible(value) {
     this._visible = value;
     if (value) {
-      fromEvent(window, 'mousedown').pipe(first()).subscribe(() => {
-        window.setTimeout(() => {
-          this._visible = false;
-        }, 0);
-      });
+      setTimeout(() => {
+        fromEvent(window, 'click').pipe(first()).subscribe(() => {
+          window.setTimeout(() => {
+            this._visible = false;
+          }, 0);
+        });
+      }, 100);
     }
   }
 
