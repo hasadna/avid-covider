@@ -113,20 +113,28 @@ export const script = {
               "uid": "df5de41a13"
             },
             {
-              "goto": "insulation",
-              "uid": "48accaa909"
+              "say": "אוקיי, עברנו את זה...",
+              "uid": "979a81e5a6"
             },
             {
-              "goto": "current-report",
+              "goto": "corvid-checks",
               "uid": "699a47659b"
             },
             {
-              "goto": "exposures",
+              "goto": "insulation",
               "uid": "9def4af95e"
             },
             {
+              "goto": "current-report",
+              "uid": "56cb1f9459"
+            },
+            {
+              "goto": "exposures",
+              "uid": "e42739825b"
+            },
+            {
               "say": "זהו, סיימנו את הדיווח עבור {{alias}}",
-              "uid": "aa5756f7c2"
+              "uid": "bbe8b21382"
             },
             {
               "do": {
@@ -135,11 +143,11 @@ export const script = {
                   "record"
                 ]
               },
-              "uid": "9133827a4d"
+              "uid": "f6fc2d122c"
             },
             {
               "goto": "reporting-loop",
-              "uid": "ba2f58e355"
+              "uid": "82cf53724b"
             }
           ],
           "uid": "5002ab217a"
@@ -733,6 +741,131 @@ export const script = {
           "uid": "397469aff5"
         },
         {
+          "name": "corvid-checks",
+          "steps": [
+            {
+              "do": {
+                "cmd": "corvid_check_reask",
+                "params": [
+                  "record"
+                ],
+                "variable": "_ask_corvid_check"
+              },
+              "uid": "98e8624499"
+            },
+            {
+              "switch": {
+                "arg": "_ask_corvid_check",
+                "cases": [
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "say": "האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?",
+                        "uid": "54742cc5d9"
+                      },
+                      {
+                        "uid": "43d06f21cf",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, נבדקתי",
+                              "steps": [
+                                {
+                                  "say": "באיזה תאריך נבדקת בפעם האחרונה?",
+                                  "uid": "26f5352ec5"
+                                },
+                                {
+                                  "uid": "26982639c0",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "corvid_check_date"
+                                  }
+                                },
+                                {
+                                  "say": "ומה היתה תוצאת הבדיקה?",
+                                  "uid": "b674e1c368"
+                                },
+                                {
+                                  "uid": "0f9b8d724f",
+                                  "wait": {
+                                    "options": [
+                                      {
+                                        "show": "אובחנתי כחולה בקורונה",
+                                        "steps": [
+                                          {
+                                            "say": "אוי, זה בטח לא פשוט. מקווים שהכל בסדר",
+                                            "uid": "d3b31ea51a"
+                                          }
+                                        ],
+                                        "uid": "f225ebdbaf",
+                                        "value": "positive"
+                                      },
+                                      {
+                                        "show": "אין לי קורונה",
+                                        "steps": [
+                                          {
+                                            "say": "משמח לשמוע, נקווה שימשיך ככה",
+                                            "uid": "fcc4016000"
+                                          }
+                                        ],
+                                        "uid": "f2caa99f31",
+                                        "value": "negative"
+                                      },
+                                      {
+                                        "show": "עוד לא קיבלתי את תוצאות הבדיקה",
+                                        "steps": [
+                                          {
+                                            "say": "אנחנו מחזיקים לך אצבעות",
+                                            "uid": "fec552d932"
+                                          }
+                                        ],
+                                        "uid": "437a27347c",
+                                        "value": "result_missing"
+                                      }
+                                    ],
+                                    "variable": "corvid_check_result"
+                                  }
+                                }
+                              ],
+                              "uid": "a93fdff28f",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "81fce4be0d"
+                  },
+                  {
+                    "match": false
+                  },
+                  {
+                    "default": true
+                  }
+                ]
+              },
+              "uid": "73068707c5"
+            },
+            {
+              "do": {
+                "cmd": "save_corvid_check_question_date",
+                "params": [
+                  "record"
+                ],
+                "variable": "corvid_check_question_date"
+              },
+              "uid": "53f6b6aa81"
+            }
+          ],
+          "uid": "69768936fa"
+        },
+        {
           "name": "insulation",
           "steps": [
             {
@@ -742,12 +875,8 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": "אוקיי, עברנו את זה...",
-                        "uid": "384df452a2"
-                      },
-                      {
                         "say": "עכשיו, מה בנוגע לבידוד?",
-                        "uid": "cfe2d49073"
+                        "uid": "940eefc1f9"
                       }
                     ],
                     "uid": "e7a358a104",

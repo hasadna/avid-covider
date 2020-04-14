@@ -136,6 +136,17 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
         },
+        corvid_check_reask: (record: any) => {
+          const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
+          const last_asked = parseInt(record.corvid_check_question_date, 10);
+          if (!record.corvid_check_question_date || ((Date.now().valueOf() - record.corvid_check_question_date) > timeout)){
+            console.log(`Will ask about corvid check`);
+            return true;
+          } else {
+            console.log(`Will not ask about corvid check`);
+            return false;
+          }
+        },
         fetch_previous_reports: (same_address_text, new_address_text, done_text) => {
           const aliases = {};
           const sliceIdx = PRODUCTION ? 10 : 16;
@@ -227,6 +238,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(record, {_household_adults, _household_minors, _household_data_available});
           } catch (err) {
             console.error(`household past data check failed: ${err}`);
+          }
+        },
+        save_corvid_check_question_date: (record: any) => {
+          try {
+            const currentDate = new Date().toISOString().slice(0, 10);
+            console.log(`Saved corvid check question date as ${currentDate}`);
+            return currentDate;
+
+          } catch (err) {
+            console.error(`Error getting current date: ${err}`);
           }
         },
         fetch_public_service_data: (record: any) => {

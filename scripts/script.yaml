@@ -36,6 +36,8 @@
             cmd: clear
         - goto: personal-details
         - goto: preconditions-check
+        - say: אוקיי, עברנו את זה...     
+        - goto: corvid-checks
         - goto: insulation
         - goto: current-report
         - goto: exposures
@@ -308,6 +310,61 @@
                 class: other
                 value: never
 
+    - name: corvid-checks
+      steps:                    
+        - do:
+            cmd: corvid_check_reask
+            params: 
+              - record
+            variable: _ask_corvid_check
+            
+        - switch:                                      # <---- check for data of past checks
+            arg: _ask_corvid_check
+            cases:
+              - match: true                          # <---- for new reporters, ask for last check
+                steps:
+                  - say: האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?
+                  - wait:
+                      options:
+                      - show: כן, נבדקתי
+                        value: true
+                        steps:
+                          - say: באיזה תאריך נבדקת בפעם האחרונה?
+                          - wait:
+                              variable: corvid_check_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                        
+                          - say: ומה היתה תוצאת הבדיקה?
+                          
+                          - wait:
+                              variable: corvid_check_result
+                              options:
+                                - show: אובחנתי כחולה בקורונה
+                                  value: positive
+                                  steps:
+                                    - say: אוי, זה בטח לא פשוט. מקווים שהכל בסדר
+                                - show: אין לי קורונה
+                                  value: negative
+                                  steps:
+                                    - say: משמח לשמוע, נקווה שימשיך ככה
+                                - show: עוד לא קיבלתי את תוצאות הבדיקה
+                                  value: result_missing
+                                  steps:
+                                    - say: אנחנו מחזיקים לך אצבעות
+                      - show: לא
+                        value: false
+              - match: false
+              - default: true                          # <---- for returning reporters, pass
+            
+        - do:
+            cmd: save_corvid_check_question_date
+            params:
+              - record
+            variable: corvid_check_question_date
+
+      
+
     - name: insulation
       steps:
         - switch:
@@ -315,7 +372,6 @@
             cases:
               - undefined: true           
                 steps:
-                  - say: אוקיי, עברנו את זה...
                   - say: עכשיו, מה בנוגע לבידוד?
               - default: true
                 steps:
