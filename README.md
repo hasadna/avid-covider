@@ -6,6 +6,8 @@ Our live site [is here](https://coronaisrael.org)
 
 The master branch is synchronized with [our staging environment](https://avid-covider.phonaris.com). This is the safe place for QA, after checking on a local environment (see below).
 
+The aggregated information contains sensitive medical details and cannot be published as-is. However, you can see parts of the data processing pipeline at [hasadna/avid-covider-pipelines](https://github.com/hasadna/avid-covider-pipelines).
+
 ## Technical Background
 
 ### Frontend
