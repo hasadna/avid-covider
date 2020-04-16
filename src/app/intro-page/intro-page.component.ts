@@ -24,6 +24,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   breaks: any = {};
   seenNudge = false;
   mapInit = false;
+  tab = 'about';
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
