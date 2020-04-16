@@ -36,7 +36,7 @@
             cmd: clear
         - goto: personal-details
         - goto: preconditions-check
-        - goto: corvid-checks
+        - goto: covid19-checks
         - goto: insulation
         - goto: current-report
         - goto: exposures
@@ -310,10 +310,10 @@
                 class: other
                 value: never
 
-    - name: corvid-checks
+    - name: covid19-checks
       steps:  
-        - do: 
-            cmd: fetch_corvid_check_question_data   ## load the relevant reporter's data, return the plan for the current report
+        - do:
+            cmd: fetch_covid19_check_question_data   ## load the relevant reporter's data, return the plan for the current report
                                                            # swtich values: "first_time" (new users), 
                                                            # "ask again", 
                                                            # "don't ask", 
@@ -328,20 +328,17 @@
             params:
               - record
         - switch:
-            arg: _corvid_check_question_status                    
+            arg: _covid19_check_question_status
             cases:
               - match: missing_result                                 ## check if there is a pending check result
                 steps:
-                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה...האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (corvid_check_date)
+                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה... האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (covid19_check_date)
                   - wait:
                       options:
                         - show: "כן, הגיעו תוצאות הבדיקה"
-                          value: true 
                           steps:
-                            - goto: corvid_check_ask_for_results
+                            - goto: covid19_check_ask_for_results
                         - show: "לא"
-                          value: false
-
               - match: first_time                          # <---- for new reporters, ask for last check
                 steps:
                   - say: האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?
@@ -352,42 +349,39 @@
                         steps:
                           - say: באיזה תאריך נבדקת בפעם האחרונה?
                           - wait:
-                              variable: _corvid_check_date
+                              variable: covid19_check_date
                               placeholder: "תאריך: dd/mm/yy"
                               input-kind: date
-                          - goto: corvid_check_ask_for_results
+                          - goto: covid19_check_ask_for_results
                       - show: לא
                         value: false
-
               - match: ask_again                         # <---- for returning reporters, pass
                 steps:
                   - say: האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?
                   - wait:
                       options:
                       - show: כן, נבדקתי
-                        value: true
                         steps:
                           - say: באיזה יום זה היה?
                           - wait:
-                              variable: _corvid_check_date
+                              variable: covid19_check_date
                               placeholder: "תאריך: dd/mm/yy"
                               input-kind: date
-                          - goto: corvid_check_ask_for_results
+                          - goto: covid19_check_ask_for_results
                       - show: לא
-                        value: false
 
               - default: true                           # don't ask
             
         - do:
-            cmd: save_corvid_check_question_data         # <--- save the following entires: question date, check date and the check result.                                                         
+            cmd: save_covid19_check_question_data         # <--- save the following entires: question date, check date and the check result.                                                         
             params:
               - record
 
-    - name: corvid_check_ask_for_results
+    - name: covid19_check_ask_for_results
       steps:
         - say: ומה היתה תוצאת הבדיקה?
         - wait:
-            variable: _corvid_check_result              
+            variable: _covid19_check_result
             options:
               - show: אובחנתי כחולה בקורונה
                 value: positive

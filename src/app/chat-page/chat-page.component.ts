@@ -229,72 +229,76 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`household past data check failed: ${err}`);
           }
         },
-        fetch_corvid_check_question_data: (record: any) => {
+        fetch_covid19_check_question_data: (record: any) => {
           try {
-            let _corvid_check_question_status = null ; 
-            let _corvid_check_question_date = null;
-            let _corvid_check_date = null;
-            let _corvid_check_result = null;
-
-            const sliceIdx = PRODUCTION ? 10 : 16;
-            const today = (new Date()).toISOString().slice(0, sliceIdx);
+            let _covid19_check_question_status = 'dont_ask';
+            let _covid19_check_question_date = 0;
+            let _covid19_check_date = 0;
+            let _covid19_check_result = null;
 
             for (const report of this.storage.reports) {
               const r = report[1];
               if (r.alias === record.alias) {
                 try {
-                  _corvid_check_question_date = r._corvid_check_question_date;
-                  _corvid_check_date = r._corvid_check_date;
-                  _corvid_check_result = r._corvid_check_result;
+                  _covid19_check_question_date = parseInt(r._covid19_check_question_date, 10);
+                  _covid19_check_date = parseInt(r._covid19_check_date, 10);
+                  _covid19_check_result = r._covid19_check_result;
                 } catch (err) {
-                  console.error(`Bad corvid old report data ${err}, ${r}`);
+                  console.error(`Bad covid19 old report data ${err}, ${r}`);
                 }
               }
             }
-            const question_timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;   // question's interval (days)
-            const pending_result_timeout = PRODUCTION ? 86400 * 14 * 1000 : 14 * 60 * 1000; // missing results interval (days)
-          
-            if (_corvid_check_question_date) {
-              console.log(`Last Corvid Question was asked on ${new Date(_corvid_check_question_date).toISOString()}`);
+            const MULTIPLIER = PRODUCTION ? 86400 * 1000 : 60 * 1000;
+            const question_period = MULTIPLIER * 7;   // question's interval (days)
+            const missing_question_period = MULTIPLIER * 1;   // question's interval (days)
+            const pending_result_timeout = MULTIPLIER * 14; // missing results interval (days)
+            const TODAY = Date.now().valueOf();
+
+            if (_covid19_check_question_date) {
+              console.log(`Last covid19 Question was asked on ${new Date(_covid19_check_question_date).toISOString()}`);
             }
-            if (_corvid_check_result === "positive" || new Date().valueOf() - _corvid_check_question_date < question_timeout) {
-              console.log('Corvid check question: will not ask due to last report date and/or past "positive" report');
-              _corvid_check_question_status = 'dont_ask';
-              _corvid_check_result = 'positive';
+            if (_covid19_check_result === 'positive') { // Positive - never ask
+              console.log('covid19 check question: will not ask due to "positive" report');
+              _covid19_check_question_status = 'dont_ask';
+            } else if (!_covid19_check_question_date) { // Never asked - always ask
+              _covid19_check_question_status = 'first_time';
+            } else if (_covid19_check_result === 'result_missing') { // Missing result
+              if (!!_covid19_check_date &&
+                  ((TODAY - _covid19_check_question_date) > missing_question_period) &&
+                  ((TODAY - _covid19_check_date) < pending_result_timeout)) {
+                    // we didn't ask in last day, it wasn't 2 weeks since the check date
+                    _covid19_check_question_status = 'missing_result';
+              }
+            } else if (TODAY - _covid19_check_question_date > question_period) {
+              console.log('covid19 check question: will ask since one week passed');
+              _covid19_check_question_status = 'ask_again';
+            } else {
+              console.log('covid19 check question: no reason to ask user');
+              _covid19_check_question_status = 'dont_ask';
             }
-            else if (!!_corvid_check_question_date  && _corvid_check_result != 'result_missing') {        // new reporters and returning that were not asked before)
-                console.log('Corvid check question is reqruied, first report');
-                _corvid_check_question_status = 'first_time';
-                _corvid_check_question_date = today;                                          
-            }
-            else if (((Date.now().valueOf() - _corvid_check_question_date) > question_timeout) && _corvid_check_result != 'result_missing') { // returning reporters without pending results
-                console.log('Corvid check question is reqruied: more than 7 days since last Corvid check quetsion, without a pending result ');
-                _corvid_check_question_status = 'ask_again';
-                _corvid_check_question_date = today;
+            if (_covid19_check_question_status !== 'dont_ask') {
+              _covid19_check_question_date = TODAY;
             }
 
-            else if (_corvid_check_result === 'result_missing') {              // reporters with missing results from a previous report
-                console.log('Corvid check: wating for a result');
-                if ((Date.now().valueOf() - _corvid_check_date) <= pending_result_timeout ) {                 // missing results within the predefined timeout
-                  console.log(`today - check date = ${(Date.now().valueOf() - _corvid_check_date)}`);
-                  _corvid_check_question_status = 'result_missing';
-                } else {                                                                            // missing results out of the predefined timeout --> clear record
-                  _corvid_check_question_status = 'ask_again';
-                  _corvid_check_date = null;
-                  _corvid_check_result = null;
-                  _corvid_check_question_date = today;
-                  }
-            }
-       
-           else {
-              console.error('Uknown status for corvid checks question');
-            }
-
-           Object.assign(record, {_corvid_check_question_status, _corvid_check_question_date, _corvid_check_date, _corvid_check_result});
-      
+            Object.assign(record, {
+              _covid19_check_question_status,
+              _covid19_check_question_date,
+              _covid19_check_date,
+              _covid19_check_result
+            });
           } catch (err) {
-            console.error(`corvid check question failed: ${err}`);
+            console.error(`covid19 check question failed: ${err}`);
+          }
+        },
+        save_covid19_check_question_data: (record: any) => {
+          if (record.covid19_check_date) {
+            try {
+              record._covid19_check_date = Date.parse(record.covid19_check_date);
+            } catch(e) {
+              console.log('Failed to parse date', record.covid19_check_date, e);
             }
+          }
+          record.covid19_check_result = record._covid19_check_result;
         },
         fetch_public_service_data: (record: any) => {
           try {
@@ -335,15 +339,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(record, {_public_service_status, _public_service_last_reported, _public_service_last_reported_yes});
           } catch (err) {
             console.error(`psd past data check failed: ${err}`);
-          }
-        },
-        save_corvid_check_question_data: (record: any) => {
-          try {
-            record.corvid_check_question_date = record._corvid_check_question_date.valueOf();
-            record.corvid_check_date = record._corvid_check_date;
-            record.corvid_check_result = record._corvid_check_result;
-          } catch (err) {
-            console.error(`error saving corvid check data: ${err}`);
           }
         },
         save_public_service_data: (record: any) => {

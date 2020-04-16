@@ -113,7 +113,7 @@ export const script = {
               "uid": "df5de41a13"
             },
             {
-              "goto": "corvid-checks",
+              "goto": "covid19-checks",
               "uid": "48accaa909"
             },
             {
@@ -741,11 +741,11 @@ export const script = {
           "uid": "397469aff5"
         },
         {
-          "name": "corvid-checks",
+          "name": "covid19-checks",
           "steps": [
             {
               "do": {
-                "cmd": "fetch_corvid_check_question_data",
+                "cmd": "fetch_covid19_check_question_data",
                 "params": [
                   "record"
                 ]
@@ -754,7 +754,7 @@ export const script = {
             },
             {
               "switch": {
-                "arg": "_corvid_check_question_status",
+                "arg": "_covid19_check_question_status",
                 "cases": [
                   {
                     "match": "missing_result",
@@ -771,7 +771,7 @@ export const script = {
                               "show": "כן, הגיעו תוצאות הבדיקה",
                               "steps": [
                                 {
-                                  "goto": "corvid_check_ask_for_results",
+                                  "goto": "covid19_check_ask_for_results",
                                   "uid": "89187eceb1"
                                 }
                               ],
@@ -811,11 +811,11 @@ export const script = {
                                   "wait": {
                                     "input-kind": "date",
                                     "placeholder": "תאריך: dd/mm/yy",
-                                    "variable": "_corvid_check_date"
+                                    "variable": "_covid19_check_date"
                                   }
                                 },
                                 {
-                                  "goto": "corvid_check_ask_for_results",
+                                  "goto": "covid19_check_ask_for_results",
                                   "uid": "cfc3c929bf"
                                 }
                               ],
@@ -855,11 +855,11 @@ export const script = {
                                   "wait": {
                                     "input-kind": "date",
                                     "placeholder": "תאריך: dd/mm/yy",
-                                    "variable": "_corvid_check_date"
+                                    "variable": "_covid19_check_date"
                                   }
                                 },
                                 {
-                                  "goto": "corvid_check_ask_for_results",
+                                  "goto": "covid19_check_ask_for_results",
                                   "uid": "01e8269390"
                                 }
                               ],
@@ -885,7 +885,7 @@ export const script = {
             },
             {
               "do": {
-                "cmd": "save_corvid_check_question_data",
+                "cmd": "save_covid19_check_question_data",
                 "params": [
                   "record"
                 ]
@@ -896,7 +896,7 @@ export const script = {
           "uid": "69768936fa"
         },
         {
-          "name": "corvid_check_ask_for_results",
+          "name": "covid19_check_ask_for_results",
           "steps": [
             {
               "say": "ומה היתה תוצאת הבדיקה?",
@@ -940,7 +940,7 @@ export const script = {
                     "value": "result_missing"
                   }
                 ],
-                "variable": "_corvid_check_result"
+                "variable": "_covid19_check_result"
               }
             }
           ],
