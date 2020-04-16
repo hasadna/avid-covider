@@ -136,17 +136,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
         },
-        corvid_check_reask: (record: any) => {
-          const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
-          const last_asked = parseInt(record.corvid_check_question_date, 10);
-          if (!record.corvid_check_question_date || ((Date.now().valueOf() - record.corvid_check_question_date) > timeout)){
-            console.log(`Will ask about corvid check`);
-            return true;
-          } else {
-            console.log(`Will not ask about corvid check`);
-            return false;
-          }
-        },
         fetch_previous_reports: (same_address_text, new_address_text, done_text) => {
           const aliases = {};
           const sliceIdx = PRODUCTION ? 10 : 16;
@@ -240,15 +229,72 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`household past data check failed: ${err}`);
           }
         },
-        save_corvid_check_question_date: (record: any) => {
+        fetch_corvid_check_question_data: (record: any) => {
           try {
-            const currentDate = new Date().toISOString().slice(0, 10);
-            console.log(`Saved corvid check question date as ${currentDate}`);
-            return currentDate;
+            let _corvid_check_question_status = null ; 
+            let _corvid_check_question_date = null;
+            let _corvid_check_date = null;
+            let _corvid_check_result = null;
 
+            const sliceIdx = PRODUCTION ? 10 : 16;
+            const today = (new Date()).toISOString().slice(0, sliceIdx);
+
+            for (const report of this.storage.reports) {
+              const r = report[1];
+              if (r.alias === record.alias) {
+                try {
+                  _corvid_check_question_date = r._corvid_check_question_date;
+                  _corvid_check_date = r._corvid_check_date;
+                  _corvid_check_result = r._corvid_check_result;
+                } catch (err) {
+                  console.error(`Bad corvid old report data ${err}, ${r}`);
+                }
+              }
+            }
+            const question_timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;   // question's interval (days)
+            const pending_result_timeout = PRODUCTION ? 86400 * 14 * 1000 : 14 * 60 * 1000; // missing results interval (days)
+          
+            if (_corvid_check_question_date) {
+              console.log(`Last Corvid Question was asked on ${new Date(_corvid_check_question_date).toISOString()}`);
+            }
+            if (_corvid_check_result === "positive" || new Date().valueOf() - _corvid_check_question_date < question_timeout) {
+              console.log('Corvid check question: will not ask due to last report date and/or past "positive" report');
+              _corvid_check_question_status = 'dont_ask';
+              _corvid_check_result = 'positive';
+            }
+            else if (!!_corvid_check_question_date  && _corvid_check_result != 'result_missing') {        // new reporters and returning that were not asked before)
+                console.log('Corvid check question is reqruied, first report');
+                _corvid_check_question_status = 'first_time';
+                _corvid_check_question_date = today;                                          
+            }
+            else if (((Date.now().valueOf() - _corvid_check_question_date) > question_timeout) && _corvid_check_result != 'result_missing') { // returning reporters without pending results
+                console.log('Corvid check question is reqruied: more than 7 days since last Corvid check quetsion, without a pending result ');
+                _corvid_check_question_status = 'ask_again';
+                _corvid_check_question_date = today;
+            }
+
+            else if (_corvid_check_result === 'result_missing') {              // reporters with missing results from a previous report
+                console.log('Corvid check: wating for a result');
+                if ((Date.now().valueOf() - _corvid_check_date) <= pending_result_timeout ) {                 // missing results within the predefined timeout
+                  console.log(`today - check date = ${(Date.now().valueOf() - _corvid_check_date)}`);
+                  _corvid_check_question_status = 'result_missing';
+                } else {                                                                            // missing results out of the predefined timeout --> clear record
+                  _corvid_check_question_status = 'ask_again';
+                  _corvid_check_date = null;
+                  _corvid_check_result = null;
+                  _corvid_check_question_date = today;
+                  }
+            }
+       
+           else {
+              console.error('Uknown status for corvid checks question');
+            }
+
+           Object.assign(record, {_corvid_check_question_status, _corvid_check_question_date, _corvid_check_date, _corvid_check_result});
+      
           } catch (err) {
-            console.error(`Error getting current date: ${err}`);
-          }
+            console.error(`corvid check question failed: ${err}`);
+            }
         },
         fetch_public_service_data: (record: any) => {
           try {
@@ -289,6 +335,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(record, {_public_service_status, _public_service_last_reported, _public_service_last_reported_yes});
           } catch (err) {
             console.error(`psd past data check failed: ${err}`);
+          }
+        },
+        save_corvid_check_question_data: (record: any) => {
+          try {
+            record.corvid_check_question_date = record._corvid_check_question_date.valueOf();
+            record.corvid_check_date = record._corvid_check_date;
+            record.corvid_check_result = record._corvid_check_result;
+          } catch (err) {
+            console.error(`error saving corvid check data: ${err}`);
           }
         },
         save_public_service_data: (record: any) => {

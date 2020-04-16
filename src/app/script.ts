@@ -113,28 +113,24 @@ export const script = {
               "uid": "df5de41a13"
             },
             {
-              "say": "אוקיי, עברנו את זה...",
-              "uid": "979a81e5a6"
-            },
-            {
               "goto": "corvid-checks",
-              "uid": "699a47659b"
+              "uid": "48accaa909"
             },
             {
               "goto": "insulation",
-              "uid": "9def4af95e"
+              "uid": "699a47659b"
             },
             {
               "goto": "current-report",
-              "uid": "56cb1f9459"
+              "uid": "9def4af95e"
             },
             {
               "goto": "exposures",
-              "uid": "e42739825b"
+              "uid": "56cb1f9459"
             },
             {
               "say": "זהו, סיימנו את הדיווח עבור {{alias}}",
-              "uid": "bbe8b21382"
+              "uid": "a2c9757617"
             },
             {
               "do": {
@@ -143,11 +139,11 @@ export const script = {
                   "record"
                 ]
               },
-              "uid": "f6fc2d122c"
+              "uid": "70b6831d1c"
             },
             {
               "goto": "reporting-loop",
-              "uid": "82cf53724b"
+              "uid": "76a36a5d14"
             }
           ],
           "uid": "5002ab217a"
@@ -644,6 +640,10 @@ export const script = {
                 ]
               },
               "uid": "8159f08bcb"
+            },
+            {
+              "say": "אוקיי, עברנו את זה...",
+              "uid": "2969e1a444"
             }
           ],
           "uid": "d96a2bfad6"
@@ -745,91 +745,37 @@ export const script = {
           "steps": [
             {
               "do": {
-                "cmd": "corvid_check_reask",
+                "cmd": "fetch_corvid_check_question_data",
                 "params": [
                   "record"
-                ],
-                "variable": "_ask_corvid_check"
+                ]
               },
-              "uid": "98e8624499"
+              "uid": "723288c020"
             },
             {
               "switch": {
-                "arg": "_ask_corvid_check",
+                "arg": "_corvid_check_question_status",
                 "cases": [
                   {
-                    "match": true,
+                    "match": "missing_result",
                     "steps": [
                       {
-                        "say": "האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?",
-                        "uid": "54742cc5d9"
+                        "say": "סיפרת לנו בדיווח קודם שנבדקת לקורונה...האם כבר קיבלת את תוצאות הבדיקה?",
+                        "uid": "6f66d047fa"
                       },
                       {
-                        "uid": "43d06f21cf",
+                        "uid": "ec12ab15c9",
                         "wait": {
                           "options": [
                             {
-                              "show": "כן, נבדקתי",
+                              "show": "כן, הגיעו תוצאות הבדיקה",
                               "steps": [
                                 {
-                                  "say": "באיזה תאריך נבדקת בפעם האחרונה?",
-                                  "uid": "26f5352ec5"
-                                },
-                                {
-                                  "uid": "26982639c0",
-                                  "wait": {
-                                    "input-kind": "date",
-                                    "placeholder": "תאריך: dd/mm/yy",
-                                    "variable": "corvid_check_date"
-                                  }
-                                },
-                                {
-                                  "say": "ומה היתה תוצאת הבדיקה?",
-                                  "uid": "b674e1c368"
-                                },
-                                {
-                                  "uid": "0f9b8d724f",
-                                  "wait": {
-                                    "options": [
-                                      {
-                                        "show": "אובחנתי כחולה בקורונה",
-                                        "steps": [
-                                          {
-                                            "say": "אוי, זה בטח לא פשוט. מקווים שהכל בסדר",
-                                            "uid": "d3b31ea51a"
-                                          }
-                                        ],
-                                        "uid": "f225ebdbaf",
-                                        "value": "positive"
-                                      },
-                                      {
-                                        "show": "אין לי קורונה",
-                                        "steps": [
-                                          {
-                                            "say": "משמח לשמוע, נקווה שימשיך ככה",
-                                            "uid": "fcc4016000"
-                                          }
-                                        ],
-                                        "uid": "f2caa99f31",
-                                        "value": "negative"
-                                      },
-                                      {
-                                        "show": "עוד לא קיבלתי את תוצאות הבדיקה",
-                                        "steps": [
-                                          {
-                                            "say": "אנחנו מחזיקים לך אצבעות",
-                                            "uid": "fec552d932"
-                                          }
-                                        ],
-                                        "uid": "437a27347c",
-                                        "value": "result_missing"
-                                      }
-                                    ],
-                                    "variable": "corvid_check_result"
-                                  }
+                                  "goto": "corvid_check_ask_for_results",
+                                  "uid": "89187eceb1"
                                 }
                               ],
-                              "uid": "a93fdff28f",
+                              "uid": "b45252d37f",
                               "value": true
                             },
                             {
@@ -840,30 +786,165 @@ export const script = {
                         }
                       }
                     ],
-                    "uid": "81fce4be0d"
+                    "uid": "40e4d7f3c6"
                   },
                   {
-                    "match": false
+                    "match": "first_time",
+                    "steps": [
+                      {
+                        "say": "האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?",
+                        "uid": "e4b12f8160"
+                      },
+                      {
+                        "uid": "f3aea3c9fa",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, נבדקתי",
+                              "steps": [
+                                {
+                                  "say": "באיזה תאריך נבדקת בפעם האחרונה?",
+                                  "uid": "76697e5326"
+                                },
+                                {
+                                  "uid": "8d3c839624",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "_corvid_check_date"
+                                  }
+                                },
+                                {
+                                  "goto": "corvid_check_ask_for_results",
+                                  "uid": "cfc3c929bf"
+                                }
+                              ],
+                              "uid": "d6ac7bfb6f",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "37fec303cc"
+                  },
+                  {
+                    "match": "ask_again",
+                    "steps": [
+                      {
+                        "say": "האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?",
+                        "uid": "3b8baa8b51"
+                      },
+                      {
+                        "uid": "c0037dc5dd",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, נבדקתי",
+                              "steps": [
+                                {
+                                  "say": "באיזה יום זה היה?",
+                                  "uid": "bdfd47114e"
+                                },
+                                {
+                                  "uid": "4f5720d08f",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "_corvid_check_date"
+                                  }
+                                },
+                                {
+                                  "goto": "corvid_check_ask_for_results",
+                                  "uid": "01e8269390"
+                                }
+                              ],
+                              "uid": "a49831bc1b",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "58d16078d6"
                   },
                   {
                     "default": true
                   }
                 ]
               },
-              "uid": "73068707c5"
+              "uid": "3424c2901c"
             },
             {
               "do": {
-                "cmd": "save_corvid_check_question_date",
+                "cmd": "save_corvid_check_question_data",
                 "params": [
                   "record"
-                ],
-                "variable": "corvid_check_question_date"
+                ]
               },
-              "uid": "53f6b6aa81"
+              "uid": "9403fc8df9"
             }
           ],
           "uid": "69768936fa"
+        },
+        {
+          "name": "corvid_check_ask_for_results",
+          "steps": [
+            {
+              "say": "ומה היתה תוצאת הבדיקה?",
+              "uid": "d1345c233d"
+            },
+            {
+              "uid": "87cc7bab94",
+              "wait": {
+                "options": [
+                  {
+                    "show": "אובחנתי כחולה בקורונה",
+                    "steps": [
+                      {
+                        "say": "אוי, זה בטח לא פשוט.  החלמה מהירה",
+                        "uid": "db3b381db6"
+                      }
+                    ],
+                    "uid": "b58ac5f0e0",
+                    "value": "positive"
+                  },
+                  {
+                    "show": "אין לי קורונה",
+                    "steps": [
+                      {
+                        "say": "משמח לשמוע, נקווה שימשיך ככה",
+                        "uid": "f6fd9de275"
+                      }
+                    ],
+                    "uid": "f41667ea9c",
+                    "value": "negative"
+                  },
+                  {
+                    "show": "עוד לא קיבלתי את תוצאות הבדיקה",
+                    "steps": [
+                      {
+                        "say": "אנחנו מחזיקים לך אצבעות",
+                        "uid": "807aaef9e7"
+                      }
+                    ],
+                    "uid": "81e8f07a9d",
+                    "value": "result_missing"
+                  }
+                ],
+                "variable": "_corvid_check_result"
+              }
+            }
+          ],
+          "uid": "17bd8d8f7a"
         },
         {
           "name": "insulation",
