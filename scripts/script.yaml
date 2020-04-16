@@ -684,31 +684,134 @@
                                 cmd: save_public_service_data
                                 params:
                                   - record
-
-
-
-    - name: end-of-report
-      steps:
-        - say: המון תודה, המידע ששלחת יעזור מאוד לצוות המחקר של מכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.
-        - say: אז נתראה מחר?
-        - wait:
-            options:
-              - show: בטח!
-                class: other
+    
+                                  
 
 
     - name: promotion
       steps:
-        - say: סיימנו. רוצה להסתכל שוב במפת התסמינים?
+        - goto: dynamic_update
+        - goto: share
+        - goto: set-reminder
+                                                # add an autodirect to homepage
+
+    - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
+      steps:    
+        - say: סיימנו עם השאלות להיום. רוצה להסתכל שוב במפת התסמינים?
         - wait:
             options:
               - show: כן, בטח
                 class: other
                 steps:
                   - do:
-                      cmd: show_map
-                  - goto: complete
+                      cmd: show_map                     # (click --> add to record)
               - show: לא עכשיו
+
+    - name: share
+      steps:
+        - say: בזכותך התקרבנו עוד צעד אחד לסוף של זה...תודה
+        - say: יעזור מאוד אם גם בני המשפחה והחברים שלך ישתתפו. רוצה לשלוח גם?
+        - wait:
+            variable: _share
+            options:
+              - show: כן, אשמח לשתף
+                value: true 
+                steps:
+                  - do:
+                      cmd: share_widget   # (click --> add to record)
+
+              - show: לא עכשיו
+                value: false
+
+    - name: set-reminder
+      steps:
+        - do:
+            cmd: reminder_status   # a function to verify if a reminder was set already (telegram, device, app, downloaded ical)
+            params:                #     1. no_reminder --> ask user to set a reminder 
+              - record             #     2. reminder_set --> ask user to add a different/another reminder
+            variable: _ask_reminder
+
+        - switch:
+            arg: _ask_reminder
+            cases:
+              - match: no_reminder
+                steps:
+                  - say: ועוד עניין קטן... הצלחת המחקר תלויה בהמשך הדיווחים שלך
+                  - say: יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?
+                  - wait:
+                      options:
+                      - show: כן, אשמח לתזכורת
+                        value: 'true'
+                        steps:
+                        - goto: reminder-choose-method
+
+                      - show: לא, אין צורך
+                        value: 'false'
+              
+              - match: reminder_set
+                steps:
+                  - say: תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב
+              
+    - name: reminder-choose-method
+      steps:                   
+        - do:
+            cmd: reminder_choose_method_show_widget
+            variable: _reminder_types 
+            params:
+              - record
+              - שלחו לי תזכורות יומית דרך...
+              - reminder_app, icon1, אפליקציית הדיווח
+              - reminder_calendar, icon2, תזכורת ביומן
+              - reminder_botelegram, icon3, אפליקציית טלגרם
+        - switch:
+            arg: _reminder_types
+            cases:
+              - match: reminder_app
+                steps:
+                - goto: reminder_app
+
+              - match: reminder_calendar
+                steps:
+                - goto: reminder_calendar
+            
+              - match: reminder_botelegram
+                steps:
+                - goto: reminder_botelegram
+
+    - name: reminder_app
+      steps:
+        - do:
+            cmd: reminder_app_widget
+            variable: _reminder_app_show_widget           # track how many clicked on "download"/"nevermind"
+            params:
+              - record
+              - הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00            # instructions text
+              - להורדת האפליקציה  + link                           # button (click --> add to record)
+              - אפשר להמשיך                                     # a follow-up button label
+
+        - do:
+            cmd: reminder_calendar_widget                       # show widget
+            variable: _reminder_calendar_show_widget            # returns success / failure message
+            params:
+              - record
+              - לחצו על הכפתור להתקנת התזכורת ביומן.                             # instrucions text
+              - להורדה                                                   # button label   (click --> add to record)
+              - אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״    # instructions text
+              - אפשר להמשיך                                               # a follow-up button label
+
+    - name: reminder_botelegram
+      steps:
+        - do:
+            cmd: reminder_botelegram_widget                       # show widget
+            variable: _reminder_botelegram_show_widget            # returns success / failure message
+            params:
+              - record
+              - <b>שימו לב</b>                             # instrucions text
+              - בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש
+              - בסדר גמור                                # button label (click --> add to record)
+              - אפשר להמשיך                              # a follow-up button label
+
+
 
 - name: generic-translation-assets ## <-- keep me last!
   keys:

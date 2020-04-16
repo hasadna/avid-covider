@@ -1222,7 +1222,7 @@ export const script = {
                     "steps": [
                       {
                         "say": "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף.",
-                        "uid": "61a438deef"
+                        "uid": "c57bd415ab"
                       },
                       {
                         "say": "האם כבר נמדד חום היום?",
@@ -1644,39 +1644,32 @@ export const script = {
           "uid": "ce7628ae51"
         },
         {
-          "name": "end-of-report",
-          "steps": [
-            {
-              "say": "המון תודה, המידע ששלחת יעזור מאוד לצוות המחקר של מכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.",
-              "uid": "b989da3e54"
-            },
-            {
-              "say": "אז נתראה מחר?",
-              "uid": "0cd94aa41c"
-            },
-            {
-              "uid": "ccc68125a7",
-              "wait": {
-                "options": [
-                  {
-                    "class": "other",
-                    "show": "בטח!"
-                  }
-                ]
-              }
-            }
-          ],
-          "uid": "a92af82c81"
-        },
-        {
           "name": "promotion",
           "steps": [
             {
-              "say": "רק למדווחים שלנו - קבלו הצצה ראשונה למפת התסמינים שנשיק ממש בקרוב! (Symptoms Map)",
-              "uid": "6caeb0331f"
+              "goto": "dynamic_update",
+              "uid": "3da728cfd5"
             },
             {
-              "uid": "6cbd31edfa",
+              "goto": "share",
+              "uid": "6cbd31edfa"
+            },
+            {
+              "goto": "set-reminder",
+              "uid": "3989d53fae"
+            }
+          ],
+          "uid": "4c6a26288b"
+        },
+        {
+          "name": "dynamic_update",
+          "steps": [
+            {
+              "say": "סיימנו עם השאלות להיום. רוצה להסתכל שוב במפת התסמינים?",
+              "uid": "a9cb8ffec3"
+            },
+            {
+              "uid": "f48c232481",
               "wait": {
                 "options": [
                   {
@@ -1687,14 +1680,10 @@ export const script = {
                         "do": {
                           "cmd": "show_map"
                         },
-                        "uid": "063dc08606"
-                      },
-                      {
-                        "goto": "complete",
-                        "uid": "47ac1483e3"
+                        "uid": "ba9a84b3db"
                       }
                     ],
-                    "uid": "89ec5d6e9c"
+                    "uid": "dc61b86c78"
                   },
                   {
                     "show": "לא עכשיו"
@@ -1703,7 +1692,227 @@ export const script = {
               }
             }
           ],
-          "uid": "4c6a26288b"
+          "uid": "d1b81a605b"
+        },
+        {
+          "name": "share",
+          "steps": [
+            {
+              "say": "בזכותך התקרבנו עוד צעד אחד לסוף של זה...תודה",
+              "uid": "76e0905665"
+            },
+            {
+              "say": "יעזור מאוד אם גם בני המשפחה והחברים שלך ישתתפו. רוצה לשלוח גם?",
+              "uid": "4d762b514b"
+            },
+            {
+              "uid": "a91f654b2b",
+              "wait": {
+                "options": [
+                  {
+                    "show": "כן, אשמח לשתף",
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "share_widget"
+                        },
+                        "uid": "4ece746ea0"
+                      }
+                    ],
+                    "uid": "95754f82c4",
+                    "value": true
+                  },
+                  {
+                    "show": "לא עכשיו",
+                    "value": false
+                  }
+                ],
+                "variable": "_share"
+              }
+            }
+          ],
+          "uid": "aa10bba14c"
+        },
+        {
+          "name": "set-reminder",
+          "steps": [
+            {
+              "do": {
+                "cmd": "reminder_status",
+                "params": [
+                  "record"
+                ],
+                "variable": "_ask_reminder"
+              },
+              "uid": "0806e2f84e"
+            },
+            {
+              "switch": {
+                "arg": "_ask_reminder",
+                "cases": [
+                  {
+                    "match": "no_reminder",
+                    "steps": [
+                      {
+                        "say": "ועוד עניין קטן... הצלחת המחקר תלויה בהמשך הדיווחים שלך",
+                        "uid": "8579015d38"
+                      },
+                      {
+                        "say": "יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?",
+                        "uid": "59d3cb7a70"
+                      },
+                      {
+                        "uid": "f2bf599275",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, אשמח לתזכורת",
+                              "steps": [
+                                {
+                                  "goto": "reminder-choose-method",
+                                  "uid": "30f271bf00"
+                                }
+                              ],
+                              "uid": "a00989617c",
+                              "value": "true"
+                            },
+                            {
+                              "show": "לא, אין צורך",
+                              "value": "false"
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "e9b9c3f4c8"
+                  },
+                  {
+                    "match": "reminder_set",
+                    "steps": [
+                      {
+                        "say": "תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב",
+                        "uid": "1607f96d99"
+                      }
+                    ],
+                    "uid": "d284dcae8e"
+                  }
+                ]
+              },
+              "uid": "9aeb786459"
+            }
+          ],
+          "uid": "df4c900aa4"
+        },
+        {
+          "name": "reminder-choose-method",
+          "steps": [
+            {
+              "do": {
+                "cmd": "reminder_choose_method_show_widget",
+                "params": [
+                  "record",
+                  "שלחו לי תזכורות יומית דרך...",
+                  "reminder_app, icon1, אפליקציית הדיווח",
+                  "reminder_calendar, icon2, תזכורת ביומן",
+                  "reminder_botelegram, icon3, אפליקציית טלגרם"
+                ],
+                "variable": "_reminder_types"
+              },
+              "uid": "adfef569de"
+            },
+            {
+              "switch": {
+                "arg": "_reminder_types",
+                "cases": [
+                  {
+                    "match": "reminder_app",
+                    "steps": [
+                      {
+                        "goto": "reminder_app",
+                        "uid": "06e2203f66"
+                      }
+                    ],
+                    "uid": "0705dff477"
+                  },
+                  {
+                    "match": "reminder_calendar",
+                    "steps": [
+                      {
+                        "goto": "reminder_calendar",
+                        "uid": "7f2727a4ee"
+                      }
+                    ],
+                    "uid": "3f850150a8"
+                  },
+                  {
+                    "match": "reminder_botelegram",
+                    "steps": [
+                      {
+                        "goto": "reminder_botelegram",
+                        "uid": "0b439d456e"
+                      }
+                    ],
+                    "uid": "daee6e9967"
+                  }
+                ]
+              },
+              "uid": "4c0953084b"
+            }
+          ],
+          "uid": "1cbf1b052b"
+        },
+        {
+          "name": "reminder_app",
+          "steps": [
+            {
+              "do": {
+                "cmd": "reminder_app_widget",
+                "params": [
+                  "record",
+                  "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
+                  "להורדת האפליקציה  + link",
+                  "אפשר להמשיך"
+                ],
+                "variable": "_reminder_app_show_widget"
+              },
+              "uid": "bc88e588a6"
+            },
+            {
+              "do": {
+                "cmd": "reminder_calendar_widget",
+                "params": [
+                  "record",
+                  "לחצו על הכפתור להתקנת התזכורת ביומן.",
+                  "להורדה",
+                  "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
+                  "אפשר להמשיך"
+                ],
+                "variable": "_reminder_calendar_show_widget"
+              },
+              "uid": "eea7f9639e"
+            }
+          ],
+          "uid": "22b4a5129c"
+        },
+        {
+          "name": "reminder_botelegram",
+          "steps": [
+            {
+              "do": {
+                "cmd": "reminder_botelegram_widget",
+                "params": [
+                  "record",
+                  "<b>שימו לב</b>",
+                  "בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
+                  "בסדר גמור",
+                  "אפשר להמשיך"
+                ],
+                "variable": "_reminder_botelegram_show_widget"
+              },
+              "uid": "6fb95d16db"
+            }
+          ],
+          "uid": "b5829f2c4f"
         }
       ]
     },
