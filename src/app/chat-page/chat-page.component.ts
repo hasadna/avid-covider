@@ -301,7 +301,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
             try {
               record._covid19_check_date = Date.parse(record.covid19_check_date).valueOf();
-            } catch(e) {
+            } catch (e) {
               console.log('Failed to parse date', record.covid19_check_date, e);
             }
           }
