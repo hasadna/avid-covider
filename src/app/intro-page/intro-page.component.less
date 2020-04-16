@@ -258,7 +258,7 @@
                     display: flex;
                     flex-flow: row;
                     align-items: center;
-                    justify-content: space-between;
+                    justify-content: space-evenly;
                     width: 100%;
                     padding: 4px;
                     border-radius: 8px;
@@ -336,13 +336,18 @@
                 direction: ltr;
                 .article {
                     display: flex;
-                    flex-flow: column;
+                    flex-flow: row;
+                    margin-top: 16px;
+                    margin-bottom: 8px;
+
                     a {
                         font-size: 16px;
+                        font-weight: 300;
                         color: @aubergine;
                         text-decoration: none;
-                        &:hover, &:visited {
-                            color: inherit;
+
+                        &:visited {
+                            color: @aubergine;
                         }
                     }
                 }
@@ -352,7 +357,7 @@
                 display: flex;
                 flex-flow: row wrap;
                 align-items: flex-start;
-                justify-content: flex-start;
+                justify-content: space-evenly;
                 max-width: 100%;
 
                 .credit {
@@ -428,9 +433,9 @@
                 margin-bottom: 32px;
                 text-decoration: none;
             }
-            a, a:hover, a:visited {
-text-decoration: none;
-                color: inherit;    
+            a, a:visited {
+                text-decoration: none;
+                color: @aubergine;    
             }
 
             .links {
