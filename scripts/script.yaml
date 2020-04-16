@@ -588,7 +588,7 @@
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
                       <span class='not-empty'>זהו</span>
                       <span class='none-selected'>אין פרטים נוספים</span>
-                    class: other
+                    class: other 
               - do:
                   cmd: update_from_selection
                   params:
@@ -691,8 +691,8 @@
     - name: promotion
       steps:
         - goto: dynamic_update
-        - goto: share
         - goto: set-reminder
+        - goto: share
                                                 # add an autodirect to homepage
 
     - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
@@ -710,7 +710,7 @@
     - name: share
       steps:
         - say: בזכותך התקרבנו עוד צעד אחד לסוף של זה...תודה
-        - say: יעזור מאוד אם גם בני המשפחה והחברים שלך ישתתפו. רוצה לשלוח גם?
+        - say: ועוד עניין קטן... יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
         - wait:
             variable: _share
             options:
@@ -736,16 +736,15 @@
             cases:
               - match: no_reminder
                 steps:
-                  - say: ועוד עניין קטן... הצלחת המחקר תלויה בהמשך הדיווחים שלך
                   - say: יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?
                   - wait:
                       options:
                       - show: כן, אשמח לתזכורת
                         value: 'true'
                         steps:
-                        - goto: reminder-choose-method
+                        - goto: reminder-choose-method   # https://zpl.io/bzZMKw4
 
-                      - show: לא, אין צורך
+                      - show: לא, אין צורך, יש לי זכרון מצויין!
                         value: 'false'
               
               - match: reminder_set
@@ -781,33 +780,45 @@
     - name: reminder_app
       steps:
         - do:
-            cmd: reminder_app_widget
+            cmd: message_with_action                     # https://zpl.io/ag0jJ9Q
             variable: _reminder_app_show_widget           # track how many clicked on "download"/"nevermind"
             params:
               - record
               - הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00            # instructions text
-              - להורדת האפליקציה  + link                           # button (click --> add to record)
+              - להורדת האפליקציה  + link                           
+              - reminder_app_downloaded                        # button (click --> add to record)
+        - do:
+            cmd: message_with_approval                    # https://zpl.io/VqgDmm5              
+            params:
+              - record
               - אפשר להמשיך                                     # a follow-up button label
 
         - do:
-            cmd: reminder_calendar_widget                       # show widget
-            variable: _reminder_calendar_show_widget            # returns success / failure message
+            cmd: message_with_action                          # https://zpl.io/ag0jJ9Q
+            variable: _reminder_calendar_show_widget          # returns success / failure 
             params:
               - record
               - לחצו על הכפתור להתקנת התזכורת ביומן.                             # instrucions text
               - להורדה                                                   # button label   (click --> add to record)
+        - do:
+            cmd: message_with_approval                          # https://zpl.io/VqgDmm5              
+            params:
               - אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״    # instructions text
               - אפשר להמשיך                                               # a follow-up button label
 
     - name: reminder_botelegram
       steps:
-        - do:
-            cmd: reminder_botelegram_widget                       # show widget
-            variable: _reminder_botelegram_show_widget            # returns success / failure message
+        - do: 
+            cmd: message_with_action                         # https://zpl.io/ag0jJ9Q
+            variable: _reminder_botelegram_show_widget       # returns success / failure
             params:
               - record
-              - <b>שימו לב</b>                             # instrucions text
-              - בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש
+              - "<b>שימו לב</b>                             # instrucions text
+                בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש"
+              - בסדר                                     # button label   (click --> add to record)
+        - do:
+            cmd:  message_with_approval
+            params:
               - בסדר גמור                                # button label (click --> add to record)
               - אפשר להמשיך                              # a follow-up button label
 

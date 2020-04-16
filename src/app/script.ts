@@ -1651,11 +1651,11 @@ export const script = {
               "uid": "3da728cfd5"
             },
             {
-              "goto": "share",
+              "goto": "set-reminder",
               "uid": "6cbd31edfa"
             },
             {
-              "goto": "set-reminder",
+              "goto": "share",
               "uid": "3989d53fae"
             }
           ],
@@ -1702,8 +1702,8 @@ export const script = {
               "uid": "76e0905665"
             },
             {
-              "say": "יעזור מאוד אם גם בני המשפחה והחברים שלך ישתתפו. רוצה לשלוח גם?",
-              "uid": "4d762b514b"
+              "say": "ועוד עניין קטן... יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
+              "uid": "595738e30c"
             },
             {
               "uid": "a91f654b2b",
@@ -1754,15 +1754,11 @@ export const script = {
                     "match": "no_reminder",
                     "steps": [
                       {
-                        "say": "ועוד עניין קטן... הצלחת המחקר תלויה בהמשך הדיווחים שלך",
-                        "uid": "8579015d38"
-                      },
-                      {
                         "say": "יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?",
-                        "uid": "59d3cb7a70"
+                        "uid": "f3af77ce87"
                       },
                       {
-                        "uid": "f2bf599275",
+                        "uid": "eba1115a57",
                         "wait": {
                           "options": [
                             {
@@ -1770,14 +1766,14 @@ export const script = {
                               "steps": [
                                 {
                                   "goto": "reminder-choose-method",
-                                  "uid": "30f271bf00"
+                                  "uid": "95c5cea2cd"
                                 }
                               ],
-                              "uid": "a00989617c",
+                              "uid": "692913258f",
                               "value": "true"
                             },
                             {
-                              "show": "לא, אין צורך",
+                              "show": "לא, אין צורך, יש לי זכרון מצויין!",
                               "value": "false"
                             }
                           ]
@@ -1866,30 +1862,48 @@ export const script = {
           "steps": [
             {
               "do": {
-                "cmd": "reminder_app_widget",
+                "cmd": "message_with_action",
                 "params": [
                   "record",
                   "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
                   "להורדת האפליקציה  + link",
-                  "אפשר להמשיך"
+                  "reminder_app_downloaded"
                 ],
                 "variable": "_reminder_app_show_widget"
               },
-              "uid": "bc88e588a6"
+              "uid": "b36b50bc9e"
             },
             {
               "do": {
-                "cmd": "reminder_calendar_widget",
+                "cmd": "message_with_approval",
+                "params": [
+                  "record",
+                  "אפשר להמשיך"
+                ]
+              },
+              "uid": "f02e0edc65"
+            },
+            {
+              "do": {
+                "cmd": "message_with_action",
                 "params": [
                   "record",
                   "לחצו על הכפתור להתקנת התזכורת ביומן.",
-                  "להורדה",
-                  "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
-                  "אפשר להמשיך"
+                  "להורדה"
                 ],
                 "variable": "_reminder_calendar_show_widget"
               },
-              "uid": "eea7f9639e"
+              "uid": "4f30361271"
+            },
+            {
+              "do": {
+                "cmd": "message_with_approval",
+                "params": [
+                  "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
+                  "אפשר להמשיך"
+                ]
+              },
+              "uid": "a6198f7784"
             }
           ],
           "uid": "22b4a5129c"
@@ -1899,17 +1913,25 @@ export const script = {
           "steps": [
             {
               "do": {
-                "cmd": "reminder_botelegram_widget",
+                "cmd": "message_with_action",
                 "params": [
                   "record",
-                  "<b>שימו לב</b>",
-                  "בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
-                  "בסדר גמור",
-                  "אפשר להמשיך"
+                  "<b>שימו לב</b>                             # instrucions text בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
+                  "בסדר"
                 ],
                 "variable": "_reminder_botelegram_show_widget"
               },
-              "uid": "6fb95d16db"
+              "uid": "0c3b8994de"
+            },
+            {
+              "do": {
+                "cmd": "message_with_approval",
+                "params": [
+                  "בסדר גמור",
+                  "אפשר להמשיך"
+                ]
+              },
+              "uid": "fd63ef3ad0"
             }
           ],
           "uid": "b5829f2c4f"
