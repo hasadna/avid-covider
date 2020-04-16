@@ -393,6 +393,7 @@
                   - say: משמח לשמוע, נקווה שימשיך ככה
               - show: עוד לא קיבלתי את תוצאות הבדיקה
                 value: result_missing
+                unless: _covid19_check_question_status_missing
                 steps:
                 - say: אנחנו מחזיקים לך אצבעות
 
@@ -555,7 +556,7 @@
         
               - match: feel_bad                                    #<--- for returning users who felt bad on their previous report
                 steps:
-                  - say: אני מקווה שהמצב השתפר מהדיווח האחרון..?
+                  - say: בדיווח שעבר סיפרת שהרגשת לא כל כך טוב... האם חל שיפור במצבך?
                   - wait:
                       variable: general_feeling
                       options:

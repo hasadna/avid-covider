@@ -268,6 +268,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                   ((TODAY - _covid19_check_date) < pending_result_timeout)) {
                     // we didn't ask in last day, it wasn't 2 weeks since the check date
                     _covid19_check_question_status = 'missing_result';
+                    record._covid19_check_question_status_missing = true;
               }
             } else if (TODAY - _covid19_check_question_date > question_period) {
               // We didn't ask for more than a week, let's ask again
