@@ -113,20 +113,24 @@ export const script = {
               "uid": "df5de41a13"
             },
             {
-              "goto": "insulation",
+              "goto": "covid19-checks",
               "uid": "48accaa909"
             },
             {
-              "goto": "current-report",
+              "goto": "insulation",
               "uid": "699a47659b"
             },
             {
-              "goto": "exposures",
+              "goto": "current-report",
               "uid": "9def4af95e"
             },
             {
+              "goto": "exposures",
+              "uid": "56cb1f9459"
+            },
+            {
               "say": "זהו, סיימנו את הדיווח עבור {{alias}}",
-              "uid": "aa5756f7c2"
+              "uid": "a2c9757617"
             },
             {
               "do": {
@@ -135,11 +139,11 @@ export const script = {
                   "record"
                 ]
               },
-              "uid": "9133827a4d"
+              "uid": "70b6831d1c"
             },
             {
               "goto": "reporting-loop",
-              "uid": "ba2f58e355"
+              "uid": "76a36a5d14"
             }
           ],
           "uid": "5002ab217a"
@@ -636,6 +640,10 @@ export const script = {
                 ]
               },
               "uid": "8159f08bcb"
+            },
+            {
+              "say": "אוקיי, עברנו את זה...",
+              "uid": "2969e1a444"
             }
           ],
           "uid": "d96a2bfad6"
@@ -733,6 +741,212 @@ export const script = {
           "uid": "397469aff5"
         },
         {
+          "name": "covid19-checks",
+          "steps": [
+            {
+              "do": {
+                "cmd": "fetch_covid19_check_question_data",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "723288c020"
+            },
+            {
+              "switch": {
+                "arg": "_covid19_check_question_status",
+                "cases": [
+                  {
+                    "match": "missing_result",
+                    "steps": [
+                      {
+                        "say": "סיפרת לנו בדיווח קודם שנבדקת לקורונה...האם כבר קיבלת את תוצאות הבדיקה?",
+                        "uid": "6f66d047fa"
+                      },
+                      {
+                        "uid": "ec12ab15c9",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, הגיעו תוצאות הבדיקה",
+                              "steps": [
+                                {
+                                  "goto": "covid19_check_ask_for_results",
+                                  "uid": "89187eceb1"
+                                }
+                              ],
+                              "uid": "b45252d37f",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "40e4d7f3c6"
+                  },
+                  {
+                    "match": "first_time",
+                    "steps": [
+                      {
+                        "say": "האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?",
+                        "uid": "e4b12f8160"
+                      },
+                      {
+                        "uid": "f3aea3c9fa",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, נבדקתי",
+                              "steps": [
+                                {
+                                  "say": "באיזה תאריך נבדקת בפעם האחרונה?",
+                                  "uid": "76697e5326"
+                                },
+                                {
+                                  "uid": "8d3c839624",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "_covid19_check_date"
+                                  }
+                                },
+                                {
+                                  "goto": "covid19_check_ask_for_results",
+                                  "uid": "cfc3c929bf"
+                                }
+                              ],
+                              "uid": "d6ac7bfb6f",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "37fec303cc"
+                  },
+                  {
+                    "match": "ask_again",
+                    "steps": [
+                      {
+                        "say": "האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?",
+                        "uid": "3b8baa8b51"
+                      },
+                      {
+                        "uid": "c0037dc5dd",
+                        "wait": {
+                          "options": [
+                            {
+                              "show": "כן, נבדקתי",
+                              "steps": [
+                                {
+                                  "say": "באיזה יום זה היה?",
+                                  "uid": "bdfd47114e"
+                                },
+                                {
+                                  "uid": "4f5720d08f",
+                                  "wait": {
+                                    "input-kind": "date",
+                                    "placeholder": "תאריך: dd/mm/yy",
+                                    "variable": "_covid19_check_date"
+                                  }
+                                },
+                                {
+                                  "goto": "covid19_check_ask_for_results",
+                                  "uid": "01e8269390"
+                                }
+                              ],
+                              "uid": "a49831bc1b",
+                              "value": true
+                            },
+                            {
+                              "show": "לא",
+                              "value": false
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "uid": "58d16078d6"
+                  },
+                  {
+                    "default": true
+                  }
+                ]
+              },
+              "uid": "3424c2901c"
+            },
+            {
+              "do": {
+                "cmd": "save_covid19_check_question_data",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "9403fc8df9"
+            }
+          ],
+          "uid": "69768936fa"
+        },
+        {
+          "name": "covid19_check_ask_for_results",
+          "steps": [
+            {
+              "say": "ומה היתה תוצאת הבדיקה?",
+              "uid": "d1345c233d"
+            },
+            {
+              "uid": "87cc7bab94",
+              "wait": {
+                "options": [
+                  {
+                    "show": "אובחנתי כחולה בקורונה",
+                    "steps": [
+                      {
+                        "say": "אוי, זה בטח לא פשוט.  החלמה מהירה",
+                        "uid": "db3b381db6"
+                      }
+                    ],
+                    "uid": "b58ac5f0e0",
+                    "value": "positive"
+                  },
+                  {
+                    "show": "אין לי קורונה",
+                    "steps": [
+                      {
+                        "say": "משמח לשמוע, נקווה שימשיך ככה",
+                        "uid": "f6fd9de275"
+                      }
+                    ],
+                    "uid": "f41667ea9c",
+                    "value": "negative"
+                  },
+                  {
+                    "show": "עוד לא קיבלתי את תוצאות הבדיקה",
+                    "steps": [
+                      {
+                        "say": "אנחנו מחזיקים לך אצבעות",
+                        "uid": "807aaef9e7"
+                      }
+                    ],
+                    "uid": "81e8f07a9d",
+                    "value": "result_missing"
+                  }
+                ],
+                "variable": "_covid19_check_result"
+              }
+            }
+          ],
+          "uid": "17bd8d8f7a"
+        },
+        {
           "name": "insulation",
           "steps": [
             {
@@ -742,12 +956,8 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": "אוקיי, עברנו את זה...",
-                        "uid": "384df452a2"
-                      },
-                      {
                         "say": "עכשיו, מה בנוגע לבידוד?",
-                        "uid": "cfe2d49073"
+                        "uid": "940eefc1f9"
                       }
                     ],
                     "uid": "e7a358a104",
