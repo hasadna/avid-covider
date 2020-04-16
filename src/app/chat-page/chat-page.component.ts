@@ -270,13 +270,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                     _covid19_check_question_status = 'missing_result';
               }
             } else if (TODAY - _covid19_check_question_date > question_period) {
+              // We didn't ask for more than a week, let's ask again
               console.log('covid19 check question: will ask since one week passed');
               _covid19_check_question_status = 'ask_again';
             } else {
+              // We couldn't find a reason to ask
               console.log('covid19 check question: no reason to ask user');
               _covid19_check_question_status = 'dont_ask';
             }
             if (_covid19_check_question_status !== 'dont_ask') {
+              // In case we're going to ask, set the question date to now
               _covid19_check_question_date = TODAY;
             }
 
@@ -292,8 +295,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         save_covid19_check_question_data: (record: any) => {
           if (record.covid19_check_date) {
+            if (!PRODUCTION) {
+              // Reset the check date otherwise testing this won't be possible
+              record.covid19_check_date = (new Date()).toISOString();
+            }
             try {
-              record._covid19_check_date = Date.parse(record.covid19_check_date);
+              record._covid19_check_date = Date.parse(record.covid19_check_date).valueOf();
             } catch(e) {
               console.log('Failed to parse date', record.covid19_check_date, e);
             }
