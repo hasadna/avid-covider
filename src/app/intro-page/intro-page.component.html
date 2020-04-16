@@ -244,8 +244,8 @@
     </div>
   </div>
 
-  <div class='cta-holder' [class.hidden]='fullMap'>
-    <div class='cta' *ngIf='startButton'>
+  <div class='cta-holder' [class.hidden]='fullMap' *ngIf='startButton'>
+    <div class='cta'>
       <span class='button' (click)='chat.emit()'><span i18n>לדיווח הבריאות היומי שלי</span></span>
     </div>
   </div>
