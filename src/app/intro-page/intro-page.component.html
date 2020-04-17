@@ -1,4 +1,4 @@
-<div class='container' [class.locked]='fullMap' 
+<div class='container' [class.locked]='fullMap' [class.desktop]='layout.desktop'
     (touchmove)='pullRefresh($event)' (touchstart)='pullRefreshStart($event)' #container>
   <div class='map-holder' *ngIf='layout.mobile'>
     <app-heatmap [closeButton]='false' [padding]='0' *ngIf='mapInit'></app-heatmap>
@@ -88,9 +88,11 @@
           <h3 i18n>מאמרים מדעיים במסגרת המחקר</h3>
           <div class='articles'>
             <div class='article'>
+              <img src='assets/img/nature-logo.png'>
               <a href='https://www.nature.com/articles/s41591-020-0857-9' target='_blank'>A framework for identifying regional outbreak and spread of COVID-19 from one-minute population-wide surveys</a>
             </div>
             <div class='article'>
+              <img src='assets/img/medarxiv-logo.png'>
               <a href='https://www.medrxiv.org/content/10.1101/2020.04.02.20051284v1.article-info' target='_blank'>Building an International Consortium for Tracking Coronavirus Health Status</a>
             </div>
           </div>

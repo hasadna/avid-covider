@@ -10,6 +10,7 @@ import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
 import { MapService } from '../map.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -29,7 +30,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
   @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
-  @Input() layout: string = null;
   @Output() done = new EventEmitter<string>();
 
   constructor(private http: HttpClient,
@@ -37,6 +37,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               private notifications: NotificationService,
               private source: SourceService,
               private mapService: MapService,
+              public layout: LayoutService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -425,7 +426,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           let payload = Object.assign({}, record);
           payload['version'] = VERSION;
           payload['locale'] = this.locale;
-          payload['layout'] = this.layout;
+          payload['layout'] = this.layout.layout;
           try {
             payload['numPreviousReports'] = this.storage.reports.length;
             if (this.storage.reports.length > 0) {
