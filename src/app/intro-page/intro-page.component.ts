@@ -25,6 +25,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   seenNudge = false;
   mapInit = false;
   tab = 'about';
+  copies = [1, 1];
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
@@ -56,6 +57,9 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       };
       if (this.layout.mobile) {
         this.top = this.breaks.base;
+      }
+      if (this.layout.desktop) {
+        this.copies = [1];
       }
       if (this.autostart) {
         this.chat.emit();

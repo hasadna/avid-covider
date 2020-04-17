@@ -46,10 +46,14 @@
         <a (click)='appinstall.prompt("itunes")' *ngIf='appinstall.iphoneAvailable()' class='iphone'><img src='assets/img/apple-appstore-badge.png'/></a>
       </div>
       <div class='logos' appLtr>
-        <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
-        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
-        <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
-        <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+        <div class='moving'>
+          <ng-container *ngFor='let i of copies'>
+            <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
+            <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
+            <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
+            <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+          </ng-container>
+        </div>
       </div>
 
       <div class='tabs'>
@@ -99,16 +103,24 @@
 
           <h3 i18n>שותפים</h3>
           <div class='logos' appLtr>
-            <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
-            <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
-            <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
-            <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+            <div class='moving'>
+              <ng-container *ngFor='let i of copies'>
+                <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
+                <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
+                <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
+                <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+              </ng-container>
+            </div>
           </div>
           <h3 i18n>תומכים</h3>
           <div class='logos' appLtr>
-            <img src='assets/img/migdal-logo.svg'/>
-            <img src='assets/img/final-logo.svg'/>
-            <img src='assets/img/gfs-logo.svg'/>
+            <div class='moving'>
+              <ng-container *ngFor='let i of copies'>
+                <img src='assets/img/migdal-logo.svg'/>
+                <img src='assets/img/final-logo.svg'/>
+                <img src='assets/img/gfs-logo.svg'/>
+              </ng-container>
+            </div>
           </div>
           <p i18n>אנו רוצים להודות לכל המתנדבים והמתנדבות שעשו ימים כלילות במהלך התקופה האחרונה!</p>
           <h3 i18n>צוות מכון ויצמן</h3>
