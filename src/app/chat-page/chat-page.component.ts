@@ -235,6 +235,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             let _covid19_check_question_status = 'dont_ask';
             let _covid19_check_question_date = 0;
             let _covid19_check_date = 0;
+            let covid19_check_date = null;
             let _covid19_check_result = null;
 
             for (const report of this.storage.reports) {
@@ -243,6 +244,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 try {
                   _covid19_check_question_date = parseInt(r._covid19_check_question_date, 10);
                   _covid19_check_date = parseInt(r._covid19_check_date, 10);
+                  covid19_check_date = r.covid19_check_date;
                   _covid19_check_result = r._covid19_check_result;
                 } catch (err) {
                   console.error(`Bad covid19 old report data ${err}, ${r}`);
@@ -261,6 +263,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             if (_covid19_check_result === 'positive') { // Positive - never ask
               console.log('covid19 check question: will not ask due to "positive" report');
               _covid19_check_question_status = 'dont_ask';
+              record.covid19_check_date = covid19_check_date;
             } else if (!_covid19_check_question_date) { // Never asked - always ask
               _covid19_check_question_status = 'first_time';
             } else if (_covid19_check_result === 'result_missing') { // Missing result
