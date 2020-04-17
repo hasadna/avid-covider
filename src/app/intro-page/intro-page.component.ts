@@ -84,7 +84,6 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
 
   pullRefreshStart(ev) {
     this._startY = ev.touches[0].pageY;
-    console.log('startY = ', this._startY);
   }
   pullRefresh(ev) {
     const y = ev.touches[0].pageY;
