@@ -262,7 +262,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             if (_covid19_check_result === 'positive') { // Positive - never ask
               console.log('covid19 check question: will not ask due to "positive" report');
               _covid19_check_question_status = 'dont_ask';
-              record.covid19_check_date = covid19_check_date;
             } else if (!_covid19_check_question_date) { // Never asked - always ask
               _covid19_check_question_status = 'first_time';
             } else if (_covid19_check_result === 'result_missing') { // Missing result
@@ -291,6 +290,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               _covid19_check_question_status,
               _covid19_check_question_date,
               _covid19_check_date,
+              covid19_check_date,
               _covid19_check_result
             });
           } catch (err) {
