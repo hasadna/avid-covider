@@ -1,0 +1,7 @@
+<div class='container'>
+  <div class='banner' [@openClose]='!!message ? "open" : "closed"'>
+    <span class='close' (click)='close(false)'></span>
+    <span class='message'>{{message}}</span>
+    <span class='button' *ngIf='buttonMessage' (click)='close(true)' appLtr>{{buttonMessage}}</span>
+  </div>
+</div>

@@ -24,6 +24,8 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   breaks: any = {};
   seenNudge = false;
   mapInit = false;
+  tab = 'about';
+  copies = [1, 1];
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
@@ -56,6 +58,9 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
       if (this.layout.mobile) {
         this.top = this.breaks.base;
       }
+      if (this.layout.desktop) {
+        this.copies = [1];
+      }
       if (this.autostart) {
         this.chat.emit();
       }
@@ -83,7 +88,6 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
 
   pullRefreshStart(ev) {
     this._startY = ev.touches[0].pageY;
-    console.log('startY = ', this._startY);
   }
   pullRefresh(ev) {
     const y = ev.touches[0].pageY;

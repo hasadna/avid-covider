@@ -1,4 +1,4 @@
-<div class='container' [class.locked]='fullMap' 
+<div class='container' [class.locked]='fullMap' [class.desktop]='layout.desktop'
     (touchmove)='pullRefresh($event)' (touchstart)='pullRefreshStart($event)' #container>
   <div class='map-holder' *ngIf='layout.mobile'>
     <app-heatmap [closeButton]='false' [padding]='0' *ngIf='mapInit'></app-heatmap>
@@ -46,51 +46,217 @@
         <a (click)='appinstall.prompt("itunes")' *ngIf='appinstall.iphoneAvailable()' class='iphone'><img src='assets/img/apple-appstore-badge.png'/></a>
       </div>
       <div class='logos' appLtr>
-        <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
-        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
-        <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+        <div class='moving'>
+          <ng-container *ngFor='let i of copies'>
+            <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
+            <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
+            <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
+            <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+          </ng-container>
+        </div>
       </div>
-      <p i18n>
-    חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
-      </p>
-      <p i18n>
-    עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/>
-    השאלון אנונימי לחלוטין. 
-      </p>
-      <p i18n>
-    תודה לך! 🙏
-      </p>
-      <p i18n>
-    *חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
-      </p>
-      <p i18n>
-    פרופסור ערן סגל, מכון ויצמן למדע
-    <br/>
-    פרופסור יובל דור, האוניברסיטה העברית
-    <br/>
-    פרופסור בנימין גיגר, מכון ויצמן למדע
-    <br/>
-    פרופסור רן בליצר, שירותי בריאות כללית
-    <br/>
-    פרופסור ורדה שלו, מכבי שירותי בריאות
-      </p>
-      <div class='logos' appLtr>
-        <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
-        <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
-        <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+
+      <div class='tabs'>
+        <div class='tab-selectors'>
+          <!--div class='tab-selector' [class.active]='tab==="results"' i18n (click)='tab="results"'>תוצאות עדכניות</div-->
+          <div class='tab-selector' [class.active]='tab==="about"' i18n (click)='tab="about"'>אודות המחקר</div>
+          <div class='tab-selector' [class.active]='tab==="media"' i18n (click)='tab="media"'>מדיה</div>
+        </div>
+        <div class='tab-content' *ngIf='tab==="about"'>
+          <h2 i18n>אודות המחקר:</h2>
+          <h1 i18n>דיווח יומי למאבק בקורונה</h1>
+          <p i18n>
+            חוקרי מכון ויצמן למדע בשיתוף גורמי הבריאות פועלים כל העת כדי למפות את התפשטות הקורונה ולשמור על כולנו. שאלון זה נוצר כדי לסייע בחיזוי ואיתור של מוקדי ההתפשטות ולהגיע לחולים מהר יותר, על ידי הערכה של מספר האנשים בכל אזור שפיתחו תסמינים.
+          </p>
+          <p i18n>
+            עליך למלא את השאלון  פעם ביום, עבור כל בן משפחה בנפרד. חשוב שגם מי שחש בטוב ולא פיתח אף תסמין ימלא את השאלון.<br/>
+            השאלון אנונימי לחלוטין. 
+          </p>
+          <p i18n>
+            תודה לך! 🙏
+          </p>
+          <p i18n>
+            * חשוב לציין שהשאלון אינו נועד כדי לאבחן הידבקות בנגיף - אם את/ה חש/ה ברע, אנא פנה (מהבית) לגורמי הרפואה. 
+          </p>
+          <p i18n>
+            פרופסור ערן סגל, מכון ויצמן למדע
+            <br/>
+            פרופסור יובל דור, האוניברסיטה העברית
+            <br/>
+            פרופסור בנימין גיגר, מכון ויצמן למדע
+            <br/>
+            פרופסור רן בליצר, שירותי בריאות כללית
+            <br/>
+            פרופסור ורדה שלו, מכבי שירותי בריאות
+          </p>
+          <h3 i18n>מאמרים מדעיים במסגרת המחקר</h3>
+          <div class='articles'>
+            <div class='article'>
+              <img src='assets/img/nature-logo.png'>
+              <a href='https://www.nature.com/articles/s41591-020-0857-9' target='_blank'>A framework for identifying regional outbreak and spread of COVID-19 from one-minute population-wide surveys</a>
+            </div>
+            <div class='article'>
+              <img src='assets/img/medarxiv-logo.png'>
+              <a href='https://www.medrxiv.org/content/10.1101/2020.04.02.20051284v1.article-info' target='_blank'>Building an International Consortium for Tracking Coronavirus Health Status</a>
+            </div>
+          </div>
+
+          <h3 i18n>שותפים</h3>
+          <div class='logos' appLtr>
+            <div class='moving'>
+              <ng-container *ngFor='let i of copies'>
+                <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
+                <a href='https://www.hasadna.org.il/' target='_blank'><img src='assets/img/hasadna-logo.svg'/></a>
+                <a href='https://www.maccabi4u.co.il/' target='_blank'><img src='assets/img/maccabi-logo.png'/></a>
+                <a href='https://www.clalit.co.il/' target='_blank'><img src='assets/img/clalit-logo.png'/></a>
+              </ng-container>
+            </div>
+          </div>
+          <h3 i18n>תומכים</h3>
+          <div class='logos' appLtr>
+            <div class='moving'>
+              <ng-container *ngFor='let i of copies'>
+                <img src='assets/img/migdal-logo.svg'/>
+                <img src='assets/img/final-logo.svg'/>
+                <img src='assets/img/gfs-logo.svg'/>
+              </ng-container>
+            </div>
+          </div>
+          <p i18n>אנו רוצים להודות לכל המתנדבים והמתנדבות שעשו ימים כלילות במהלך התקופה האחרונה!</p>
+          <h3 i18n>צוות מכון ויצמן</h3>
+          <div class='credits'>
+            <div class='credit'><img src='assets/img/profiles/פרופסור ערן סגל.png'><span i18n>פרופסור ערן סגל</span></div>
+            <div class='credit'><img src='assets/img/profiles/ד״ר אורי כהן.png'><span i18n>ד״ר אורי כהן</span></div>
+            <div class='credit'><img src='assets/img/profiles/חגי רוסמן.png'><span i18n>חגי רוסמן</span></div>
+            <div class='credit'><img src='assets/img/profiles/ד״ר סמדר שילה.png'><span i18n>ד״ר סמדר שילה</span></div>
+            <div class='credit'><img src='assets/img/profiles/איה קשת.png'><span i18n>איה קשת</span></div>
+            <div class='credit'><img src='assets/img/profiles/אמיר גבריאלי.png'><span i18n>אמיר גבריאלי</span></div>
+            <div class='credit'><img src='assets/img/profiles/תומר מאיר.png'><span i18n>תומר מאיר</span></div>
+            <div class='credit'><img src='assets/img/profiles/טל קראדי.png'><span i18n>טל קראדי</span></div>
+            <div class='credit'><img src='assets/img/profiles/סער שוער.png'><span i18n>סער שוער</span></div>
+            <div class='credit'><img src='assets/img/profiles/נסטיה גודנבה.png'><span i18n>נסטיה גודנבה</span></div>
+            <div class='credit'><img src='assets/img/profiles/דמטרי קולובקוב.png'><span i18n>דמטרי קולובקוב</span></div>
+            <div class='credit'><img src='assets/img/profiles/איריס קלקה.png'><span i18n>איריס קלקה</span></div>
+            <div class='credit'><img src='assets/img/profiles/עמית לבון.png'><span i18n>עמית לבון</span></div>
+            <div class='credit'><img src='assets/img/profiles/ישי לנדאו.png'><span i18n>ישי לנדאו</span></div>
+          </div>
+          <h3 i18n>צוות הסדנא לידע ציבורי</h3>
+          <div class='credits'>
+            <div class='credit'><img src='assets/img/profiles/dorit.png'><span i18n>דורית חיזי</span></div>
+            <div class='credit'><img src='assets/img/profiles/adam.png'><span i18n>אדם קריב</span></div>
+            <div class='credit'><img src='assets/img/profiles/mushon.png'><span i18n>מושון זר-אביב</span></div>
+            <div class='credit'><img src='assets/img/profiles/noam.png'><span i18n>נעם קסטל</span></div>
+            <div class='credit'><img src='assets/img/profiles/mary.png'><span i18n>מרי לויצקר</span></div>
+            <div class='credit'><img src='assets/img/profiles/orihoch.png'><span i18n>אורי הוך</span></div>
+          </div>
+          <p>
+            <span i18n>רוני מאור</span>, 
+            <span i18n>זיו מאור</span>, 
+            <span i18n>ירון דינור</span>, 
+            <span i18n>עו"ד יונתן קלינגר</span>, 
+            <span i18n>ניר ועומר מהירשמן תקשורת</span>, 
+            <span i18n>יניב גרוסמן</span>
+          </p>
+          <p i18n>
+            תודה לכל המתנדבים והמתנדבות הנוספים שתרמו בהצעות, רעיונות ומשובים. הרשימה מתארכת כל הזמן -  אם נשמט שמכם בטעות, נשמח לעדכן.
+          </p>
+
+          <h3 i18n>צוות התרגום</h3>
+          <div class='credits'>
+            <div class='credit'><img src='assets/img/profiles/yaelsela.png'><span i18n>יעל סלע</span></div>
+          </div>
+          <p>
+            <span i18n>מרי לויצקר</span>, 
+            <span i18n>תסנים ברייה</span>, 
+            <span i18n>אמאני בריק</span>, 
+            <span i18n>יונתן שלו</span>, 
+            <span i18n>לורן סממה</span>, 
+            <span i18n>שרון כהן</span>, 
+            <span i18n>ג'וד ביטון</span>, 
+            <span i18n>רומן פריבורקין</span>, 
+            <span i18n>גנאדי בריוזקין</span>, 
+            <span i18n>גרגורי דרדיק</span>, 
+            <span i18n>סרגיי לנצמן</span>, 
+            <span i18n>נדין אפשטיין</span>, 
+            <span i18n>נטי שיזף</span>, 
+            <span i18n>אלי דיין</span>, 
+            <span i18n>מריאנה ביאליק</span>, 
+            <span i18n>מוחמד סולימאן</span>
+          <p>
+
+          <h3 i18n>תודות נוספות</h3>
+          <div class='thanks-logos'>
+            <a href='https://200apps.com/' target='_blank'><img src='assets/img/200apps-logo.png'></a>
+            <img src='assets/img/ascella-logo.png'>
+          </div>
+          <p>
+            <span i18n>שניר אברהם</span>, 
+            <span i18n>אריאל טרקלטאוב</span>, 
+            <span i18n>בר קירל</span>
+          </p>
+          <p>
+            דב שרון, אור וינקלר, אור מהאהבתי, אורה טלר, איריס רפפורט, אירית לוי, אירית בלום, אבנר סטפק, איתמר גיבתון, איתן משה פור, אלה ויטרניוק, אלון ויסר, אלירן חולי, אמילי מואטי, אניס ארמלי, אתי דואניס, בני דרור, ג‘ודי קרקו, גדי שכנאי, דולי הימלבלוי, חביבה מלניק, נדיה אבני, זיו כהן, יאיר בורטינגר, לאה אלייב, אמירה חרוד, יצחק לוי, יפעת הררי, איציק חן, יוסי הררי, דוד חפי, איציק חן, דליה ישראל גור אריה, אבירם אלואי, עידן מרקוביץ, אור סרי, גילה קריב, חנה פרץ, יעקב לקס, שרה אורן, שושנה ברמן, יגאל ג’נח, יוני בגן, יוסי מבס, יעל כהן פארן, יעקב לקס , יעקב שוורץ, ליאור לוברסקי, מאיר רביב, מני שני, משה קליגר, נוהאד סאבק, נורית אייל, סטיבן רובין, סתו רייכמן, ענת מרציאנו, צבי שני, ציפורה בן זאב, רועי בכר, דר רימון גובראן, רן שוסטרמן, שי טמצין, ש.נ., שי גוטמן, שכיב שנאן, שלמה עצמונית נאווה מלכה
+          </p>
+        </div>
+        <div class='tab-content' *ngIf='tab==="media"'>
+          <h2 i18n>מדיה:</h2>
+          <p>
+            <span i18n>מבחר קטעי עיתונות על היוזמה.</span><br/>
+            <span i18n>לפניות עיתונאים וכלי תקשורת - ניר הירשמן</span>
+            <span>: <a href='mailto:info@nirshman.com' target='_blank'>info@nirshman.com</a></span>
+          </p>
+
+          <div class='media youtube'>
+            <iframe type="text/html" src="https://www.youtube.com/embed/SgdoLjS9wuE?modestbranding=1&iv_load_policy=3"
+                    frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class='caption'>
+            <span class='text' i18n>
+              פרופ' ערן סגל ממכון ויצמן למדע על מיזם ניבוי התפרצות הקורונה - הסדנא לידע ציבורי, קשת 12, 24.3.2020
+            </span>
+            <span class='tag' i18n>קשת 12</span>
+          </div>
+
+          <div class='media youtube'>
+            <iframe type="text/html" src="https://www.youtube.com/embed/IaD0szKbsAo?modestbranding=1&iv_load_policy=3"
+                    frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class='caption'>
+            <span class='text' i18n>
+              ד"ר סמדר שילה ממכון ויצמן על מוקדי התפרצות הקורונה- הסדנא לידע ציבורי, רשת 13, 4.4.2020
+            </span>
+            <span class='tag' i18n>רשת 13</span>
+          </div>
+
+          <div class='media youtube'>
+            <iframe type="text/html" src="https://www.youtube.com/embed/PNSvG5qBwqY?modestbranding=1&iv_load_policy=3"
+                    frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div class='caption'>
+            <span class='text' i18n>
+              חגי רוסמן ממכון ויצמן על זיהוי מוקדי התפרצות הקורונה - הסדנא לידע ציבורי, רשת 13, 6.4.2020
+            </span>
+            <span class='tag' i18n>רשת 13</span>
+          </div>
+          
+          <a href='https://www.ynet.co.il/health/article/Bkrzci00PL' target='_blank'>
+            <div class='media weblink'>
+              <img src='assets/img/ynet-preview-1.jpg'>
+            </div>
+            <div class='caption'>
+              <span class='text' i18n>
+                מכון ויצמן צופה: אלו הערים הבאות בסיכון להתפשטות הקורונה, ד"ר איתי גל, YNET 6.4.2020
+              </span>&#x202B;&nbsp;&#x202C;
+              <span class='tag'>YNET</span>
+            </div>
+          </a>
+        </div>
       </div>
-      <div class='logos' appLtr>
-        <img src='assets/img/migdal-logo.svg'/>
-        <img src='assets/img/final-logo.svg'/>
-        <img src='assets/img/gfs-logo.svg'/>
-      </div>
+
       <div class='links'>
         <a href='https://www.hasadna.org.il/coronabot/participant-form' i18n target='_blank'>תנאי ההשתתפות במחקר</a>&nbsp;|&nbsp;
         <a href='https://www.hasadna.org.il/coronabot/privacy' i18n target='_blank'>מדיניות פרטיות</a><br/>
         <a href="mailto:coronabot@hasadna.org" i18n>יצירת קשר</a><br/>
-        <p>
-          <span i18n>לפניות עיתונאים וכלי תקשורת - ניר הירשמן</span>&nbsp;<a href='mailto:info@nirshman.com' target='_blank'>info@nirshman.com</a>
-        </p>
         <p>
           <a href='https://github.com/hasadna/avid-covider' i18n target='_blank'>קוד המקור</a>&nbsp;|&nbsp;
           <span i18n>גירסא</span>&nbsp;<span>{{version}}</span>
@@ -101,8 +267,8 @@
     </div>
   </div>
 
-  <div class='cta-holder' [class.hidden]='fullMap'>
-    <div class='cta' *ngIf='startButton'>
+  <div class='cta-holder' [class.hidden]='fullMap' *ngIf='startButton'>
+    <div class='cta'>
       <span class='button' (click)='chat.emit()'><span i18n>לדיווח הבריאות היומי שלי</span></span>
     </div>
   </div>

@@ -1,14 +1,36 @@
 @import url('../../common.less');
 
-.chat {
+.container {
     flex: 0 0 auto;
     display: flex;
     flex-flow: column;
     height: 100%;
     width: 100%;
+    position: relative;
 
-    htl-hatool {
+    .chat {
+        flex: 0 0 auto;
+        display: flex;
+        flex-flow: column;
         height: 100%;
-        overflow: hidden;
+        width: 100%;
+    
+        htl-hatool {
+            height: 100%;
+            overflow: hidden;
+        }
     }
+
+    &.desktop {
+        padding: 80px;
+        background-color: @aubergine;
+
+        .chat {
+            htl-hatool {
+                border-radius: 8px;
+            }
+        }
+    }
+
 }
+

@@ -10,6 +10,7 @@ import { NotificationService } from '../notification.service';
 import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
 import { MapService } from '../map.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -22,6 +23,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   subscription: Subscription = null;
   content: ContentManager;
   runner: ScriptRunnerImpl;
+  toasterMessage = null;
+  bannerMessage = null;
+  bannerButtonMessage = null;
 
   @ViewChild('uploadFileText') uploadFileText: ElementRef;
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
@@ -29,7 +33,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   @ViewChild('inputPlaceholder') inputPlaceholder: ElementRef;
   @ViewChild('fixmeMessage') fixmeMessage: ElementRef;
 
-  @Input() layout: string = null;
   @Output() done = new EventEmitter<string>();
 
   constructor(private http: HttpClient,
@@ -37,6 +40,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               private notifications: NotificationService,
               private source: SourceService,
               private mapService: MapService,
+              public layout: LayoutService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -190,6 +194,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           }
           console.log('OPTIONS', options);
+          this.bannerMessage = 'Got ' + options.length + ' options!';
+          this.bannerButtonMessage = 'התקנה';
           return options;
         },
         set_flag: (record: any, varname) => {
@@ -223,11 +229,92 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 }
               }
             }
-            console.log('HOUSEHOLD', _household_adults, 'ADULTS', _household_minors, 'MINORS');
             Object.assign(record, {_household_adults, _household_minors, _household_data_available});
           } catch (err) {
             console.error(`household past data check failed: ${err}`);
           }
+        },
+        fetch_covid19_check_question_data: (record: any) => {
+          try {
+            let _covid19_check_question_status = 'dont_ask';
+            let _covid19_check_question_date = 0;
+            let _covid19_check_date = 0;
+            let covid19_check_date = null;
+            let _covid19_check_result = null;
+
+            for (const report of this.storage.reports) {
+              const r = report[1];
+              if (r.alias === record.alias) {
+                try {
+                  _covid19_check_question_date = parseInt(r._covid19_check_question_date, 10);
+                  _covid19_check_date = parseInt(r._covid19_check_date, 10);
+                  covid19_check_date = r.covid19_check_date;
+                  _covid19_check_result = r._covid19_check_result;
+                } catch (err) {
+                  console.error(`Bad covid19 old report data ${err}, ${r}`);
+                }
+              }
+            }
+            const MULTIPLIER = PRODUCTION ? 86400 * 1000 : 60 * 1000;
+            const question_period = MULTIPLIER * 7;   // question's interval (days)
+            const missing_question_period = MULTIPLIER * 1;   // question's interval (days)
+            const pending_result_timeout = MULTIPLIER * 14; // missing results interval (days)
+            const TODAY = Date.now().valueOf();
+
+            if (_covid19_check_question_date) {
+              console.log(`Last covid19 Question was asked on ${new Date(_covid19_check_question_date).toISOString()}`);
+            }
+            if (_covid19_check_result === 'positive') { // Positive - never ask
+              console.log('covid19 check question: will not ask due to "positive" report');
+              _covid19_check_question_status = 'dont_ask';
+            } else if (!_covid19_check_question_date) { // Never asked - always ask
+              _covid19_check_question_status = 'first_time';
+            } else if (_covid19_check_result === 'result_missing') { // Missing result
+              if (!!_covid19_check_date &&
+                  ((TODAY - _covid19_check_question_date) > missing_question_period) &&
+                  ((TODAY - _covid19_check_date) < pending_result_timeout)) {
+                    // we didn't ask in last day, it wasn't 2 weeks since the check date
+                    _covid19_check_question_status = 'missing_result';
+                    record._covid19_check_question_status_missing = true;
+              }
+            } else if (TODAY - _covid19_check_question_date > question_period) {
+              // We didn't ask for more than a week, let's ask again
+              console.log('covid19 check question: will ask since one week passed');
+              _covid19_check_question_status = 'ask_again';
+            } else {
+              // We couldn't find a reason to ask
+              console.log('covid19 check question: no reason to ask user');
+              _covid19_check_question_status = 'dont_ask';
+            }
+            if (_covid19_check_question_status !== 'dont_ask') {
+              // In case we're going to ask, set the question date to now
+              _covid19_check_question_date = TODAY;
+            }
+
+            Object.assign(record, {
+              _covid19_check_question_status,
+              _covid19_check_question_date,
+              _covid19_check_date,
+              covid19_check_date,
+              _covid19_check_result
+            });
+          } catch (err) {
+            console.error(`covid19 check question failed: ${err}`);
+          }
+        },
+        save_covid19_check_question_data: (record: any) => {
+          if (record.covid19_check_date) {
+            if (!PRODUCTION) {
+              // Reset the check date otherwise testing this won't be possible
+              record.covid19_check_date = (new Date()).toISOString();
+            }
+            try {
+              record._covid19_check_date = Date.parse(record.covid19_check_date).valueOf();
+            } catch (e) {
+              console.log('Failed to parse date', record.covid19_check_date, e);
+            }
+          }
+          record.covid19_check_result = record._covid19_check_result;
         },
         fetch_public_service_data: (record: any) => {
           try {
@@ -346,7 +433,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           let payload = Object.assign({}, record);
           payload['version'] = VERSION;
           payload['locale'] = this.locale;
-          payload['layout'] = this.layout;
+          payload['layout'] = this.layout.layout;
           try {
             payload['numPreviousReports'] = this.storage.reports.length;
             if (this.storage.reports.length > 0) {
