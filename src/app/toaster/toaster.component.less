@@ -1,0 +1,32 @@
+@import url('../../common.less');
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    right: 0;
+    padding: 32px;
+
+    .toaster {
+        border-radius: 8px;
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.3);
+        border: solid 4px #ffffff;
+        background-color: fade(@aubergine, 90);
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+        width: 100%;
+
+        .message {
+            display: block;
+            flex-basis: 100%;
+            font-size: 20px;
+            font-weight: 300;
+            color: #ffffff;
+            text-align: center;
+        }
+    }
+}

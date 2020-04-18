@@ -2,6 +2,9 @@
   <div class='chat'>
     <htl-hatool [content]='content' appLtr></htl-hatool>
   </div>
+  <app-toaster [message]='toasterMessage'></app-toaster>
+  <app-banner [message]='bannerMessage' [buttonMessage]='bannerButtonMessage'></app-banner>
+
   <span class='placeholder-tx' i18n #uploadFileText>לחצ/י לבחירת קובץ</span>
   <span class='placeholder-tx' i18n #uploadedFileText>קובץ הועלה בהצלחה</span>
   <span class='placeholder-tx' i18n #notUploadedFileText>תקלה בהעלאת קובץ</span>

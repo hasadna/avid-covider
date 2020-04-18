@@ -1,0 +1,60 @@
+@import url('../../common.less');
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    right: 0;
+    padding: 0;
+
+    .banner {
+        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.3);
+        border: none;
+        border-bottom: solid 4px #ffffff;
+        background-color: fade(@aubergine, 90);
+
+        display: flex;
+        flex-flow: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 20px 16px;
+        width: 100%;
+
+        .button {
+            flex: 0 0 auto;
+            border-radius: 18px;
+            background-color: #ffffff;
+            font-size: 18px;
+            color: @aubergine;
+            padding: 6px 20px;
+            margin: 0;
+            cursor: pointer;
+            &:not(.ltr) {
+                margin-right: auto;
+            }
+            &.ltr {
+                margin-left: auto;
+            }
+        }
+
+        .message {
+            display: block;
+            flex-basis: 1 1 auto;
+            font-size: 20px;
+            font-weight: 300;
+            color: #ffffff;
+            text-align: center;
+            margin: 0 8px;
+        }
+
+        .close {
+            height: 32px;
+            width: 32px;
+            background-image: url(../../assets/img/cross-white.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+        }
+    }
+}

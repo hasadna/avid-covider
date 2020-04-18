@@ -23,6 +23,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   subscription: Subscription = null;
   content: ContentManager;
   runner: ScriptRunnerImpl;
+  toasterMessage = null;
+  bannerMessage = null;
+  bannerButtonMessage = null;
 
   @ViewChild('uploadFileText') uploadFileText: ElementRef;
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
@@ -191,6 +194,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           }
           console.log('OPTIONS', options);
+          this.bannerMessage = 'Got ' + options.length + ' options!';
+          this.bannerButtonMessage = 'התקנה';
           return options;
         },
         set_flag: (record: any, varname) => {
