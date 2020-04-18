@@ -522,7 +522,7 @@
         - switch:
             arg: general_feeling                                      
             cases:
-              - undefined: true                                          #<--- for new reporters, ask how they fell
+              - default: true                                          #<--- for new reporters, ask how they fell
                 steps:
                 - say: ומה נשמע היום?
                 - wait:
