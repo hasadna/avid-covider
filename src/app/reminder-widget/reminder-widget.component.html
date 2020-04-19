@@ -6,7 +6,7 @@
     </div>
     <div class='options'>
       <ng-container *ngFor='let option of options'>
-        <div class='option' (click)='resolve(options.id)'>
+        <div class='option' (click)='resolve(option.id)'>
           <div class='icon' [style.background-image]='"url(" + option.icon + ")"'></div>
           <h2>{{option.title}}</h2>   
         </div>

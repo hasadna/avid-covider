@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Inject, LOCALE_ID, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { NotificationService } from '../notification.service';
 import { VERSION } from '../constants';
-import { AppinstallService } from '../appinstall.service';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
 
@@ -33,7 +32,6 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   @ViewChild('container') container: ElementRef;
 
   constructor(private notifications: NotificationService,
-              public appinstall: AppinstallService,
               public layout: LayoutService,
               public mapService: MapService,
               @Inject(LOCALE_ID) public locale) {}
