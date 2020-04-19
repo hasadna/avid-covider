@@ -218,7 +218,8 @@ END:VCALENDAR'''.format(title=title, body=body))
 def create_assets(script):
     translations = {}
     for x in script['keys']:
-        translations[x['name']] = x['show'].get('.tx',{})
+        default = {'_': x['show']}
+        translations[x['name']] = x['show'].get('.tx', default) if isinstance(x['show'], dict) else default
 
     languages = [(x, x+'/') for x in LANGUAGES] + [('_', '')]
     for lang, path in languages:
