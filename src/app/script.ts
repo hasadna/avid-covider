@@ -790,8 +790,8 @@ export const script = {
                     "match": "first_time",
                     "steps": [
                       {
-                        "say": "האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?",
-                        "uid": "6958a0181a"
+                        "say": "האם נבדקת לקורונה בעבר (בדיקת PCR)?",
+                        "uid": "e6750b2274"
                       },
                       {
                         "uid": "c19f8f2009",

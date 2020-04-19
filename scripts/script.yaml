@@ -341,7 +341,7 @@
                         - show: "לא"
               - match: first_time                          # <---- for new reporters, ask for last check
                 steps:
-                  - say: האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?
+                  - say: האם נבדקת לקורונה בעבר (בדיקת PCR)?
                   - wait:
                       options:
                       - show: כן, נבדקתי
