@@ -34,7 +34,7 @@ export class RemindersService {
       icon: 'assets/img/telegram-icon.png',
       check: () => true
     },
-  ]
+  ];
   titleTranslations: {};
 
   constructor(private notifications: NotificationService,
