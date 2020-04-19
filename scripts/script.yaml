@@ -806,15 +806,12 @@
                         - match: copied
                           steps:
                             - do:
-                                cmd: banner
+                                cmd: toaster
                                 params:
                                   - הקישור לדיווח היומי הועתק ללוח!
                         - match: shared
                           steps:
-                            - do:
-                                cmd: toaster
-                                params:
-                                  - תודה רבה על השיתוף!
+                            - say: תודה רבה על השיתוף!
                                   
 
               - show: לא עכשיו
