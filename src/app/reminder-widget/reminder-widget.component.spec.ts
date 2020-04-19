@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThankYouPageComponent } from './thank-you-page.component';
+import { ReminderWidgetComponent } from './reminder-widget.component';
 
-describe('ThankYouPageComponent', () => {
-  let component: ThankYouPageComponent;
-  let fixture: ComponentFixture<ThankYouPageComponent>;
+describe('ReminderWidgetComponent', () => {
+  let component: ReminderWidgetComponent;
+  let fixture: ComponentFixture<ReminderWidgetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThankYouPageComponent ]
+      declarations: [ ReminderWidgetComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThankYouPageComponent);
+    fixture = TestBed.createComponent(ReminderWidgetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

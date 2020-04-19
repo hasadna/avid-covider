@@ -5,7 +5,6 @@
       steps:
       - goto: intro
       - goto: reporting-loop
-      - goto: promotion
       - goto: end-of-report
 
     - name: intro
@@ -261,7 +260,7 @@
             params:
               - record
               - preconditions_received
-        - say: אוקיי, עברנו את זה...     
+        - say: אוקיי, עברנו את זה…     
 
     - name: preconditions-diseases
       steps:
@@ -332,7 +331,7 @@
             cases:
               - match: missing_result                                 ## check if there is a pending check result
                 steps:
-                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה... האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (covid19_check_date)
+                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה… האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (covid19_check_date)
                   - wait:
                       options:
                         - show: "כן, הגיעו תוצאות הבדיקה"
@@ -556,7 +555,7 @@
         
               - match: feel_bad                                    #<--- for returning users who felt bad on their previous report
                 steps:
-                  - say: בדיווח שעבר סיפרת שהרגשת לא כל כך טוב... האם חל שיפור במצבך?
+                  - say: בדיווח שעבר סיפרת שהרגשת לא כל כך טוב… האם חל שיפור במצבך?
                   - wait:
                       variable: general_feeling
                       options:
@@ -772,31 +771,194 @@
                                 cmd: save_public_service_data
                                 params:
                                   - record
-
-
-
+  
     - name: end-of-report
       steps:
-        - say: המון תודה, המידע ששלחת יעזור מאוד לצוות המחקר של מכון ויצמן וגם לעמיתים שלנו במדינות אחרות לזהות התפרצויות נקודתיות של המחלה ולנסות לטפל בהן לפני שהן מתפשטות.
-        - say: אז נתראה מחר?
-        - wait:
-            options:
-              - show: בטח!
-                class: other
+        - goto: dynamic_update
+        - goto: set-reminder
+        - goto: share
 
-
-    - name: promotion
-      steps:
-        - say: סיימנו. רוצה להסתכל שוב במפת התסמינים?
+    - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
+      steps:    
+        - say: סיימנו עם השאלות להיום. רוצה להסתכל שוב במפת התסמינים?
         - wait:
             options:
               - show: כן, בטח
                 class: other
                 steps:
                   - do:
-                      cmd: show_map
-                  - goto: complete
+                      cmd: show_map                     # (click --> add to record)
               - show: לא עכשיו
+
+    - name: share
+      steps:
+        - say: בזכותך התקרבנו עוד צעד אחד לסוף של זה… תודה
+        - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
+        - wait:
+            options:
+              - show: כן, אשמח לשתף
+                steps:
+                  - do:
+                      cmd: share_action   # (click --> add to record)
+                      variable: action_share
+                  - switch:
+                      arg: action_share
+                      cases:
+                        - default: true
+                        - match: copied
+                          steps:
+                            - do:
+                                cmd: banner
+                                params:
+                                  - הקישור לדיווח היומי הועתק ללוח!
+                        - match: shared
+                          steps:
+                            - do:
+                                cmd: toaster
+                                params:
+                                  - תודה רבה על השיתוף!
+                                  
+
+              - show: לא עכשיו
+
+    - name: set-reminder
+      steps:
+        - do:
+            cmd: reminder_status   # a function to verify if a reminder was set already (telegram, device, app, downloaded ical)
+            params:                #     1. no_reminder --> ask user to set a reminder 
+              - record             #     2. reminder_set --> ask user to add a different/another reminder
+            variable: action_reminder_set
+
+        - switch:
+            arg: action_reminder_required
+            cases:
+              - default: true
+                steps:
+                  - say: יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?
+                  - wait:
+                      variable: action_reminder_wanted
+                      options:
+                      - show: כן, אשמח לתזכורת
+                        value: wanted
+                        steps:
+                        - goto: reminder-choose-method   # https://zpl.io/bzZMKw4
+
+                      - show: כבר יש לי תזכורת, תודה
+                        value: already_set
+
+                      - show: לא, אין צורך, יש לי זכרון מצויין!
+                        value: not_wanted
+                  - do:
+                      cmd: save_reminder_status
+              
+              - match: 'not_required'
+                steps:
+                  - say: תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב
+              
+    - name: reminder-choose-method
+      steps:                   
+        - do:
+            cmd: reminder_choose_method_show_widget
+            variable: action_reminder_selected 
+            params:
+              - record
+        - switch:
+            arg: action_reminder_selected
+            cases:
+              - match: notification
+                steps:
+                - goto: reminder-notification
+
+              - match: android-app
+                steps:
+                - goto: reminder-app
+
+              - match: iphone-app
+                steps:
+                - goto: reminder-app
+
+              - match: calendar
+                steps:
+                - goto: reminder-calendar
+            
+              - match: telegram
+                steps:
+                - goto: reminder-telegram
+
+    - name: reminder-notification
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_notification_approved
+            params:
+              - אשרו קבלת התראות מן האתר על מנת שנוכל להזכיר לכם למלא את השאלון
+              - בסדר
+        - switch:
+            arg: action_reminder_notification_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: install_notification
+                        
+    - name: reminder-app
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_notification_approved           # track how many clicked on "download"/"nevermind"
+            params:
+              - הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00
+              - להורדת האפליקציה
+        - switch:
+            arg: action_reminder_app_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: install_app
+                      params:
+                      - record
+                        
+    - name: reminder-calendar
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_calendar_approved
+            params:
+              - לחצו על הכפתור להתקנת התזכורת ביומן
+              - להורדה
+        - switch:
+            arg: action_reminder_calendar_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                - do:
+                    cmd: install_calendar
+                - do:
+                    cmd: banner
+                    params:
+                      - אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״
+
+    - name: reminde-telegram
+      steps:
+        - do: 
+            cmd: banner
+            variable: action_reminder_telegram_approved
+            params:
+              - "<b>שימו לב: </b> בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש"
+              - בסדר
+        - switch:
+            arg: action_reminder_telegram_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                - do:
+                    cmd: install_telegram
+
 
 - name: generic-translation-assets ## <-- keep me last!
   keys:
@@ -804,3 +966,13 @@
       show: זמן לדיווח הבריאות היומי!
     - name: calendarBody
       show: "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה \U0001F4AA\U0001F3FD!"
+    - name: reminder:notification
+      show: התראה בדפדפן
+    - name: reminder:calendar
+      show: תזכורת ביומן
+    - name: reminder:android-app
+      show: אפליקציית האנדרואיד שלנו
+    - name: reminder:iphone-app
+      show: אפליקציית האייפון שלנו
+    - name: reminder:telegram
+      show: בוט טלגרם

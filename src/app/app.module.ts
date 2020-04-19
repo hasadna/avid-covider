@@ -10,7 +10,6 @@ import { HatoolLibModule } from 'hatool';
 import * as Sentry from '@sentry/browser';
 import { IntroPageComponent } from './intro-page/intro-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
-import { ThankYouPageComponent } from './thank-you-page/thank-you-page.component';
 import { HeaderComponent } from './header/header.component';
 import { VERSION } from './constants';
 import { LtrDirective } from './ltr.directive';
@@ -20,6 +19,7 @@ import { FullscreenMapComponent } from './fullscreen-map/fullscreen-map.componen
 import { HeatmapComponent } from './heatmap/heatmap.component';
 import { ToasterComponent } from './toaster/toaster.component';
 import { BannerComponent } from './banner/banner.component';
+import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -44,7 +44,6 @@ const appRoutes: Routes = [
     AppComponent,
     IntroPageComponent,
     ChatPageComponent,
-    ThankYouPageComponent,
     HeaderComponent,
     LtrDirective,
     GenericPageComponent,
@@ -52,7 +51,8 @@ const appRoutes: Routes = [
     FullscreenMapComponent,
     HeatmapComponent,
     ToasterComponent,
-    BannerComponent
+    BannerComponent,
+    ReminderWidgetComponent
   ],
   imports: [
     BrowserModule,

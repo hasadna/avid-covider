@@ -1,0 +1,16 @@
+<div class='container'>
+  <div class='widget' [@openClose]='isOpen ? "open" : "closed"' [class.open]='isOpen'>
+    <div class='header'>
+      <h1 i18n>שלחו לי תזכורות יומיות דרך…</h1>
+      <div class='close' (click)='resolve()'></div>
+    </div>
+    <div class='options'>
+      <ng-container *ngFor='let option of options'>
+        <div class='option' (click)='resolve(options.id)'>
+          <div class='icon' [style.background-image]='"url(" + option.icon + ")"'></div>
+          <h2>{{option.title}}</h2>   
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

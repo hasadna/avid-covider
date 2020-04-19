@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output } from '@angular/core';
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { map, catchError, first } from 'rxjs/operators';
 import { VERSION, PRODUCTION } from '../constants';
 import { script } from '../script';
 import { of, Subscription } from 'rxjs';
@@ -11,6 +11,11 @@ import { SourceService } from '../source.service';
 import { citySuggestions } from '../city-suggestions';
 import { MapService } from '../map.service';
 import { LayoutService } from '../layout.service';
+import { BannerComponent } from '../banner/banner.component';
+import { ShareService } from '../share.service';
+import { ReminderWidgetComponent } from '../reminder-widget/reminder-widget.component';
+import { RemindersService } from '../reminders.service';
+import { AppinstallService } from '../appinstall.service';
 
 @Component({
   selector: 'app-chat-page',
@@ -23,9 +28,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   subscription: Subscription = null;
   content: ContentManager;
   runner: ScriptRunnerImpl;
+
   toasterMessage = null;
   bannerMessage = null;
   bannerButtonMessage = null;
+  reminderWidgetOptions = null;
+  @ViewChild(BannerComponent) banner: BannerComponent;
+  @ViewChild(ReminderWidgetComponent) reminderWidget: ReminderWidgetComponent;
 
   @ViewChild('uploadFileText') uploadFileText: ElementRef;
   @ViewChild('uploadedFileText') uploadedFileText: ElementRef;
@@ -41,6 +50,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               private source: SourceService,
               private mapService: MapService,
               public layout: LayoutService,
+              private shareService: ShareService,
+              private reminders: RemindersService,
+              private appinstall: AppinstallService,
               @Inject(LOCALE_ID) private locale) {}
 
   init() {
@@ -193,9 +205,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               ]
             });
           }
-          console.log('OPTIONS', options);
-          this.bannerMessage = 'Got ' + options.length + ' options!';
-          this.bannerButtonMessage = 'התקנה';
           return options;
         },
         set_flag: (record: any, varname) => {
@@ -428,6 +437,61 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         show_map: () => {
           this.mapService.openMap();
+        },
+        share_action: async () => {
+          if (this.shareService.shareWidgetSupported) {
+            const shared = this.shareService.shareWidget()
+              .then(() => {
+                return 'shared';
+              }, () => {
+                return this.shareService.clipboardCopy();
+              });
+            if (shared === 'error') {
+              return this.shareService.clipboardCopy();
+            }
+            return shared;
+          }
+          return this.shareService.clipboardCopy();
+        },
+        toaster: (message) => {
+          this.toasterMessage = message;
+        },
+        banner: async (message, buttonMessage?) => {
+          this.bannerMessage = message;
+          this.bannerButtonMessage = buttonMessage;
+          return new Promise((resolve, reject) => {
+            this.banner.result.pipe(first()).subscribe((value) => {
+              resolve(value);
+            });
+          });
+        },
+        reminder_status: () => {
+          return 'required';
+        },
+        reminder_choose_method_show_widget: async (record) => {
+          const options = this.reminders.widgetOptions(record);
+          this.reminderWidgetOptions = options;
+          return new Promise((resolve, reject) => {
+            this.reminderWidget.select.pipe(first()).subscribe((selected) => {
+              resolve(selected);
+            });
+          });
+        },
+        install_notification: async () => {
+          await this.notifications.addNotification();
+        },
+        install_app: async (record) => {
+          if (record.action_reminder_selected === 'android-app') {
+            return this.appinstall.prompt('play');
+          } else if (record.action_reminder_selected === 'iphone-app') {
+            return this.appinstall.prompt('itunes');
+          }
+        },
+        install_calendar: () => {
+          window.open('assets/corona_reminder.ics', '_blank');
+        },
+        install_telegram: () => {
+          window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
         },
         save_report: (record) => {
           let payload = Object.assign({}, record);

@@ -28,8 +28,8 @@ export class NotificationService {
     }
   }
 
-  addNotification() {
-    this.addNotificationA(this.title, this.body, this.action).then(() => { console.log('setNotification!'); });
+  async addNotification() {
+    return this.addNotificationA(this.title, this.body, this.action);
   }
 
   async addNotificationA(title, body, action) {
