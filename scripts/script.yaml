@@ -340,7 +340,7 @@
                         - show: "לא"
               - match: first_time                          # <---- for new reporters, ask for last check
                 steps:
-                  - say: האם נבדקת כחולה בקורונה בעבר (בדיקת PCR)?
+                  - say: האם נבדקת לקורונה בעבר (בדיקת PCR)?
                   - wait:
                       options:
                       - show: כן, נבדקתי
@@ -623,8 +623,6 @@
           options:
             - show: שיעולים או נזלת
               field: toplevel_symptoms_cough
-            - show: כאבי גרון
-              field: symptoms_sore_throat
             - show: קוצר נשימה
               field: symptoms_breath_shortness
             - show: כאבים
