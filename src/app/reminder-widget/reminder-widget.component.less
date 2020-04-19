@@ -1,0 +1,97 @@
+@import url('../../common.less');
+
+:host {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+
+    .container {
+        width: 100%;
+        overflow-y: hidden;
+
+        .widget {
+            box-shadow: 0 -4px 8px 0 rgba(0, 0, 0, 0.12);
+            background-color: @white;
+            display: flex;
+            flex-flow: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            width: 100%;
+    
+            &:not(.open) {
+                pointer-events: none;
+            }
+    
+            .header {
+                display: flex;
+                flex-flow: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 16px;
+                width: 100%;
+    
+                h1 {
+                    font-size: 18px;
+                    font-weight: normal;
+                    color: @aubergine;
+                    flex: 1 1 100%;
+                }
+    
+                .close {
+                    width: 32px;
+                    height: 32px;
+                    flex: 0 0 auto;
+                    background-image: url('../../assets/img/cross.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    cursor: pointer;
+                }
+                margin-bottom: 4px;
+            }
+    
+            .options {
+                width: 100%;
+                padding: 16px 8px;
+                overflow-x: scroll;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                display: flex;
+                flex-flow: row;
+                align-items: flex-start;
+                justify-content: flex-start;
+    
+                .option {
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+                    cursor: pointer;
+                    padding: 0 8px;
+                    width: 96px;
+    
+                    .icon {
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 20px;
+                        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+                        margin-bottom: 8px;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                    }
+    
+                    h2 {
+                        text-align: center;
+                        font-size: 14px;
+                        font-weight: 300;
+                        color: @charcoal;
+                    }
+                }
+    
+            }
+        }    
+    }
+}

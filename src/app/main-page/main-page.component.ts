@@ -33,4 +33,8 @@ export class MainPageComponent implements OnInit, AfterViewInit {
     return this._tab;
   }
 
+  done() {
+    window.close();
+  }
+
 }

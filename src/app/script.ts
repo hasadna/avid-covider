@@ -18,12 +18,8 @@ export const script = {
               "uid": "e9acb54132"
             },
             {
-              "goto": "promotion",
-              "uid": "7a26c4124f"
-            },
-            {
               "goto": "end-of-report",
-              "uid": "346d2a3795"
+              "uid": "7a26c4124f"
             }
           ],
           "uid": "898235e117"
@@ -642,8 +638,8 @@ export const script = {
               "uid": "8159f08bcb"
             },
             {
-              "say": "אוקיי, עברנו את זה...",
-              "uid": "2969e1a444"
+              "say": "אוקיי, עברנו את זה…",
+              "uid": "d5409965b6"
             }
           ],
           "uid": "d96a2bfad6"
@@ -760,8 +756,8 @@ export const script = {
                     "match": "missing_result",
                     "steps": [
                       {
-                        "say": "סיפרת לנו בדיווח קודם שנבדקת לקורונה... האם כבר קיבלת את תוצאות הבדיקה?",
-                        "uid": "bfb279ebba"
+                        "say": "סיפרת לנו בדיווח קודם שנבדקת לקורונה… האם כבר קיבלת את תוצאות הבדיקה?",
+                        "uid": "9294346d45"
                       },
                       {
                         "uid": "2b939bd7e7",
@@ -1344,8 +1340,8 @@ export const script = {
                     "match": "feel_bad",
                     "steps": [
                       {
-                        "say": "בדיווח שעבר סיפרת שהרגשת לא כל כך טוב... האם חל שיפור במצבך?",
-                        "uid": "46b80839fc"
+                        "say": "בדיווח שעבר סיפרת שהרגשת לא כל כך טוב… האם חל שיפור במצבך?",
+                        "uid": "e85d3225b7"
                       },
                       {
                         "uid": "98c766d9cb",
@@ -1851,22 +1847,22 @@ export const script = {
           "uid": "ce7628ae51"
         },
         {
-          "name": "promotion",
+          "name": "end-of-report",
           "steps": [
             {
               "goto": "dynamic_update",
-              "uid": "3da728cfd5"
+              "uid": "02d5f52542"
             },
             {
               "goto": "set-reminder",
-              "uid": "6cbd31edfa"
+              "uid": "33392c8ecc"
             },
             {
               "goto": "share",
-              "uid": "3989d53fae"
+              "uid": "ccc68125a7"
             }
           ],
-          "uid": "4c6a26288b"
+          "uid": "a92af82c81"
         },
         {
           "name": "dynamic_update",
@@ -1905,15 +1901,15 @@ export const script = {
           "name": "share",
           "steps": [
             {
-              "say": "בזכותך התקרבנו עוד צעד אחד לסוף של זה...תודה",
-              "uid": "76e0905665"
+              "say": "בזכותך התקרבנו עוד צעד אחד לסוף של זה… תודה",
+              "uid": "8299e2c005"
             },
             {
-              "say": "ועוד עניין קטן... יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
-              "uid": "595738e30c"
+              "say": "ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
+              "uid": "624d211d31"
             },
             {
-              "uid": "a91f654b2b",
+              "uid": "35fb9f9cfc",
               "wait": {
                 "options": [
                   {
@@ -1921,20 +1917,59 @@ export const script = {
                     "steps": [
                       {
                         "do": {
-                          "cmd": "share_widget"
+                          "cmd": "share_action",
+                          "variable": "action_share"
                         },
-                        "uid": "4ece746ea0"
+                        "uid": "105a18ae59"
+                      },
+                      {
+                        "switch": {
+                          "arg": "action_share",
+                          "cases": [
+                            {
+                              "default": true
+                            },
+                            {
+                              "match": "copied",
+                              "steps": [
+                                {
+                                  "do": {
+                                    "cmd": "banner",
+                                    "params": [
+                                      "הקישור לדיווח היומי הועתק ללוח!"
+                                    ]
+                                  },
+                                  "uid": "5704308432"
+                                }
+                              ],
+                              "uid": "6f3c084b3c"
+                            },
+                            {
+                              "match": "shared",
+                              "steps": [
+                                {
+                                  "do": {
+                                    "cmd": "toaster",
+                                    "params": [
+                                      "תודה רבה על השיתוף!"
+                                    ]
+                                  },
+                                  "uid": "28edd94b70"
+                                }
+                              ],
+                              "uid": "035277ba4d"
+                            }
+                          ]
+                        },
+                        "uid": "07c0aa7bef"
                       }
                     ],
-                    "uid": "95754f82c4",
-                    "value": true
+                    "uid": "95754f82c4"
                   },
                   {
-                    "show": "לא עכשיו",
-                    "value": false
+                    "show": "לא עכשיו"
                   }
-                ],
-                "variable": "_share"
+                ]
               }
             }
           ],
@@ -1949,23 +1984,23 @@ export const script = {
                 "params": [
                   "record"
                 ],
-                "variable": "_ask_reminder"
+                "variable": "action_reminder_set"
               },
-              "uid": "0806e2f84e"
+              "uid": "28e38c50e9"
             },
             {
               "switch": {
-                "arg": "_ask_reminder",
+                "arg": "action_reminder_required",
                 "cases": [
                   {
-                    "match": "no_reminder",
+                    "default": true,
                     "steps": [
                       {
                         "say": "יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?",
-                        "uid": "f3af77ce87"
+                        "uid": "1821905288"
                       },
                       {
-                        "uid": "eba1115a57",
+                        "uid": "0138ef5e2d",
                         "wait": {
                           "options": [
                             {
@@ -1973,35 +2008,46 @@ export const script = {
                               "steps": [
                                 {
                                   "goto": "reminder-choose-method",
-                                  "uid": "95c5cea2cd"
+                                  "uid": "d7b1cb4925"
                                 }
                               ],
-                              "uid": "692913258f",
-                              "value": "true"
+                              "uid": "e4546e3d72",
+                              "value": "wanted"
+                            },
+                            {
+                              "show": "כבר יש לי תזכורת, תודה",
+                              "value": "already_set"
                             },
                             {
                               "show": "לא, אין צורך, יש לי זכרון מצויין!",
-                              "value": "false"
+                              "value": "not_wanted"
                             }
-                          ]
+                          ],
+                          "variable": "action_reminder_wanted"
                         }
+                      },
+                      {
+                        "do": {
+                          "cmd": "save_reminder_status"
+                        },
+                        "uid": "72dd2c31c7"
                       }
                     ],
-                    "uid": "e9b9c3f4c8"
+                    "uid": "6e65389281"
                   },
                   {
-                    "match": "reminder_set",
+                    "match": "not_required",
                     "steps": [
                       {
                         "say": "תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב",
-                        "uid": "1607f96d99"
+                        "uid": "d7af144da0"
                       }
                     ],
-                    "uid": "d284dcae8e"
+                    "uid": "aed7dfa73b"
                   }
                 ]
               },
-              "uid": "9aeb786459"
+              "uid": "cdaef4bda3"
             }
           ],
           "uid": "df4c900aa4"
@@ -2013,135 +2059,244 @@ export const script = {
               "do": {
                 "cmd": "reminder_choose_method_show_widget",
                 "params": [
-                  "record",
-                  "שלחו לי תזכורות יומית דרך...",
-                  "reminder_app, icon1, אפליקציית הדיווח",
-                  "reminder_calendar, icon2, תזכורת ביומן",
-                  "reminder_botelegram, icon3, אפליקציית טלגרם"
+                  "record"
                 ],
-                "variable": "_reminder_types"
+                "variable": "action_reminder_selected"
               },
-              "uid": "adfef569de"
+              "uid": "cbf65cb8cf"
             },
             {
               "switch": {
-                "arg": "_reminder_types",
+                "arg": "action_reminder_selected",
                 "cases": [
                   {
-                    "match": "reminder_app",
+                    "match": "notification",
                     "steps": [
                       {
-                        "goto": "reminder_app",
-                        "uid": "06e2203f66"
+                        "goto": "reminder-notification",
+                        "uid": "0c7fb69962"
                       }
                     ],
-                    "uid": "0705dff477"
+                    "uid": "812263f9a6"
                   },
                   {
-                    "match": "reminder_calendar",
+                    "match": "android-app",
                     "steps": [
                       {
-                        "goto": "reminder_calendar",
-                        "uid": "7f2727a4ee"
+                        "goto": "reminder-app",
+                        "uid": "e3c5b80d2f"
                       }
                     ],
-                    "uid": "3f850150a8"
+                    "uid": "252726ece7"
                   },
                   {
-                    "match": "reminder_botelegram",
+                    "match": "iphone-app",
                     "steps": [
                       {
-                        "goto": "reminder_botelegram",
-                        "uid": "0b439d456e"
+                        "goto": "reminder-app",
+                        "uid": "448a61b57c"
                       }
                     ],
-                    "uid": "daee6e9967"
+                    "uid": "e89ebd4a8d"
+                  },
+                  {
+                    "match": "calendar",
+                    "steps": [
+                      {
+                        "goto": "reminder-calendar",
+                        "uid": "75d7f22d5e"
+                      }
+                    ],
+                    "uid": "a8ba945b20"
+                  },
+                  {
+                    "match": "telegram",
+                    "steps": [
+                      {
+                        "goto": "reminder-telegram",
+                        "uid": "042defdb9e"
+                      }
+                    ],
+                    "uid": "b3e5202448"
                   }
                 ]
               },
-              "uid": "4c0953084b"
+              "uid": "0126a575eb"
             }
           ],
           "uid": "1cbf1b052b"
         },
         {
-          "name": "reminder_app",
+          "name": "reminder-notification",
           "steps": [
             {
               "do": {
-                "cmd": "message_with_action",
+                "cmd": "banner",
                 "params": [
-                  "record",
-                  "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
-                  "להורדת האפליקציה  + link",
-                  "reminder_app_downloaded"
-                ],
-                "variable": "_reminder_app_show_widget"
-              },
-              "uid": "b36b50bc9e"
-            },
-            {
-              "do": {
-                "cmd": "message_with_approval",
-                "params": [
-                  "record",
-                  "אפשר להמשיך"
-                ]
-              },
-              "uid": "f02e0edc65"
-            },
-            {
-              "do": {
-                "cmd": "message_with_action",
-                "params": [
-                  "record",
-                  "לחצו על הכפתור להתקנת התזכורת ביומן.",
-                  "להורדה"
-                ],
-                "variable": "_reminder_calendar_show_widget"
-              },
-              "uid": "4f30361271"
-            },
-            {
-              "do": {
-                "cmd": "message_with_approval",
-                "params": [
-                  "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
-                  "אפשר להמשיך"
-                ]
-              },
-              "uid": "a6198f7784"
-            }
-          ],
-          "uid": "22b4a5129c"
-        },
-        {
-          "name": "reminder_botelegram",
-          "steps": [
-            {
-              "do": {
-                "cmd": "message_with_action",
-                "params": [
-                  "record",
-                  "<b>שימו לב</b>                             # instrucions text בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
+                  "אשרו קבלת התראות מן האתר על מנת שנוכל להזכיר לכם למלא את השאלון",
                   "בסדר"
                 ],
-                "variable": "_reminder_botelegram_show_widget"
+                "variable": "action_reminder_notification_approved"
               },
-              "uid": "0c3b8994de"
+              "uid": "c375cfc633"
             },
             {
-              "do": {
-                "cmd": "message_with_approval",
-                "params": [
-                  "בסדר גמור",
-                  "אפשר להמשיך"
+              "switch": {
+                "arg": "action_reminder_notification_approved",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "install_notification"
+                        },
+                        "uid": "c515b3f782"
+                      }
+                    ],
+                    "uid": "49bb5f86fa"
+                  }
                 ]
               },
-              "uid": "fd63ef3ad0"
+              "uid": "dd67721e4c"
             }
           ],
-          "uid": "b5829f2c4f"
+          "uid": "78c91b40af"
+        },
+        {
+          "name": "reminder-app",
+          "steps": [
+            {
+              "do": {
+                "cmd": "banner",
+                "params": [
+                  "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
+                  "להורדת האפליקציה"
+                ],
+                "variable": "action_reminder_notification_approved"
+              },
+              "uid": "cfb39e8e4e"
+            },
+            {
+              "switch": {
+                "arg": "action_reminder_app_approved",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "install_app",
+                          "params": [
+                            "record"
+                          ]
+                        },
+                        "uid": "0eb7d1be6f"
+                      }
+                    ],
+                    "uid": "b6c3cf69d9"
+                  }
+                ]
+              },
+              "uid": "c23a45210a"
+            }
+          ],
+          "uid": "92af1beb96"
+        },
+        {
+          "name": "reminder-calendar",
+          "steps": [
+            {
+              "do": {
+                "cmd": "banner",
+                "params": [
+                  "לחצו על הכפתור להתקנת התזכורת ביומן",
+                  "להורדה"
+                ],
+                "variable": "action_reminder_calendar_approved"
+              },
+              "uid": "1e4267eebb"
+            },
+            {
+              "switch": {
+                "arg": "action_reminder_calendar_approved",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "install_calendar"
+                        },
+                        "uid": "3c369219df"
+                      },
+                      {
+                        "do": {
+                          "cmd": "banner",
+                          "params": [
+                            "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״"
+                          ]
+                        },
+                        "uid": "6ade096f21"
+                      }
+                    ],
+                    "uid": "6fd48d1778"
+                  }
+                ]
+              },
+              "uid": "676dc08b04"
+            }
+          ],
+          "uid": "8a8a72a8bd"
+        },
+        {
+          "name": "reminde-telegram",
+          "steps": [
+            {
+              "do": {
+                "cmd": "banner",
+                "params": [
+                  "<b>שימו לב: </b> בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
+                  "בסדר"
+                ],
+                "variable": "action_reminder_telegram_approved"
+              },
+              "uid": "aac3251f7e"
+            },
+            {
+              "switch": {
+                "arg": "action_reminder_telegram_approved",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
+                      {
+                        "do": {
+                          "cmd": "install_telegram"
+                        },
+                        "uid": "de4d11b007"
+                      }
+                    ],
+                    "uid": "8782943299"
+                  }
+                ]
+              },
+              "uid": "7c5a308c57"
+            }
+          ],
+          "uid": "0cc4f1fd66"
         }
       ]
     },
@@ -2154,6 +2309,26 @@ export const script = {
         {
           "name": "calendarBody",
           "show": "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!"
+        },
+        {
+          "name": "reminder:notification",
+          "show": "התראה בדפדפן"
+        },
+        {
+          "name": "reminder:calendar",
+          "show": "תזכורת ביומן"
+        },
+        {
+          "name": "reminder:android-app",
+          "show": "אפליקציית האנדרואיד שלנו"
+        },
+        {
+          "name": "reminder:iphone-app",
+          "show": "אפליקציית האייפון שלנו"
+        },
+        {
+          "name": "reminder:telegram",
+          "show": "בוט טלגרם"
         }
       ],
       "name": "generic-translation-assets"
