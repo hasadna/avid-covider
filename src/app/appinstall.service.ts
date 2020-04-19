@@ -33,7 +33,7 @@ export class AppinstallService {
   }
 
   showButton() {
-    return false && (this.androidAvailable() || this.iphoneAvailable());
+    return (this.androidAvailable() || this.iphoneAvailable());
   }
 
   platformAvailable(platform) {
@@ -49,11 +49,9 @@ export class AppinstallService {
   }
 
   prompt(platform) {
-    if (this.showButton()) {
-      this.prompts[this.platforms.indexOf(platform)]().then(
-        (res) => { console.log('Install Prompt', res); },
-        (err) => { console.log('Install Prompt error', err); }
-      );
-    }
+    return this.prompts[this.platforms.indexOf(platform)]().then(
+      (res) => { console.log('Install Prompt', res); },
+      (err) => { console.log('Install Prompt error', err); }
+    );
   }
 }

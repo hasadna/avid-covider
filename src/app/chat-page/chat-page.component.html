@@ -2,8 +2,9 @@
   <div class='chat'>
     <htl-hatool [content]='content' appLtr></htl-hatool>
   </div>
-  <app-toaster [message]='toasterMessage'></app-toaster>
-  <app-banner [message]='bannerMessage' [buttonMessage]='bannerButtonMessage'></app-banner>
+  <app-toaster [message]='toasterMessage' #toaster></app-toaster>
+  <app-banner [message]='bannerMessage' [buttonMessage]='bannerButtonMessage' #banner></app-banner>
+  <app-reminder-widget [options]='reminderWidgetOptions' #reminderWidget></app-reminder-widget>
 
   <span class='placeholder-tx' i18n #uploadFileText>לחצ/י לבחירת קובץ</span>
   <span class='placeholder-tx' i18n #uploadedFileText>קובץ הועלה בהצלחה</span>

@@ -9,9 +9,6 @@ import { LayoutService } from '../layout.service';
 })
 export class FullscreenMapComponent implements OnInit, AfterViewInit {
 
-  @Output() chat = new EventEmitter<void>();
-  @Output() thankyou = new EventEmitter<void>();
-
   constructor(public mapService: MapService, public layout: LayoutService) {
   }
 
