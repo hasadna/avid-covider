@@ -904,7 +904,7 @@
       steps:
         - do:
             cmd: banner
-            variable: action_reminder_notification_approved           # track how many clicked on "download"/"nevermind"
+            variable: action_reminder_app_approved           # track how many clicked on "download"/"nevermind"
             params:
               - הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00
               - להורדת האפליקציה
