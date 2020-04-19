@@ -482,9 +482,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         install_app: async (record) => {
           if (record.action_reminder_selected === 'android-app') {
-            return this.appinstall.prompt('play');
+            await this.appinstall.prompt('play');
           } else if (record.action_reminder_selected === 'iphone-app') {
-            return this.appinstall.prompt('itunes');
+            await this.appinstall.prompt('itunes');
           }
         },
         install_calendar: () => {
