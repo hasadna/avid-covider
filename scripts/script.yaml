@@ -757,7 +757,7 @@
                         - match: valid
                         - match: required
                           steps:
-                            - say: האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?
+                            - say: האם באחד הימים בשבוע האחרון יצא לך לתת שירות פנים אל פנים ל-10 אנשים או יותר?
                             - wait:
                                 variable: _served_public_last_fortnight
                                 options:

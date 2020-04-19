@@ -1797,8 +1797,8 @@ export const script = {
                               "match": "required",
                               "steps": [
                                 {
-                                  "say": "האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?",
-                                  "uid": "07940bc67a"
+                                  "say": "האם באחד הימים בשבוע האחרון יצא לך לתת שירות פנים אל פנים ל-10 אנשים או יותר?",
+                                  "uid": "4681bfd263"
                                 },
                                 {
                                   "uid": "2df81cdb42",
@@ -1930,12 +1930,12 @@ export const script = {
                               "steps": [
                                 {
                                   "do": {
-                                    "cmd": "banner",
+                                    "cmd": "toaster",
                                     "params": [
                                       "הקישור לדיווח היומי הועתק ללוח!"
                                     ]
                                   },
-                                  "uid": "5704308432"
+                                  "uid": "2c019c4617"
                                 }
                               ],
                               "uid": "6f3c084b3c"
@@ -1944,13 +1944,8 @@ export const script = {
                               "match": "shared",
                               "steps": [
                                 {
-                                  "do": {
-                                    "cmd": "toaster",
-                                    "params": [
-                                      "תודה רבה על השיתוף!"
-                                    ]
-                                  },
-                                  "uid": "28edd94b70"
+                                  "say": "תודה רבה על השיתוף!",
+                                  "uid": "702a884444"
                                 }
                               ],
                               "uid": "035277ba4d"
@@ -2172,9 +2167,9 @@ export const script = {
                   "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
                   "להורדת האפליקציה"
                 ],
-                "variable": "action_reminder_notification_approved"
+                "variable": "action_reminder_app_approved"
               },
-              "uid": "cfb39e8e4e"
+              "uid": "cb2ffa1829"
             },
             {
               "switch": {
@@ -2255,7 +2250,7 @@ export const script = {
           "uid": "8a8a72a8bd"
         },
         {
-          "name": "reminde-telegram",
+          "name": "reminder-telegram",
           "steps": [
             {
               "do": {
@@ -2266,7 +2261,7 @@ export const script = {
                 ],
                 "variable": "action_reminder_telegram_approved"
               },
-              "uid": "aac3251f7e"
+              "uid": "bed91ce04a"
             },
             {
               "switch": {
@@ -2282,17 +2277,17 @@ export const script = {
                         "do": {
                           "cmd": "install_telegram"
                         },
-                        "uid": "de4d11b007"
+                        "uid": "d1a8995e02"
                       }
                     ],
-                    "uid": "8782943299"
+                    "uid": "988d4cf3f6"
                   }
                 ]
               },
-              "uid": "7c5a308c57"
+              "uid": "fcf7b80a2f"
             }
           ],
-          "uid": "0cc4f1fd66"
+          "uid": "3a04ebabe1"
         }
       ]
     },
