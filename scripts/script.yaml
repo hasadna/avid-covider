@@ -624,8 +624,6 @@
           options:
             - show: שיעולים או נזלת
               field: toplevel_symptoms_cough
-            - show: כאבי גרון
-              field: symptoms_sore_throat
             - show: קוצר נשימה
               field: symptoms_breath_shortness
             - show: כאבים
