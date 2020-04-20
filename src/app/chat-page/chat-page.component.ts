@@ -425,11 +425,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
           }
         },
-        calculate_alias: (record, male_alias, female_alias) => {
+        calculate_alias: (record, male_alias, female_alias, other_alias) => {
           if (record.sex === 'male') {
             return this.fillIn(record, male_alias);
+          } else if (record.sex === 'female') {
+              return this.fillIn(record, female_alias);
           } else {
-            return this.fillIn(record, female_alias);
+            return this.fillIn(record, other_alias);
           }
         },
         prepare_city_town_suggestions: () => {
