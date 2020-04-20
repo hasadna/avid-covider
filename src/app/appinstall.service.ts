@@ -7,7 +7,7 @@ import { fromEvent } from 'rxjs';
 export class AppinstallService {
 
   installPrompt: any;
-  platforms = ['play']; // , 'itunes'];
+  platforms = [];
   prompts = [
     this.openUrl('https://play.google.com/store/apps/details?id=il.ac.weizmann.corona')
     // this.openUrl('https://itunes.com'),
