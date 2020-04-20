@@ -936,6 +936,7 @@
                     cmd: banner
                     params:
                       - אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״
+                      - המשך
 
     - name: reminder-telegram
       steps:
