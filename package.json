@@ -24,7 +24,7 @@
     "@types/mapbox-gl": "^1.8.3",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
-    "hatool": "^0.3.62",
+    "hatool": "^0.3.63",
     "mapbox-gl": "^1.9.1",
     "rxjs": "~6.3.3",
     "smoothscroll-polyfill": "^0.4.4",
