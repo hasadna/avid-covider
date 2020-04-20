@@ -87,7 +87,12 @@ def assign_translations(x, stack, parent=None, parentkey=None, translations=None
                 )
     elif isinstance(x, list):
         for index, xx in enumerate(x):
-            new_stack = stack + [index]
+            if isinstance(xx, dict) and 'show' in xx:
+                new_stack = stack + [calc_hash(x['show'])[:2]]
+            elif isinstance(x, str):
+                new_stack = stack + [calc_hash(x)[:2]]
+            else:
+                new_stack = stack + [index]
             yield from assign_translations(xx, new_stack, 
                 parent=x, parentkey=index,
                 translations=translations, fields=fields, field_in_key=field_in_key
