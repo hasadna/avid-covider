@@ -3,6 +3,7 @@ import { SourceService } from './source.service';
 import { first } from 'rxjs/operators';
 
 import * as mapboxgl from 'mapbox-gl';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class MapService {
   overlayOpen = false;
   reportedToday = false;
   mapVisible = false;
+  mapVisibleStream = new Subject();
   _init = false;
   lat = 34.785;
   lng = 32.075;
@@ -53,9 +55,11 @@ export class MapService {
 
   closeMap() {
     this.mapVisible = false;
+    this.mapVisibleStream.next(this.mapVisible);
   }
 
   openMap() {
     this.mapVisible = true;
+    this.mapVisibleStream.next(this.mapVisible);
   }
 }
