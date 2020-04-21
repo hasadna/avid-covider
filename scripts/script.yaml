@@ -775,6 +775,10 @@
         - goto: dynamic_update
         - goto: set-reminder
         - goto: share
+        - say: תודה רבה, נתראה מחר?
+        - wait:
+            options:
+              - show: בטח!
 
     - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
       steps:    
