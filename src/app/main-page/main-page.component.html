@@ -4,7 +4,7 @@
   </div>
   <div class='pane second'>
     <app-intro-page *ngIf='ls.mobile && tab==="intro"' (info)='tab="info"' (chat)='tab="chat"'></app-intro-page>
-    <app-chat-page *ngIf='tab==="chat"' (done)='ls.mobile ? done() : tab="intro"; ftab="intro"'></app-chat-page>
+    <app-chat-page *ngIf='tab==="chat"' (done)='tab="intro"; ftab="intro"'></app-chat-page>
   </div>
   <app-fullscreen-map *ngIf='mapService.mapVisible'></app-fullscreen-map>
 </div>
