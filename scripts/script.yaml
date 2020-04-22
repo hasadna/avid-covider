@@ -772,9 +772,9 @@
   
     - name: end-of-report
       steps:
-        - goto: dynamic_update
         - goto: set-reminder
         - goto: share
+        - goto: dynamic_update
         - say: תודה רבה, נתראה מחר?
         - wait:
             options:
