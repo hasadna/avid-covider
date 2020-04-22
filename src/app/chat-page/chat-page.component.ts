@@ -199,6 +199,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           if (reported_today) {
             options.push({
               show: done_text,
+              class: 'other',
               value: 'done',
               steps: [
                 {pop: 'default'}
