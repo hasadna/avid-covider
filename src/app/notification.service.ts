@@ -44,7 +44,7 @@ export class NotificationService {
       const HOUR = DAY / 24;
       const now = new Date();
       const now_ts = now.valueOf();
-      const dow = PRODUCTION ? now.getUTCDay() : (now_ts / DAY) % 7;
+      const dow = PRODUCTION ? now.getUTCDay() : (Math.floor(now_ts / DAY) % 7);
       console.log('Today is:', dow, '(0 is sunday)');
       const min_hour = HOUR * ({
         5: 18
