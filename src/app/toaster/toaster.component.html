@@ -1,5 +1,7 @@
 <div class='container'>
-  <div class='toaster' [@openClose]='!!message ? "open" : "closed"'>
-    <span class='message' [innerHTML]='message'></span>
+  <div class='wrapper' [@openClose]='!!message ? "open" : "closed"'>
+    <div class='toaster'>
+      <span class='message' [innerHTML]='message'></span>
+    </div>
   </div>
 </div>
