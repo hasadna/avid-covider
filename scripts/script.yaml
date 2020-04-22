@@ -39,7 +39,7 @@
         - goto: insulation
         - goto: current-report
         - goto: exposures
-        - say: זהו, סיימנו את הדיווח עבור {{alias}}
+        - say: שניה לפני שמסיימים,
         - do:
             cmd: save_report
             params:
