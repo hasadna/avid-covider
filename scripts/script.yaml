@@ -757,19 +757,29 @@
                         - match: valid
                         - match: required
                           steps:
-                            - say: האם בשבוע האחרון נתת בעבודתך שירות באופן פיזי למעל 10 אנשים ביום?
+                            - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
+                            - say: האם השאלה רלוונטית לגביך בימים אלו?
                             - wait:
                                 variable: _served_public_last_fortnight
                                 options:
-                                  - show: כן, נתתי שירות
-                                    value: true
-                                  - show: לא נתתי שירות
+                                  - show: כן, רלוונטית
+                                    value: relevant
+                                    steps:
+                                    - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                    - wait:
+                                        variable: _served_public_last_fortnight
+                                        options:
+                                        - show: כן, נתתי שירות
+                                          value: true
+                                        - show: לא נתתי שירות
+                                          value: false
+                                    - do:
+                                        cmd: save_public_service_data
+                                        params: 
+                                          - record
+                              
+                                  - show: לא רלוונטית
                                     value: false
-                            - do:
-                                cmd: save_public_service_data
-                                params:
-                                  - record
-  
     - name: end-of-report
       steps:
         - goto: set-reminder
