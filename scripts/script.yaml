@@ -757,19 +757,29 @@
                         - match: valid
                         - match: required
                           steps:
-                            - say: האם באחד הימים בשבוע האחרון יצא לך לתת שירות פנים אל פנים ל-10 אנשים או יותר?
+                            - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
+                            - say: האם השאלה רלוונטית לגביך בימים אלו?
                             - wait:
-                                variable: _served_public_last_fortnight
+                                variable: _service_question_relevant
                                 options:
-                                  - show: כן, נתתי שירות
+                                  - show: כן, רלוונטית
                                     value: true
-                                  - show: לא נתתי שירות
+                                    steps:
+                                    - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                    - wait:
+                                        variable: _served_public_last_fortnight
+                                        options:
+                                        - show: כן, נתתי שירות
+                                          value: true
+                                        - show: לא נתתי שירות
+                                          value: false
+                                    - do:
+                                        cmd: save_public_service_data
+                                        params: 
+                                          - record
+                              
+                                  - show: לא רלוונטית
                                     value: false
-                            - do:
-                                cmd: save_public_service_data
-                                params:
-                                  - record
-  
     - name: end-of-report
       steps:
         - goto: dynamic_update
