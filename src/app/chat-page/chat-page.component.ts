@@ -435,8 +435,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
-        show_map: () => {
+        show_map: async () => {
           this.mapService.openMap();
+          return new Promise((resolve, reject) => {
+            this.mapService.mapVisibleStream.pipe(first()).subscribe(() => {
+              resolve();
+            });
+          });
         },
         share_action: async () => {
           if (this.shareService.shareWidgetSupported) {

@@ -1846,16 +1846,30 @@ export const script = {
           "name": "end-of-report",
           "steps": [
             {
-              "goto": "dynamic_update",
+              "goto": "set-reminder",
               "uid": "02d5f52542"
             },
             {
-              "goto": "set-reminder",
+              "goto": "share",
               "uid": "33392c8ecc"
             },
             {
-              "goto": "share",
+              "goto": "dynamic_update",
               "uid": "ccc68125a7"
+            },
+            {
+              "say": "תודה רבה, נתראה מחר?",
+              "uid": "0a690c5650"
+            },
+            {
+              "uid": "5ef62a029a",
+              "wait": {
+                "options": [
+                  {
+                    "show": "בטח!"
+                  }
+                ]
+              }
             }
           ],
           "uid": "a92af82c81"
@@ -1864,31 +1878,8 @@ export const script = {
           "name": "dynamic_update",
           "steps": [
             {
-              "say": "סיימנו עם השאלות להיום. רוצה להסתכל שוב במפת התסמינים?",
-              "uid": "a9cb8ffec3"
-            },
-            {
-              "uid": "f48c232481",
-              "wait": {
-                "options": [
-                  {
-                    "class": "other",
-                    "show": "כן, בטח",
-                    "steps": [
-                      {
-                        "do": {
-                          "cmd": "show_map"
-                        },
-                        "uid": "ba9a84b3db"
-                      }
-                    ],
-                    "uid": "dc61b86c78"
-                  },
-                  {
-                    "show": "לא עכשיו"
-                  }
-                ]
-              }
+              "say": "סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד… תודה",
+              "uid": "e9b1cba33e"
             }
           ],
           "uid": "d1b81a605b"
@@ -1897,15 +1888,11 @@ export const script = {
           "name": "share",
           "steps": [
             {
-              "say": "בזכותך התקרבנו עוד צעד אחד לסוף של זה… תודה",
-              "uid": "8299e2c005"
-            },
-            {
               "say": "ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
-              "uid": "624d211d31"
+              "uid": "3b53898038"
             },
             {
-              "uid": "35fb9f9cfc",
+              "uid": "0b4905b30d",
               "wait": {
                 "options": [
                   {
@@ -1916,7 +1903,7 @@ export const script = {
                           "cmd": "share_action",
                           "variable": "action_share"
                         },
-                        "uid": "105a18ae59"
+                        "uid": "5d2962eddc"
                       },
                       {
                         "switch": {
@@ -1935,27 +1922,27 @@ export const script = {
                                       "הקישור לדיווח היומי הועתק ללוח!"
                                     ]
                                   },
-                                  "uid": "2c019c4617"
+                                  "uid": "49049c25a9"
                                 }
                               ],
-                              "uid": "6f3c084b3c"
+                              "uid": "402a230a4a"
                             },
                             {
                               "match": "shared",
                               "steps": [
                                 {
                                   "say": "תודה רבה על השיתוף!",
-                                  "uid": "702a884444"
+                                  "uid": "862a9c2c56"
                                 }
                               ],
-                              "uid": "035277ba4d"
+                              "uid": "494ead23fc"
                             }
                           ]
                         },
-                        "uid": "07c0aa7bef"
+                        "uid": "333c16a1e9"
                       }
                     ],
-                    "uid": "95754f82c4"
+                    "uid": "867192e73f"
                   },
                   {
                     "show": "לא עכשיו"
@@ -2234,7 +2221,8 @@ export const script = {
                         "do": {
                           "cmd": "banner",
                           "params": [
-                            "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״"
+                            "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
+                            "המשך"
                           ]
                         },
                         "uid": "6ade096f21"
