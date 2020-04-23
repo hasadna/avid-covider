@@ -760,10 +760,10 @@
                             - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
                             - say: האם השאלה רלוונטית לגביך בימים אלו?
                             - wait:
-                                variable: _service_question_relevant
+                                variable: _served_public_last_fortnight
                                 options:
                                   - show: כן, רלוונטית
-                                    value: true
+                                    value: relevant
                                     steps:
                                     - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
                                     - wait:
