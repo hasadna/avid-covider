@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Inject, LOCALE_ID } from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
@@ -17,7 +17,8 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
 
   private map: mapboxgl.Map;
 
-  constructor(public layout: LayoutService, public mapService: MapService) { }
+  constructor(public layout: LayoutService, public mapService: MapService,
+              @Inject(LOCALE_ID) private locale) { }
 
   ngOnInit() {
   }
@@ -41,6 +42,12 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
             showZoom: true,
             visualizePitch: false
           }), 'top-left');
+        }
+        for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
+          this.map.setLayoutProperty(f, 'text-field', [
+            'get',
+            'name_' + this.locale
+          ]);
         }
       } catch (e) {
         console.log('Failed to instantiate map');
