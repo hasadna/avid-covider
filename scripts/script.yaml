@@ -782,19 +782,11 @@
 
     - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
       steps:    
-        - say: סיימנו עם השאלות להיום. רוצה להסתכל שוב במפת התסמינים?
-        - wait:
-            options:
-              - show: כן, בטח
-                class: other
-                steps:
-                  - do:
-                      cmd: show_map                     # (click --> add to record)
-              - show: לא עכשיו
+        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד… תודה
+
 
     - name: share
       steps:
-        - say: בזכותך התקרבנו עוד צעד אחד לסוף של זה… תודה
         - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
         - wait:
             options:
