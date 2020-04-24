@@ -43,14 +43,16 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
             visualizePitch: false
           }), 'top-left');
         }
-        for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
-          this.map.setLayoutProperty(f, 'text-field', [
-            'get',
-            'name_' + this.locale
-          ]);
-        }
+        this.map.on('load', () => {
+          for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
+            this.map.setLayoutProperty(f, 'text-field', [
+              'get',
+              'name_' + this.locale.slice(0, 2)
+            ]);
+          }
+        });
       } catch (e) {
-        console.log('Failed to instantiate map');
+        console.log('Failed to instantiate map', e);
       }
     }, 100);
   }
