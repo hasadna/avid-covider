@@ -785,10 +785,58 @@
         - goto: set-reminder
         - goto: share
         - goto: dynamic_update
+        - goto: affiliations
         - say: תודה רבה, נתראה מחר?
         - wait:
             options:
               - show: בטח!
+
+    - name: affiliations
+      steps:
+        - do:
+            variable: _affiliates_should_ask
+            cmd: affiliates_should_ask
+        - switch:
+            arg: _affiliates_should_ask
+            cases:
+              - match: false
+                steps:
+                  - pop: end-of-report
+              - default: true
+        - switch:
+            arg: affiliate_questionnaires_preference
+            cases:
+              - match: never
+              - default: true
+                steps:
+                - say: האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?
+                - wait:
+                    variable: affiliate_questionnaires_preference
+                    options:
+                      - show: כן, בשמחה
+                        value: ok
+                      - show: לא, בפעם אחרת
+                        value: later
+                      - show: לא, אף פעם
+                        value: never
+                - switch:
+                    arg: affiliate_questionnaires_preference
+                    cases:
+                      - match: ok
+                        steps:
+                          - goto: affiliate-alon-chen
+              
+    - name: affiliate-alon-chen
+      steps:
+        - say: לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?
+        - say: פרופ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
+        - wait:
+            options:
+              - show: אשמח להשתתף
+                steps:
+                  - do:
+                      cmd: affiliate_alon_chen                      
+              - show: לא, בפעם אחרת
 
     - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
       steps:    

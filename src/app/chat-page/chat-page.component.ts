@@ -180,7 +180,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
                 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
-                '_household.*', '_public_service.*'
+                '_household.*', '_public_service.*', 'affiliate_.*',
               ])
             });
             options.push(option);
@@ -497,6 +497,21 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         install_telegram: () => {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
+        },
+        affiliates_should_ask: () => {
+          return PRODUCTION ? (new Date()).getDay() % 4 === 0 : true;
+        },
+        affiliate_alon_chen: () => {
+          const links = {
+            'he': 'https://docs.google.com/forms/d/e/1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?vc=0&c=0&w=1',
+            'en': 'https://forms.gle/PrRUuk52HqdTqkBx9',
+            'ar': 'https://forms.gle/N4b5Dx9YRnYNs3oN7',
+            'es': 'https://forms.gle/nuPi1WcERMTU3axK8',
+            'fr': 'https://forms.gle/Jty3a4H6m2A9d6vs6',
+            'ru': 'https://forms.gle/2PkXRyhWwohkWvpM6'
+          };
+          const link = links[this.locale] || links.he;
+          window.open(link, '_blank');
         },
         save_report: (record) => {
           let payload = Object.assign({}, record);
