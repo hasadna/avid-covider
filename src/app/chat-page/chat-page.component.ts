@@ -147,7 +147,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       0,
       {
         clear: () => {
-          this.runner.record = {};
+          this.runner.record = Object.assign({}, this.storage.device);
         },
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
@@ -549,6 +549,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       },
       (key, value, record) => {}
     ).subscribe((success) => {
+      this.storage.saveDevice(this.runner.record);
       this.done.emit();
     });
   }

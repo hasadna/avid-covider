@@ -7,6 +7,7 @@ export class ReportStoreService {
 
   storage: any;
   reports: any[];
+  device: any;
 
   constructor() {
     try {
@@ -15,6 +16,7 @@ export class ReportStoreService {
       console.log('no local storage');
     }
     this.readReports();
+    this.readDevice();
   }
 
   getItem(key, defaultValue) {
@@ -41,6 +43,14 @@ export class ReportStoreService {
 
   readReports() {
     this.reports = this.getItem('reports', []);
+  }
+
+  readDevice() {
+    this.device = this.getItem('device', {});
+  }
+
+  saveDevice(device) {
+    this.setItem('device', device);
   }
 
   addReport(report) {
