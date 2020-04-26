@@ -503,12 +503,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         affiliate_alon_chen: () => {
           const links = {
-            'he': 'https://docs.google.com/forms/d/e/1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?vc=0&c=0&w=1',
-            'en': 'https://forms.gle/PrRUuk52HqdTqkBx9',
-            'ar': 'https://forms.gle/N4b5Dx9YRnYNs3oN7',
-            'es': 'https://forms.gle/nuPi1WcERMTU3axK8',
-            'fr': 'https://forms.gle/Jty3a4H6m2A9d6vs6',
-            'ru': 'https://forms.gle/2PkXRyhWwohkWvpM6'
+            he: 'https://docs.google.com/forms/d/e/1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?vc=0&c=0&w=1',
+            en: 'https://forms.gle/PrRUuk52HqdTqkBx9',
+            ar: 'https://forms.gle/N4b5Dx9YRnYNs3oN7',
+            es: 'https://forms.gle/nuPi1WcERMTU3axK8',
+            fr: 'https://forms.gle/Jty3a4H6m2A9d6vs6',
+            ru: 'https://forms.gle/2PkXRyhWwohkWvpM6'
           };
           const link = links[this.locale] || links.he;
           window.open(link, '_blank');
