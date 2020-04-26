@@ -5,7 +5,7 @@
 # For IE 9-11 support, please remove 'not' from the last line of the file and adjust as needed
 
 > 0.5%
-last 2 versions
+last 4 versions
 Firefox ESR
 not dead
 not IE 9-11
