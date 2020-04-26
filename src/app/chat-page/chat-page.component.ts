@@ -180,7 +180,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
                 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
-                '_household.*', '_public_service.*', 'affiliate_.*',
+                '_household.*', '_public_service.*',
               ])
             });
             options.push(option);
@@ -549,7 +549,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       },
       (key, value, record) => {}
     ).subscribe((success) => {
-      this.storage.saveDevice(this.runner.record);
+      const device = this.prepareToSave(this.runner.record);
+      this.storage.saveDevice(device);
       this.done.emit();
     });
   }
