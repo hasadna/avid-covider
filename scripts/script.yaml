@@ -784,8 +784,9 @@
       steps:
         - goto: set-reminder
         - goto: share
-        - goto: dynamic_update
+        # - goto: dynamic_update
         - goto: affiliations
+        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה… 
         - say: תודה רבה, נתראה מחר?
         - wait:
             options:
@@ -838,9 +839,8 @@
                       cmd: affiliate_alon_chen                      
               - show: לא, בפעם אחרת
 
-    - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
-      steps:    
-        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה… 
+    # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
+    #   steps:    
 
 
     - name: share
