@@ -64,7 +64,7 @@
                   cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show
                   variable: _report_options
                   params:
-                    - "דיווח חדש ב{{street}} {{city_town}}"
+                    - "דיווח חדש ב{{_location}}"
                     - "דיווח חדש בכתובת אחרת"
                     - "כל בני ביתי כבר דיווחו"
               - wait:                                                    # <---- wait for the user choice of the current reporter
@@ -140,6 +140,13 @@
                   required: false
             - default: true                   # <---- for returning reporters, pass
 
+        - do:                                 # <---- location is the concatenation of an optional street and the city
+            cmd: combine_location
+            params: 
+              - record
+              - "{{street}} {{city_town}}"
+            variable: _location
+
         - switch:
             arg: alias                         # alias is our user identifier (age+sex+street+city)
             cases:
@@ -150,8 +157,8 @@
                   variable: alias
                   params:
                     - record
-                    - "בן {{age}} מ{{street}} {{city_town}}"
-                    - "בת {{age}} מ{{street}} {{city_town}}"
+                    - "בן {{age}} מ{{_location}}"
+                    - "בת {{age}} מ{{_location}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
@@ -172,7 +179,7 @@
             - match: true
             - default: true
               steps:
-              - say: "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{street}} {{city_town}} -"
+              - say: "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -"
               - say: כמה מבוגרים מעל לגיל 18 גרים בבית?
               - switch:
                   arg: _is_adult
