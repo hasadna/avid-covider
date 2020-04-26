@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, Input, Inject, LOCALE_ID } from '@ang
 import * as mapboxgl from 'mapbox-gl';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
+import { I18nService } from '../i18n.service';
 
 @Component({
   selector: 'app-heatmap',
@@ -17,7 +18,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
 
   private map: mapboxgl.Map;
 
-  constructor(public layout: LayoutService, public mapService: MapService,
+  constructor(public layout: LayoutService, public mapService: MapService, private i18n: I18nService,
               @Inject(LOCALE_ID) private locale) { }
 
   ngOnInit() {
@@ -43,16 +44,24 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
             visualizePitch: false
           }), 'top-left');
         }
-        if (this.locale !== 'he') {
-          this.map.on('load', () => {
-            for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
+        this.map.on('load', () => {
+          for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
+            if (this.i18n.ltr) {
               this.map.setLayoutProperty(f, 'text-field', [
-                'get',
-                'name_' + this.locale.slice(0, 2)
+                'coalesce',
+                ['get', 'name_' + this.locale.slice(0, 2)],
+                ['get', 'name_en'],
+                ['get', 'name']
+              ]);
+            } else {
+              this.map.setLayoutProperty(f, 'text-field', [
+                'coalesce',
+                ['get', 'name_' + this.locale.slice(0, 2)],
+                ['get', 'name']
               ]);
             }
-          });
-        }
+          }
+        });
       } catch (e) {
         console.log('Failed to instantiate map', e);
       }
