@@ -533,18 +533,23 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
         },
         affiliates_should_ask: () => {
-          return PRODUCTION ? (new Date()).getDay() % 4 === 0 : true;
+          if (PRODUCTION) {
+            const today = (new Date()).getDay();
+            return (today % 2 === 0) && today < 6;
+          }
+          return true;
         },
         affiliate_alon_chen: () => {
           const links = {
-            he: 'https://docs.google.com/forms/d/e/1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?vc=0&c=0&w=1',
-            en: 'https://forms.gle/PrRUuk52HqdTqkBx9',
-            ar: 'https://forms.gle/N4b5Dx9YRnYNs3oN7',
-            es: 'https://forms.gle/nuPi1WcERMTU3axK8',
-            fr: 'https://forms.gle/Jty3a4H6m2A9d6vs6',
-            ru: 'https://forms.gle/2PkXRyhWwohkWvpM6'
+            he: '1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?usp=pp_url&entry.356067021=',
+            en: '1FAIpQLSd9HQDsN1WaikNr0QVrdnG7dKWuevbxR2L1v8Uh62mTHM6c4A/viewform?usp=pp_url&entry.101300820=',
+            ar: '1FAIpQLSc0cz03mvaMdEnVqFkzBmmjX-EKWOzYYei2znOh_12yDkkOAA/viewform?usp=pp_url&entry.759991142=',
+            es: '1FAIpQLSdTZcTd0dnv2ZFU-SZ0725qieDoE7ugAECFfQE1gICUm1d05A/viewform?usp=pp_url&entry.2037241339=',
+            fr: '1FAIpQLSf6hU2H_JaiKMCWnGKptxLWFMdAZnUFuik_kIUiFPm2uqp8xQ/viewform?usp=pp_url&entry.1895607011=',
+            ru: '1FAIpQLSfNyO_jtY0K8dWCJ4UvceKgAgcs-BZ4khBYdW55wgq8rFLmnw/viewform?usp=pp_url&entry.2022038576='
           };
-          const link = links[this.locale] || links.he;
+          const prefix = 'https://docs.google.com/forms/d/e/';
+          const link = prefix + (links[this.locale] || links.he) + this.storage.device.main_uid;
           window.open(link, '_blank');
         },
         save_report: (record) => {

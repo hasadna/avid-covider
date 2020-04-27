@@ -826,6 +826,7 @@
                       - match: ok
                         steps:
                           - goto: affiliate-alon-chen
+                      - default: true
               
     - name: affiliate-alon-chen
       steps:
@@ -897,8 +898,6 @@
 
                       - show: לא, אין צורך, יש לי זכרון מצויין!
                         value: not_wanted
-                  - do:
-                      cmd: save_reminder_status
               
               - match: 'not_required'
                 steps:
