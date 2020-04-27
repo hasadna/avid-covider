@@ -836,8 +836,10 @@
             options:
               - show: אשמח להשתתף במחקר
                 steps:
+                  - say: תודה רבה, נתראה מחר!
                   - do:
-                      cmd: affiliate_alon_chen                      
+                      cmd: affiliate_alon_chen
+                  - goto: complete
               - show: לא, בפעם אחרת
 
     # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
