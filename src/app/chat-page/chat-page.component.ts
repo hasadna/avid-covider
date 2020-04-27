@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output } from '@angular/core';
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, first } from 'rxjs/operators';
+import { map, catchError, first, switchMap } from 'rxjs/operators';
 import { VERSION, PRODUCTION } from '../constants';
 import { script } from '../script';
 import { of, Subscription } from 'rxjs';
@@ -74,6 +74,24 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       }
     }
     return result;
+  }
+
+  augmentPayload(payload) {
+    payload['version'] = VERSION;
+    payload['locale'] = this.locale;
+    payload['layout'] = this.layout.layout;
+    try {
+      payload['numPreviousReports'] = this.storage.reports.length;
+      if (this.storage.reports.length > 0) {
+        payload['dateFirstReport'] = this.storage.reports[0][0];
+      }
+    } catch (e) {
+      console.log('Failed to add stats');
+    }
+    payload['notificationsEnabled'] = this.notifications.canAddNotification;
+    payload['engagementSource'] = this.source.getSource();
+    payload['_cityTownSuggestions'] = null;
+    return payload;
   }
 
   ngAfterViewInit() {
@@ -515,20 +533,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         save_report: (record) => {
           let payload = Object.assign({}, record);
-          payload['version'] = VERSION;
-          payload['locale'] = this.locale;
-          payload['layout'] = this.layout.layout;
-          try {
-            payload['numPreviousReports'] = this.storage.reports.length;
-            if (this.storage.reports.length > 0) {
-              payload['dateFirstReport'] = this.storage.reports[0][0];
-            }
-          } catch (e) {
-            console.log('Failed to add stats');
-          }
-          payload['notificationsEnabled'] = this.notifications.canAddNotification;
-          payload['engagementSource'] = this.source.getSource();
-          payload['_cityTownSuggestions'] = null;
+          payload = this.augmentPayload(payload);
           this.storage.addReport(payload);
           payload = this.prepareToSave(payload);
           let obs = null;
@@ -548,9 +553,26 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         }
       },
       (key, value, record) => {}
+    ).pipe(
+      map(() => {
+        let payload = Object.assign({}, this.runner.record);
+        payload = this.augmentPayload(payload);
+        payload = this.prepareToSave(payload);
+        this.storage.saveDevice(payload);
+        return payload;
+      }),
+      switchMap((payload) => {
+        if (PRODUCTION) {
+          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure-devices', payload);
+        } else {
+          console.log('DEVICE STATE', payload);
+          return of({success: true});
+        }
+      }),
+      catchError(() => of({success: false})),
+      map((response: any) => response.success)
     ).subscribe((success) => {
-      const device = this.prepareToSave(this.runner.record);
-      this.storage.saveDevice(device);
+      console.log('Reported device success', success);
       this.done.emit();
     });
   }

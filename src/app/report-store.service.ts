@@ -50,7 +50,21 @@ export class ReportStoreService {
   }
 
   saveDevice(device) {
-    this.setItem('device', device);
+  const result = {};
+  for (const [key, value] of Object.entries(device)) {
+    if (key.indexOf('event_') !== 0) {
+      result[key] = value;
+    }
+  }
+  this.setItem('device', result);
+  }
+
+  setEvent(event) {
+    this.device['event_'  + event] = true;
+  }
+
+  setEventValue(event, value) {
+    this.device['event_'  + event] = value;
   }
 
   addReport(report) {
