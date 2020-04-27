@@ -15,8 +15,8 @@ export class ReportStoreService {
     } catch (e) {
       console.log('no local storage');
     }
-    this.readReports();
     this.readDevice();
+    this.readReports();
   }
 
   getItem(key, defaultValue) {
