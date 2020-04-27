@@ -155,6 +155,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     return ret;
   }
 
+  makeUid() {
+    let result = '';
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charNum = charset.length;
+    for (let i = 0; i < 6; i++) {
+      result += charset.charAt(Math.floor(Math.random() * charNum));
+    }
+    return result;
+  }
+
   start() {
     if (this.started) {
       return;
@@ -198,9 +208,15 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
                 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
-                '_household.*', '_public_service.*',
+                '_household.*', '_public_service.*', 'uid'
               ])
             });
+            if (!option.value['uid']) {
+              option.value['uid'] = this.makeUid();
+            }
+            if (!this.storage.device.main_uid) {
+              this.storage.device.main_uid = option.value['uid'];
+            }
             options.push(option);
           }
           const lastReport = this.storage.reports.length - 1;
