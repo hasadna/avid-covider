@@ -54,6 +54,7 @@ export class NotificationService {
       }[dow] || 19); // UTC Times -> trigger won't be after 9 pm (2 pm on fridays)
       let remainder = now_ts % DAY;
       const day_start = now_ts - remainder;
+      remainder -= 2 * HOUR;
       remainder = remainder > max_hour ? max_hour : remainder;
       remainder = remainder < min_hour ? min_hour : remainder;
       const next = day_start + DAY + remainder;
