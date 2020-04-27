@@ -140,6 +140,11 @@
                   required: false
             - default: true                   # <---- for returning reporters, pass
 
+        - do:
+            cmd: ensure_uid
+            params:
+              - record
+
         - switch:
             arg: alias                         # alias is our user identifier (age+sex+street+city)
             cases:

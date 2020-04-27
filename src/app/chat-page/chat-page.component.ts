@@ -205,14 +205,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 '_household.*', '_public_service.*', 'uid'
               ])
             });
-            if (!option.value['uid']) {
-              option.value['uid'] = this.makeUid();
-            }
-            if (!this.storage.device.main_uid) {
-              this.storage.device.main_uid = option.value['uid'];
-              this.storage.device.main_age = option.value['age'];
-              this.storage.device.main_city = option.value['city'];
-            }
             options.push(option);
           }
           const lastReport = this.storage.reports.length - 1;
@@ -236,6 +228,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           }
           return options;
+        },
+        ensure_uid: (record) => {
+          if (!record['uid']) {
+            record['uid'] = this.makeUid();
+          }
+          if (!this.storage.device.main_uid) {
+            this.storage.device.main_uid = record['uid'];
+            this.storage.device.main_age = record['age'];
+            this.storage.device.main_city = record['city'];
+          }
         },
         set_flag: (record: any, varname) => {
           record[varname] = true;
