@@ -78,18 +78,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
 
   augmentPayload(payload) {
     payload['version'] = VERSION;
-    payload['locale'] = this.locale;
-    payload['layout'] = this.layout.layout;
-    try {
-      payload['numPreviousReports'] = this.storage.reports.length;
-      if (this.storage.reports.length > 0) {
-        payload['dateFirstReport'] = this.storage.reports[0][0];
-      }
-    } catch (e) {
-      console.log('Failed to add stats');
-    }
-    payload['notificationsEnabled'] = this.notifications.canAddNotification;
-    payload['engagementSource'] = this.source.getSource();
     payload['_cityTownSuggestions'] = null;
     return payload;
   }
@@ -187,6 +175,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           const today_aliases = {};
           let reported_today = false;
           for (const report of this.storage.reports) {
+            if (!this.storage.device.originalEngagementSource &&
+                report[1].engagementSource) {
+              this.storage.device.originalEngagementSource = report[1].engagementSource;
+            }
             if (!report[1].alias) {
               continue;
             }
@@ -197,7 +189,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
           }
           const options = [];
-          for (const alias of Object.keys(aliases)) {
+          const aliases_list = Object.keys(aliases);
+          this.storage.device.num_aliases = aliases_list.length;
+          for (const alias of aliases_list) {
             const option: any = {};
             if (today_aliases[alias]) {
               option.class = 'disabled';
@@ -216,6 +210,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
             if (!this.storage.device.main_uid) {
               this.storage.device.main_uid = option.value['uid'];
+              this.storage.device.main_age = option.value['age'];
+              this.storage.device.main_city = option.value['city'];
             }
             options.push(option);
           }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PRODUCTION } from './constants';
+import { ReportStoreService } from './report-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class NotificationService {
   body: string;
   action: string;
 
-  constructor() { }
+  constructor(private storage: ReportStoreService) { }
 
   init(title, body, action) {
     this.title = title;
@@ -23,6 +24,8 @@ export class NotificationService {
       const notificationPermissionNeeded = Notification.permission !== 'granted';
       this.showNotificationBox = notificationAvailable && notificationPermissionNeeded;
       this.canAddNotification = notificationAvailable && !notificationPermissionNeeded;
+      this.storage.device.notificationsEnabled = this.canAddNotification;
+
     } catch (e) {
       console.log('Failed to check if notification is available');
     }

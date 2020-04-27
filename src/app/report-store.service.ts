@@ -43,6 +43,10 @@ export class ReportStoreService {
 
   readReports() {
     this.reports = this.getItem('reports', []);
+    this.device.numPreviousReports = this.reports.length;
+    if (this.reports.length > 0) {
+      this.device.dateFirstReport = this.storage.reports[0][0];
+    }
   }
 
   readDevice() {
@@ -50,13 +54,13 @@ export class ReportStoreService {
   }
 
   saveDevice(device) {
-  const result = {};
-  for (const [key, value] of Object.entries(device)) {
-    if (key.indexOf('event_') !== 0) {
-      result[key] = value;
+    const result = {};
+    for (const [key, value] of Object.entries(device)) {
+      if (key.indexOf('event_') !== 0) {
+        result[key] = value;
+      }
     }
-  }
-  this.setItem('device', result);
+    this.setItem('device', result);
   }
 
   setEvent(event) {
