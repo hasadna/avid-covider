@@ -45,7 +45,7 @@ export class ReportStoreService {
     this.reports = this.getItem('reports', []);
     this.device.numPreviousReports = this.reports.length;
     if (this.reports.length > 0) {
-      this.device.dateFirstReport = this.storage.reports[0][0];
+      this.device.dateFirstReport = this.reports[0][0];
     }
   }
 
