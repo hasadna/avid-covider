@@ -502,8 +502,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           });
         },
-        reminder_status: () => {
-          return 'required';
+        reminder_status: (record) => {
+          const has_reminder = record.action_reminder_wanted === 'already_set' || this.reminders.isSourceReminder();
+          return has_reminder ? 'not-required' : 'required';
         },
         reminder_choose_method_show_widget: async (record) => {
           const options = this.reminders.widgetOptions(record);
@@ -531,10 +532,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
         },
         affiliates_should_ask: () => {
-          if (PRODUCTION) {
-            const today = (new Date()).getDay();
-            return (today % 2 === 0) && today < 6;
-          }
+          // Keeping this function in case we'd like to implement a more complex logic
           return true;
         },
         affiliate_alon_chen: () => {

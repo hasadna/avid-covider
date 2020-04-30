@@ -838,14 +838,17 @@
         - say: פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
         - say: לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?
         - wait:
+            variable: affiliate_questionnaires_preference_alon_chen
             options:
               - show: אשמח להשתתף במחקר
+                value: ok
                 steps:
                   - say: תודה רבה, נתראה מחר!
                   - do:
                       cmd: affiliate_alon_chen
                   - goto: complete
               - show: לא, בפעם אחרת
+                value: pass
 
     # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
     #   steps:    

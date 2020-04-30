@@ -2,6 +2,7 @@ import { Injectable, Inject, LOCALE_ID } from '@angular/core';
 import { NotificationService } from './notification.service';
 import { AppinstallService } from './appinstall.service';
 import { script } from './script';
+import { SourceService } from './source.service';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class RemindersService {
 
   constructor(private notifications: NotificationService,
               private appinstall: AppinstallService,
+              private source: SourceService,
               @Inject(LOCALE_ID) private locale) {
     this.titleTranslations = {};
     for (const item of script.s[1].keys) {
@@ -66,4 +68,15 @@ export class RemindersService {
     return options;
   }
 
+  isSourceReminder() {
+    const source = this.source.getSource();
+    return source && (
+      source.indexOf('calendar') === 0 ||
+      source.indexOf('notification') === 0 ||
+      source.indexOf('app_android') === 0 ||
+      source.indexOf('app_ios') === 0 ||
+      source.indexOf('telegram-reminder') === 0 ||
+      false
+    );
+  }
 }
