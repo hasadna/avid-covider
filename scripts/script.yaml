@@ -858,14 +858,16 @@
       steps:
         - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
         - wait:
+            variable: event_share_action
             options:
               - show: כן, אשמח לשתף
+                value: yes
                 steps:
                   - do:
                       cmd: share_action   # (click --> add to record)
-                      variable: action_share
+                      variable: event_share_result
                   - switch:
-                      arg: action_share
+                      arg: event_share_result
                       cases:
                         - default: true
                         - match: copied
@@ -880,6 +882,7 @@
                                   
 
               - show: לא עכשיו
+                value: no
 
     - name: set-reminder
       steps:

@@ -3,6 +3,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
 import { I18nService } from '../i18n.service';
+import { ReportStoreService } from '../report-store.service';
 
 @Component({
   selector: 'app-heatmap',
@@ -14,14 +15,23 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
   @Input() closeButton = true;
   @Input() infoButton = true;
   @Input() padding = 16;
-  infoboxActive = false;
+  _infoboxActive = false;
 
   private map: mapboxgl.Map;
 
   constructor(public layout: LayoutService, public mapService: MapService, private i18n: I18nService,
-              @Inject(LOCALE_ID) private locale) { }
+              private storage: ReportStoreService, @Inject(LOCALE_ID) private locale) { }
 
   ngOnInit() {
+  }
+
+  set infoboxActive(value) {
+    this._infoboxActive = value;
+    this.storage.setEvent(value ? 'map_infobox_open' : 'map_infobox_close');
+  }
+
+  get infoboxActive() {
+    return this._infoboxActive;
   }
 
   ngAfterViewInit() {

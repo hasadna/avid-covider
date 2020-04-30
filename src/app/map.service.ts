@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 
 import * as mapboxgl from 'mapbox-gl';
 import { Subject } from 'rxjs';
+import { ReportStoreService } from './report-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +20,12 @@ export class MapService {
   lng = 32.075;
   zoom = 11;
 
-  constructor(private source: SourceService) {
+  constructor(private source: SourceService, private storage: ReportStoreService) {
     this.source.sourceStream.pipe(first()).subscribe((_source) => {
       if (_source === 'map') {
         this.overlayOpen = true;
         this.mapVisible = true;
+        this.storage.setEvent('share_map_open');
       }
     });
   }
@@ -47,6 +49,7 @@ export class MapService {
 
   closeOverlay() {
     this.overlayOpen = false;
+    this.storage.setEvent('share_map_overlay_close');
   }
 
   needsToReport() {
@@ -56,10 +59,12 @@ export class MapService {
   closeMap() {
     this.mapVisible = false;
     this.mapVisibleStream.next(this.mapVisible);
+    this.storage.setEvent('map_close');
   }
 
   openMap() {
     this.mapVisible = true;
     this.mapVisibleStream.next(this.mapVisible);
+    this.storage.setEvent('hp_map_open');
   }
 }
