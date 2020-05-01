@@ -571,6 +571,15 @@ export const script = {
               "uid": "94b2b8dad7"
             },
             {
+              "do": {
+                "cmd": "ensure_uid",
+                "params": [
+                  "record"
+                ]
+              },
+              "uid": "f691bd8fba"
+            },
+            {
               "switch": {
                 "arg": "alias",
                 "cases": [
@@ -588,7 +597,7 @@ export const script = {
                                 "en": "{{age}} years old male from {{street}} {{city_town}}",
                                 "es": "{{age}} años de {{street}} {{city_town}}",
                                 "fr": "{{age}} ans de {{street}} {{city_town}}",
-                                "ru": "{{age}} лет, с улицы {{street}} в городе {{city_town}}"
+                                "ru": "Мужчина с улицы {{street}} в городе {{city_town}}, возраст: {{age}}"
                               }
                             },
                             {
@@ -598,13 +607,13 @@ export const script = {
                                 "en": "{{age}} years old female from {{street}} {{city_town}}",
                                 "es": "{{age}} años de {{street}} {{city_town}}",
                                 "fr": "{{age}} ans de {{street}} {{city_town}}",
-                                "ru": "{{age}} лет, с улицы {{street}} в городе {{city_town}}"
+                                "ru": "Женщина с улицы {{street}} в городе {{city_town}}, возраст: {{age}}"
                               }
                             }
                           ],
                           "variable": "alias"
                         },
-                        "uid": "8b55168adb"
+                        "uid": "d8f37b1931"
                       },
                       {
                         "say": {
@@ -614,13 +623,13 @@ export const script = {
                             "en": "Great. In the interest of privacy, in your following daily reports we'll address you as  {{alias}}",
                             "es": "Excelente, para preservar tu privacidad, en los próximos informes, te llamaremos simplemente  {{alias}}",
                             "fr": "Parfait, afin de protéger votre confidentialité, dans les prochains questionnaires, nous vous appellerons simplement {{alias}}",
-                            "ru": "Отлично. Чтобы сохранить вашу конфиденциальность, в следующих отчетах мы просто вас будем называть {{alias}}"
+                            "ru": "Отлично. Чтобы сохранить вашу конфиденциальность, в следующих отчётах мы просто вас будем называть {{alias}}"
                           }
                         },
-                        "uid": "bf62d4b8ec"
+                        "uid": "cf237328b6"
                       }
                     ],
-                    "uid": "1baea83011",
+                    "uid": "dde5b2b5b2",
                     "undefined": true
                   },
                   {
@@ -628,7 +637,7 @@ export const script = {
                   }
                 ]
               },
-              "uid": "65a50a6980"
+              "uid": "47e6289077"
             },
             {
               "do": {
@@ -638,7 +647,7 @@ export const script = {
                 ],
                 "variable": "_is_adult"
               },
-              "uid": "32853d136a"
+              "uid": "3e3c501803"
             },
             {
               "do": {
@@ -647,7 +656,7 @@ export const script = {
                   "record"
                 ]
               },
-              "uid": "895892c2cc"
+              "uid": "38f644ccb9"
             },
             {
               "switch": {
@@ -665,12 +674,12 @@ export const script = {
                             "_": "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{street}} {{city_town}} -",
                             "ar": "في كم سؤال (بدنا نسألهن مرة واحدة فقط) بالنسبة للبيت بـ {{street}} في مدينة {{city_town}} -",
                             "en": "We have some questions (which we will ask just once) about the house on  {{street}}, {{city_town}}",
-                            "es": "Tenemos algunas preguntas (solo por esta vez) sobre la casa en {{street}} {{city_town}}",
+                            "es": "Tenemos algunas preguntas (que formularemos una sola vez) sobre la vivienda en {{street}} {{city_town}}",
                             "fr": "Nous avons quelques questions (que nous ne poserons qu'une seule fois) concernant la maison située {{street}} {{city_town}}",
-                            "ru": "У нас есть несколько вопросов (которые больше не будем повторять) про {{street}} {{city_town}} "
+                            "ru": "У нас есть несколько вопросов (которые больше не будем повторять) о вашем доме на улице {{street}} в {{city_town}} "
                           }
                         },
-                        "uid": "621928ce03"
+                        "uid": "e13327539a"
                       },
                       {
                         "say": {
@@ -678,12 +687,12 @@ export const script = {
                             "_": "כמה מבוגרים מעל לגיל 18 גרים בבית?",
                             "ar": "عدد الأشخاص البالغين فوق جيل ال 18 الذين يسكنون في البيت؟",
                             "en": "How many adults over 18 years old live in the house?",
-                            "es": "¿Cuántos de ellos son mayores de 18 años viven en la casa?",
+                            "es": "¿Cuántas personas mayores de 18 años viven en la casa?",
                             "fr": "Combien d'adultes de plus de 18 ans vivent dans le foyer ?",
                             "ru": "Сколько взрослых старше 18 лет живут в доме?"
                           }
                         },
-                        "uid": "8a0382e6c1"
+                        "uid": "81f59fb6ff"
                       },
                       {
                         "switch": {
@@ -693,7 +702,7 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
-                                  "uid": "b9df1b176f",
+                                  "uid": "738bda4025",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -713,13 +722,13 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "5ba08ebdef"
+                              "uid": "3b24665ef3"
                             },
                             {
                               "match": false,
                               "steps": [
                                 {
-                                  "uid": "9ddb38850f",
+                                  "uid": "8d325b4090",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -739,24 +748,24 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "4e36d11757"
+                              "uid": "c3487a3e0a"
                             }
                           ]
                         },
-                        "uid": "3c567f5b5b"
+                        "uid": "9dad111e6d"
                       },
                       {
                         "say": {
                           ".tx": {
                             "_": "וכמה ילדים מתחת לגיל 18?",
-                            "ar": "عدد الأطفال تحت جيل 18؟",
+                            "ar": "وكم عدد الأطفال تحت جيل 18؟",
                             "en": "And how many children under 18?",
                             "es": "¿ y cuántos menores de 18 años?",
                             "fr": "Et combien d'enfants de moins de 18 ans ?",
                             "ru": "А сколько детей до 18 лет?"
                           }
                         },
-                        "uid": "cadc9957e0"
+                        "uid": "57b585e6ae"
                       },
                       {
                         "switch": {
@@ -766,7 +775,7 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
-                                  "uid": "b4ae1ceaaa",
+                                  "uid": "68374c31a8",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -786,13 +795,13 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "0c96d5c98c"
+                              "uid": "d88076b323"
                             },
                             {
                               "match": false,
                               "steps": [
                                 {
-                                  "uid": "72f2ec1bbb",
+                                  "uid": "4844732372",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -812,18 +821,18 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "7a718c6c40"
+                              "uid": "a16c57a306"
                             }
                           ]
                         },
-                        "uid": "f5416b3eb6"
+                        "uid": "16b02bc1dc"
                       }
                     ],
-                    "uid": "1e14d30084"
+                    "uid": "ee6b195014"
                   }
                 ]
               },
-              "uid": "6409f67795"
+              "uid": "5dfaa9a605"
             },
             {
               "switch": {
@@ -848,14 +857,14 @@ export const script = {
                                       "ar": "في عملك، هل انت جزء من فريق طبي - الذي يعتني بمرضى أو يستقبل جمهور؟",
                                       "en": "Are you part of a health-care team, treating patients or receiving them?",
                                       "es": "¿Formas parte de un equipo médico, atendiendo pacientes o brindando atención al público?",
-                                      "fr": "Faites vous partie d'une équipe médicale dans le cadre de votre travail ? Soignez-vous ou recevez-vous des patients ?",
+                                      "fr": "Faites-vous partie d'une équipe médicale dans le cadre de votre travail ? Soignez-vous ou recevez-vous des patients ?",
                                       "ru": "Работаете ли вы как медицинский персонал (уход за больными или прием публики)?"
                                     }
                                   },
-                                  "uid": "f21abaa60d"
+                                  "uid": "12b2e5ec79"
                                 },
                                 {
-                                  "uid": "a193745d13",
+                                  "uid": "e4a7372c8c",
                                   "wait": {
                                     "options": [
                                       {
@@ -889,7 +898,7 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "fd54eca6a5",
+                              "uid": "51855196c7",
                               "undefined": true
                             },
                             {
@@ -897,14 +906,14 @@ export const script = {
                             }
                           ]
                         },
-                        "uid": "bfe332a80b"
+                        "uid": "a5b6fc2757"
                       }
                     ],
-                    "uid": "688c92f408"
+                    "uid": "91a788d995"
                   }
                 ]
               },
-              "uid": "6379bd7362"
+              "uid": "69bce737fc"
             }
           ],
           "uid": "ab5b28894d"
@@ -3252,6 +3261,7 @@ export const script = {
                                       "ar": "السؤال التالي يتعلق بالأشخاص الذين يُقدمون خدمات في عملهم أو مهنتهم لأشخاص آخرين.",
                                       "en": "The next question is for those that give service at their workplace or business.",
                                       "es": "La siguiente pregunta es pertinente para personas que brindan servicio en sus trabajos u oficios a otra gente.",
+                                      "fr": "La question suivante concerne ceux qui fournissent un service à d'autres personnes dans le cadre de leur travail ou de leur occupation.",
                                       "ru": "Следующий вопрос имеет отношение к тем, чей род деятельности связан с обслуживанием других людей."
                                     }
                                   },
@@ -3264,6 +3274,7 @@ export const script = {
                                       "ar": "هل هذا السؤال له علاقة بك في هذه الأيام؟ ",
                                       "en": "Is the question relevant for you these days?",
                                       "es": "¿La pregunta es adecuada a ti en estos días?",
+                                      "fr": "La question vous concerne-t-elle en ce moment?",
                                       "ru": "Этот вопрос имеет к вам отношение в эти дни?"
                                     }
                                   },
@@ -3280,6 +3291,7 @@ export const script = {
                                             "ar": "نعم, له علاقة ",
                                             "en": "Yes, it's relevant",
                                             "es": "Sí, es adecuado",
+                                            "fr": "Oui, la question me concerne",
                                             "ru": "Да, имеет отношение"
                                           }
                                         },
@@ -3291,6 +3303,7 @@ export const script = {
                                                 "ar": "هل في أحد أيام الأسبوع السابق قمت/ي من خلال عملك بتقديم خدمات وجها لوجه, لأكثر من 10 أشخاص؟",
                                                 "en": "In any day during the last week, did you serve (face to face) more than 10 people?",
                                                 "es": "La semana pasada en tu trabajo ¿has atendido, algún día, a más de 10 personas ese mismo día?",
+                                                "fr": "Dans le cadre de votre profession, avez-vous physiquement aidé plus de 10 personnes au cours des 7 derniers jours ?",
                                                 "ru": "Был ли день на последней неделе на работе когда вы обслужили больше 10 человек?"
                                               }
                                             },
@@ -3350,6 +3363,7 @@ export const script = {
                                             "ar": "لا, ليس له علاقة",
                                             "en": "No, it's not relevant",
                                             "es": "No es adecuado",
+                                            "fr": "Non, la question ne me concerne pas",
                                             "ru": "Не имеет отношения"
                                           }
                                         },
@@ -3388,15 +3402,33 @@ export const script = {
               "uid": "33392c8ecc"
             },
             {
-              "goto": "dynamic_update",
+              "goto": "affiliations",
               "uid": "ccc68125a7"
             },
             {
-              "goto": "affiliations",
-              "uid": "02f3720eeb"
+              "say": {
+                ".tx": {
+                  "_": "סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה…",
+                  "ar": "أنهينا جميع الأسئلة لهذا اليوم. بفضلك إقتربنا خطوة أخرى لنهاية هذا الأمر..",
+                  "en": "We're done with today's questions. Thanks to you we are one step closer to ending this...",
+                  "es": "Hemos finalizado las preguntas por hoy. Gracias a ti hemos avanzado un paso más hacia el final de esto...",
+                  "fr": "Nous avons fini de vous poser des questions pour aujourd'hui. Grâce à vous, nous avons fait un pas de plus vers la fin de tout cela ...",
+                  "ru": "Мы закончили вопросы на сегодня. Благодаря вам мы продвинулись ещё на один шаг..."
+                }
+              },
+              "uid": "87a44257a2"
             },
             {
-              "say": "תודה רבה, נתראה מחר?",
+              "say": {
+                ".tx": {
+                  "_": "תודה רבה, נתראה מחר?",
+                  "ar": "شكرًا جزيلًا, نلتقي غدًا؟",
+                  "en": "Thank you. Will we see you tomorrow?",
+                  "es": "Gracias ¿Nos vemos mañana?",
+                  "fr": "Merci beaucoup, on se voit demain ?",
+                  "ru": "Большое спасибо, увидимся завтра?"
+                }
+              },
               "uid": "5427b26490"
             },
             {
@@ -3404,7 +3436,16 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": "בטח!"
+                    "show": {
+                      ".tx": {
+                        "_": "בטח!",
+                        "ar": "طبعًا!",
+                        "en": "Sure!",
+                        "es": "¡Claro!",
+                        "fr": "Bien sûr !",
+                        "ru": "Конечно!"
+                      }
+                    }
                   }
                 ]
               }
@@ -3454,7 +3495,16 @@ export const script = {
                     "default": true,
                     "steps": [
                       {
-                        "say": "האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?",
+                        "say": {
+                          ".tx": {
+                            "_": "האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?",
+                            "ar": "هل يُمككنا أن نقترح عليكم الإشتراك في أبحاث إضافية لباحثي معهد وايزمن؟",
+                            "en": "Would you like to participate in further studies by the Weizmann Institute scientists?",
+                            "es": "¿Podemos proponerte participar en otras investigaciones realizadas por los científicos del Instituto Weizmann?",
+                            "fr": "Pouvons-nous vous proposer de participer à des recherches supplémentaire par des scientifiques de l'Institut Weizmann ?",
+                            "ru": "Можно ли предложить вам поучаствовать в других исследованиях Института Вайцмана?"
+                          }
+                        },
                         "uid": "d24e2af160"
                       },
                       {
@@ -3462,15 +3512,42 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "show": "כן, בשמחה",
+                              "show": {
+                                ".tx": {
+                                  "_": "כן, בשמחה",
+                                  "ar": "نعم, يُسعدني ذلك",
+                                  "en": "Yes, with pleasure",
+                                  "es": "Sí, será un placer",
+                                  "fr": "Oui, avec plaisir",
+                                  "ru": "Да, с удовольствием"
+                                }
+                              },
                               "value": "ok"
                             },
                             {
-                              "show": "לא, בפעם אחרת",
+                              "show": {
+                                ".tx": {
+                                  "_": "לא, בפעם אחרת",
+                                  "ar": "لا, مرة أخرى",
+                                  "en": "Not now, later",
+                                  "es": "No, en otro momento",
+                                  "fr": "Non, une autre fois",
+                                  "ru": "Нет, в другой раз"
+                                }
+                              },
                               "value": "later"
                             },
                             {
-                              "show": "לא, אף פעם",
+                              "show": {
+                                ".tx": {
+                                  "_": "לא, אף פעם",
+                                  "ar": "لا, ولا مرة",
+                                  "en": "No, never",
+                                  "es": "No, nunca",
+                                  "fr": "Non, jamais",
+                                  "ru": "Нет, никогда"
+                                }
+                              },
                               "value": "never"
                             }
                           ],
@@ -3490,6 +3567,9 @@ export const script = {
                                 }
                               ],
                               "uid": "9c54ccfbba"
+                            },
+                            {
+                              "default": true
                             }
                           ]
                         },
@@ -3509,72 +3589,135 @@ export const script = {
           "name": "affiliate-alon-chen",
           "steps": [
             {
-              "say": "לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?",
-              "uid": "ebfdd65b68"
+              "say": {
+                ".tx": {
+                  "_": "פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.",
+                  "ar": "بروفيسور ألون حن وفريقه من معهد وايزمن يبحثون جوانب مُختلفة من بيولوجيا الأعصاب تحت الضغوطات, ويطلبون مُساعدة الجمهور بتعبئة إستبيان الذي يُقيّم مستوى التوتر والقلق بين السكان لتحديد آثاره, أسبابه وطرق للتكيف معه.",
+                  "en": "Professor Alon Chen of the Weizmann Institute and his team are researching different aspects of the neurobiology of stress, and are requesting help from the public by completing a questionnaire that estimates the level of stress and anxiety in the population and maps its effects, causes, and coping strategies.",
+                  "fr": "Le professeur Alon Chen de l'Institut Weizmann et son équipe étudient divers aspects de la neurobiologie du stress. Ils demandent l'aide du public pour remplir un questionnaire qui évalue le niveau de stress et d'anxiété dans la population, afin de cartographier ses effets, ses facteurs et ses stratégies d'adaptation.",
+                  "ru": "Профессор Алон Хен из Института Вайцмана и его группа исследуют нейробиологические эффекты стресса и просят публику заполнить анкету, которая оценивает уровень стресса среди населения. Это поможет исследователям оценить влияние стресса, его причины и предложить стратегию по его преодолению."
+                }
+              },
+              "uid": "ed824c7891"
             },
             {
-              "say": "פרופ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.",
-              "uid": "2cc2407dfe"
+              "say": {
+                ".tx": {
+                  "_": "לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?",
+                  "ar": "نظرًا لجميع الآثار التي تُسببها هذه الفترة على حياتنا, هل بإمكاننا ان نسألك عن مزاجك؟",
+                  "en": "In view of the large effects of this period on our lives, is it OK if we ask you about your mood and feelings?",
+                  "es": "Debido a la influencia de esta época especial que repercute, en general, sobre nuestras vidas ¿Podemos preguntarte también acerca de tu estado de ánimo?",
+                  "fr": "Après avoir examiné tous les effets de cette période de notre vie, pouvons-nous également vous interroger sur votre humeur ?",
+                  "ru": "Учитывая, что этот период по-разному влияет на людей, можно ли спросить вас о вашем настроении?"
+                }
+              },
+              "uid": "157579fe76"
             },
             {
-              "uid": "e3579b717a",
+              "uid": "19f8eb5c80",
               "wait": {
                 "options": [
                   {
-                    "show": "אשמח להשתתף",
+                    "show": {
+                      ".tx": {
+                        "_": "אשמח להשתתף במחקר",
+                        "ar": "يُسعدني الإشتراك بالبحث",
+                        "en": "I would be happy to participate in the research",
+                        "es": "Participaré en la investigación con gusto",
+                        "fr": "Je serais ravi de participer à la recherche",
+                        "ru": "Я буду рад/а поучаствовать в исследовании."
+                      }
+                    },
                     "steps": [
+                      {
+                        "say": {
+                          ".tx": {
+                            "_": "תודה רבה, נתראה מחר!",
+                            "ar": "شكرًا جزيلًا, نلتقي غدًا!",
+                            "en": "Thanks, we'll meet tomorrow!",
+                            "es": "Muchas gracias, ¡nos vemos mañana!",
+                            "fr": "Merci beaucoup, à demain !",
+                            "ru": "Большое спасибо, увидимся завтра!"
+                          }
+                        },
+                        "uid": "c4b59f6f31"
+                      },
                       {
                         "do": {
                           "cmd": "affiliate_alon_chen"
                         },
-                        "uid": "c8b0ea3e48"
+                        "uid": "3e2d803d4a"
+                      },
+                      {
+                        "goto": "complete",
+                        "uid": "f8b9576e1f"
                       }
                     ],
-                    "uid": "8aa42bcf71"
+                    "uid": "a37063e62c",
+                    "value": "ok"
                   },
                   {
-                    "show": "לא, בפעם אחרת"
+                    "show": {
+                      ".tx": {
+                        "_": "לא, בפעם אחרת",
+                        "ar": "لا, مرة أخرى",
+                        "en": "Not now, later",
+                        "es": "No, en otro momento",
+                        "fr": "Non, une autre fois",
+                        "ru": "Нет, в другой раз"
+                      }
+                    },
+                    "value": "pass"
                   }
-                ]
+                ],
+                "variable": "affiliate_questionnaires_preference_alon_chen"
               }
             }
           ],
           "uid": "91e09012bf"
         },
         {
-          "name": "dynamic_update",
-          "steps": [
-            {
-              "say": "סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה…",
-              "uid": "afd200b220"
-            }
-          ],
-          "uid": "d1b81a605b"
-        },
-        {
           "name": "share",
           "steps": [
             {
-              "say": "ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
+              "say": {
+                ".tx": {
+                  "_": "ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
+                  "ar": "هناك مسألة أخرى...سيُساعدنا كثيرًا إذا إشترك أيضا أصدقاؤك وعائلتك. هل تُريد/ين مُشاركتهم؟",
+                  "en": "One more thing... it would really help if your friends and relatives also participate. Would you like to let them know about the report?",
+                  "es": "Otro detalle... Ayudaría mucho si participarán también tus conocidos. ¿Quieres compartir esto con ellos?",
+                  "fr": "Et encore une chose … Ce nous aiderait beaucoup si vos amis et vos proches participent également. Voulez-vous leur partager ?",
+                  "ru": "И ещё одно маленькое дело... Нам очень поможет, если ваши друзья и родственники примут участие в нашем проекте.  Хотите с ними поделиться?"
+                }
+              },
               "uid": "3b53898038"
             },
             {
-              "uid": "0b4905b30d",
+              "uid": "feef17d055",
               "wait": {
                 "options": [
                   {
-                    "show": "כן, אשמח לשתף",
+                    "show": {
+                      ".tx": {
+                        "_": "כן, אשמח לשתף",
+                        "ar": "نعم, يُسعدني أن أشارك",
+                        "en": "Yes, I'll be happy to share",
+                        "es": "Sí, me gustaría compartir",
+                        "fr": "Oui, je souhaiterais partager",
+                        "ru": "Да, буду рад/а поделиться"
+                      }
+                    },
                     "steps": [
                       {
                         "do": {
                           "cmd": "share_action",
-                          "variable": "action_share"
+                          "variable": "event_share_result"
                         },
-                        "uid": "5d2962eddc"
+                        "uid": "8c1c1c031a"
                       },
                       {
                         "switch": {
-                          "arg": "action_share",
+                          "arg": "event_share_result",
                           "cases": [
                             {
                               "default": true
@@ -3586,7 +3729,16 @@ export const script = {
                                   "do": {
                                     "cmd": "toaster",
                                     "params": [
-                                      "הקישור לדיווח היומי הועתק ללוח!"
+                                      {
+                                        ".tx": {
+                                          "_": "הקישור לדיווח היומי הועתק ללוח!",
+                                          "ar": "تم نسخ الرابط للإستبيان اليومي إلى اللوح!",
+                                          "en": "The link to the daily report has been copied to the clipboard!",
+                                          "es": "El enlace al informe diario se ha copiado al calendario",
+                                          "fr": "Le lien du rapport quotidien a été copié dans le presse-papiers !",
+                                          "ru": "Ссылка на ежедневный отчёт скопированa"
+                                        }
+                                      }
                                     ]
                                   },
                                   "uid": "49049c25a9"
@@ -3598,7 +3750,16 @@ export const script = {
                               "match": "shared",
                               "steps": [
                                 {
-                                  "say": "תודה רבה על השיתוף!",
+                                  "say": {
+                                    ".tx": {
+                                      "_": "תודה רבה על השיתוף!",
+                                      "ar": "شكرًا على المُشاركة!",
+                                      "en": "Thanks for sharing!",
+                                      "es": "¡Muchas gracias por compartir!",
+                                      "fr": "Merci beaucoup pour le partage !",
+                                      "ru": "Спасибо, что поделились нашeй ссылкой!"
+                                    }
+                                  },
                                   "uid": "862a9c2c56"
                                 }
                               ],
@@ -3606,15 +3767,27 @@ export const script = {
                             }
                           ]
                         },
-                        "uid": "333c16a1e9"
+                        "uid": "06bf6f3a2f"
                       }
                     ],
-                    "uid": "867192e73f"
+                    "uid": "867192e73f",
+                    "value": true
                   },
                   {
-                    "show": "לא עכשיו"
+                    "show": {
+                      ".tx": {
+                        "_": "לא עכשיו",
+                        "ar": "لاحقًا ",
+                        "en": "Not now",
+                        "es": "Ahora no",
+                        "fr": "Pas maintenant",
+                        "ru": "Не сейчас"
+                      }
+                    },
+                    "value": false
                   }
-                ]
+                ],
+                "variable": "event_share_action"
               }
             }
           ],
@@ -3629,9 +3802,9 @@ export const script = {
                 "params": [
                   "record"
                 ],
-                "variable": "action_reminder_set"
+                "variable": "action_reminder_required"
               },
-              "uid": "28e38c50e9"
+              "uid": "bd6c017d59"
             },
             {
               "switch": {
@@ -3641,7 +3814,16 @@ export const script = {
                     "default": true,
                     "steps": [
                       {
-                        "say": "יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?",
+                        "say": {
+                          ".tx": {
+                            "_": "יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?",
+                            "ar": "هناك عدة طرق التي من خلالها يُمكننا تذكيرك بأن تعود/ي وتُخبرنا/تُخبرينا كيف حالك, هل تُريد/ين هذا؟",
+                            "en": "There are a number of ways we can remind you to return and tell us about how you feel. Shall we try?",
+                            "es": "Puedo ofrecerte algunas maneras para recordarte regresar a contarnos cómo estás, ¿quieres que lo probemos?",
+                            "fr": "Il y a plusieurs façons de vous rappeler de revenir et de nous dire comment vous allez,  voulez-vous essayer ?",
+                            "ru": "Есть несколько способов, которыми мы сможем напоминать вам рассказать нам, как у вас дела. Попробуем?"
+                          }
+                        },
                         "uid": "1821905288"
                       },
                       {
@@ -3649,7 +3831,16 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "show": "כן, אשמח לתזכורת",
+                              "show": {
+                                ".tx": {
+                                  "_": "כן, אשמח לתזכורת",
+                                  "ar": "نعم,  يُسعدني ان تقوموا بتذكيري",
+                                  "en": "Yes, I would be happy to get a reminder",
+                                  "es": "Sí, me gustaría recibir recordatorios",
+                                  "fr": "Oui, je souhaiterais un rappel",
+                                  "ru": "Да, я хочу напоминание"
+                                }
+                              },
                               "steps": [
                                 {
                                   "goto": "reminder-choose-method",
@@ -3660,35 +3851,56 @@ export const script = {
                               "value": "wanted"
                             },
                             {
-                              "show": "כבר יש לי תזכורת, תודה",
+                              "show": {
+                                ".tx": {
+                                  "_": "כבר יש לי תזכורת, תודה",
+                                  "ar": "يوجد لدي تذكير, شكرًا",
+                                  "en": "I already have a reminder, thanks",
+                                  "es": "Ya tengo un recordatorio, gracias",
+                                  "fr": "J'ai déjà un rappel, merci",
+                                  "ru": "У меня уже есть напоминание, спасибо"
+                                }
+                              },
                               "value": "already_set"
                             },
                             {
-                              "show": "לא, אין צורך, יש לי זכרון מצויין!",
+                              "show": {
+                                ".tx": {
+                                  "_": "לא, אין צורך, יש לי זכרון מצויין!",
+                                  "ar": "لا, لست بحاجة لذلك, لدي ذاكرة قوية!",
+                                  "en": "It's not necessary, I have a great memory!",
+                                  "es": "No, no hace falta, ¡mi memoria es excelente!",
+                                  "fr": "Non, pas besoin, j'ai une excellente mémoire !",
+                                  "ru": "Нет, не нужно, у меня отличная память!"
+                                }
+                              },
                               "value": "not_wanted"
                             }
                           ],
                           "variable": "action_reminder_wanted"
                         }
-                      },
-                      {
-                        "do": {
-                          "cmd": "save_reminder_status"
-                        },
-                        "uid": "72dd2c31c7"
                       }
                     ],
                     "uid": "6e65389281"
                   },
                   {
-                    "match": "not_required",
+                    "match": "not-required",
                     "steps": [
                       {
-                        "say": "תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב",
-                        "uid": "d7af144da0"
+                        "say": {
+                          ".tx": {
+                            "_": "תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב",
+                            "ar": "شكرًا لانك عُدت/ي لتعبئة الإستبيان. في إنتظار سماع أخبارك ",
+                            "en": "Thanks for returning to report. We look forward to hearing from you again",
+                            "es": "Muchas gracias por volver a informar. Estamos esperando oír de ti",
+                            "fr": "Merci beaucoup d'être revenu. Hâte de savoir comment vous allez",
+                            "ru": "Большое спасибо, что вы снова заполняете отчёт. Будем рады снова от вас услышать."
+                          }
+                        },
+                        "uid": "26a4dafad7"
                       }
                     ],
-                    "uid": "aed7dfa73b"
+                    "uid": "441056f822"
                   }
                 ]
               },
@@ -3778,8 +3990,26 @@ export const script = {
               "do": {
                 "cmd": "banner",
                 "params": [
-                  "אשרו קבלת התראות מן האתר על מנת שנוכל להזכיר לכם למלא את השאלון",
-                  "בסדר"
+                  {
+                    ".tx": {
+                      "_": "אשרו קבלת התראות מן האתר על מנת שנוכל להזכיר לכם למלא את השאלון",
+                      "ar": "قوموا بتأكيد تلقي التنبيهات من الموقع حتى نتمكن من تذكيركم بتعبئة الإستبيان",
+                      "en": "Please allow notifications from the site so we can remind you to fill out the form",
+                      "es": "Permite recibir alertas del sitio para que podamos recordarte rellenar el cuestionario",
+                      "fr": "Confirmez la réception des alertes du site afin que nous puissions vous rappeler de remplir le questionnaire",
+                      "ru": "Разрешите получение уведомлений от нашего сайта, чтобы мы могли напомнить вам заполнить отчёт."
+                    }
+                  },
+                  {
+                    ".tx": {
+                      "_": "בסדר",
+                      "ar": "ممتاز",
+                      "en": "Fine",
+                      "es": "OK",
+                      "fr": "D'accord",
+                      "ru": "Хорошо"
+                    }
+                  }
                 ],
                 "variable": "action_reminder_notification_approved"
               },
@@ -3818,8 +4048,26 @@ export const script = {
               "do": {
                 "cmd": "banner",
                 "params": [
-                  "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
-                  "להורדת האפליקציה"
+                  {
+                    ".tx": {
+                      "_": "הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00",
+                      "ar": "قوموا بتحميل التطبيق وسوف نقوم بتذكيركم كل يوم ب-20:00",
+                      "en": "Download the app, and we will remind you each day at 8pm",
+                      "es": "Descarga la aplicación y te lo recordaremos todos los días a las 20:00",
+                      "fr": "Téléchargez l'application et nous vous enverrons un rappel tous les jours à 20h00",
+                      "ru": "Скачайте аппликацию и мы напомним вам каждый день в 20:00"
+                    }
+                  },
+                  {
+                    ".tx": {
+                      "_": "להורדת האפליקציה",
+                      "ar": "لتحميل التطبيق",
+                      "en": "App download",
+                      "es": "Descargar la aplicación",
+                      "fr": "Téléchargez l'application",
+                      "ru": "Скачать аппликацию"
+                    }
+                  }
                 ],
                 "variable": "action_reminder_app_approved"
               },
@@ -3861,8 +4109,26 @@ export const script = {
               "do": {
                 "cmd": "banner",
                 "params": [
-                  "לחצו על הכפתור להתקנת התזכורת ביומן",
-                  "להורדה"
+                  {
+                    ".tx": {
+                      "_": "לחצו על הכפתור להתקנת התזכורת ביומן",
+                      "ar": "إضغطوا الزر لتثبيت التذكير في اليوميات",
+                      "en": "Press the button to install a calendar reminder",
+                      "es": "Pulsa el botón para configurar el recordatorio diario",
+                      "fr": "Cliquez sur le bouton pour ajouter un rappel au calendrier",
+                      "ru": "Нажмите на кнопку, чтобы добавить напоминание в календарь."
+                    }
+                  },
+                  {
+                    ".tx": {
+                      "_": "להורדה",
+                      "ar": "للتحميل",
+                      "en": "Download",
+                      "es": "Descarga",
+                      "fr": "Télécharger",
+                      "ru": "Скачать"
+                    }
+                  }
                 ],
                 "variable": "action_reminder_calendar_approved"
               },
@@ -3888,8 +4154,26 @@ export const script = {
                         "do": {
                           "cmd": "banner",
                           "params": [
-                            "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
-                            "המשך"
+                            {
+                              ".tx": {
+                                "_": "אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״",
+                                "ar": "إذا لم يحدث تغير, إفتحوا الملف corona_reminder.ics من ״التحميلات״",
+                                "en": "If it doesn't happen automatically, open the file corona_reminder.ics in the \"Downloads\" folder",
+                                "es": "Si no sucede nada, abre el archivo corona_reminder.ics en las \"Descargas\"",
+                                "fr": "Si rien ne se passe, ouvrez le fichier corona_reminder.ics à partir des \"Téléchargements\"",
+                                "ru": "Если ничего не происходит, откройте файл corona_reminder.ics в папке \"Загрузки\" (\"Downloads\")"
+                              }
+                            },
+                            {
+                              ".tx": {
+                                "_": "המשך",
+                                "ar": "إستمر",
+                                "en": "Continue",
+                                "es": "Continuar",
+                                "fr": "Continuation",
+                                "ru": "Продолжение"
+                              }
+                            }
                           ]
                         },
                         "uid": "6ade096f21"
@@ -3911,8 +4195,26 @@ export const script = {
               "do": {
                 "cmd": "banner",
                 "params": [
-                  "<b>שימו לב: </b> בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
-                  "בסדר"
+                  {
+                    ".tx": {
+                      "_": "<b>שימו לב: </b> בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש",
+                      "ar": "<b>إنتبهوا: </b> البوت في تيليغرام يعمل عن طريق طرف ثالث ونحن غير مسؤولين عنه. من المُفضل التحقق من سياسة الخصوصية وحفظ المعلومات للبوت قبل الإستخدام .",
+                      "en": "<b>Attention: </b> The telegram bot is operated by a third party and we bear no responsibility for it. It's recommended to check out the bot's privacy and data storage policies before using it.",
+                      "es": "<b>Atención: </b> El bot de Telegram está operado por un ente ajeno y no es de nuestra responsabilidad. Se recomienda controlar las políticas de protección de datos y privacidad del bot antes de utilizarlo.",
+                      "fr": "<b>Attention:</b> le bot Telegram est exploité par un tiers et sans aucune responsabilité de notre part. Il est recommandé de vérifier les informations du bot et la politique de confidentialité avant utilisation",
+                      "ru": "<b>Внимание: </b>Бот в Telegram управляется третьей стороной без какой-либо ответственности с нашей стороны. Мы рекомендуем проверить политику конфиденциальности и политику хранения информации бота перед использованием."
+                    }
+                  },
+                  {
+                    ".tx": {
+                      "_": "בסדר",
+                      "ar": "ممتاز",
+                      "en": "Fine",
+                      "es": "OK",
+                      "fr": "D'accord",
+                      "ru": "Хорошо"
+                    }
+                  }
                 ],
                 "variable": "action_reminder_telegram_approved"
               },

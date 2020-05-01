@@ -14,7 +14,7 @@ export class ReportStoreService {
     try {
       this.storage = window.localStorage;
       this.setItem('testLocalStorage', ['test']);
-      hasLocalStorage = this.getItem('hasLocalStorage', [false])[0] === 'test';
+      hasLocalStorage = this.getItem('testLocalStorage', [false])[0] === 'test';
     } catch (e) {
       console.log('no local storage');
     }
