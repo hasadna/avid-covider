@@ -19,6 +19,7 @@ export class SourceService {
       this.storage.device.engagementSource = this.source;
       this.storage.device.originalReferrer = this.storage.device.originalReferrer || document.referrer;
       this.storage.device.referrer = document.referrer;
+      this.storage.device.location = window.location.href;
       this.storage.saveDevice(this.storage.device);
     });
   }

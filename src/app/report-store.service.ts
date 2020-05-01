@@ -10,13 +10,17 @@ export class ReportStoreService {
   device: any;
 
   constructor() {
+    let hasLocalStorage = false;
     try {
       this.storage = window.localStorage;
+      this.setItem('testLocalStorage', ['test']);
+      hasLocalStorage = this.getItem('hasLocalStorage', [false])[0] === 'test';
     } catch (e) {
       console.log('no local storage');
     }
     this.readDevice();
     this.readReports();
+    this.device.hasLocalStorage = hasLocalStorage;
   }
 
   getItem(key, defaultValue) {
