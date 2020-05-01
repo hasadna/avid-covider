@@ -912,7 +912,7 @@
                       - show: לא, אין צורך, יש לי זכרון מצויין!
                         value: not_wanted
               
-              - match: 'not_required'
+              - match: 'not-required'
                 steps:
                   - say: תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב
               
