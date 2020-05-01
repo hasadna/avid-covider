@@ -19,5 +19,6 @@ describe('test chatbot scenarion 1 - new user', () => {
     page.getMessageOptions().first().click();
     const lastMessage =  page.getMessagesTo().last().getText();
     expect(lastMessage).toContain(STR.ben);
+    expect(lastMessage).not.toContain(STR.bat);
   });
 });
