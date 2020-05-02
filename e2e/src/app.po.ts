@@ -1,5 +1,8 @@
 import { browser, by, element, ElementFinder, ElementArrayFinder } from 'protractor';
 
+// AppPage is used for getting main elements on page
+// This logic is seperated from test itself since itmay change from time to time
+
 export enum AnswerType {
   InputNumber = 'InputNumber',
   InputText = 'InputText',
@@ -66,43 +69,53 @@ export class AppPage {
 
   // get the next element will be used for answer
   async getNextAnswerElement(): Promise<INextAnswer> {
-    const htlInput = await this.getHtlInput();
-    const isHtlInputPresent = await htlInput.isPresent();
-    const result: INextAnswer = { type: AnswerType.InputText };
-    // is hatool input active
-
+    const isHtlInputPresent = await this.getHtlInput().isPresent();
     if (isHtlInputPresent) {
-      // using htl input - return it
-      const inputType = await htlInput.getAttribute('type');
-      switch (inputType) {
-        case 'date': {
-          result.type = AnswerType.InputDate;
-          break;
-        }
-        case 'number': {
-          result.type = AnswerType.InputNumber;
-          break;
-        }
-        default: {
-          result.type = AnswerType.InputText;
-          break;
-        }
-      }
-      log(`Next answer element is using Hatool Input [${result.type}]`);
-      result.input = htlInput;
-      result.confirmElement = this.getHtlInputConfrim();
+      // using htl input
+      return this.getNextAnswerInputElement();
     } else {
-      const htlSingleSelectOption = this.getActiveHtlSingleOptions();
-      // is active hatool options are of type single
-      const isSingle = await htlSingleSelectOption.isPresent();
-      log(`Next answer element is using Hatool Options [${isSingle ? 'single' : 'multi'}]`);
+      // use htl options
+      return this.getNextAnswerOptionElement();
+    }
+  }
 
-      result.type = isSingle ? AnswerType.OptionsSingle : AnswerType.OptionsMulti;
-      result.options = isSingle ? htlSingleSelectOption : this.getActiveHtlMultiOptions();
-      if (!isSingle) {
-        result.confirmElement = this.getActiveHtlMultiOptionsConfirm();
+  private async getNextAnswerInputElement(): Promise<INextAnswer> {
+    const result: INextAnswer = { type: AnswerType.InputText };
+    const htlInput = await this.getHtlInput();
+    const inputType = await htlInput.getAttribute('type');
+
+    switch (inputType) {
+      case 'date': {
+        result.type = AnswerType.InputDate;
+        break;
+      }
+      case 'number': {
+        result.type = AnswerType.InputNumber;
+        break;
+      }
+      default: {
+        result.type = AnswerType.InputText;
+        break;
       }
     }
+    result.input = htlInput;
+    result.confirmElement = this.getHtlInputConfrim();
+    log(`Next answer element is using Hatool Input [${result.type}]`);
+    return result;
+  }
+
+  private async getNextAnswerOptionElement(): Promise<INextAnswer> {
+    const result: INextAnswer = { type: AnswerType.InputText };
+    const htlSingleSelectOption = this.getActiveHtlSingleOptions();
+    // is active hatool options are of type single
+    const isSingle = await htlSingleSelectOption.isPresent();
+
+    result.type = isSingle ? AnswerType.OptionsSingle : AnswerType.OptionsMulti;
+    result.options = isSingle ? htlSingleSelectOption : this.getActiveHtlMultiOptions();
+    if (!isSingle) {
+      result.confirmElement = this.getActiveHtlMultiOptionsConfirm();
+    }
+    log(`Next answer element is using Hatool Options [${isSingle ? 'single' : 'multi'}]`);
     return result;
   }
 }
