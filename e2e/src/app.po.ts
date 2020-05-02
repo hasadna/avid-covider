@@ -1,4 +1,4 @@
-import { browser, by, element, ElementFinder, ElementArrayFinder } from 'protractor';
+import { browser, by, element, ElementFinder, ElementArrayFinder, protractor, promise } from 'protractor';
 
 // AppPage is used for getting main elements on page
 // This logic is seperated from test itself since itmay change from time to time
@@ -21,6 +21,12 @@ export interface INextAnswer {
 const log = (msg, arg: any = '') => console.log(`[App Page] ${msg}`, arg);
 
 export class AppPage {
+  activeAnswerType: AnswerType;
+  asnswersCounter = {
+    optionsSingle: 0,
+    optionsMulti: 0,
+  };
+
   navigateTo() {
     return browser.get('/');
   }
@@ -34,7 +40,7 @@ export class AppPage {
   }
 
   // == input ==
-  getHtlInput() {
+  getHtlInput(): ElementFinder {
     return element(by.css('htl-input input'));
   }
 
@@ -43,19 +49,27 @@ export class AppPage {
   }
 
   // == options ==
-  getActiveHtlSingleOptions() {
-    return element.all(by.css('htl-messages htl-message-options:last-child .options button'));
+  private getActiveHtlSingleOptions(useIndex?: number): ElementArrayFinder {
+    const index = this.asnswersCounter.optionsSingle;
+    return element.all(by.css('htl-messages htl-message-options'))
+      .get(index)
+      .all(by.css('.options button'));
   }
 
-  getActiveHtlMultiOptions(): ElementArrayFinder {
+  private getActiveHtlMultiOptions(useIndex?: number): ElementArrayFinder {
+    // get all options without 'other' class ('other' is confirm button)
+    const index = this.asnswersCounter.optionsMulti;
+    return element.all(by.css('htl-messages htl-message-multi-options'))
+      .get(index)
+      .all(by.css('button:not(.other)'));
+  }
+
+  private getActiveHtlMultiOptionsConfirm(): ElementFinder {
     // get all options other than last ('other' is confirm button)
-    return element.all(by.css('htl-messages htl-message-multi-options:last-child .options button:not(.other)'));
-    // return allButtons.filter((elem, index) => elem !== allButtons.last());
-  }
-
-  getActiveHtlMultiOptionsConfirm(): ElementFinder {
-    // get last option ('other' is confirm button)
-    return element(by.css('htl-messages htl-message-multi-options:last-child .options button.other'));
+    const index = this.asnswersCounter.optionsMulti;
+    return element.all(by.css('htl-messages htl-message-multi-options'))
+      .get(index)
+      .element(by.css('button.other'));
   }
 
   // due to layout structure, this function may return 1-3 messages, depend on the displayed elements
@@ -63,10 +77,35 @@ export class AppPage {
   // async getLastMessagesText(): Promise<string> {
   //   return element.all(by.css(`htl-message-to:nth-last-child(-n+3) .speech-bubble span`)).getText();
   // }
-  async getActiveQuestionText(): Promise<string> {
+  waitForNextAnswerElements() {
+    switch(this.activeAnswerType) {
+      case AnswerType.OptionsSingle: {
+        this.asnswersCounter.optionsSingle++;
+        break;
+      }
+      case AnswerType.OptionsMulti:{
+        this.asnswersCounter.optionsMulti++;
+        break;
+      }
+    }
+    log('asnswersCounter', this.asnswersCounter)
+    const EC = protractor.ExpectedConditions;
+    const inputReady = EC.elementToBeClickable(this.getHtlInput());
+    const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
+    const optionsMultiReady = EC.elementToBeClickable(this.getActiveHtlMultiOptionsConfirm());    // next multi option confirm
+
+    // todo: can be removed?
+    browser.sleep(300); // minimal wait time - to allow browser to do some render before next step
+    browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
+  }
+  async getActiveQuestionText(): promise.Promise<string> {
     return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();
   }
 
+  async getAfterAnswerText(): promise.Promise<string> {
+    return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();
+  }
+  
   // get the next element will be used for answer
   async getNextAnswerElement(): Promise<INextAnswer> {
     const isHtlInputPresent = await this.getHtlInput().isPresent();
@@ -101,6 +140,7 @@ export class AppPage {
     result.input = htlInput;
     result.confirmElement = this.getHtlInputConfrim();
     log(`Next answer element is using Hatool Input [${result.type}]`);
+    this.activeAnswerType = result.type;
     return result;
   }
 
@@ -113,8 +153,10 @@ export class AppPage {
     result.type = isSingle ? AnswerType.OptionsSingle : AnswerType.OptionsMulti;
     result.options = isSingle ? htlSingleSelectOption : this.getActiveHtlMultiOptions();
     if (!isSingle) {
+      // confirm element for optionsMulti
       result.confirmElement = this.getActiveHtlMultiOptionsConfirm();
     }
+    this.activeAnswerType = result.type;
     log(`Next answer element is using Hatool Options [${isSingle ? 'single' : 'multi'}]`);
     return result;
   }

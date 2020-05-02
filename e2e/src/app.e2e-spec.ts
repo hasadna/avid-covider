@@ -1,5 +1,5 @@
 import { AppPage, INextAnswer, AnswerType } from './app.po';
-import { browser, ElementFinder, ElementArrayFinder, protractor } from 'protractor';
+import { browser, ElementFinder, ElementArrayFinder, protractor, promise } from 'protractor';
 
 const MAX_ANSWERS_PER_REPORT = 30;
 const STR = {
@@ -22,16 +22,16 @@ describe('test chatbot scenarion 1 - new user', () => {
     // browser.executeScript('window.localStorage.clear();');
     page = new AppPage();
   });
+  // todo: recover safely
+  // it('[Case] should simulate a "ben" click for a new user', () => {
+  //   page.navigateTo();
 
-  it('[Case] should simulate a "ben" click for a new user', () => {
-    page.navigateTo();
-
-    // click on "ben"
-    page.getMessageOptions().first().click();
-    const lastMessage = page.getMessagesTo().last().getText();
-    expect(lastMessage).toContain(STR.ben);
-    expect(lastMessage).not.toContain(STR.bat);
-  });
+  //   // click on "ben"
+  //   page.getMessageOptions().first().click();
+  //   const lastMessage = page.getMessagesTo().last().getText();
+  //   expect(lastMessage).toContain(STR.ben);
+  //   expect(lastMessage).not.toContain(STR.bat);
+  // });
 
   fit('[Blind] should simulate a "ben" click for a new user', async() => {
     page.navigateTo();
@@ -39,11 +39,12 @@ describe('test chatbot scenarion 1 - new user', () => {
     let activeAnswerElement;
     let reportSent = false;
     for (let i = 0; i < MAX_ANSWERS_PER_REPORT && !reportSent; i++) {
-      browser.sleep(3000);
-      activeQuestionText = await page.getActiveQuestionText();
-      log('Active quesion:', activeQuestionText.toString().split('').reverse().join(''));
+      page.waitForNextAnswerElements();
+      activeQuestionText = await reverseStr(page.getActiveQuestionText());
+      log('Active quesion:', activeQuestionText);
       activeAnswerElement = await page.getNextAnswerElement();
       await answerRandomally(activeAnswerElement);
+      // page.isNextAnswerReady()
       // reportSent = (lastMessageText).includes(STR.reportSent);
     }
   });
@@ -53,9 +54,9 @@ describe('test chatbot scenarion 1 - new user', () => {
 async function answerRandomally(answer: INextAnswer) {
   switch (answer.type) {
     case AnswerType.InputText: {
-      const input = 'yada yada'
+      const input = 'yada yada';
       answer.input.sendKeys(input);
-      await confirmAnswer(answer.confirmElement);
+      await safeClick(answer.confirmElement);
       log(`Answer using input-text: ${input}`);
       break;
     }
@@ -64,14 +65,14 @@ async function answerRandomally(answer: INextAnswer) {
       const max = await answer.input.getAttribute('max');
       const input = getRandomInt(parseInt(max, 10), parseInt(min, 10));
       answer.input.sendKeys(input);
-      await confirmAnswer(answer.confirmElement);
+      await safeClick(answer.confirmElement);
       log(`Answer using input-number: ${input}`);
       break;
     }
     case AnswerType.InputDate: {
       const input = (new Date()).toISOString();
       answer.input.sendKeys(input);
-      await confirmAnswer(answer.confirmElement);
+      await safeClick(answer.confirmElement);
       log(`Answer using input-date: ${input}`);
       break;
     }
@@ -88,32 +89,39 @@ async function answerRandomally(answer: INextAnswer) {
 async function selectRandomOptionSingle(options: ElementArrayFinder) {
   const lastOptionIndex = (await options.count()) - 1;
   const clickBtnIndex = getRandomInt(lastOptionIndex);
-  log(`Answer using single-select option - click button index: ${clickBtnIndex}`);
-  options.get(clickBtnIndex).click();
+  const btnText = await reverseStr(options.get(1).getText());
+  log(`Answer using single-select option - click button index: ${clickBtnIndex} of ${lastOptionIndex} (${btnText})`);
+  safeClick(options.get(1)); // todo: use random value instead
 }
 
 async function selectRandomOptionMulti(options: ElementArrayFinder, confirmElement: ElementFinder) {
   const lastOptionIndex = (await options.count()) - 1;
   let clickBtnIndex = getRandomInt(lastOptionIndex);
     // multi-select option
-    const howManyToSelect = 1; // remove
+    const howManyToSelect = 1; // todo: use random value instead
     for (let index = 0; index < howManyToSelect; index++) {
     // click randomally (same option may be clicked multiple times)
     clickBtnIndex = getRandomInt(lastOptionIndex);
-    log(`Answer using multi-select option - click button index: ${clickBtnIndex} (last index is ${lastOptionIndex})`);
-    options.get(1).click(); // remove
-    confirmAnswer(confirmElement);
+    const btnText = await reverseStr(options.get(1).getText());
+    log(`Answer using multi-select option - click button index: ${clickBtnIndex} of ${lastOptionIndex} (${btnText})`);
+    safeClick(options.get(1)); // todo: use random value instead
+    safeClick(confirmElement);
   }
 }
 
-async function confirmAnswer(confirmElement: ElementFinder) {
+async function safeClick(button: ElementFinder) {
   const EC = protractor.ExpectedConditions;
-  browser.wait(EC.presenceOf(confirmElement), 5000);
-  confirmElement.click();
+  browser.wait(EC.elementToBeClickable(button), 10000);
+  button.click();
 }
 
 function getRandomInt(max, min = 0) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+async function reverseStr(strFinder: promise.Promise<string>) {
+  const str = await strFinder;
+  return str.split('').reverse().join('');
 }
