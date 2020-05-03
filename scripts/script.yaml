@@ -39,11 +39,11 @@
         - goto: insulation
         - goto: current-report
         - goto: exposures
-        - say: זהו, סיימנו את הדיווח עבור {{alias}}
         - do:
             cmd: save_report
             params:
               - record
+        - say: מצויין, יש לנו את כל הדיווח של {{alias}}. מה לגבי אנשים נוספים?
         - goto: reporting-loop
               
     - name: personal-details
