@@ -36,12 +36,11 @@
       <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()' [style.background-image]='"url(" + mapService.static() + ")"'>
         <div class='enlarge'></div>
       </div>
-      <h1 i18n appLtr>לפני הכל,<br/>
-      מה שלומך? באמת.</h1>
+      <h1 i18n appLtr>נכנסים לשגרה החדשה.</h1>
       <h2 i18n>
-      כולנו מדווחים מידי יום ועוזרים לחוקרי מכון ויצמן לזהות התפרצויות מקומיות של נגיף הקורונה לפני שהן יוצאות משליטה.
+      דווקא עכשיו, כשמתחילים להסיר את המגבלות: כולנו מדווחים מידי יום ועוזרים לחוקרי מכון ויצמן לזהות התפרצויות מקומיות של קורונה לפני שהן יוצאות משליטה.
       </h2>
-      <div class='logos' appLtr>
+        <div class='logos' appLtr>
         <div class='moving'>
           <ng-container *ngFor='let i of copies'>
             <a href='https://www.weizmann.ac.il/' target='_blank'><img src='assets/img/weizmann-logo.png'/></a>
