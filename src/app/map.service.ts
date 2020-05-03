@@ -38,8 +38,8 @@ export class MapService {
     } else {
       this.http.get('/data/map_coloring.json')
         .pipe(
-          catchError((error) => {
-            return this.http.get('https://avid-covider.phonaris.com/data/map_coloring.json?a=1')
+          catchError(() => {
+            return this.http.get('https://avid-covider.phonaris.com/data/map_coloring.json?a=1');
           })
         ).subscribe((data) => {
           this._init = true;
