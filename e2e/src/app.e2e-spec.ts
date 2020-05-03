@@ -16,10 +16,8 @@ const log = (msg, arg: any = '') => console.log(`[app.e2e-spec] ${msg}`, arg);
  */
 describe('test chatbot scenarion 1 - new user', () => {
   let page: AppPage;
-  const answers = [];
 
   beforeEach(() => {
-    // browser.executeScript('window.localStorage.clear();');
     page = new AppPage();
   });
   // todo: recover safely
@@ -37,6 +35,7 @@ describe('test chatbot scenarion 1 - new user', () => {
     page.navigateTo();
     let activeQuestionText;
     let activeAnswerElement;
+    let reportSentTextFound;
     let reportSent = false;
     for (let i = 0; i < MAX_ANSWERS_PER_REPORT && !reportSent; i++) {
       page.waitForNextAnswerElements();
@@ -44,8 +43,15 @@ describe('test chatbot scenarion 1 - new user', () => {
       log('Active quesion:', activeQuestionText);
       activeAnswerElement = await page.getNextAnswerElement();
       await answerRandomally(activeAnswerElement);
-      // page.isNextAnswerReady()
-      // reportSent = (lastMessageText).includes(STR.reportSent);
+      // check if report ended
+      reportSentTextFound = await page.existInPostAnswerText(STR.reportSent);
+      reportSent = reportSentTextFound;
+      if (reportSent) {
+        log('=== reportSent! ===');
+        browser.executeScript('return window.wouldSend;').then(function (v) {
+          console.log('*** ', v);
+        });
+      }
     }
   });
 });

@@ -16,6 +16,7 @@ import { ShareService } from '../share.service';
 import { ReminderWidgetComponent } from '../reminder-widget/reminder-widget.component';
 import { RemindersService } from '../reminders.service';
 import { AppinstallService } from '../appinstall.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat-page',
@@ -58,7 +59,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   init() {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
-    this.runner.timeout = 250;
+    this.runner.timeout = environment.chatRunnerTimeout;
     this.runner.debug = false;
     this.runner.fixme = () => {
       this.restart();
@@ -558,6 +559,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             obs = this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
           } else {
             console.log('WOULD SEND', payload);
+            window['wouldSend'] = payload;  // used by protractor (e2e testing)
             obs = of({success: true});
           }
           obs.pipe(

@@ -88,7 +88,6 @@ export class AppPage {
         break;
       }
     }
-    log('asnswersCounter', this.asnswersCounter)
     const EC = protractor.ExpectedConditions;
     const inputReady = EC.elementToBeClickable(this.getHtlInput());
     const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
@@ -102,10 +101,14 @@ export class AppPage {
     return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();
   }
 
-  async getAfterAnswerText(): promise.Promise<string> {
-    return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();
+  // check if strung exist ins last 1-3 messages
+  // (To be specific: 'nth-last-child' will take the last 3 items, and will filter those who are not 'htl-message-to')
+  async existInPostAnswerText(searchText): promise.Promise<boolean> {
+    return element.all(by.css(`htl-messages htl-message-to:nth-last-child(-n+3) .speech-bubble span`))
+      .filter((elem) => elem.getText().then((text)  => text.includes(searchText)))
+      .isPresent();
   }
-  
+
   // get the next element will be used for answer
   async getNextAnswerElement(): Promise<INextAnswer> {
     const isHtlInputPresent = await this.getHtlInput().isPresent();
