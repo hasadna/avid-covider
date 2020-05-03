@@ -72,12 +72,8 @@ export class AppPage {
       .element(by.css('button.other'));
   }
 
-  // due to layout structure, this function may return 1-3 messages, depend on the displayed elements
-  // (To be specific: 'nth-last-child' will take the last 3 items, and will filter those who are not 'htl-message-to')
-  // async getLastMessagesText(): Promise<string> {
-  //   return element.all(by.css(`htl-message-to:nth-last-child(-n+3) .speech-bubble span`)).getText();
-  // }
-  waitForNextAnswerElements() {
+  // wait until next answer elements ready for interaction
+  async waitForNextAnswerElements() {
     switch(this.activeAnswerType) {
       case AnswerType.OptionsSingle: {
         this.asnswersCounter.optionsSingle++;
@@ -93,9 +89,7 @@ export class AppPage {
     const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
     const optionsMultiReady = EC.elementToBeClickable(this.getActiveHtlMultiOptionsConfirm());    // next multi option confirm
 
-    // todo: can be removed?
-    browser.sleep(300); // minimal wait time - to allow browser to do some render before next step
-    browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
+    await browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
   }
   async getActiveQuestionText(): promise.Promise<string> {
     return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();

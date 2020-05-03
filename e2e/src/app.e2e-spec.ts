@@ -1,5 +1,6 @@
 import { AppPage, INextAnswer, AnswerType } from './app.po';
 import { browser, ElementFinder, ElementArrayFinder, protractor, promise } from 'protractor';
+import { safeClick, getRandomInt, reverseStr } from './e2e.utils';
 
 const MAX_ANSWERS_PER_REPORT = 30;
 const STR = {
@@ -20,25 +21,26 @@ describe('test chatbot scenarion 1 - new user', () => {
   beforeEach(() => {
     page = new AppPage();
   });
-  // todo: recover safely
-  // it('[Case] should simulate a "ben" click for a new user', () => {
-  //   page.navigateTo();
 
-  //   // click on "ben"
-  //   page.getMessageOptions().first().click();
-  //   const lastMessage = page.getMessagesTo().last().getText();
-  //   expect(lastMessage).toContain(STR.ben);
-  //   expect(lastMessage).not.toContain(STR.bat);
-  // });
+  // basic sanity check
+  it('[Sanity] should click "ben" for a new user', () => {
+    page.navigateTo();
 
-  fit('[Blind] should simulate a "ben" click for a new user', async() => {
+    // click on "ben"
+    page.getMessageOptions().first().click();
+    const lastMessage = page.getMessagesTo().last().getText();
+    expect(lastMessage).toContain(STR.ben);
+    expect(lastMessage).not.toContain(STR.bat);
+  });
+
+  fit('[Flow] should fill report for a new user ', async() => {
     page.navigateTo();
     let activeQuestionText;
     let activeAnswerElement;
     let reportSentTextFound;
     let reportSent = false;
     for (let i = 0; i < MAX_ANSWERS_PER_REPORT && !reportSent; i++) {
-      page.waitForNextAnswerElements();
+      await page.waitForNextAnswerElements();
       activeQuestionText = await reverseStr(page.getActiveQuestionText());
       log('Active quesion:', activeQuestionText);
       activeAnswerElement = await page.getNextAnswerElement();
@@ -113,21 +115,4 @@ async function selectRandomOptionMulti(options: ElementArrayFinder, confirmEleme
     safeClick(options.get(1)); // todo: use random value instead
     safeClick(confirmElement);
   }
-}
-
-async function safeClick(button: ElementFinder) {
-  const EC = protractor.ExpectedConditions;
-  browser.wait(EC.elementToBeClickable(button), 10000);
-  button.click();
-}
-
-function getRandomInt(max, min = 0) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-async function reverseStr(strFinder: promise.Promise<string>) {
-  const str = await strFinder;
-  return str.split('').reverse().join('');
 }
