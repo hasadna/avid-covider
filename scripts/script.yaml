@@ -43,7 +43,7 @@
             cmd: save_report
             params:
               - record
-        - say: מצויין, יש לנו את כל הדיווח של {{alias}}. מה לגבי אנשים נוספים?
+        - say: מצויין, שלחנו את הדיווח של {{alias}}. מה לגבי אנשים נוספים?
         - goto: reporting-loop
               
     - name: personal-details
