@@ -62,6 +62,7 @@ async function doAnswer(answerElements: IAnswerElements, nextAnswer: AnswerTestD
     }
     case AnswerElementType.InputDate: {
       const input = getValidDateInput(nextAnswer);
+      answerElements.input.click(); // to active date field
       answerElements.input.sendKeys(input);
       await safeClick(answerElements.confirmElement);
       log(`Answer using input-date: ${input}`);
