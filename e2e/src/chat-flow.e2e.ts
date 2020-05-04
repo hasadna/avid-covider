@@ -14,12 +14,12 @@ export async function simulateChatFlow(page: AppPage, stopText: string, answers:
   let nextAnswer;
 
   log('=== start chat flow simulation ===');
-  if(answers.length > 0) {
+  if (answers.length > 0) {
     log('provided answers: ', answers);
   }
 
   for (let i = 0; i < MAX_ANSWERS_PER_REPORT && !stopTextDiscovered; i++) {
-    log(` --- Quesion ${i + 1} ---`)
+    log(` --- Quesion ${i + 1} ---`);
     nextAnswer = (answers.length > 0) ? answers.shift() : null;
 
     // wait for browser

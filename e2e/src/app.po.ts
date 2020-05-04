@@ -74,12 +74,12 @@ export class AppPage {
 
   // wait until next answer elements ready for interaction
   async waitForNextAnswerElements() {
-    switch(this.activeAnswerElementType) {
+    switch (this.activeAnswerElementType) {
       case AnswerElementType.OptionsSingle: {
         this.asnswersCounter.optionsSingle++;
         break;
       }
-      case AnswerElementType.OptionsMulti:{
+      case AnswerElementType.OptionsMulti: {
         this.asnswersCounter.optionsMulti++;
         break;
       }
@@ -88,7 +88,7 @@ export class AppPage {
     const inputReady = EC.elementToBeClickable(this.getHtlInput());
     const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
     const optionsMultiReady = EC.elementToBeClickable(this.getActiveHtlMultiOptionsConfirm());    // next multi option confirm
-    log('asnswersCounter', this.asnswersCounter)
+    log('asnswersCounter', this.asnswersCounter);
     await browser.waitForAngular();
     await browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
   }
