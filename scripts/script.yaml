@@ -231,19 +231,73 @@
             - match: true 
               steps:
               - switch:
-                  arg: medical_staff_member
+                  arg: work_outside
                   cases:
-                    - undefined: true        # <---- ask new/returning users with no past info about the kind work
-                      steps:
-                        - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
-                        - wait:
-                            variable: medical_staff_member
-                            options:
-                            - show: כן, אני חלק מצוות רפואי
-                              value: "true" 
-                            - show: לא, אני לא
-                              value: "false"
-                    - default: true            # <---- for returning users past info about the kind work, pass
+                  - undefined: true
+                    steps:
+                    - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
+                    - wait:
+                        variable: work_outside
+                        options:
+                        - show: כן, יש עבודה מחוץ לבית
+                          value: true 
+                          steps:
+                          - say: האם העבודה במקום קבוע?
+                          - wait:
+                              variable: _work_outside
+                              options:
+                              - show: כן, במקום קבוע
+                                value: true
+                                steps:
+                                - say: אפשר לשאול מהו מקום העבודה? זה יכול לעזור לנו במחקר
+                                - wait:
+                                    variable: _work_outside
+                                    options:
+                                    - show: כן, בטח
+                                      value: true
+                                      steps:
+                                        - do:
+                                            cmd: prepare_city_town_suggestions
+                                            variable: _workTownSuggestions
+                                        - say: איפה נמצא מקום העבודה?
+                                        - wait:
+                                            variable: work_outside_city_town
+                                            placeholder: "שם העיר או הישוב"
+                                            suggestionsFrom: _workTownSuggestions
+                                        - say: ובאיזה רחוב זה?
+                                        - wait:
+                                            variable: work_outside_street
+                                            placeholder: שם הרחוב, אם ידוע
+                                            required: false
+                                    - show: עדיף שלא
+                              - show: לא, אין כתובת קבועה בעבודה
+                                value: false
+                          - say: וכמה שעות, פחות או יותר, עוברות עליך שם בשבוע?
+                          - wait:
+                              variable: work_outside_avg_weekly_hours
+                              input-type: number
+                              validation: "[0-9]+"
+                              input-step: 1
+                              placeholder: מספר השעות, בממוצע
+
+                          - switch:
+                              arg: medical_staff_member
+                              cases:
+                              - undefined: true        # <---- ask new/returning users with no past info about the kind work
+                                steps:
+                                - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
+                                - wait:
+                                    variable: medical_staff_member
+                                    options:
+                                    - show: כן, אני חלק מצוות רפואי
+                                      value: "true" 
+                                    - show: לא, אני לא
+                                      value: "false"
+                              - default: true            # <---- for returning users past info about the kind work, pass
+
+                        - show: לא
+                          value: false 
+                  - default: true 
 
     - name: preconditions-check
       steps:
