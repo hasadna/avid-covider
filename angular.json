@@ -67,6 +67,14 @@
                 }
               ]
             },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
+            },
             "en": {
               "fileReplacements": [
                 {
@@ -257,6 +265,9 @@
           "configurations": {
             "production": {
               "browserTarget": "avid-covider:build:production"
+            },
+            "test": {
+              "browserTarget": "avid-covider:build:test"
             }
           }
         },
@@ -316,7 +327,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "avid-covider:serve"
+            "devServerTarget": "avid-covider:serve:test"
           },
           "configurations": {
             "production": {
