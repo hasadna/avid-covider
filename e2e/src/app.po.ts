@@ -3,7 +3,7 @@ import { browser, by, element, ElementFinder, ElementArrayFinder, protractor, pr
 // AppPage is used for getting main elements on page
 // This logic is seperated from test itself since itmay change from time to time
 
-export enum AnswerType {
+export enum AnswerElementType {
   InputNumber = 'InputNumber',
   InputText = 'InputText',
   InputDate = 'InputDate',
@@ -11,8 +11,8 @@ export enum AnswerType {
   OptionsMulti = 'OptionsMulti',
 }
 
-export interface INextAnswer {
-  type: AnswerType;
+export interface IAnswerElements {
+  type: AnswerElementType;
   input?: ElementFinder; // for type Input
   options?: ElementArrayFinder; // for type Options
   confirmElement?: ElementFinder; // Input OR Options(multi)
@@ -21,7 +21,7 @@ export interface INextAnswer {
 const log = (msg, arg: any = '') => console.log(`[App Page] ${msg}`, arg);
 
 export class AppPage {
-  activeAnswerType: AnswerType;
+  activeAnswerElementType: AnswerElementType;
   asnswersCounter = {
     optionsSingle: 0,
     optionsMulti: 0,
@@ -74,12 +74,12 @@ export class AppPage {
 
   // wait until next answer elements ready for interaction
   async waitForNextAnswerElements() {
-    switch(this.activeAnswerType) {
-      case AnswerType.OptionsSingle: {
+    switch(this.activeAnswerElementType) {
+      case AnswerElementType.OptionsSingle: {
         this.asnswersCounter.optionsSingle++;
         break;
       }
-      case AnswerType.OptionsMulti:{
+      case AnswerElementType.OptionsMulti:{
         this.asnswersCounter.optionsMulti++;
         break;
       }
@@ -88,7 +88,8 @@ export class AppPage {
     const inputReady = EC.elementToBeClickable(this.getHtlInput());
     const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
     const optionsMultiReady = EC.elementToBeClickable(this.getActiveHtlMultiOptionsConfirm());    // next multi option confirm
-
+    log('asnswersCounter', this.asnswersCounter)
+    await browser.waitForAngular();
     await browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
   }
   async getActiveQuestionText(): promise.Promise<string> {
@@ -104,7 +105,7 @@ export class AppPage {
   }
 
   // get the next element will be used for answer
-  async getNextAnswerElement(): Promise<INextAnswer> {
+  async getNextAnswerElement(): Promise<IAnswerElements> {
     const isHtlInputPresent = await this.getHtlInput().isPresent();
     if (isHtlInputPresent) {
       // using htl input
@@ -115,45 +116,45 @@ export class AppPage {
     }
   }
 
-  private async getNextAnswerInputElement(): Promise<INextAnswer> {
-    const result: INextAnswer = { type: AnswerType.InputText };
+  private async getNextAnswerInputElement(): Promise<IAnswerElements> {
+    const result: IAnswerElements = { type: AnswerElementType.InputText };
     const htlInput = await this.getHtlInput();
     const inputType = await htlInput.getAttribute('type');
 
     switch (inputType) {
       case 'date': {
-        result.type = AnswerType.InputDate;
+        result.type = AnswerElementType.InputDate;
         break;
       }
       case 'number': {
-        result.type = AnswerType.InputNumber;
+        result.type = AnswerElementType.InputNumber;
         break;
       }
       default: {
-        result.type = AnswerType.InputText;
+        result.type = AnswerElementType.InputText;
         break;
       }
     }
     result.input = htlInput;
     result.confirmElement = this.getHtlInputConfrim();
     log(`Next answer element is using Hatool Input [${result.type}]`);
-    this.activeAnswerType = result.type;
+    this.activeAnswerElementType = result.type;
     return result;
   }
 
-  private async getNextAnswerOptionElement(): Promise<INextAnswer> {
-    const result: INextAnswer = { type: AnswerType.InputText };
+  private async getNextAnswerOptionElement(): Promise<IAnswerElements> {
+    const result: IAnswerElements = { type: AnswerElementType.InputText };
     const htlSingleSelectOption = this.getActiveHtlSingleOptions();
     // is active hatool options are of type single
     const isSingle = await htlSingleSelectOption.isPresent();
 
-    result.type = isSingle ? AnswerType.OptionsSingle : AnswerType.OptionsMulti;
+    result.type = isSingle ? AnswerElementType.OptionsSingle : AnswerElementType.OptionsMulti;
     result.options = isSingle ? htlSingleSelectOption : this.getActiveHtlMultiOptions();
     if (!isSingle) {
       // confirm element for optionsMulti
       result.confirmElement = this.getActiveHtlMultiOptionsConfirm();
     }
-    this.activeAnswerType = result.type;
+    this.activeAnswerElementType = result.type;
     log(`Next answer element is using Hatool Options [${isSingle ? 'single' : 'multi'}]`);
     return result;
   }
