@@ -634,6 +634,8 @@
               field: toplevel_symptoms_pains
             - show: שלשול
               field: symptoms_diarrhea
+            - show: חוסר תאבון או דילוג על ארוחות
+              field: lack_of_appetite_or_skipping_meals                            
             - show: בחילה או הקאות
               field: symptoms_nausea_and_vomiting
             - show: צמרמורת
@@ -704,6 +706,8 @@
                     field: symptoms_headache
                   - show: כאבי גרון
                     field: symptoms_sore_throat
+                  - show: כאב בטן
+                    field: abdominal_pain
                   - show: |-
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
                       <span class='not-empty'>זהו</span>
