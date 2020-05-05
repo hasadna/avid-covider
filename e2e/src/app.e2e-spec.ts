@@ -11,7 +11,7 @@ const STR = {
   raanana: 'רעננה',
   balfour: 'בלפור',
   herzl: 'הרצל',
-  reportSent: 'זהו, סיימנו',
+  reportSent: 'השלמנו את הדיווח היומי', // todo: should we test this?
 };
 
 const log = (msg, arg: any = '') => console.log(`[app-spec] ${msg}`, arg);
@@ -64,7 +64,7 @@ describe('[Flow] Reporting For a first address on a device', () => {
   it('should fill report for a new user ', async () => {
     showTestMessage(page, 'START: should fill report for a new user');
 
-    await simulateChatFlow(page, STR.reportSent, answers);
+    await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
     const wouldSend = await browser.executeScript('return window.wouldSend;');
     log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
@@ -86,7 +86,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     await page.clearLocalStorage();
     await showTestMessage(page, 'BEFOREALL: [Flow] Returning user can not start a new report on the same day');
     // fill random user report for 'alias'
-    await simulateChatFlow(page, STR.reportSent, beforeAllanswers);
+    await simulateChatFlow(page, beforeAllanswers);
   });
 
   it('should NOT start a new report in the same day', async () => {
@@ -116,7 +116,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     await page.navigateTo();
 
     const answers = [0];  // choose another report for the same alias
-    await simulateChatFlow(page, STR.reportSent, answers);
+    await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
     const wouldSend = await browser.executeScript('return window.wouldSend;');
     log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);

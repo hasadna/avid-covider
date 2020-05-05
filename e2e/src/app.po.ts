@@ -56,6 +56,10 @@ export class AppPage {
     // return element(by.css('body')).allowAnimations(false);
   }
 
+  async getWouldSend() {
+    return await browser.executeScript('return window.wouldSend;');
+  }
+
   async clearLocalStorage() {
     const ls = await browser.executeScript('window.localStorage.clear(); return window.localStorage');
     log(`local storage cleared: ${ls['length'] === 0}`);
