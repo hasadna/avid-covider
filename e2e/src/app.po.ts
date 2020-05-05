@@ -19,19 +19,56 @@ export interface IAnswerElements {
 }
 
 const log = (msg, arg: any = '') => console.log(`[App Page] ${msg}`, arg);
-
+const testDataElementCss = [
+  'position:fixed;',
+  'top:0;',
+  'left:0;',
+  'width:80%;',
+  'height:50px;',
+  'padding: 10px; 20px;',
+  'text-align: left;',
+  'z-index:100;',
+  'color:red;',
+  'font-size:20px;',
+  'background:white;',
+].join('');
 export class AppPage {
   activeAnswerElementType: AnswerElementType;
-  asnswersCounter = {
+  answersCounter = {
     optionsSingle: 0,
     optionsMulti: 0,
   };
 
+  private resetCounters = () => {
+    this.answersCounter.optionsSingle = 0;
+    this.answersCounter.optionsMulti = 0;
+  }
+
   navigateTo() {
-    // reset counters
-    this.asnswersCounter.optionsSingle = 0;
-    this.asnswersCounter.optionsMulti = 0;
+    this.activeAnswerElementType = null;
+    this.resetCounters();
     return browser.get('/');
+  }
+
+  disableAnimations() {
+    // todo: override css animations in src/theme.less?
+    // Turns off ng-animate animations for all elements
+    // return element(by.css('body')).allowAnimations(false);
+  }
+
+  async clearLocalStorage() {
+    const ls = await browser.executeScript('window.localStorage.clear(); return window.localStorage');
+    log(`local storage cleared: ${ls['length'] === 0}`);
+  }
+
+  async displayTestData(msg: string) {
+    const script = `
+      var elem = document.createElement('div');
+      elem.style.cssText = '${testDataElementCss}';
+      elem.innerHTML = 'ACTIVE PHASE: ${msg}';
+      document.body.appendChild(elem);
+    `;
+    await browser.executeScript(script);
   }
 
   getMessageOptions() {
@@ -53,7 +90,7 @@ export class AppPage {
 
   // == options ==
   private getActiveHtlSingleOptions(useIndex?: number): ElementArrayFinder {
-    const index = this.asnswersCounter.optionsSingle;
+    const index = this.answersCounter.optionsSingle;
     return element.all(by.css('htl-messages htl-message-options'))
       .get(index)
       .all(by.css('.options button'));
@@ -61,7 +98,7 @@ export class AppPage {
 
   private getActiveHtlMultiOptions(useIndex?: number): ElementArrayFinder {
     // get all options without 'other' class ('other' is confirm button)
-    const index = this.asnswersCounter.optionsMulti;
+    const index = this.answersCounter.optionsMulti;
     return element.all(by.css('htl-messages htl-message-multi-options'))
       .get(index)
       .all(by.css('button:not(.other)'));
@@ -69,7 +106,7 @@ export class AppPage {
 
   private getActiveHtlMultiOptionsConfirm(): ElementFinder {
     // get all options other than last ('other' is confirm button)
-    const index = this.asnswersCounter.optionsMulti;
+    const index = this.answersCounter.optionsMulti;
     return element.all(by.css('htl-messages htl-message-multi-options'))
       .get(index)
       .element(by.css('button.other'));
@@ -79,11 +116,11 @@ export class AppPage {
   async waitForNextAnswerElements() {
     switch (this.activeAnswerElementType) {
       case AnswerElementType.OptionsSingle: {
-        this.asnswersCounter.optionsSingle++;
+        this.answersCounter.optionsSingle++;
         break;
       }
       case AnswerElementType.OptionsMulti: {
-        this.asnswersCounter.optionsMulti++;
+        this.answersCounter.optionsMulti++;
         break;
       }
     }
@@ -91,10 +128,12 @@ export class AppPage {
     const inputReady = EC.elementToBeClickable(this.getHtlInput());
     const optionsSingleReady = EC.elementToBeClickable(this.getActiveHtlSingleOptions().last()); // next single option
     const optionsMultiReady = EC.elementToBeClickable(this.getActiveHtlMultiOptionsConfirm());    // next multi option confirm
-    log('asnswersCounter', this.asnswersCounter);
+
     await browser.waitForAngular();
-    await browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 100000);
+    await browser.wait(EC.or(inputReady, optionsSingleReady, optionsMultiReady), 10000);
   }
+
+  // get active question text
   async getActiveQuestionText(): promise.Promise<string> {
     return element.all(by.css('htl-message-to')).last().element(by.css('.speech-bubble span')).getText();
   }
