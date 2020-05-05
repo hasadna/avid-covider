@@ -465,6 +465,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             return this.fillIn(record, female_alias);
           }
         },
+        combine_location: (record, location_text) => {
+          return this.fillIn(record, location_text).trim();
+        },
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
