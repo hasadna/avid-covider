@@ -817,6 +817,55 @@
                         value: no_response
                         class: "other"
 
+
+                 # - do:
+                 #     cmd: fetch_public_transportation_question_date
+                 #     params:
+                 #       - record
+                  
+                 # - switch:
+                 #     arg: _public_transportation_question_ask
+                 #     cases:
+                 #       match: true
+                 #       steps:
+                  - say: האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?          
+                  - wait:
+                      variable: public_transportation_last_week
+                      options:
+                        - show: כן
+                          value: true
+                          steps:
+                          - say: במה מאלה השתמשת השבוע?
+                          - wait:
+                              variable: _var
+                              multi: true
+                              options:
+                              - show: "רכבת"
+                                field: public_transportation_train
+                              - show: "אוטובוס"
+                                field: public_transportation_bus 
+                              - show: "מונית"
+                                field: public_transportation_taxi
+                              - show: "אחר"
+                                field: public_transportation_other
+                              - show: |-
+                                  <span class='empty'>בעצם לא</span>
+                                  <span class='not-empty'>זהו</span>
+                                  <span class='none-selected'>אין פרטים נוספים</span>
+                                class: other
+                          - do:
+                              cmd: update_from_selection
+                              params:
+                                - record
+                                - _var
+                            
+                        - show: לא
+                          value: none
+                  #      - do:
+                  #          cmd: save_public_transportation_question_date
+                  #          params: 
+                  #          - record    
+
                   - switch:
                       arg: _is_adult
                       cases:
