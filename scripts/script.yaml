@@ -747,44 +747,66 @@
               - record
 
         - switch:
-            arg: _is_adult
+            arg: exposure_status
             cases:
-              - default: true
-              - match: true
+              - default: true 
+              - match: none                  # <--- the following questions are relevant only for people that are not in any kind of insulation
                 steps:
-                  - do:
-                      cmd: fetch_public_service_data
-                      params:
-                        - record
+                  - say: "האם חבשת היום מסיכה כשיצאת מהבית?"
+                  - wait:
+                      variable: habits_wear_mask
+                      options:
+                      - show: כן, תמיד
+                        value: always
+                      - show: רוב הזמן
+                        value: mostly_not
+                      - show: בחלק קטן מהזמן
+                        value: mostly_yes
+                      - show: לא
+                        value: never
+                      - show: לא רוצה להשיב
+                        value: no_response
+                        class: "other"
+
                   - switch:
-                      arg: _public_service_status
+                      arg: _is_adult
                       cases:
-                        - match: valid
-                        - match: required
-                          steps:
-                            - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
-                            - say: האם השאלה רלוונטית לגביך בימים אלו?
-                            - wait:
-                                variable: _served_public_last_fortnight
-                                options:
-                                  - show: כן, רלוונטית
-                                    value: relevant
-                                    steps:
-                                    - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                      - default: true
+                      - match: true
+                        steps:
+                          - do:
+                              cmd: fetch_public_service_data
+                              params:
+                                - record
+                          - switch:
+                              arg: _public_service_status
+                              cases:
+                                - match: valid
+                                - match: required
+                                  steps:
+                                    - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
+                                    - say: האם השאלה רלוונטית לגביך בימים אלו?
                                     - wait:
                                         variable: _served_public_last_fortnight
                                         options:
-                                        - show: כן, נתתי שירות
-                                          value: true
-                                        - show: לא נתתי שירות
-                                          value: false
-                                    - do:
-                                        cmd: save_public_service_data
-                                        params: 
-                                          - record
-                              
-                                  - show: לא רלוונטית
-                                    value: false
+                                          - show: כן, רלוונטית
+                                            value: relevant
+                                            steps:
+                                            - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                            - wait:
+                                                variable: _served_public_last_fortnight
+                                                options:
+                                                - show: כן, נתתי שירות
+                                                  value: true
+                                                - show: לא נתתי שירות
+                                                  value: false
+                                            - do:
+                                                cmd: save_public_service_data
+                                                params: 
+                                                  - record    
+                                          - show: לא רלוונטית
+                                            value: false
+
     - name: end-of-report
       steps:
         - goto: set-reminder
