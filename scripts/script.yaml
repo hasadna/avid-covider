@@ -553,6 +553,7 @@
                 steps:
                   - do:
                       cmd: need_to_ask_about_routine
+                      variable: _need_to_ask_about_routine
                       params:
                         - record
                   - switch:

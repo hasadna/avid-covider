@@ -1319,9 +1319,10 @@ export const script = {
                           "cmd": "need_to_ask_about_routine",
                           "params": [
                             "record"
-                          ]
+                          ],
+                          "variable": "_need_to_ask_about_routine"
                         },
-                        "uid": "a3523e71ec"
+                        "uid": "d123f70a2f"
                       },
                       {
                         "switch": {
