@@ -52,8 +52,8 @@ async function doAnswer(answerElements: IAnswerElements, nextAnswer: AnswerTestD
     case AnswerElementType.InputText: {
       const input = nextAnswer ? nextAnswer as string : 'yada yada';
       answerElements.input.sendKeys(input);
-      await safeClick(answerElements.confirmElement);
       log(`Answer using input-text: ${reverseStrSync(input)}`);
+      await safeClick(answerElements.confirmElement);
       break;
     }
     case AnswerElementType.InputNumber: {
@@ -61,16 +61,16 @@ async function doAnswer(answerElements: IAnswerElements, nextAnswer: AnswerTestD
       const min = parseInt(await answerElements.input.getAttribute('min'), 10);
       const input = getValidNumberInput(max, min, nextAnswer);
       answerElements.input.sendKeys(input);
-      await safeClick(answerElements.confirmElement);
       log(`Answer using input-number: ${input}`);
+      await safeClick(answerElements.confirmElement);
       break;
     }
     case AnswerElementType.InputDate: {
       const input = getValidDateInput(nextAnswer);
       answerElements.input.click(); // to active date field
       answerElements.input.sendKeys(input);
-      await safeClick(answerElements.confirmElement);
       log(`Answer using input-date: ${input}`);
+      await safeClick(answerElements.confirmElement);
       break;
     }
     case AnswerElementType.OptionsSingle: {

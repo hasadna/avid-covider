@@ -1,6 +1,9 @@
 import { browser, ElementFinder, protractor, promise } from 'protractor';
 import { AnswerTestDataType } from './models.e2e';
 
+const DAY = 24 * 60 * 60 * 1000;
+const RANDOM_TIME_OFFSET_MAX = 14 * DAY;
+
 const err = (msg, arg: any = '') => console.error(`[Utils - Error] ${msg}`, arg);
 
 export async function safeClick(button: ElementFinder) {
@@ -45,12 +48,16 @@ export function getValidDateInput(nextAnswer: AnswerTestDataType): string {
       err(`answer [${nextAnswer}] not valid as for input type date`);
     }
   }
-  return isValidNextAnswer ? (nextAnswer as string) : getCurrentDateString();
+  return isValidNextAnswer ? (nextAnswer as string) : getRandomDateString();
 }
 
-function getCurrentDateString() {
-  const date = new Date();
-  return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`;
+function getRandomDateString() {
+  const offset = getRandomInt(RANDOM_TIME_OFFSET_MAX, 0)
+  const date = new Date(Date.now() - offset);
+  const day = ('0' + date.getDate()).slice(-2); // get in 2 digit format
+  const month = ('0' + date.getMonth()).slice(-2); // get in 2 digit format
+  const fullYear = date.getFullYear();
+  return `${day}/${month}/${fullYear}`;
 }
 
 export function getValidOptionIndex(lastIndex: number, nextAnswer: AnswerTestDataType): number {

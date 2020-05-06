@@ -50,10 +50,14 @@ export class AppPage {
     return browser.get('/');
   }
 
-  disableAnimations() {
-    // todo: override css animations in src/theme.less?
-    // Turns off ng-animate animations for all elements
-    // return element(by.css('body')).allowAnimations(false);
+  async disableAnimations() {
+    // override css animations in src/theme.less
+    const script = `
+      var elem = document.createElement('style');
+      elem.innerHTML = '* {animation: none !important;}';
+      document.head.appendChild(elem);
+    `;
+    await browser.executeScript(script);
   }
 
   async getWouldSend() {
