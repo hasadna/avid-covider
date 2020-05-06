@@ -89,6 +89,8 @@
                     value: male
                   - show: בת
                     value: female
+                  - show: אחר
+                    value: other
             - default: true                          # <---- for returning reporters, pass
 
         - switch:
@@ -105,6 +107,9 @@
                   - match: female
                     steps:
                     - say: בת כמה?
+                  - match: other
+                    steps:
+                    - say: מה הגיל שלך?
               - wait:
                   variable: age
                   placeholder: "גיל, 0-120"
@@ -157,6 +162,7 @@
                     - record
                     - "בן {{age}} מ{{street}} {{city_town}}"
                     - "בת {{age}} מ{{street}} {{city_town}}"
+                    - "דיווח עבור גיל {{age}} מ{{street}} {{city_town}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
