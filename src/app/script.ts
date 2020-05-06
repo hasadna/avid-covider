@@ -431,7 +431,7 @@ export const script = {
                             "record",
                             "בן {{age}} מ{{_location}}",
                             "בת {{age}} מ{{_location}}",
-                            "דיווח עבור גיל {{age}} מ{{_location}}"
+                            "גיל {{age}} מ{{_location}}"
                           ],
                           "variable": "alias"
                         },
@@ -464,12 +464,22 @@ export const script = {
             },
             {
               "do": {
+                "cmd": "is_old",
+                "params": [
+                  "record"
+                ],
+                "variable": "_is_old"
+              },
+              "uid": "c66ea28556"
+            },
+            {
+              "do": {
                 "cmd": "fetch_household_data",
                 "params": [
                   "record"
                 ]
               },
-              "uid": "18552bcc62"
+              "uid": "255af420b6"
             },
             {
               "switch": {
@@ -483,11 +493,11 @@ export const script = {
                     "steps": [
                       {
                         "say": "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -",
-                        "uid": "2fb51aac61"
+                        "uid": "e51b127ea6"
                       },
                       {
                         "say": "כמה מבוגרים מעל לגיל 18 גרים בבית?",
-                        "uid": "6f0513265a"
+                        "uid": "ddaadab144"
                       },
                       {
                         "switch": {
@@ -497,7 +507,7 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
-                                  "uid": "799fa20500",
+                                  "uid": "0f0ab944cf",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -508,13 +518,13 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "1d5d0279a7"
+                              "uid": "964835528e"
                             },
                             {
                               "match": false,
                               "steps": [
                                 {
-                                  "uid": "35f7c67694",
+                                  "uid": "d073832592",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -525,15 +535,15 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "508c84043e"
+                              "uid": "e7554e1f63"
                             }
                           ]
                         },
-                        "uid": "86660cb2df"
+                        "uid": "6aa687cb41"
                       },
                       {
                         "say": "וכמה ילדים מתחת לגיל 18?",
-                        "uid": "8908359a20"
+                        "uid": "d8a5d22932"
                       },
                       {
                         "switch": {
@@ -543,7 +553,7 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
-                                  "uid": "4b59320d24",
+                                  "uid": "e6dca8ba8c",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -554,13 +564,13 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "a639cb9852"
+                              "uid": "f14282832c"
                             },
                             {
                               "match": false,
                               "steps": [
                                 {
-                                  "uid": "910fff2629",
+                                  "uid": "4c8324ae32",
                                   "wait": {
                                     "input-kind": "number",
                                     "input-max": 99,
@@ -571,22 +581,22 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "8d3dbd01fb"
+                              "uid": "0f0e773867"
                             }
                           ]
                         },
-                        "uid": "ff185e44dc"
+                        "uid": "20a02ef3e2"
                       }
                     ],
-                    "uid": "59547d5ca6"
+                    "uid": "e52be7b791"
                   }
                 ]
               },
-              "uid": "20ee4aa27c"
+              "uid": "7b08de84ce"
             },
             {
               "switch": {
-                "arg": "_is_adult",
+                "arg": "_is_old",
                 "cases": [
                   {
                     "default": true
@@ -605,14 +615,14 @@ export const script = {
                               "steps": [
                                 {
                                   "say": "האם מקום המגורים הנוכחי שלך הוא דיור מוגן?",
-                                  "uid": "132132a332"
+                                  "uid": "6415cf5af0"
                                 },
                                 {
-                                  "uid": "515fb93860",
+                                  "uid": "8ee414573b",
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": "כן, בדיור מוגן",
+                                        "show": "כן, דיור מוגן",
                                         "value": true
                                       },
                                       {
@@ -628,19 +638,19 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "a4f874099c",
+                              "uid": "ee97af0f30",
                               "undefined": true
                             }
                           ]
                         },
-                        "uid": "41677fbeb3"
+                        "uid": "ad41aeabb6"
                       }
                     ],
-                    "uid": "69f2d8c722"
+                    "uid": "605c43beb6"
                   }
                 ]
               },
-              "uid": "e640fb6c0a"
+              "uid": "4158ebe000"
             }
           ],
           "uid": "ab5b28894d"
@@ -1251,10 +1261,10 @@ export const script = {
                               "value": "insulation"
                             },
                             {
-                              "show": "אני חולה קורונה (מאומת בבדיקת מעבדה)",
+                              "show": "אני חולה בקורונה (מאומת בבדיקת מעבדה)",
                               "steps": [
                                 {
-                                  "uid": "32b02ca38f",
+                                  "uid": "c127e7134f",
                                   "wait": {
                                     "options": [
                                       {
@@ -1278,7 +1288,7 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "7fdfa3db6a",
+                              "uid": "fed74bf715",
                               "value": "diagnosed"
                             },
                             {
