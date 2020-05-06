@@ -76,9 +76,14 @@ async function doAnswer(answerElements: IAnswerElements, nextAnswer: AnswerTestD
     }
     case AnswerElementType.InputDate: {
       const input = getValidDateInput(nextAnswer);
-      answerElements.input.click(); // to active date field
-      answerElements.input.sendKeys(input);
-      log(`Answer using input-date: ${input}`);
+      await answerElements.input.click(); // to active date field
+      // using this workround since sendKeys doesn't work on headless chrome 
+      const script = `
+        var elem = document.querySelector('htl-input input');
+        elem.value = '${input}';
+        document.querySelector('htl-input button').disabled = false;
+      `;
+      await browser.executeScript(script);
       await safeClick(answerElements.confirmElement);
       break;
     }

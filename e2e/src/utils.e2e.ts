@@ -58,7 +58,7 @@ function getRandomDateString() {
   const day = ('0' + date.getDate()).slice(-2); // get in 2 digit format
   const month = ('0' + date.getMonth()).slice(-2); // get in 2 digit format
   const fullYear = date.getFullYear();
-  return `${day}/${month}/${fullYear}`;
+  return `${fullYear}-${month}-${day}`; // ISO standard
 }
 
 export function getValidOptionIndex(lastIndex: number, nextAnswer: AnswerTestDataType): number {

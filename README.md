@@ -120,7 +120,7 @@ Internally, chat-flow mechanism uses page object to interact with DOM elements.
 Scripts:
 
 - `e2e` - angular default 
-- `e2e:ci` - uses `config.ci` instead of default config. uses headless chrome.
+- `e2e:ci` - uses `ci.conf` instead of default config. uses headless chrome.
 - `e2e:dev` - used for runing a single run on develpment (You'll need to run angular dev server on port 4200 before running this on - `npm start`) 
 - `e2e:dev-headless` - same as `e2e:dev` but with headless chrome
 
