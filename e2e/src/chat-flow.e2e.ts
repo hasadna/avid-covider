@@ -12,13 +12,14 @@ export async function simulateChatFlow(page: AppPage, stopText: string, answers:
   let activeAnswerElement;
   let stopTextDiscovered = false;
   let nextAnswer;
+  let i;
 
   log('=== start chat flow simulation ===');
   if (answers.length > 0) {
     log('provided answers: ', answers);
   }
 
-  for (let i = 0; i < MAX_ANSWERS_PER_REPORT && !stopTextDiscovered; i++) {
+  for (i = 0; i < MAX_ANSWERS_PER_REPORT && !stopTextDiscovered; i++) {
     log(` --- Quesion ${i + 1} ---`);
     nextAnswer = (answers.length > 0) ? answers.shift() : null;
 
@@ -39,6 +40,7 @@ export async function simulateChatFlow(page: AppPage, stopText: string, answers:
       log('=== end chat flow simulation ===');
     }
   }
+  return i; // how many questions where asked
 }
 
 // interaction functions

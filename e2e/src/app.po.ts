@@ -28,6 +28,9 @@ export class AppPage {
   };
 
   navigateTo() {
+    // reset counters
+    this.asnswersCounter.optionsSingle = 0;
+    this.asnswersCounter.optionsMulti = 0;
     return browser.get('/');
   }
 

@@ -56,9 +56,7 @@ export class MapService {
   }
 
   static() {
-    return 'https://api.mapbox.com/styles/v1/wios/ck8xf8qi305nr1iqan5e50vcv/static/' +
-           `${this.lat},${this.lng},${this.zoom},0/680x680@2x` +
-           '?access_token=pk.eyJ1Ijoid2lvcyIsImEiOiJjazh4ZXZ6Z24wejdtM3JvN2F1MHdlc2Z4In0.vz7knGcRWWGE4LGOLx8c7g';
+    return '/data/map_preview.png';
   }
 
   closeOverlay() {
