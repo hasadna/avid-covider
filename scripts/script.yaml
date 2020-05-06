@@ -250,6 +250,22 @@
             - match: true 
               steps:
               - switch:
+                  arg: is_assisted_living
+                  cases:
+                  - default: true
+                  - undefined: true
+                    steps:
+                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן?
+                    - wait:
+                        variable: is_assisted_living
+                        options:
+                          - show: כן, בדיור מוגן
+                            value: true
+                          - show: לא
+                            value: false
+                          - show: לא רוצה להשיב
+                            value: no_response
+              - switch:
                   arg: medical_staff_member
                   cases:
                     - undefined: true        # <---- ask new/returning users with no past info about the kind work
@@ -263,24 +279,6 @@
                             - show: לא, אני לא
                               value: "false"
                     - default: true            # <---- for returning users past info about the kind work, pass
-
-        - switch:
-            arg: _is_adult
-            cases:
-            - default: true
-            - match: true 
-              steps:
-                - say: האם מקום המגורים שלך הנוכחי שלך הוא דיור מוגן?
-                - wait:
-                    variable: assisted_living
-                    options:
-                      - show: כן, בדיור מוגן
-                        value: true 
-                      - show: לא
-                        value: false
-                      - show: לא רוצה להשיב
-                        value: no_response
-
 
     - name: preconditions-check
       steps:
