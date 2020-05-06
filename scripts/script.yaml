@@ -186,6 +186,12 @@
               - record
             variable: _is_adult
 
+        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
+            cmd: is_old
+            params: 
+              - record
+            variable: _is_old
+
         - do:                                       # <---- check if we already have the household data from past reports
             cmd: fetch_household_data
             params: 
@@ -245,7 +251,7 @@
                           input-max: 99
 
         - switch:
-            arg: _is_adult
+            arg: _is_old
             cases:
             - default: true
             - match: true 
@@ -260,7 +266,7 @@
                     - wait:
                         variable: is_assisted_living
                         options:
-                          - show: כן, בדיור מוגן
+                          - show: כן, דיור מוגן
                             value: true
                           - show: לא
                             value: false

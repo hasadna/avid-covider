@@ -412,6 +412,14 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
           }
         },
+        is_old: (record: any) => {
+          try {
+            const age = parseInt(record.age, 10);
+            return age >= 65;
+          } catch (err) {
+            console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
+          }
+        },
         in_insulation: (record: any) => {
           return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
         },
