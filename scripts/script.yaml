@@ -531,7 +531,7 @@
                                 value: has_symptoms
                               - show: אני בבידוד מרצוני האישי                    
                                 value: voluntary
-                      - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
+                      - show: "אני חולה בקורונה (מאומת בבדיקת מעבדה)"
                         value: diagnosed
                         steps:
                           - wait:
