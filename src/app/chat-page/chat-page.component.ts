@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Inject, LOCALE_ID, EventEmitter, Output } from '@angular/core';
 import { ContentManager, ScriptRunnerNew as ScriptRunnerImpl } from 'hatool';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError, first } from 'rxjs/operators';
+import { map, catchError, first, switchMap } from 'rxjs/operators';
 import { VERSION, PRODUCTION } from '../constants';
 import { script } from '../script';
 import { of, Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ import { ShareService } from '../share.service';
 import { ReminderWidgetComponent } from '../reminder-widget/reminder-widget.component';
 import { RemindersService } from '../reminders.service';
 import { AppinstallService } from '../appinstall.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat-page',
@@ -58,7 +59,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
   init() {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
-    this.runner.timeout = 250;
+    this.runner.timeout = environment.chatRunnerTimeout;
     this.runner.debug = false;
     this.runner.fixme = () => {
       this.restart();
@@ -74,6 +75,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       }
     }
     return result;
+  }
+
+  augmentPayload(payload) {
+    payload['version'] = VERSION;
+    payload['_cityTownSuggestions'] = null;
+    return payload;
   }
 
   ngAfterViewInit() {
@@ -137,6 +144,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     return ret;
   }
 
+  makeUid() {
+    let result = '';
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charNum = charset.length;
+    for (let i = 0; i < 6; i++) {
+      result += charset.charAt(Math.floor(Math.random() * charNum));
+    }
+    return result;
+  }
+
   start() {
     if (this.started) {
       return;
@@ -147,7 +164,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       0,
       {
         clear: () => {
-          this.runner.record = {};
+          this.runner.record = Object.assign({}, this.storage.device);
         },
         load_local_storage: (record: any) => {
           record._existing_user = this.storage.reports.length > 0 ? 'returning' : 'new';
@@ -159,6 +176,10 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           const today_aliases = {};
           let reported_today = false;
           for (const report of this.storage.reports) {
+            if (!this.storage.device.originalEngagementSource &&
+                report[1].engagementSource) {
+              this.storage.device.originalEngagementSource = report[1].engagementSource;
+            }
             if (!report[1].alias) {
               continue;
             }
@@ -169,7 +190,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
           }
           const options = [];
-          for (const alias of Object.keys(aliases)) {
+          const aliases_list = Object.keys(aliases);
+          this.storage.device.num_aliases = aliases_list.length;
+          for (const alias of aliases_list) {
             const option: any = {};
             if (today_aliases[alias]) {
               option.class = 'disabled';
@@ -180,7 +203,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
                 'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
-                '_household.*', '_public_service.*'
+                '_household.*', '_public_service.*', 'uid'
               ])
             });
             options.push(option);
@@ -206,6 +229,16 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           }
           return options;
+        },
+        ensure_uid: (record) => {
+          if (!record['uid']) {
+            record['uid'] = this.makeUid();
+          }
+          if (!this.storage.device.main_uid) {
+            this.storage.device.main_uid = record['uid'];
+            this.storage.device.main_age = record['age'];
+            this.storage.device.main_city = record['city'];
+          }
         },
         set_flag: (record: any, varname) => {
           record[varname] = true;
@@ -437,8 +470,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
-        show_map: () => {
+        show_map: async () => {
           this.mapService.openMap();
+          return new Promise((resolve, reject) => {
+            this.mapService.mapVisibleStream.pipe(first()).subscribe(() => {
+              resolve();
+            });
+          });
         },
         share_action: async () => {
           if (this.shareService.shareWidgetSupported) {
@@ -467,8 +505,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
           });
         },
-        reminder_status: () => {
-          return 'required';
+        reminder_status: (record) => {
+          const has_reminder = record.action_reminder_wanted === 'already_set' || this.reminders.isSourceReminder();
+          return has_reminder ? 'not-required' : 'required';
         },
         reminder_choose_method_show_widget: async (record) => {
           const options = this.reminders.widgetOptions(record);
@@ -495,22 +534,26 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         install_telegram: () => {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
         },
+        affiliates_should_ask: () => {
+          // Keeping this function in case we'd like to implement a more complex logic
+          return true;
+        },
+        affiliate_alon_chen: () => {
+          const links = {
+            he: '1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?usp=pp_url&entry.356067021=',
+            en: '1FAIpQLSd9HQDsN1WaikNr0QVrdnG7dKWuevbxR2L1v8Uh62mTHM6c4A/viewform?usp=pp_url&entry.101300820=',
+            ar: '1FAIpQLSc0cz03mvaMdEnVqFkzBmmjX-EKWOzYYei2znOh_12yDkkOAA/viewform?usp=pp_url&entry.759991142=',
+            es: '1FAIpQLSdTZcTd0dnv2ZFU-SZ0725qieDoE7ugAECFfQE1gICUm1d05A/viewform?usp=pp_url&entry.2037241339=',
+            fr: '1FAIpQLSf6hU2H_JaiKMCWnGKptxLWFMdAZnUFuik_kIUiFPm2uqp8xQ/viewform?usp=pp_url&entry.1895607011=',
+            ru: '1FAIpQLSfNyO_jtY0K8dWCJ4UvceKgAgcs-BZ4khBYdW55wgq8rFLmnw/viewform?usp=pp_url&entry.2022038576='
+          };
+          const prefix = 'https://docs.google.com/forms/d/e/';
+          const link = prefix + (links[this.locale] || links.he) + this.storage.device.main_uid;
+          window.open(link, '_blank');
+        },
         save_report: (record) => {
           let payload = Object.assign({}, record);
-          payload['version'] = VERSION;
-          payload['locale'] = this.locale;
-          payload['layout'] = this.layout.layout;
-          try {
-            payload['numPreviousReports'] = this.storage.reports.length;
-            if (this.storage.reports.length > 0) {
-              payload['dateFirstReport'] = this.storage.reports[0][0];
-            }
-          } catch (e) {
-            console.log('Failed to add stats');
-          }
-          payload['notificationsEnabled'] = this.notifications.canAddNotification;
-          payload['engagementSource'] = this.source.getSource();
-          payload['_cityTownSuggestions'] = null;
+          payload = this.augmentPayload(payload);
           this.storage.addReport(payload);
           payload = this.prepareToSave(payload);
           let obs = null;
@@ -518,6 +561,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             obs = this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
           } else {
             console.log('WOULD SEND', payload);
+            window['wouldSend'] = payload;  // used by protractor (e2e testing)
             obs = of({success: true});
           }
           obs.pipe(
@@ -530,7 +574,26 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         }
       },
       (key, value, record) => {}
+    ).pipe(
+      map(() => {
+        let payload = Object.assign({}, this.runner.record);
+        payload = this.augmentPayload(payload);
+        payload = this.prepareToSave(payload);
+        this.storage.saveDevice(payload);
+        return payload;
+      }),
+      switchMap((payload) => {
+        if (PRODUCTION) {
+          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure-devices', payload);
+        } else {
+          console.log('DEVICE STATE', payload);
+          return of({success: true});
+        }
+      }),
+      catchError(() => of({success: false})),
+      map((response: any) => response.success)
     ).subscribe((success) => {
+      console.log('Reported device success', success);
       this.done.emit();
     });
   }

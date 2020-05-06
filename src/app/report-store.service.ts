@@ -7,14 +7,20 @@ export class ReportStoreService {
 
   storage: any;
   reports: any[];
+  device: any;
 
   constructor() {
+    let hasLocalStorage = false;
     try {
       this.storage = window.localStorage;
+      this.setItem('testLocalStorage', ['test']);
+      hasLocalStorage = this.getItem('testLocalStorage', [false])[0] === 'test';
     } catch (e) {
       console.log('no local storage');
     }
+    this.readDevice();
     this.readReports();
+    this.device.hasLocalStorage = hasLocalStorage;
   }
 
   getItem(key, defaultValue) {
@@ -41,6 +47,32 @@ export class ReportStoreService {
 
   readReports() {
     this.reports = this.getItem('reports', []);
+    this.device.numPreviousReports = this.reports.length;
+    if (this.reports.length > 0) {
+      this.device.dateFirstReport = this.reports[0][0];
+    }
+  }
+
+  readDevice() {
+    this.device = this.getItem('device', {});
+  }
+
+  saveDevice(device) {
+    const result = {};
+    for (const [key, value] of Object.entries(device)) {
+      if (key.indexOf('event_') !== 0) {
+        result[key] = value;
+      }
+    }
+    this.setItem('device', result);
+  }
+
+  setEvent(event) {
+    this.device['event_'  + event] = true;
+  }
+
+  setEventValue(event, value) {
+    this.device['event_'  + event] = value;
   }
 
   addReport(report) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs';
+import { ReportStoreService } from './report-store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class LayoutService {
   layout: string;
   height = 0;
 
-  constructor() {
+  constructor(private storage: ReportStoreService) {
     fromEvent(window, 'resize').subscribe(($event) => {
       this.updateView();
     });
@@ -26,6 +27,7 @@ export class LayoutService {
       this.desktop = this.nativeElement.offsetWidth >= 600;
       this.layout = this.mobile ? 'mobile' : 'desktop';
       this.height = this.nativeElement.offsetHeight;
+      this.storage.device.layout = this.layout;
     }
   }
 

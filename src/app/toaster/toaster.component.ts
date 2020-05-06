@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { state, style, transition, animate, trigger } from '@angular/animations';
+import { state, style, transition, animate, trigger, sequence, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-toaster',
@@ -7,21 +7,25 @@ import { state, style, transition, animate, trigger } from '@angular/animations'
   styleUrls: ['./toaster.component.less'],
   animations: [
     trigger('openClose', [
-      state('closed', style({
-        filter: 'blur(20px)',
-        transform: 'translateY(-35%)',
-        opacity: 0,
-      })),
-      state('open', style({
-        filter: 'blur(0px)',
-        transform: 'translateY(0%)',
-        opacity: 1,
-      })),
+      state('closed', style({ filter: 'blur(20px)', transform: 'translateY(-35%)', opacity: 0, display: 'none'})),
+      state('open', style({ filter: 'blur(0px)', transform: 'translateY(0%)', opacity: 1, })),
       transition('open => closed', [
-        animate('0.5s')
+        sequence([
+          animate('0.5s', keyframes([
+            style({ filter: 'blur(0px)', transform: 'translateY(0%)', opacity: 1 }),
+            style({ filter: 'blur(20px)', transform: 'translateY(-35%)', opacity: 0 })
+          ])),
+          style({ display: 'none' })
+        ])
       ]),
       transition('closed => open', [
-        animate('0.5s')
+        sequence([
+          style({ display: 'flex' }),
+          animate('0.5s', keyframes([
+            style({ filter: 'blur(20px)', transform: 'translateY(-35%)', opacity: 0 }),
+            style({ filter: 'blur(0px)', transform: 'translateY(0%)', opacity: 1 })
+          ]))
+        ])
       ])
     ])
   ]

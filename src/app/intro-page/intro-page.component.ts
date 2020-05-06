@@ -3,6 +3,7 @@ import { NotificationService } from '../notification.service';
 import { VERSION } from '../constants';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
+import { ReportStoreService } from '../report-store.service';
 
 @Component({
   selector: 'app-intro-page',
@@ -23,7 +24,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   breaks: any = {};
   seenNudge = false;
   mapInit = false;
-  tab = 'about';
+  _tab = 'about';
   copies = [1, 1];
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
@@ -34,9 +35,11 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   constructor(private notifications: NotificationService,
               public layout: LayoutService,
               public mapService: MapService,
+              private storage: ReportStoreService,
               @Inject(LOCALE_ID) public locale) {}
 
   ngOnInit() {
+    this.tab = this._tab;
   }
 
   ngAfterViewInit() {
@@ -63,6 +66,14 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
         this.chat.emit();
       }
     }, 100);
+  }
+
+  get tab() {
+    return this._tab;
+  }
+  set tab(value) {
+    this._tab = value;
+    this.storage.setEvent('hp_tab_' + value);
   }
 
   get fullMap() { return this._fullMap; }
@@ -97,10 +108,15 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   }
 
   nudgeNeeded() {
-    return !this.mapService.reportedToday && !this.seenNudge;
+    const ret = !this.mapService.reportedToday && !this.seenNudge;
+    if (ret) {
+      this.storage.setEvent('hp_map_nudge_shown');
+    }
+    return ret;
   }
 
   closeNudge() {
+    this.storage.setEvent('hp_map_nudge_closed');
     this.seenNudge = true;
   }
 }

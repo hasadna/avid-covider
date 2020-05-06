@@ -4,10 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:test": "ng serve --configuration=test",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e --port 4300",
+    "e2e:dev": "npx protractor e2e/protractor.conf.js"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +26,7 @@
     "@types/mapbox-gl": "^1.8.3",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
-    "hatool": "^0.3.63",
+    "hatool": "^0.3.65",
     "mapbox-gl": "^1.9.1",
     "rxjs": "~6.3.3",
     "smoothscroll-polyfill": "^0.4.4",
