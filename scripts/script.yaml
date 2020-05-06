@@ -668,6 +668,40 @@
                                                   value: no_response
                                                   class: other
 
+                                    - say: האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?          
+                                    - wait:
+                                        variable: routine_uses_public_transportation
+                                        options:
+                                          - show: כן
+                                            value: true
+                                            steps:
+                                            - say: במה מאלה השתמשת השבוע?
+                                            - wait:
+                                                variable: _var
+                                                multi: true
+                                                options:
+                                                - show: "רכבת"
+                                                  field: routine_uses_public_transportation_train
+                                                - show: "אוטובוס"
+                                                  field: routine_uses_public_transportation_bus 
+                                                - show: "מונית"
+                                                  field: routine_uses_public_transportation_taxi
+                                                - show: "אחר"
+                                                  field: routine_uses_public_transportation_other
+                                                - show: |-
+                                                    <span class='empty'>בעצם לא</span>
+                                                    <span class='not-empty'>זהו</span>
+                                                    <span class='none-selected'>אין פרטים נוספים</span>
+                                                  class: other
+                                            - do:
+                                                cmd: update_from_selection
+                                                params:
+                                                  - record
+                                                  - _var
+                                              
+                                          - show: לא
+                                            value: false
+
                                     - say: "האם חבשת השבוע מסיכה כשיצאת מהבית?"
                                     - wait:
                                         variable: routine_wears_mask
