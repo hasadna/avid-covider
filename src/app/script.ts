@@ -782,7 +782,7 @@ export const script = {
                   },
                   {
                     "show": "עישנתי בעבר, לפני יותר מחמש שנים",
-                    "value": "long_past_smokre"
+                    "value": "long_past_smoker"
                   },
                   {
                     "class": "other",
@@ -1334,172 +1334,403 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
-                                  "say": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
-                                  "uid": "11ce1b4b56"
+                                  "say": "האם יצאת מהבית במהלך השבוע האחרון?",
+                                  "uid": "c0a3441c7e"
                                 },
                                 {
-                                  "uid": "7a4298f04a",
+                                  "uid": "f496a7208d",
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": "כן, יש עבודה מחוץ לבית",
+                                        "show": "כן, יצאתי",
                                         "steps": [
                                           {
-                                            "say": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
-                                            "uid": "dd40a90605"
+                                            "say": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
+                                            "uid": "e6777b8d52"
                                           },
                                           {
-                                            "uid": "f7742ce6a8",
-                                            "wait": {
-                                              "input-max": 168,
-                                              "input-min": 0,
-                                              "input-step": 1,
-                                              "input-type": "number",
-                                              "placeholder": "מספר השעות, בערך",
-                                              "variable": "work_outside_weekly_hours"
-                                            }
-                                          },
-                                          {
-                                            "say": "האם העבודה במקום קבוע?",
-                                            "uid": "f3ec812c5e"
-                                          },
-                                          {
-                                            "uid": "1e90da0da7",
+                                            "uid": "79a2591bdc",
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן, במקום קבוע",
+                                                  "show": "כן, יש עבודה מחוץ לבית",
                                                   "steps": [
                                                     {
-                                                      "say": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
-                                                      "uid": "e9337098a3"
+                                                      "say": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
+                                                      "uid": "b5646b238a"
                                                     },
                                                     {
-                                                      "uid": "e452151a27",
+                                                      "uid": "2b3b0adc62",
+                                                      "wait": {
+                                                        "input-max": 168,
+                                                        "input-min": 0,
+                                                        "input-step": 1,
+                                                        "input-type": "number",
+                                                        "placeholder": "מספר השעות, בערך",
+                                                        "variable": "routine_workplace_weekly_hours"
+                                                      }
+                                                    },
+                                                    {
+                                                      "say": "האם העבודה במקום קבוע?",
+                                                      "uid": "8255661f63"
+                                                    },
+                                                    {
+                                                      "uid": "02dfe3cf0d",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": "כן, בטח",
+                                                            "show": "כן, במקום קבוע",
                                                             "steps": [
                                                               {
-                                                                "do": {
-                                                                  "cmd": "prepare_city_town_suggestions",
-                                                                  "variable": "_cityTownSuggestions"
-                                                                },
-                                                                "uid": "5a332e9913"
+                                                                "say": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
+                                                                "uid": "41b1deb2d4"
                                                               },
                                                               {
-                                                                "say": "איפה נמצא מקום העבודה?",
-                                                                "uid": "a14aaa4804"
-                                                              },
-                                                              {
-                                                                "uid": "43cf17c932",
+                                                                "uid": "9a150d7fd3",
                                                                 "wait": {
-                                                                  "placeholder": "שם העיר או הישוב",
-                                                                  "suggestionsFrom": "_cityTownSuggestions",
-                                                                  "variable": "workplace_city_town"
-                                                                }
-                                                              },
-                                                              {
-                                                                "say": "ובאיזה רחוב זה?",
-                                                                "uid": "8d1053b658"
-                                                              },
-                                                              {
-                                                                "uid": "bee0bce878",
-                                                                "wait": {
-                                                                  "placeholder": "שם הרחוב, אם ידוע",
-                                                                  "required": false,
-                                                                  "variable": "workplace_street"
+                                                                  "options": [
+                                                                    {
+                                                                      "show": "כן, בטח",
+                                                                      "steps": [
+                                                                        {
+                                                                          "do": {
+                                                                            "cmd": "prepare_city_town_suggestions",
+                                                                            "variable": "_cityTownSuggestions"
+                                                                          },
+                                                                          "uid": "028b39805d"
+                                                                        },
+                                                                        {
+                                                                          "say": "איפה נמצא מקום העבודה?",
+                                                                          "uid": "9c526fbe63"
+                                                                        },
+                                                                        {
+                                                                          "uid": "e1de7d045a",
+                                                                          "wait": {
+                                                                            "placeholder": "שם העיר או הישוב",
+                                                                            "suggestionsFrom": "_cityTownSuggestions",
+                                                                            "variable": "routine_workplace_city_town"
+                                                                          }
+                                                                        },
+                                                                        {
+                                                                          "say": "ובאיזה רחוב זה?",
+                                                                          "uid": "1e927d313e"
+                                                                        },
+                                                                        {
+                                                                          "uid": "78f3e9eed6",
+                                                                          "wait": {
+                                                                            "placeholder": "שם הרחוב, אם ידוע",
+                                                                            "required": false,
+                                                                            "variable": "routine_workplace_street"
+                                                                          }
+                                                                        }
+                                                                      ],
+                                                                      "uid": "42592936a0"
+                                                                    },
+                                                                    {
+                                                                      "show": "עדיף שלא"
+                                                                    }
+                                                                  ]
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "b863eea70d"
+                                                            "uid": "c13f21be29",
+                                                            "value": true
                                                           },
                                                           {
-                                                            "show": "עדיף שלא"
+                                                            "show": "לא, אין כתובת קבועה בעבודה",
+                                                            "value": false
+                                                          }
+                                                        ],
+                                                        "variable": "routine_workplace_single_location"
+                                                      }
+                                                    },
+                                                    {
+                                                      "say": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
+                                                      "uid": "2afcf4dbfe"
+                                                    },
+                                                    {
+                                                      "uid": "66402aea2a",
+                                                      "wait": {
+                                                        "options": [
+                                                          {
+                                                            "show": "כן, נתתי שירות",
+                                                            "value": true
+                                                          },
+                                                          {
+                                                            "show": "לא נתתי שירות",
+                                                            "value": false
+                                                          }
+                                                        ],
+                                                        "variable": "_served_public_last_fortnight"
+                                                      }
+                                                    },
+                                                    {
+                                                      "switch": {
+                                                        "arg": "medical_staff_member",
+                                                        "cases": [
+                                                          {
+                                                            "steps": [
+                                                              {
+                                                                "say": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
+                                                                "uid": "12b8141c8b"
+                                                              },
+                                                              {
+                                                                "uid": "2afcddf9e6",
+                                                                "wait": {
+                                                                  "options": [
+                                                                    {
+                                                                      "show": "כן, אני חלק מצוות רפואי",
+                                                                      "value": true
+                                                                    },
+                                                                    {
+                                                                      "show": "לא, אני לא",
+                                                                      "value": false
+                                                                    }
+                                                                  ],
+                                                                  "variable": "medical_staff_member"
+                                                                }
+                                                              }
+                                                            ],
+                                                            "uid": "4410fe66d1",
+                                                            "undefined": true
+                                                          },
+                                                          {
+                                                            "default": true
                                                           }
                                                         ]
-                                                      }
+                                                      },
+                                                      "uid": "de6d708a67"
                                                     }
                                                   ],
-                                                  "uid": "4651ae95ee",
+                                                  "uid": "c1071808c0",
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": "לא, אין כתובת קבועה בעבודה",
+                                                  "show": "לא",
                                                   "value": false
                                                 }
                                               ],
-                                              "variable": "workplace_single_location"
-                                            }
-                                          },
-                                          {
-                                            "say": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
-                                            "uid": "d4d019c572"
-                                          },
-                                          {
-                                            "uid": "877dc62d75",
-                                            "wait": {
-                                              "options": [
-                                                {
-                                                  "show": "כן, נתתי שירות",
-                                                  "value": true
-                                                },
-                                                {
-                                                  "show": "לא נתתי שירות",
-                                                  "value": false
-                                                }
-                                              ],
-                                              "variable": "_served_public_last_fortnight"
+                                              "variable": "routine_workplace_is_outside"
                                             }
                                           },
                                           {
                                             "switch": {
-                                              "arg": "medical_staff_member",
+                                              "arg": "routine_visits_prayer_house",
                                               "cases": [
+                                                {
+                                                  "default": true
+                                                },
                                                 {
                                                   "steps": [
                                                     {
-                                                      "say": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
-                                                      "uid": "ae83fcc428"
+                                                      "switch": {
+                                                        "arg": "sex",
+                                                        "cases": [
+                                                          {
+                                                            "default": true,
+                                                            "steps": [
+                                                              {
+                                                                "say": "האם ביקור בבית תפילה הוא חלק מהשיגרה שלך?",
+                                                                "uid": "6ab9910b0e"
+                                                              }
+                                                            ],
+                                                            "uid": "d4190187e8"
+                                                          },
+                                                          {
+                                                            "match": "male",
+                                                            "steps": [
+                                                              {
+                                                                "say": "האם אתה נוהג לבקר בבית תפילה באופן קבוע?",
+                                                                "uid": "2db8016a4a"
+                                                              }
+                                                            ],
+                                                            "uid": "3cd5c27479"
+                                                          },
+                                                          {
+                                                            "match": "female",
+                                                            "steps": [
+                                                              {
+                                                                "say": "האם את נוהגת לבקר בבית תפילה באופן קבוע?",
+                                                                "uid": "bd50e82835"
+                                                              }
+                                                            ],
+                                                            "uid": "a6f96b035e"
+                                                          }
+                                                        ]
+                                                      },
+                                                      "uid": "562dbeafec"
                                                     },
                                                     {
-                                                      "uid": "89bc5df611",
+                                                      "uid": "7f58f97c5e",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": "כן, אני חלק מצוות רפואי",
+                                                            "show": "כן",
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": "לא, אני לא",
+                                                            "show": "לא",
                                                             "value": false
+                                                          },
+                                                          {
+                                                            "class": "other",
+                                                            "show": "לא רוצה להשיב",
+                                                            "value": "no_response"
                                                           }
                                                         ],
-                                                        "variable": "medical_staff_member"
+                                                        "variable": "routine_visits_prayer_house"
                                                       }
                                                     }
                                                   ],
-                                                  "uid": "6b9aa57a00",
+                                                  "uid": "be3d6b4c5d",
                                                   "undefined": true
-                                                },
-                                                {
-                                                  "default": true
                                                 }
                                               ]
                                             },
-                                            "uid": "1655bb4466"
+                                            "uid": "c12ca2f1f5"
+                                          },
+                                          {
+                                            "say": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
+                                            "uid": "ecc9f76937"
+                                          },
+                                          {
+                                            "uid": "cc1b617583",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": "כן",
+                                                  "steps": [
+                                                    {
+                                                      "say": "במה מאלה השתמשת השבוע?",
+                                                      "uid": "4a581cabac"
+                                                    },
+                                                    {
+                                                      "uid": "d44db069f9",
+                                                      "wait": {
+                                                        "multi": true,
+                                                        "options": [
+                                                          {
+                                                            "field": "routine_uses_public_transportation_train",
+                                                            "show": "רכבת"
+                                                          },
+                                                          {
+                                                            "field": "routine_uses_public_transportation_bus",
+                                                            "show": "אוטובוס"
+                                                          },
+                                                          {
+                                                            "field": "routine_uses_public_transportation_taxi",
+                                                            "show": "מונית"
+                                                          },
+                                                          {
+                                                            "field": "routine_uses_public_transportation_other",
+                                                            "show": "אחר"
+                                                          },
+                                                          {
+                                                            "class": "other",
+                                                            "show": "<span class='empty'>בעצם לא</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>"
+                                                          }
+                                                        ],
+                                                        "variable": "_var"
+                                                      }
+                                                    },
+                                                    {
+                                                      "do": {
+                                                        "cmd": "update_from_selection",
+                                                        "params": [
+                                                          "record",
+                                                          "_var"
+                                                        ]
+                                                      },
+                                                      "uid": "f6cdaee202"
+                                                    }
+                                                  ],
+                                                  "uid": "e6040a31ae",
+                                                  "value": true
+                                                },
+                                                {
+                                                  "show": "לא",
+                                                  "value": false
+                                                }
+                                              ],
+                                              "variable": "routine_uses_public_transportation"
+                                            }
+                                          },
+                                          {
+                                            "say": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
+                                            "uid": "143a271ac6"
+                                          },
+                                          {
+                                            "uid": "ef3dc90d0f",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": "כן, תמיד",
+                                                  "value": "always"
+                                                },
+                                                {
+                                                  "show": "רוב הזמן",
+                                                  "value": "mostly_yes"
+                                                },
+                                                {
+                                                  "show": "בחלק קטן מהזמן",
+                                                  "value": "mostly_no"
+                                                },
+                                                {
+                                                  "show": "לא",
+                                                  "value": "never"
+                                                },
+                                                {
+                                                  "class": "other",
+                                                  "show": "לא רוצה להשיב",
+                                                  "value": "no_response"
+                                                }
+                                              ],
+                                              "variable": "routine_wears_mask"
+                                            }
+                                          },
+                                          {
+                                            "say": "ומה עם כפפות?",
+                                            "uid": "3a47aa4a37"
+                                          },
+                                          {
+                                            "uid": "5056a7c058",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": "כן, כל הזמן",
+                                                  "value": "always"
+                                                },
+                                                {
+                                                  "show": "רוב הזמן",
+                                                  "value": "mostly_yes"
+                                                },
+                                                {
+                                                  "show": "בחלק קטן מהזמן",
+                                                  "value": "mostly_no"
+                                                },
+                                                {
+                                                  "show": "לא",
+                                                  "value": "never"
+                                                },
+                                                {
+                                                  "class": "other",
+                                                  "show": "לא רוצה להשיב",
+                                                  "value": "no_response"
+                                                }
+                                              ],
+                                              "variable": "routine_wears_gloves"
+                                            }
                                           }
                                         ],
-                                        "uid": "a3ce2dca85",
+                                        "uid": "f40022b226",
                                         "value": true
                                       },
                                       {
-                                        "show": "לא",
+                                        "show": "לא, נשארתי בבית",
                                         "value": false
                                       }
                                     ],
-                                    "variable": "routine_workplace_is_outside"
+                                    "variable": "routine_left_the_house"
                                   }
                                 }
                               ],
@@ -1824,7 +2055,7 @@ export const script = {
                     "show": "שלשול"
                   },
                   {
-                    "field": "lack_of_appetite_or_skipping_meals",
+                    "field": "symptoms_lack_of_appetite_or_skipping_meals",
                     "show": "חוסר תאבון או דילוג על ארוחות"
                   },
                   {
@@ -1965,7 +2196,7 @@ export const script = {
                               "show": "כאבי גרון"
                             },
                             {
-                              "field": "abdominal_pain",
+                              "field": "symptoms_abdominal_pain",
                               "show": "כאב בטן"
                             },
                             {
