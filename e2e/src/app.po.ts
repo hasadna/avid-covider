@@ -2,7 +2,7 @@ import { browser, by, element, ElementFinder, ElementArrayFinder, protractor, pr
 
 // AppPage is used for getting main elements on page
 // This logic is seperated from test itself since itmay change from time to time
-
+const LOG_COUNTERS = true;
 export enum AnswerElementType {
   InputNumber = 'InputNumber',
   InputText = 'InputText',
@@ -35,13 +35,16 @@ const testDataElementCss = [
 export class AppPage {
   activeAnswerElementType: AnswerElementType;
   answersCounter = {
+    input: 0,
     optionsSingle: 0,
     optionsMulti: 0,
   };
 
   private resetCounters = () => {
+    this.answersCounter.input = 0;
     this.answersCounter.optionsSingle = 0;
     this.answersCounter.optionsMulti = 0;
+    log('--- reset counters ---');
   }
 
   navigateTo() {
@@ -131,6 +134,16 @@ export class AppPage {
         this.answersCounter.optionsMulti++;
         break;
       }
+      case AnswerElementType.InputText:
+      case AnswerElementType.InputNumber:
+      case AnswerElementType.InputDate: {
+        this.answersCounter.input++;
+        break;
+      }
+    }
+    if (LOG_COUNTERS) {
+      const total = this.answersCounter.input + this.answersCounter.optionsMulti + this.answersCounter.optionsSingle;
+      log(`answersCounter [total: ${total}, Question should be ${total + 1}]`, this.answersCounter);
     }
     const EC = protractor.ExpectedConditions;
     const inputReady = EC.elementToBeClickable(this.getHtlInput());

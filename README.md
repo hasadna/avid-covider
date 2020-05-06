@@ -99,9 +99,34 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 #### Running tests
 
-We don't have any tests at the moment, but generally that's how it's done:
+##### E2E
+We use [Protractor](http://www.protractortest.org/).
+Useful sources in case you are new to e2e / protractor
+* [Protractor API](https://www.protractortest.org/#/api?view=ProtractorExpectedConditions.prototype.elementToBeSelected)
+* [Getting started](https://medium.com/@TammyTorres/e2e-testing-on-angular-app-with-protractor-tips-included-f3d5f65a8816)
+* [video tutorial E2E with angular](https://www.youtube.com/watch?v=LCSwmJwRU1U) 
+
+Concept
+Our E2E stack have 3 parts (all included in `e2e` directory):
+* A page object (`app.po.ts`) - use to interact with page elements
+* Chat flow (`chat-flow.e2e.ts`) - simulate a complete report interaction (randomly / by answers array)
+* Specs (like `app.e2e-spec.ts`) - actual tests are here, written with [Jasmin](https://jasmine.github.io/)
+
+The util file (`utils.e2e.ts`) contain small utility functions which does not interact with any test / browser entities.
+
+The basic idea is: tests in spec file may use either chat-flow mechanism (`simulateChatFlow`) to simulate a complete report interaction, page object to check spec element, or both.<br>
+Internally, chat-flow mechanism uses page object to interact with DOM elements.
+
+Scripts:
+
+- `e2e` - angular default 
+- `e2e:ci` - uses `config.ci` instead of default config. uses headless chrome.
+- `e2e:dev` - used for runing a single run on develpment (You'll need to run angular dev server on port 4200 before running this on - `npm start`) 
+- `e2e:dev-headless` - same as `e2e:dev` but with headless chrome
+
+##### Unit
+We don't unit tests at the moment, but generally that's how it's done:
 - Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-- Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 #### Angular help
 

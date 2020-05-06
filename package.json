@@ -9,7 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e --port 4300",
-    "e2e:dev": "npx protractor e2e/protractor.conf.js"
+    "e2e:ci": "ng e2e --port 4300 --protractorConfig=e2e/protractor.conf.ci.js",
+    "e2e:dev": "npx protractor e2e/protractor.conf.js",
+    "e2e:dev-headless": "npx protractor e2e/protractor.conf.js --capabilities.chromeOptions.args=--headless"
   },
   "private": true,
   "dependencies": {
