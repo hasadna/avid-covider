@@ -267,7 +267,6 @@
                           - show: לא רוצה להשיב
                             value: no_response
 
-
     - name: preconditions-check
       steps:
         - switch:
@@ -332,7 +331,7 @@
               - show: עישנתי בעבר, הפסקתי לפני פחות מחמש שנים
                 value: short_past_smoker
               - show: עישנתי בעבר, לפני יותר מחמש שנים
-                value: long_past_smokre
+                value: long_past_smoker
               - show: אף פעם
                 class: other
                 value: never
@@ -562,81 +561,152 @@
                         - match: false
                         - match: true
                           steps:
-                          - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
+                          - say: האם יצאת מהבית במהלך השבוע האחרון?
                           - wait:
-                              variable: routine_workplace_is_outside
+                              variable: routine_left_the_house
                               options:
-                              - show: כן, יש עבודה מחוץ לבית
-                                value: true 
-                                steps:
-                                - say: וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?
-                                - wait:
-                                    variable: work_outside_weekly_hours
-                                    input-type: number
-                                    input-step: 1
-                                    input-min: 0
-                                    input-max: 168
-                                    placeholder: מספר השעות, בערך  
-                                - say: האם העבודה במקום קבוע?
-                                - wait:
-                                    variable: workplace_single_location
-                                    options:
-                                    - show: כן, במקום קבוע
-                                      value: true
-                                      steps:
-                                      - say: אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר
-                                      - wait:
-                                          options:
-                                          - show: כן, בטח
+                                - show: כן, יצאתי
+                                  value: true
+                                  steps:
+                                    - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
+                                    - wait:
+                                        variable: routine_workplace_is_outside
+                                        options:
+                                        - show: כן, יש עבודה מחוץ לבית
+                                          value: true 
+                                          steps:
+                                          - say: וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?
+                                          - wait:
+                                              variable: routine_workplace_weekly_hours
+                                              input-type: number
+                                              input-step: 1
+                                              input-min: 0
+                                              input-max: 168
+                                              placeholder: מספר השעות, בערך  
+                                          - say: האם העבודה במקום קבוע?
+                                          - wait:
+                                              variable: routine_workplace_single_location
+                                              options:
+                                              - show: כן, במקום קבוע
+                                                value: true
+                                                steps:
+                                                - say: אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר
+                                                - wait:
+                                                    options:
+                                                    - show: כן, בטח
+                                                      steps:
+                                                        - do:
+                                                            cmd: prepare_city_town_suggestions
+                                                            variable: _cityTownSuggestions
+                                                        - say: איפה נמצא מקום העבודה?
+                                                        - wait:
+                                                            variable: routine_workplace_city_town
+                                                            placeholder: "שם העיר או הישוב"
+                                                            suggestionsFrom: _cityTownSuggestions
+                                                        - say: ובאיזה רחוב זה?
+                                                        - wait:
+                                                            variable: routine_workplace_street
+                                                            placeholder: שם הרחוב, אם ידוע
+                                                            required: false
+                                                    - show: עדיף שלא
+                                              - show: לא, אין כתובת קבועה בעבודה
+                                                value: false
+                
+                                          - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                          - wait:
+                                              variable: _served_public_last_fortnight
+                                              options:
+                                              - show: כן, נתתי שירות
+                                                value: true
+                                              - show: לא נתתי שירות
+                                                value: false
+          
+                                          - switch:
+                                              arg: medical_staff_member
+                                              cases:
+                                              - undefined: true        # <---- ask new/returning users with no past info about the kind work
+                                                steps:
+                                                - say: האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?
+                                                - wait:
+                                                    variable: medical_staff_member
+                                                    options:
+                                                    - show: כן, אני חלק מצוות רפואי
+                                                      value: true
+                                                    - show: לא, אני לא
+                                                      value: false
+                                              - default: true            # <---- for returning users past info about the kind work, pass
+                
+                                        - show: לא
+                                          value: false
+          
+                                    - switch:
+                                        arg: routine_visits_prayer_house
+                                        cases:
+                                          - default: true 
+                                          - undefined: true 
                                             steps:
-                                              - do:
-                                                  cmd: prepare_city_town_suggestions
-                                                  variable: _cityTownSuggestions
-                                              - say: איפה נמצא מקום העבודה?
-                                              - wait:
-                                                  variable: workplace_city_town
-                                                  placeholder: "שם העיר או הישוב"
-                                                  suggestionsFrom: _cityTownSuggestions
-                                              - say: ובאיזה רחוב זה?
-                                              - wait:
-                                                  variable: workplace_street
-                                                  placeholder: שם הרחוב, אם ידוע
-                                                  required: false
-                                          - show: עדיף שלא
-                                    - show: לא, אין כתובת קבועה בעבודה
-                                      value: false
-      
-                                - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
-                                - wait:
-                                    variable: _served_public_last_fortnight
-                                    options:
-                                    - show: כן, נתתי שירות
-                                      value: true
-                                    - show: לא נתתי שירות
-                                      value: false
+                                            - switch:
+                                                arg: sex
+                                                cases:
+                                                - default: true
+                                                  steps:
+                                                  - say: האם ביקור בבית תפילה הוא חלק מהשיגרה שלך?                  
+                                                - match: male
+                                                  steps:
+                                                  - say: האם אתה נוהג לבקר בבית תפילה באופן קבוע?
+                                                - match: female
+                                                  steps:
+                                                  - say: האם את נוהגת לבקר בבית תפילה באופן קבוע?
+                                            - wait:
+                                                variable: routine_visits_prayer_house
+                                                options:
+                                                - show: כן
+                                                  value: true
+                                                - show: לא
+                                                  value: false
+                                                - show: לא רוצה להשיב
+                                                  value: no_response
+                                                  class: other
 
-                                - switch:
-                                    arg: medical_staff_member
-                                    cases:
-                                    - undefined: true        # <---- ask new/returning users with no past info about the kind work
-                                      steps:
-                                      - say: האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?
-                                      - wait:
-                                          variable: medical_staff_member
-                                          options:
-                                          - show: כן, אני חלק מצוות רפואי
-                                            value: true
-                                          - show: לא, אני לא
-                                            value: false
-                                    - default: true            # <---- for returning users past info about the kind work, pass
-      
-                              - show: לא
-                                value: false 
+                                    - say: "האם חבשת השבוע מסיכה כשיצאת מהבית?"
+                                    - wait:
+                                        variable: routine_wears_mask
+                                        options:
+                                        - show: כן, תמיד
+                                          value: always
+                                        - show: רוב הזמן
+                                          value: mostly_yes
+                                        - show: בחלק קטן מהזמן
+                                          value: mostly_no
+                                        - show: לא
+                                          value: never
+                                        - show: לא רוצה להשיב
+                                          value: no_response
+                                          class: "other"
+
+                                    - say: "ומה עם כפפות?"
+                                    - wait:
+                                        variable: routine_wears_gloves
+                                        options:
+                                        - show: כן, כל הזמן
+                                          value: always
+                                        - show: רוב הזמן
+                                          value: mostly_yes
+                                        - show: בחלק קטן מהזמן
+                                          value: mostly_no
+                                        - show: לא
+                                          value: never
+                                        - show: לא רוצה להשיב
+                                          value: no_response
+                                          class: "other"
+
+                                - show: לא, נשארתי בבית
+                                  value: false
+
         - do:
             cmd: save_public_service_data
             params: 
               - record
-
 
     - name: current-report
       steps:
@@ -752,7 +822,7 @@
             - show: שלשול
               field: symptoms_diarrhea
             - show: חוסר תאבון או דילוג על ארוחות
-              field: lack_of_appetite_or_skipping_meals                            
+              field: symptoms_lack_of_appetite_or_skipping_meals                            
             - show: בחילה או הקאות
               field: symptoms_nausea_and_vomiting
             - show: צמרמורת
@@ -824,7 +894,7 @@
                   - show: כאבי גרון
                     field: symptoms_sore_throat
                   - show: כאב בטן
-                    field: abdominal_pain
+                    field: symptoms_abdominal_pain
                   - show: |-
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
                       <span class='not-empty'>זהו</span>
