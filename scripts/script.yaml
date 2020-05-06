@@ -176,7 +176,7 @@
                     - record
                     - "בן {{age}} מ{{_location}}"
                     - "בת {{age}} מ{{_location}}"
-                    - "דיווח עבור גיל {{age}} מ{{_location}}"
+                    - "גיל {{age}} מ{{_location}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
