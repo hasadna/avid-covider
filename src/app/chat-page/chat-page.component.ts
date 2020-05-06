@@ -201,9 +201,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(option, {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
-                'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member',
-                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling',
-                '_household.*', '_public_service.*', 'uid'
+                'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member', 'is_assisted_living',
+                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling', 'routine.*',
+                '_household.*', '_public_service_last_reported_yes', 'uid'
               ])
             });
             options.push(option);
@@ -358,53 +358,25 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           }
           record.covid19_check_result = record._covid19_check_result;
         },
-        fetch_public_service_data: (record: any) => {
-          try {
-            let _public_service_last_reported_yes = null;
-            let _public_service_last_reported = null;
-            let _public_service_status = null;
-            for (const report of this.storage.reports) {
-              const r = report[1];
-              if (r.alias === record.alias) {
-                try {
-                  _public_service_last_reported_yes = parseInt(r._public_service_last_reported_yes, 10);
-                  _public_service_last_reported = parseInt(r._public_service_last_reported, 10);
-                } catch (e) {
-                  console.log('Bad old report data', r);
-                }
-              }
-            }
-            const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
-            if (_public_service_last_reported_yes) {
-              console.log('LAST YES REPORT TIME', new Date(_public_service_last_reported_yes).toISOString());
-            }
-            if (_public_service_last_reported) {
-              console.log('LAST REPORT TIME', new Date(_public_service_last_reported).toISOString());
-              console.log('NEXT REPORT TIME', new Date(_public_service_last_reported + timeout).toISOString());
-            }
-            if (!_public_service_last_reported || ((Date.now().valueOf() - _public_service_last_reported) > timeout)) {
-              console.log('PSD required');
-              _public_service_status = 'required';
-            } else {
-              _public_service_status = 'valid';
-              console.log('PSD valid');
-            }
-            if (!!_public_service_last_reported_yes &&
-                  ((Date.now().valueOf() - _public_service_last_reported_yes) < 2 * timeout)) {
-              record.served_public_last_fortnight = true;
-              console.log('SERVED MORE THAN 10 PEOPLE IN PAST 2 WEEKS:', record.served_public_last_fortnight);
-            }
-            Object.assign(record, {_public_service_status, _public_service_last_reported, _public_service_last_reported_yes});
-          } catch (err) {
-            console.error(`psd past data check failed: ${err}`);
+        need_to_ask_about_routine: (record: any) => {
+          const routine_last_asked = record.routine_last_asked || 0;
+          const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
+          const now = Date.now().valueOf();
+          if (now > routine_last_asked + timeout) {
+            record.routine_last_asked = now;
+            return true;
           }
+          return false;
         },
         save_public_service_data: (record: any) => {
-          record._public_service_last_reported = Date.now().valueOf();
           if (record._served_public_last_fortnight) {
             record._public_service_last_reported_yes = Date.now().valueOf();
           }
-          record.served_public_last_fortnight = !!record._served_public_last_fortnight || !!record.served_public_last_fortnight;
+          const last_yes = record._public_service_last_reported_yes || 0;
+          const timeout = PRODUCTION ? 86400 * 14 * 1000 : 14 * 60 * 1000;
+          const now = Date.now().valueOf();
+
+          record.served_public_last_fortnight = (now < last_yes + timeout);
           console.log('SERVED MORE THAN 10 PEOPLE:', record.served_public_last_fortnight);
           if (!!record._public_service_last_reported_yes) {
             console.log('LAST YES REPORT TIME', new Date(record._public_service_last_reported_yes).toISOString());
@@ -440,6 +412,14 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
           }
         },
+        is_old: (record: any) => {
+          try {
+            const age = parseInt(record.age, 10);
+            return age >= 65;
+          } catch (err) {
+            console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
+          }
+        },
         in_insulation: (record: any) => {
           return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
         },
@@ -458,12 +438,17 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
           }
         },
-        calculate_alias: (record, male_alias, female_alias) => {
+        calculate_alias: (record, male_alias, female_alias, other_alias) => {
           if (record.sex === 'male') {
             return this.fillIn(record, male_alias);
+          } else if (record.sex === 'female') {
+              return this.fillIn(record, female_alias);
           } else {
-            return this.fillIn(record, female_alias);
+            return this.fillIn(record, other_alias);
           }
+        },
+        combine_location: (record, location_text) => {
+          return this.fillIn(record, location_text).trim();
         },
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];

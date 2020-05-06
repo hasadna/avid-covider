@@ -37,6 +37,7 @@
         - goto: preconditions-check
         - goto: covid19-checks
         - goto: insulation
+        - goto: routine
         - goto: current-report
         - goto: exposures
         - do:
@@ -89,6 +90,8 @@
                     value: male
                   - show: בת
                     value: female
+                  - show: אחר
+                    value: other
             - default: true                          # <---- for returning reporters, pass
 
         - switch:
@@ -105,6 +108,9 @@
                   - match: female
                     steps:
                     - say: בת כמה?
+                  - match: other
+                    steps:
+                    - say: מה הגיל שלך?
               - wait:
                   variable: age
                   placeholder: "גיל, 0-120"
@@ -146,6 +152,19 @@
               - record
 
         - switch:
+            arg: _location                    # _location is the concatenation of an optional street and the city
+            cases:
+            - undefined: true                 # <---- for new users, create _location
+              steps:
+              - do:
+                  cmd: combine_location
+                  variable: _location
+                  params:
+                    - record
+                    - "{{street}} {{city_town}}"
+            - default: true                   # <---- for returning users, we already have saved _location
+
+        - switch:
             arg: alias                         # alias is our user identifier (age+sex+street+city)
             cases:
             - undefined: true                            #<--- for new users, create alias
@@ -155,8 +174,9 @@
                   variable: alias
                   params:
                     - record
-                    - "בן {{age}} מ{{street}} {{city_town}}"
-                    - "בת {{age}} מ{{street}} {{city_town}}"
+                    - "בן {{age}} מ{{_location}}"
+                    - "בת {{age}} מ{{_location}}"
+                    - "גיל {{age}} מ{{_location}}"
               - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
             - default: true                 # <---- for returning users, we already have saved alias
 
@@ -165,6 +185,12 @@
             params: 
               - record
             variable: _is_adult
+
+        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
+            cmd: is_old
+            params: 
+              - record
+            variable: _is_old
 
         - do:                                       # <---- check if we already have the household data from past reports
             cmd: fetch_household_data
@@ -177,7 +203,7 @@
             - match: true
             - default: true
               steps:
-              - say: "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{street}} {{city_town}} -"
+              - say: "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -"
               - say: כמה מבוגרים מעל לגיל 18 גרים בבית?
               - switch:
                   arg: _is_adult
@@ -225,25 +251,27 @@
                           input-max: 99
 
         - switch:
-            arg: _is_adult
+            arg: _is_old
             cases:
             - default: true
             - match: true 
               steps:
               - switch:
-                  arg: medical_staff_member
+                  arg: is_assisted_living
                   cases:
-                    - undefined: true        # <---- ask new/returning users with no past info about the kind work
-                      steps:
-                        - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
-                        - wait:
-                            variable: medical_staff_member
-                            options:
-                            - show: כן, אני חלק מצוות רפואי
-                              value: "true" 
-                            - show: לא, אני לא
-                              value: "false"
-                    - default: true            # <---- for returning users past info about the kind work, pass
+                  - default: true
+                  - undefined: true
+                    steps:
+                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן?
+                    - wait:
+                        variable: is_assisted_living
+                        options:
+                          - show: כן, דיור מוגן
+                            value: true
+                          - show: לא
+                            value: false
+                          - show: לא רוצה להשיב
+                            value: no_response
 
     - name: preconditions-check
       steps:
@@ -309,7 +337,7 @@
               - show: עישנתי בעבר, הפסקתי לפני פחות מחמש שנים
                 value: short_past_smoker
               - show: עישנתי בעבר, לפני יותר מחמש שנים
-                value: long_past_smokre
+                value: long_past_smoker
               - show: אף פעם
                 class: other
                 value: never
@@ -503,7 +531,7 @@
                                 value: has_symptoms
                               - show: אני בבידוד מרצוני האישי                    
                                 value: voluntary
-                      - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
+                      - show: "אני חולה בקורונה (מאומת בבדיקת מעבדה)"
                         value: diagnosed
                         steps:
                           - wait:
@@ -520,6 +548,206 @@
                       - show: "אני לא בבידוד"
                         class: other
                         value: "none"
+
+    - name: routine
+      steps:
+        - switch:
+            arg: _is_adult
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: need_to_ask_about_routine
+                      variable: _need_to_ask_about_routine
+                      params:
+                        - record
+                  - switch:
+                      arg: _need_to_ask_about_routine
+                      cases:
+                        - match: false
+                        - match: true
+                          steps:
+                          - say: האם יצאת מהבית במהלך השבוע האחרון?
+                          - wait:
+                              variable: routine_left_the_house
+                              options:
+                                - show: כן, יצאתי
+                                  value: true
+                                  steps:
+                                    - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
+                                    - wait:
+                                        variable: routine_workplace_is_outside
+                                        options:
+                                        - show: כן, יש עבודה מחוץ לבית
+                                          value: true 
+                                          steps:
+                                          - say: וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?
+                                          - wait:
+                                              variable: routine_workplace_weekly_hours
+                                              input-type: number
+                                              input-step: 1
+                                              input-min: 0
+                                              input-max: 168
+                                              placeholder: מספר השעות, בערך  
+                                          - say: האם העבודה במקום קבוע?
+                                          - wait:
+                                              variable: routine_workplace_single_location
+                                              options:
+                                              - show: כן, במקום קבוע
+                                                value: true
+                                                steps:
+                                                - say: אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר
+                                                - wait:
+                                                    options:
+                                                    - show: כן, בטח
+                                                      steps:
+                                                        - do:
+                                                            cmd: prepare_city_town_suggestions
+                                                            variable: _cityTownSuggestions
+                                                        - say: איפה נמצא מקום העבודה?
+                                                        - wait:
+                                                            variable: routine_workplace_city_town
+                                                            placeholder: "שם העיר או הישוב"
+                                                            suggestionsFrom: _cityTownSuggestions
+                                                        - say: ובאיזה רחוב זה?
+                                                        - wait:
+                                                            variable: routine_workplace_street
+                                                            placeholder: שם הרחוב, אם ידוע
+                                                            required: false
+                                                    - show: עדיף שלא
+                                              - show: לא, אין כתובת קבועה בעבודה
+                                                value: false
+                
+                                          - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                          - wait:
+                                              variable: _served_public_last_fortnight
+                                              options:
+                                              - show: כן, נתתי שירות
+                                                value: true
+                                              - show: לא נתתי שירות
+                                                value: false
+          
+                                          - switch:
+                                              arg: medical_staff_member
+                                              cases:
+                                              - undefined: true        # <---- ask new/returning users with no past info about the kind work
+                                                steps:
+                                                - say: האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?
+                                                - wait:
+                                                    variable: medical_staff_member
+                                                    options:
+                                                    - show: כן, אני חלק מצוות רפואי
+                                                      value: true
+                                                    - show: לא, אני לא
+                                                      value: false
+                                              - default: true            # <---- for returning users past info about the kind work, pass
+                
+                                        - show: לא
+                                          value: false
+          
+                                    - switch:
+                                        arg: routine_visits_prayer_house
+                                        cases:
+                                          - default: true 
+                                          - undefined: true 
+                                            steps:
+                                            - switch:
+                                                arg: sex
+                                                cases:
+                                                - default: true
+                                                  steps:
+                                                  - say: האם ביקור בבית תפילה הוא חלק מהשיגרה שלך?                  
+                                                - match: male
+                                                  steps:
+                                                  - say: האם אתה נוהג לבקר בבית תפילה באופן קבוע?
+                                                - match: female
+                                                  steps:
+                                                  - say: האם את נוהגת לבקר בבית תפילה באופן קבוע?
+                                            - wait:
+                                                variable: routine_visits_prayer_house
+                                                options:
+                                                - show: כן
+                                                  value: true
+                                                - show: לא
+                                                  value: false
+                                                - show: לא רוצה להשיב
+                                                  value: no_response
+                                                  class: other
+
+                                    - say: האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?          
+                                    - wait:
+                                        variable: routine_uses_public_transportation
+                                        options:
+                                          - show: כן
+                                            value: true
+                                            steps:
+                                            - say: במה מאלה השתמשת השבוע?
+                                            - wait:
+                                                variable: _var
+                                                multi: true
+                                                options:
+                                                - show: "רכבת"
+                                                  field: routine_uses_public_transportation_train
+                                                - show: "אוטובוס"
+                                                  field: routine_uses_public_transportation_bus 
+                                                - show: "מונית"
+                                                  field: routine_uses_public_transportation_taxi
+                                                - show: "אחר"
+                                                  field: routine_uses_public_transportation_other
+                                                - show: |-
+                                                    <span class='empty'>בעצם לא</span>
+                                                    <span class='not-empty'>זהו</span>
+                                                    <span class='none-selected'>אין פרטים נוספים</span>
+                                                  class: other
+                                            - do:
+                                                cmd: update_from_selection
+                                                params:
+                                                  - record
+                                                  - _var
+                                              
+                                          - show: לא
+                                            value: false
+
+                                    - say: "האם חבשת השבוע מסיכה כשיצאת מהבית?"
+                                    - wait:
+                                        variable: routine_wears_mask
+                                        options:
+                                        - show: כן, תמיד
+                                          value: always
+                                        - show: רוב הזמן
+                                          value: mostly_yes
+                                        - show: בחלק קטן מהזמן
+                                          value: mostly_no
+                                        - show: לא
+                                          value: never
+                                        - show: לא רוצה להשיב
+                                          value: no_response
+                                          class: "other"
+
+                                    - say: "ומה עם כפפות?"
+                                    - wait:
+                                        variable: routine_wears_gloves
+                                        options:
+                                        - show: כן, כל הזמן
+                                          value: always
+                                        - show: רוב הזמן
+                                          value: mostly_yes
+                                        - show: בחלק קטן מהזמן
+                                          value: mostly_no
+                                        - show: לא
+                                          value: never
+                                        - show: לא רוצה להשיב
+                                          value: no_response
+                                          class: "other"
+
+                                - show: לא, נשארתי בבית
+                                  value: false
+
+        - do:
+            cmd: save_public_service_data
+            params: 
+              - record
 
     - name: current-report
       steps:
@@ -596,7 +824,7 @@
                     options:
                       - show: "כן, נמדד חום"
                         steps:
-                          - goto: ask-body-temperature
+                          - goto: current-report-ask-body-temperature
                       - show: "היום לא נמדד חום"
 
             - match: feel_bad
@@ -606,10 +834,10 @@
                     options:
                       - show: "כן, נמדד חום"
                         steps:
-                          - goto: ask-body-temperature
+                          - goto: current-report-ask-body-temperature
                       - show: "היום לא נמדד חום"
 
-    - name: ask-body-temperature
+    - name: current-report-ask-body-temperature
       steps:
         - say: "ומה בדיוק המדחום אומר?"
         - wait:
@@ -634,6 +862,8 @@
               field: toplevel_symptoms_pains
             - show: שלשול
               field: symptoms_diarrhea
+            - show: חוסר תאבון או דילוג על ארוחות
+              field: symptoms_lack_of_appetite_or_skipping_meals                            
             - show: בחילה או הקאות
               field: symptoms_nausea_and_vomiting
             - show: צמרמורת
@@ -704,6 +934,8 @@
                     field: symptoms_headache
                   - show: כאבי גרון
                     field: symptoms_sore_throat
+                  - show: כאב בטן
+                    field: symptoms_abdominal_pain
                   - show: |-
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
                       <span class='not-empty'>זהו</span>
@@ -746,45 +978,6 @@
             params:
               - record
 
-        - switch:
-            arg: _is_adult
-            cases:
-              - default: true
-              - match: true
-                steps:
-                  - do:
-                      cmd: fetch_public_service_data
-                      params:
-                        - record
-                  - switch:
-                      arg: _public_service_status
-                      cases:
-                        - match: valid
-                        - match: required
-                          steps:
-                            - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
-                            - say: האם השאלה רלוונטית לגביך בימים אלו?
-                            - wait:
-                                variable: _served_public_last_fortnight
-                                options:
-                                  - show: כן, רלוונטית
-                                    value: relevant
-                                    steps:
-                                    - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
-                                    - wait:
-                                        variable: _served_public_last_fortnight
-                                        options:
-                                        - show: כן, נתתי שירות
-                                          value: true
-                                        - show: לא נתתי שירות
-                                          value: false
-                                    - do:
-                                        cmd: save_public_service_data
-                                        params: 
-                                          - record
-                              
-                                  - show: לא רלוונטית
-                                    value: false
     - name: end-of-report
       steps:
         - goto: set-reminder

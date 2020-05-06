@@ -4,6 +4,7 @@ import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
 import { I18nService } from '../i18n.service';
 import { ReportStoreService } from '../report-store.service';
+import { PRODUCTION } from '../constants';
 
 @Component({
   selector: 'app-heatmap',
@@ -40,7 +41,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
       try {
         this.map = new mapboxgl.Map({
           container: 'fullscreen-map',
-          style: 'mapbox://styles/wios/ck9qrvmgv1utk1is4aw2xjxrh',
+          style: 'mapbox://styles/wios/ck9qrvmgv1utk1is4aw2xjxrh' + (PRODUCTION ? '' : '/draft'),
           center: [this.mapService.lat, this.mapService.lng],
           minZoom: 3,
           zoom: this.mapService.zoom
