@@ -66,10 +66,12 @@ describe('[Flow] Reporting For a first address on a device', () => {
 
     await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
-    const wouldSend = await browser.executeScript('return window.wouldSend;');
-    log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
+    const wouldSend = await page.getWouldSend();
+    expect(wouldSend).toBeDefined();
+    expect(wouldSend).not.toBeNull();
     expect(wouldSend['alias']).toBeDefined();
     expect(wouldSend['alias']).toEqual(alias);
+    log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
   });
 });
 
@@ -118,7 +120,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     const answers = [0];  // choose another report for the same alias
     await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
-    const wouldSend = await browser.executeScript('return window.wouldSend;');
+    const wouldSend = await page.getWouldSend();
     log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
     expect(wouldSend['alias']).toBeDefined();
     expect(wouldSend['alias']).toEqual(alias);

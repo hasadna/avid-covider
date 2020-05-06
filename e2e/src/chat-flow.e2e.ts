@@ -1,9 +1,16 @@
 import { AppPage, IAnswerElements, AnswerElementType } from './app.po';
 import { ElementFinder, ElementArrayFinder, browser } from 'protractor';
-import { safeClick, reverseStr, getValidNumberInput, getValidDateInput, getValidOptionIndex, reverseStrSync } from './utils.e2e';
+import {
+  safeClick,
+  reverseStr,
+  getValidNumberInput,
+  getValidDateInput,
+  getValidOptionIndex,
+  reverseStrSync,
+} from './utils.e2e';
 import { AnswerTestDataType } from './models.e2e';
 
-const MAX_ANSWERS_PER_REPORT = 30;
+const MAX_ANSWERS_PER_REPORT = 50;
 const log = (msg, arg: any = '') => console.log(`[chat-flow] ${msg}`, arg);
 // Simulate a complete conversion with chat-bot
 // can use pre-detemined answers, or - choose them randomally when not provided
@@ -21,7 +28,7 @@ export async function simulateChatFlow(page: AppPage, answers: Array<AnswerTestD
 
   for (i = 0; i < MAX_ANSWERS_PER_REPORT && !wouldSend; i++) {
     log(` --- Quesion ${i + 1} ---`);
-    nextAnswer = (answers.length > 0) ? answers.shift() : null;
+    nextAnswer = answers.length > 0 ? answers.shift() : null;
 
     // wait for browser
     await page.waitForNextAnswerElements();
@@ -42,6 +49,8 @@ export async function simulateChatFlow(page: AppPage, answers: Array<AnswerTestD
         wouldSend,
         questions: i, // how many questions where asked
       };
+    } else if (i + 1 === MAX_ANSWERS_PER_REPORT) {
+      log('=== WARNING: end chat due to MAX QUESIONS NUMBER Reached ===');
     }
   }
 }
@@ -50,7 +59,7 @@ export async function simulateChatFlow(page: AppPage, answers: Array<AnswerTestD
 async function doAnswer(answerElements: IAnswerElements, nextAnswer: AnswerTestDataType) {
   switch (answerElements.type) {
     case AnswerElementType.InputText: {
-      const input = nextAnswer ? nextAnswer as string : 'yada yada';
+      const input = nextAnswer ? (nextAnswer as string) : 'yada yada';
       answerElements.input.sendKeys(input);
       log(`Answer using input-text: ${reverseStrSync(input)}`);
       await safeClick(answerElements.confirmElement);
@@ -92,7 +101,11 @@ async function selectRandomOptionSingle(options: ElementArrayFinder, nextAnswer:
   log(`Answer using single-select option - click button index: ${optionIndex} of ${lastOptionIndex} (${optionText})`);
   await safeClick(optionElement);
 }
-async function selectRandomOptionMulti(options: ElementArrayFinder, confirmElement: ElementFinder, nextAnswer: AnswerTestDataType) {
+async function selectRandomOptionMulti(
+  options: ElementArrayFinder,
+  confirmElement: ElementFinder,
+  nextAnswer: AnswerTestDataType
+) {
   const lastOptionIndex = (await options.count()) - 1;
   let optionIndex;
 
