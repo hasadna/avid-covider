@@ -1,0 +1,1053 @@
+- description: תסריט לניהול שיחות מצד הפונה
+  name: פונה
+  snippets:
+    - name: default
+      steps:
+      - goto: intro
+      - goto: reporting-loop
+      - goto: end-of-report
+
+    - name: intro
+      steps:
+        - do:
+            cmd: load_local_storage                 # Load the data of previous reports on device
+            params:
+            - record
+        - switch:
+            arg: _existing_user
+            cases:
+            - match: new                                                           # <--- First report on device
+              steps:
+              - say: טוב שבאת,
+              - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
+              - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
+              - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
+              - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
+              - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
+            - match: returning                                                     # <--- Previous reports found on device
+              steps:
+              - say: הי! טוב לראותך שוב
+              - say: הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה
+
+    - name: reporting-loop
+      steps:
+        - do:
+            cmd: clear
+        - goto: personal-details
+        - goto: preconditions-check
+        - goto: covid19-checks
+        - goto: insulation
+        - goto: current-report
+        - goto: exposures
+        - do:
+            cmd: save_report
+            params:
+              - record
+        - say: מצויין, השלמנו את הדיווח היומי עבור {{alias}}
+        - goto: reporting-loop
+              
+    - name: personal-details
+      steps:
+        - do:
+            cmd: load_local_storage                 # Load the data of previous reports on device
+            params:
+            - record
+
+        - switch:
+            arg: _existing_user
+            cases:
+            - match: new
+            - match: returning                                                     # <--- Previous reports found on device
+              steps:
+              - say: עבור מי ברצונך לדווח עכשיו?
+              - do:
+                  cmd: fetch_previous_reports                            # <--- Generate the list of options (reporters) to show
+                  variable: _report_options
+                  params:
+                    - "דיווח חדש ב{{street}} {{city_town}}"
+                    - "דיווח חדש בכתובת אחרת"
+                    - "כל בני ביתי כבר דיווחו"
+              - wait:                                                    # <---- wait for the user choice of the current reporter
+                  optionsFrom: _report_options
+                  variable: _report_selection
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _report_selection                    
+                            
+        - switch:
+            arg: sex
+            cases:
+            - undefined: true                          # <---- for new reporters, ask for sex
+              steps:
+              - say: בן? בת?
+              - wait:
+                  variable: sex
+                  options:
+                  - show: בן
+                    value: male
+                  - show: בת
+                    value: female
+            - default: true                          # <---- for returning reporters, pass
+
+        - switch:
+            arg: age
+            cases:
+            - undefined: true                       # <---- for new reporters, ask for age
+              steps:
+              - switch:
+                  arg: sex
+                  cases:
+                  - match: male
+                    steps:
+                    - say: בן כמה?
+                  - match: female
+                    steps:
+                    - say: בת כמה?
+              - wait:
+                  variable: age
+                  placeholder: "גיל, 0-120"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 120
+            - default: true                       # <---- for returning reporters, pass
+
+        - switch:
+            arg: city_town
+            cases:
+            - undefined: true                    # <---- for new reporters, ask for city
+              steps:   
+              - do:
+                  cmd: prepare_city_town_suggestions
+                  variable: _cityTownSuggestions
+              - say: מה הוא מקום המגורים?
+              - wait:
+                  variable: city_town
+                  placeholder: "שם העיר או הישוב"
+                  suggestionsFrom: _cityTownSuggestions
+            - default: true                     # <---- for returning reporters, pass
+
+        - switch:
+            arg: street
+            cases:
+            - undefined: true                 # <---- for new reporters, ask for street name
+              steps:   
+              - say: שם הרחוב?
+              - wait:
+                  variable: street
+                  placeholder: שם הרחוב, אם ידוע
+                  required: false
+            - default: true                   # <---- for returning reporters, pass
+
+        - do:
+            cmd: ensure_uid
+            params:
+              - record
+
+        - switch:
+            arg: _location                    # _location is the concatenation of an optional street and the city
+            cases:
+            - undefined: true                 # <---- for new users, create _location
+              steps:
+              - do:
+                  cmd: combine_location
+                  variable: _location
+                  params:
+                    - record
+                    - "{{street}} {{city_town}}"
+            - default: true                   # <---- for returning users, we already have saved _location
+
+        - switch:
+            arg: alias                         # alias is our user identifier (age+sex+street+city)
+            cases:
+            - undefined: true                            #<--- for new users, create alias
+              steps:
+              - do:
+                  cmd: calculate_alias
+                  variable: alias
+                  params:
+                    - record
+                    - "בן {{age}} מ{{_location}}"
+                    - "בת {{age}} מ{{_location}}"
+              - say: נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}
+            - default: true                 # <---- for returning users, we already have saved alias
+
+        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
+            cmd: is_adult
+            params: 
+              - record
+            variable: _is_adult
+
+        - do:                                       # <---- check if we already have the household data from past reports
+            cmd: fetch_household_data
+            params: 
+              - record
+
+        - switch:
+            arg: _household_data_available
+            cases:
+            - match: true
+            - default: true
+              steps:
+              - say: "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -"
+              - say: כמה מבוגרים מעל לגיל 18 גרים בבית?
+              - switch:
+                  arg: _is_adult
+                  cases:
+                    - match: true
+                      steps:
+                      - wait:
+                          variable: _household_adults
+                          placeholder: מספר המבוגרים ,1-99
+                          validation: "[0-9]+"
+                          input-kind: number
+                          input-min: 1
+                          input-max: 99
+                    - match: false
+                      steps:
+                      - wait:
+                          variable: _household_adults
+                          placeholder: מספר המבוגרים ,0-99
+                          validation: "[0-9]+"
+                          input-kind: number
+                          input-min: 0
+                          input-max: 99
+                
+              - say: וכמה ילדים מתחת לגיל 18?
+              - switch:
+                  arg: _is_adult
+                  cases:
+                    - match: true
+                      steps:
+                      - wait:
+                          variable: _household_minors
+                          placeholder: מספר הילדים, 0-99
+                          validation: "[0-9]+"
+                          input-kind: number
+                          input-min: 0
+                          input-max: 99
+                    - match: false
+                      steps:
+                      - wait:
+                          variable: _household_minors
+                          placeholder: מספר הילדים, 1-99
+                          validation: "[0-9]+"
+                          input-kind: number
+                          input-min: 1
+                          input-max: 99
+
+        - switch:
+            arg: _is_adult
+            cases:
+            - default: true
+            - match: true 
+              steps:
+              - switch:
+                  arg: medical_staff_member
+                  cases:
+                    - undefined: true        # <---- ask new/returning users with no past info about the kind work
+                      steps:
+                        - say: האם העבודה שלך היא כחלק מצוות רפואי- בטיפול בחולים או בקבלת קהל?
+                        - wait:
+                            variable: medical_staff_member
+                            options:
+                            - show: כן, אני חלק מצוות רפואי
+                              value: "true" 
+                            - show: לא, אני לא
+                              value: "false"
+                    - default: true            # <---- for returning users past info about the kind work, pass
+
+    - name: preconditions-check
+      steps:
+        - switch:
+            arg: preconditions_received
+            cases:
+              - undefined: true                  # <---- for new reporters, ask for preconditions (go to relevant block)
+                steps:
+                - goto: preconditions
+              - default: true                    # <---- for returning reporters, pass
+
+    - name: preconditions
+      steps:
+        - say: "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:"
+        - goto: preconditions-diseases
+        - goto: preconditions-smoking
+        - do:
+            cmd: set_flag
+            params:
+              - record
+              - preconditions_received
+        - say: אוקיי, עברנו את זה…     
+
+    - name: preconditions-diseases
+      steps:
+        - wait:
+            variable: _var
+            multi: true
+            options:
+            - show: "סוכרת"
+              field: precondition_chronic_diabetes
+            - show: "בעיית יתר לחץ דם"
+              field: precondition_chronic_hypertension
+            - show: מחלת לב, כלי דם או שבץ
+              field: precondition_chronic_ischemic_heart_disease_or_stroke
+            - show: מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)
+              field: precondition_chronic_lung_disease
+            - show: סרטן
+              field: precondition_chronic_cancer
+            - show: אי ספיקת כליות
+              field: precondition_chronic_kidney_failure
+            - show: דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון
+              field: precondition_chronic_immune_system_suppression
+            - show: |-
+                <span class='empty'>אף אחת ממחלות הרקע הללו</span>
+                <span class='not-empty'>זהו</span>
+                <span class='none-selected'>ללא מחלות רקע</span>
+              class: other
+        - do:
+            cmd: update_from_selection
+            params:
+              - record
+              - _var
+    
+    - name: preconditions-smoking
+      steps:
+        - say: מה לגבי עישון?
+        - wait:
+            variable: precondition_smoking
+            options:
+              - show: עישון יומיומי
+                value: daily_smoker
+              - show: עישנתי בעבר, הפסקתי לפני פחות מחמש שנים
+                value: short_past_smoker
+              - show: עישנתי בעבר, לפני יותר מחמש שנים
+                value: long_past_smokre
+              - show: אף פעם
+                class: other
+                value: never
+
+    - name: covid19-checks
+      steps:  
+        - do:
+            cmd: fetch_covid19_check_question_data   ## load the relevant reporter's data, return the plan for the current report
+                                                           # swtich values: "first_time" (new users), 
+                                                           # "ask again", 
+                                                           # "don't ask", 
+                                                           # "ask for missing check results"
+
+                                                            ## logic:
+                                                            ## - no date of asking the question before (and new user) --> "first time" 
+                                                            ## - returning users with question date >= 7 days --> "ask again"
+                                                            ## - returning users with quesion date < 7 days OR returning users with POSITIVE check rsult ---> "dont_ask"  
+                                                            ## -  if there is a missing result from the last two weeks --> "ask for missing check results"
+                                                            ##    in case of previous "positive" check result, the result and the check date to be submitted with the current report as well
+            params:
+              - record
+        - switch:
+            arg: _covid19_check_question_status
+            cases:
+              - match: missing_result                                 ## check if there is a pending check result
+                steps:
+                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה… האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (covid19_check_date)
+                  - wait:
+                      options:
+                        - show: "כן, הגיעו תוצאות הבדיקה"
+                          steps:
+                            - goto: covid19_check_ask_for_results
+                        - show: "לא"
+              - match: first_time                          # <---- for new reporters, ask for last check
+                steps:
+                  - say: האם נבדקת לקורונה בעבר (בדיקת PCR)?
+                  - wait:
+                      options:
+                      - show: כן, נבדקתי
+                        value: true
+                        steps:
+                          - say: באיזה תאריך נבדקת בפעם האחרונה?
+                          - wait:
+                              variable: covid19_check_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                          - goto: covid19_check_ask_for_results
+                      - show: לא
+                        value: false
+              - match: ask_again                         # <---- for returning reporters, pass
+                steps:
+                  - say: האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?
+                  - wait:
+                      options:
+                      - show: כן, נבדקתי
+                        steps:
+                          - say: באיזה יום זה היה?
+                          - wait:
+                              variable: covid19_check_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                          - goto: covid19_check_ask_for_results
+                      - show: לא
+
+              - default: true                           # don't ask
+            
+        - do:
+            cmd: save_covid19_check_question_data         # <--- save the following entires: question date, check date and the check result.                                                         
+            params:
+              - record
+
+    - name: covid19_check_ask_for_results
+      steps:
+        - say: ומה היתה תוצאת הבדיקה?
+        - wait:
+            variable: _covid19_check_result
+            options:
+              - show: אובחנתי כחולה בקורונה
+                value: positive
+                steps:
+                  - say: אוי, זה בטח לא פשוט.  החלמה מהירה
+              - show: אין לי קורונה
+                value: negative
+                steps:
+                  - say: משמח לשמוע, נקווה שימשיך ככה
+              - show: עוד לא קיבלתי את תוצאות הבדיקה
+                value: result_missing
+                unless: _covid19_check_question_status_missing
+                steps:
+                - say: אנחנו מחזיקים לך אצבעות
+
+    - name: insulation
+      steps:
+        - switch:
+            arg: exposure_status
+            cases:
+              - undefined: true           
+                steps:
+                  - say: עכשיו, מה בנוגע לבידוד?
+              - default: true
+                steps:
+                  - switch:
+                      arg: exposure_status
+                      cases:        
+                      - pattern: "(insulation_with_family|insulation|diagnosed)" 
+                        steps:
+                          - say: "הדיווח הקודם היה על בידוד או אישפוז. האם משהו השתנה?"
+                      - default: true
+                        steps:
+                          - say: "בדיווח הקודם לא הוזכר בידוד או אשפוז. האם משהו השתנה?"
+                  - wait:
+                      options:
+                        - show: לא, המצב דומה
+                        - show: כן, משהו השתנה
+                          steps:
+                            - say: אז מה השתנה?
+                            - do:
+                                cmd: clear_fields
+                                params:
+                                  - record
+                                  - exposure.*
+                                  - insulation.*
+
+        - switch:
+            arg: exposure_status
+            cases:
+              - default: true
+              - undefined: true
+                steps:
+                - wait:
+                    variable: exposure_status
+                    options:
+                      - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
+                        value: insulation_with_family
+                        steps:
+                          - say: "באיזה תאריך התחיל הבידוד?"
+                          - wait:
+                              variable: insulation_start_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                      - show: אני בבידוד מבני משפחה, ובחדר סגור
+                        value: "insulation"
+                        steps:
+                          - say: "באיזה תאריך התחיל הבידוד?"
+                          - wait:
+                              variable: insulation_start_date
+                              placeholder: "תאריך: dd/mm/yy"
+                              input-kind: date
+                          - say: מה הסיבה לשהות שלך בבידוד?
+                          - wait:
+                              variable: insulation_reason
+                              options:
+                              - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                                value: back-from-abroad
+                                steps: 
+                                  - say: "מתי חזרת לארץ?"
+                                  - wait:
+                                      variable: insulation_returned_from_abroad_date
+                                      placeholder: "תאריך: dd/mm/yy"
+                                      input-kind: date
+                                      options:
+                              - show: אני בבידוד כי נחשפתי לחולה מאומת
+                                value: contact-with-patient
+                                steps:
+                                  - say: ידוע לך מה מספר החולה שפגשת?
+                                  - wait:
+                                      options:
+                                      - show: "כן, ידוע לי מספר החולה"
+                                        value: "yes"
+                                        steps:
+                                          - say: מצויין. מה המספר?
+                                          - wait:
+                                              variable: insulation_patient_number
+                                              placeholder: "מספר החולה שפגשתי, בספרות"
+                                          - say: האם זכור לך היום שבו נפגשתם?
+                                          - wait:
+                                              options:
+                                              - show: "כן, זכור לי התאריך"
+                                                value: "yes"
+                                                steps: 
+                                                - say: מה היה התאריך?
+                                                - wait:
+                                                    variable: insulation_exposure_date
+                                                    placeholder: "תאריך: dd/mm/yy"
+                                                    input-kind: date
+                                              - show: "לא זכור לי"
+                                                value: "no"
+                                      - show: "לא ידוע לי"
+                                        value: "no"
+                              - show: אני בבידוד כי חוויתי תסמינים
+                                value: has_symptoms
+                              - show: אני בבידוד מרצוני האישי                    
+                                value: voluntary
+                      - show: "אני חולה קורונה (מאומת בבדיקת מעבדה)"
+                        value: diagnosed
+                        steps:
+                          - wait:
+                              variable: diagnosed_location
+                              options:                 
+                              - show: אשפוז בבית חולים
+                                value: hospital
+                              - show: בבית מלון
+                                value: hotel
+                              - show: בבית
+                                value: home
+                              - show: החלמתי ואני בבית
+                                value: recovered
+                      - show: "אני לא בבידוד"
+                        class: other
+                        value: "none"
+
+    - name: current-report
+      steps:
+        - switch:
+            arg: general_feeling                                      
+            cases:
+              - default: true                                          #<--- for new reporters, ask how they fell
+                steps:
+                - say: ומה נשמע היום?
+                - wait:
+                    variable: general_feeling
+                    options:
+                    - show: בסדר גמור
+                      value: feel_good
+                      steps:
+                        - say: נהדר לשמוע!
+                        - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
+                    - show: לא כל כך טוב
+                      value: feel_bad
+                      steps:
+                      - say: "אוייש… איך זה בא לידי ביטוי?"
+      
+              - match: feel_good                                      #<--- for returning users who felt good on their previous report
+                steps:
+                  - say: אני מקווה שהמרגש עדיין טוב כמו בדיווח הקודם
+                  - wait:
+                      variable: general_feeling
+                      options:
+                      - show: כן, בסדר גמור
+                        value: feel_good
+                        steps:
+                          - say: נהדר לשמוע!
+                          - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
+                      - show: לצערי לא כל כך טוב
+                        value: feel_bad
+                        steps:
+                        - say: "אוייש… איך זה בא לידי ביטוי?"
+        
+              - match: feel_bad                                    #<--- for returning users who felt bad on their previous report
+                steps:
+                  - say: בדיווח שעבר סיפרת שהרגשת לא כל כך טוב… האם חל שיפור במצבך?
+                  - wait:
+                      variable: general_feeling
+                      options:
+                      - show: כן, עכשיו הכל בסדר
+                        value: feel_good
+                        steps:
+                          - say: נהדר לשמוע!
+                          - say: "ליתר בטחון, האם יש משהו מהתסמינים האלה?"
+                      - show: לא, עדיין לא משהו
+                        value: feel_bad
+                        steps:
+                        - say: "אוייש… איך זה בא לידי ביטוי?"
+
+        - goto: current-report-symptoms
+
+    - name: current-report-symptoms
+      steps:
+        - goto: current-report-top-level-symptoms
+        - goto: current-report-cough-symptoms
+        - goto: current-report-pain-symptoms
+        - goto: current-report-temperature
+
+    - name: current-report-temperature
+      steps:
+        - switch:
+            arg: general_feeling
+            cases:
+            - match: feel_good
+              steps:
+                - say: "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף."
+                - say: "האם כבר נמדד חום היום?"
+                - wait:
+                    options:
+                      - show: "כן, נמדד חום"
+                        steps:
+                          - goto: ask-body-temperature
+                      - show: "היום לא נמדד חום"
+
+            - match: feel_bad
+              steps:
+                - say: "האם נמדד חום היום?"
+                - wait:
+                    options:
+                      - show: "כן, נמדד חום"
+                        steps:
+                          - goto: ask-body-temperature
+                      - show: "היום לא נמדד חום"
+
+    - name: ask-body-temperature
+      steps:
+        - say: "ומה בדיוק המדחום אומר?"
+        - wait:
+            variable: temperature
+            placeholder: מעלות חום, 35.0-43.0
+            input-kind: number
+            input-min: 35
+            input-max: 43
+            input-step: 0.1
+              
+    - name: current-report-top-level-symptoms
+      steps:
+      - wait:
+          variable: _var
+          multi: true
+          options:
+            - show: שיעולים או נזלת
+              field: toplevel_symptoms_cough
+            - show: קוצר נשימה
+              field: symptoms_breath_shortness
+            - show: כאבים
+              field: toplevel_symptoms_pains
+            - show: שלשול
+              field: symptoms_diarrhea
+            - show: בחילה או הקאות
+              field: symptoms_nausea_and_vomiting
+            - show: צמרמורת
+              field: symptoms_chills
+            - show: בלבול
+              field: symptoms_confusion
+            - show: עייפות או חולשה
+              field: symptoms_tiredness_or_fatigue
+            - show: איבדתי את חוש הטעם או הריח
+              field: symptoms_smell_taste_loss
+            - show: |-
+                <span class='empty'>אף אחד מהתסמינים האלה</span>
+                <span class='not-empty'>זהו</span>
+                <span class='none-selected'>אין תסמינים</span>
+              class: other
+      - do:
+          cmd: update_from_selection
+          params:
+            - record
+            - _var
+
+    - name: current-report-cough-symptoms
+      steps:
+      - switch:
+          arg: toplevel_symptoms_cough
+          cases:
+            - default: true
+            - match: true
+              steps:
+              - say: נשמח לעוד כמה פרטים לגבי השיעול והנזלת. 
+              - wait:
+                  variable: _var
+                  multi: true
+                  options:
+                  - show: נזלת או גודש באף
+                    field: symptoms_clogged_nose
+                  - show: שיעול יבש
+                    field: symptoms_dry_cough
+                  - show: שיעול לח, או שיעול עם כיח
+                    field: symptoms_moist_cough
+                  - show: |-
+                      <span class='empty'>אף אחד מהתסמינים האלה</span>
+                      <span class='not-empty'>זהו</span>
+                      <span class='none-selected'>אין פרטים נוספים</span>
+                    class: other
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _var
+
+    - name: current-report-pain-symptoms
+      steps:
+      - switch:
+          arg: toplevel_symptoms_pains
+          cases:
+            - default: true
+            - match: true
+              steps:
+              - say: מה כואב בדיוק?
+              - wait:
+                  variable: _var
+                  multi: true
+                  options:
+                  - show: כאבי שרירים
+                    field: symptoms_muscles_pain
+                  - show: כאבי ראש
+                    field: symptoms_headache
+                  - show: כאבי גרון
+                    field: symptoms_sore_throat
+                  - show: |-
+                      <span class='empty'>אף אחד מהתסמינים האלה</span>
+                      <span class='not-empty'>זהו</span>
+                      <span class='none-selected'>אין פרטים נוספים</span>      
+                    class: other
+              - do:
+                  cmd: update_from_selection
+                  params:
+                    - record
+                    - _var
+
+    - name: exposures
+      steps:
+        - say: "חשוב לנו לדעת -"
+        - say: "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים"
+        - wait:
+            options:
+              - show: כן, שהיתי בקרבת אנשים נוספים
+                steps:
+                - say: כמה מהם מבוגרים מעל גיל 18?
+                - wait:
+                    variable: _met_above_18
+                    placeholder: מספר המבוגרים, 0-99
+                    validation: "[0-9]+"
+                    input-kind: number
+                    input-min: 0
+                    input-max: 99
+                - say: וכמה ילדים מתחת לגיל 18?
+                - wait:
+                    variable: _met_under_18
+                    placeholder: מספר הילדים, 0-99
+                    validation: "[0-9]+"
+                    input-kind: number
+                    input-min: 0
+                    input-max: 99
+              - show: לא, רק עם בני הבית
+
+        - do:
+            cmd: calculate_met_daily
+            params:
+              - record
+
+        - switch:
+            arg: _is_adult
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: fetch_public_service_data
+                      params:
+                        - record
+                  - switch:
+                      arg: _public_service_status
+                      cases:
+                        - match: valid
+                        - match: required
+                          steps:
+                            - say: השאלה הבאה קשורה למי שנותנים שירות בעבודתם או בעיסוקם לאנשים אחרים.
+                            - say: האם השאלה רלוונטית לגביך בימים אלו?
+                            - wait:
+                                variable: _served_public_last_fortnight
+                                options:
+                                  - show: כן, רלוונטית
+                                    value: relevant
+                                    steps:
+                                    - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
+                                    - wait:
+                                        variable: _served_public_last_fortnight
+                                        options:
+                                        - show: כן, נתתי שירות
+                                          value: true
+                                        - show: לא נתתי שירות
+                                          value: false
+                                    - do:
+                                        cmd: save_public_service_data
+                                        params: 
+                                          - record
+                              
+                                  - show: לא רלוונטית
+                                    value: false
+    - name: end-of-report
+      steps:
+        - goto: set-reminder
+        - goto: share
+        # - goto: dynamic_update
+        - goto: affiliations
+        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה… 
+        - say: תודה רבה, נתראה מחר?
+        - wait:
+            options:
+              - show: בטח!
+
+    - name: affiliations
+      steps:
+        - do:
+            variable: _affiliates_should_ask
+            cmd: affiliates_should_ask
+        - switch:
+            arg: _affiliates_should_ask
+            cases:
+              - match: false
+                steps:
+                  - pop: end-of-report
+              - default: true
+        - switch:
+            arg: affiliate_questionnaires_preference
+            cases:
+              - match: never
+              - default: true
+                steps:
+                - say: האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?
+                - wait:
+                    variable: affiliate_questionnaires_preference
+                    options:
+                      - show: כן, בשמחה
+                        value: ok
+                      - show: לא, בפעם אחרת
+                        value: later
+                      - show: לא, אף פעם
+                        value: never
+                - switch:
+                    arg: affiliate_questionnaires_preference
+                    cases:
+                      - match: ok
+                        steps:
+                          - goto: affiliate-alon-chen
+                      - default: true
+              
+    - name: affiliate-alon-chen
+      steps:
+        - say: פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
+        - say: לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?
+        - wait:
+            variable: affiliate_questionnaires_preference_alon_chen
+            options:
+              - show: אשמח להשתתף במחקר
+                value: ok
+                steps:
+                  - say: תודה רבה, נתראה מחר!
+                  - do:
+                      cmd: affiliate_alon_chen
+                  - goto: complete
+              - show: לא, בפעם אחרת
+                value: pass
+
+    # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
+    #   steps:    
+
+
+    - name: share
+      steps:
+        - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
+        - wait:
+            variable: event_share_action
+            options:
+              - show: כן, אשמח לשתף
+                value: yes
+                steps:
+                  - do:
+                      cmd: share_action   # (click --> add to record)
+                      variable: event_share_result
+                  - switch:
+                      arg: event_share_result
+                      cases:
+                        - default: true
+                        - match: copied
+                          steps:
+                            - do:
+                                cmd: toaster
+                                params:
+                                  - הקישור לדיווח היומי הועתק ללוח!
+                        - match: shared
+                          steps:
+                            - say: תודה רבה על השיתוף!
+                                  
+
+              - show: לא עכשיו
+                value: no
+
+    - name: set-reminder
+      steps:
+        - do:
+            cmd: reminder_status   # a function to verify if a reminder was set already (telegram, device, app, downloaded ical)
+            params:                #     1. no_reminder --> ask user to set a reminder 
+              - record             #     2. reminder_set --> ask user to add a different/another reminder
+            variable: action_reminder_required
+
+        - switch:
+            arg: action_reminder_required
+            cases:
+              - default: true
+                steps:
+                  - say: יש כמה דרכים שבהן נוכל להזכיר לך לחזור ולספר לנו מה שלומך, שננסה?
+                  - wait:
+                      variable: action_reminder_wanted
+                      options:
+                      - show: כן, אשמח לתזכורת
+                        value: wanted
+                        steps:
+                        - goto: reminder-choose-method   # https://zpl.io/bzZMKw4
+
+                      - show: כבר יש לי תזכורת, תודה
+                        value: already_set
+
+                      - show: לא, אין צורך, יש לי זכרון מצויין!
+                        value: not_wanted
+              
+              - match: 'not-required'
+                steps:
+                  - say: תודה רבה שחזרת לדווח. מחכים לשמוע ממך שוב
+              
+    - name: reminder-choose-method
+      steps:                   
+        - do:
+            cmd: reminder_choose_method_show_widget
+            variable: action_reminder_selected 
+            params:
+              - record
+        - switch:
+            arg: action_reminder_selected
+            cases:
+              - match: notification
+                steps:
+                - goto: reminder-notification
+
+              - match: android-app
+                steps:
+                - goto: reminder-app
+
+              - match: iphone-app
+                steps:
+                - goto: reminder-app
+
+              - match: calendar
+                steps:
+                - goto: reminder-calendar
+            
+              - match: telegram
+                steps:
+                - goto: reminder-telegram
+
+    - name: reminder-notification
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_notification_approved
+            params:
+              - אשרו קבלת התראות מן האתר על מנת שנוכל להזכיר לכם למלא את השאלון
+              - בסדר
+        - switch:
+            arg: action_reminder_notification_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: install_notification
+                        
+    - name: reminder-app
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_app_approved           # track how many clicked on "download"/"nevermind"
+            params:
+              - הורידו את האפליקציה ונזכיר לכם כל יום ב-20:00
+              - להורדת האפליקציה
+        - switch:
+            arg: action_reminder_app_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - do:
+                      cmd: install_app
+                      params:
+                      - record
+                        
+    - name: reminder-calendar
+      steps:
+        - do:
+            cmd: banner
+            variable: action_reminder_calendar_approved
+            params:
+              - לחצו על הכפתור להתקנת התזכורת ביומן
+              - להורדה
+        - switch:
+            arg: action_reminder_calendar_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                - do:
+                    cmd: install_calendar
+                - do:
+                    cmd: banner
+                    params:
+                      - אם כלום לא קורה, פתחו את הקובץ corona_reminder.ics מה״הורדות״
+                      - המשך
+
+    - name: reminder-telegram
+      steps:
+        - do: 
+            cmd: banner
+            variable: action_reminder_telegram_approved
+            params:
+              - "<b>שימו לב: </b> בוט הטלגרם מופעל על ידי צד שלישי וללא כל אחריות מצדנו. מומלץ לבדוק את מדיניות שמירת המידע והפרטיות של הבוט לפני השימוש"
+              - בסדר
+        - switch:
+            arg: action_reminder_telegram_approved
+            cases:
+              - default: true
+              - match: true
+                steps:
+                - do:
+                    cmd: install_telegram
+
+
+- name: generic-translation-assets ## <-- keep me last!
+  keys:
+    - name: calendarTitle
+      show: זמן לדיווח הבריאות היומי!
+    - name: calendarBody
+      show: "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה \U0001F4AA\U0001F3FD!"
+    - name: reminder:notification
+      show: התראה בדפדפן
+    - name: reminder:calendar
+      show: תזכורת ביומן
+    - name: reminder:android-app
+      show: אפליקציית האנדרואיד שלנו
+    - name: reminder:iphone-app
+      show: אפליקציית האייפון שלנו
+    - name: reminder:telegram
+      show: בוט טלגרם
