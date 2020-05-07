@@ -7,10 +7,10 @@ const MAX_ANSWERS_PER_REPORT = 30;
 const log = (msg, arg: any = '') => console.log(`[chat-flow] ${msg}`, arg);
 // Simulate a complete conversion with chat-bot
 // can use pre-detemined answers, or - choose them randomally when not provided
-export async function simulateChatFlow(page: AppPage, stopText: string, answers: Array<AnswerTestDataType> = []) {
+export async function simulateChatFlow(page: AppPage, answers: Array<AnswerTestDataType> = []) {
   let activeQuestionText;
   let activeAnswerElement;
-  let stopTextDiscovered = false;
+  let wouldSend = null;
   let nextAnswer;
   let i;
 
@@ -19,7 +19,7 @@ export async function simulateChatFlow(page: AppPage, stopText: string, answers:
     log('provided answers: ', answers);
   }
 
-  for (i = 0; i < MAX_ANSWERS_PER_REPORT && !stopTextDiscovered; i++) {
+  for (i = 0; i < MAX_ANSWERS_PER_REPORT && !wouldSend; i++) {
     log(` --- Quesion ${i + 1} ---`);
     nextAnswer = (answers.length > 0) ? answers.shift() : null;
 
@@ -35,12 +35,15 @@ export async function simulateChatFlow(page: AppPage, stopText: string, answers:
     await doAnswer(activeAnswerElement, nextAnswer);
 
     // check if report ended
-    stopTextDiscovered = await page.existInPostAnswerText(stopText);
-    if (stopTextDiscovered) {
+    wouldSend = await page.getWouldSend();
+    if (wouldSend) {
       log('=== end chat flow simulation ===');
+      return {
+        wouldSend,
+        questions: i, // how many questions where asked
+      };
     }
   }
-  return i; // how many questions where asked
 }
 
 // interaction functions
