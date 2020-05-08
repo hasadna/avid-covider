@@ -19,15 +19,18 @@
             - match: new                                                           # <--- First report on device
               steps:
               - say: טוב שבאת,
-              - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
-              - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
+              - say: כולם מנסים לחזור לשיגרה מסויימת אבל מגפת הקורונה לא נעלמה
+              - say: התשובות שלך לכמה שאלות, והמשך הדיווח, יעזור לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים
+              - say: להתפרצות מחודשת של התפרצות המחלה ולהיערך אליה בהתאם.
+              - say: כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרקטיות שלך             
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
               - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
               - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: הי! טוב לראותך שוב
-              - say: הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה
+              - say: יחד איתך ננסה להבין מה הסיכוי להתפרצות מחודשת של נגיף הקורונה באזור שלך
+              - say: אם אחרי הדיווח שלך אפשר יהיה לקבל גם דיווח לגבי בני הבית או המשפחה שלך, זה יעזור מאוד
 
     - name: reporting-loop
       steps:
@@ -186,7 +189,7 @@
               - record
             variable: _is_adult
 
-        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
+        - do:                                   # <---- check whether the reporter is an adult (65 years old and older) or a minor
             cmd: is_old
             params: 
               - record
@@ -262,11 +265,11 @@
                   - default: true
                   - undefined: true
                     steps:
-                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן?
+                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן או בית אבות?
                     - wait:
                         variable: is_assisted_living
                         options:
-                          - show: כן, דיור מוגן
+                          - show: כן, דיור מוגן או בית אבות
                             value: true
                           - show: לא
                             value: false
@@ -418,7 +421,7 @@
               - show: אובחנתי כחולה בקורונה
                 value: positive
                 steps:
-                  - say: אוי, זה בטח לא פשוט.  החלמה מהירה
+                  - say: אוי, זה בטח לא פשוט. החלמה מהירה
               - show: אין לי קורונה
                 value: negative
                 steps:
@@ -436,7 +439,7 @@
             cases:
               - undefined: true           
                 steps:
-                  - say: עכשיו, מה בנוגע לבידוד?
+                  - say: מגפת הקורונה לא נעלמה, וחלק מאיתנו נמצאים בבידוד או באשפוז גם כעת, מה איתך?
               - default: true
                 steps:
                   - switch:
@@ -464,93 +467,114 @@
         - switch:
             arg: exposure_status
             cases:
-              - default: true
-              - undefined: true
-                steps:
-                - wait:
-                    variable: exposure_status
-                    options:
-                      - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
-                        value: insulation_with_family
-                        steps:
-                          - say: "באיזה תאריך התחיל הבידוד?"
-                          - wait:
-                              variable: insulation_start_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                      - show: אני בבידוד מבני משפחה, ובחדר סגור
-                        value: "insulation"
-                        steps:
-                          - say: "באיזה תאריך התחיל הבידוד?"
-                          - wait:
-                              variable: insulation_start_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                          - say: מה הסיבה לשהות שלך בבידוד?
-                          - wait:
-                              variable: insulation_reason
-                              options:
-                              - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
-                                value: back-from-abroad
-                                steps: 
+            - default: true
+            - undefined: true
+              steps:
+              - switch:
+                  arg: sex
+                  match: female
+                  steps:
+                  - say: האם את חולה בקורונה כרגע?
+                  match: male
+                  steps:
+                  - say: האם אתה חולה בקורונה כרגע?
+                  match: other
+                  steps:
+                  - say: האם יש לך קורונה כרגע?
+
+              - wait:
+                  variable: exposure_status
+                  options:
+                  - show: "כן, אני חולה בקורונה (מאומת בבדיקת מעבדה)"
+                    value: diagnosed
+                    steps:
+                      - wait:
+                          variable: diagnosed_location
+                          options:                 
+                          - show: אשפוז בבית חולים
+                            value: hospital
+                          - show: בבית מלון
+                            value: hotel
+                          - show: בבית
+                            value: home
+                          - show: החלמתי ואני בבית
+                            value: recovered
+                  - show: לא, אין לי קורונה  
+                    value: none
+                    steps:
+                      - say: יופי, משמח לשמוע
+                      - say: האם יש סיבה אחרת שבגללה נדרש בידוד או אשפוז?
+                      - wait:
+                          variable: exposure_status
+                          options:
+                          - show: אני בבידוד, ושוהה בחדרים משותפים עם בני משפחה או שותפים
+                            value: insulation_with_family
+                            steps:
+                            - say: "באיזה תאריך התחיל הבידוד?"
+                            - wait:
+                                variable: insulation_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                          - show: אני בבידוד מבני משפחה, ובחדר סגור
+                            value: "insulation"
+                            steps:
+                            - say: "באיזה תאריך התחיל הבידוד?"
+                            - wait:
+                                variable: insulation_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - say: מה הסיבה לבידוד?
+                            - wait:
+                                variable: insulation_reason
+                                options:
+                                - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                                  value: back-from-abroad
+                                  steps: 
                                   - say: "מתי חזרת לארץ?"
                                   - wait:
                                       variable: insulation_returned_from_abroad_date
                                       placeholder: "תאריך: dd/mm/yy"
                                       input-kind: date
                                       options:
-                              - show: אני בבידוד כי נחשפתי לחולה מאומת
-                                value: contact-with-patient
-                                steps:
-                                  - say: ידוע לך מה מספר החולה שפגשת?
-                                  - wait:
-                                      options:
-                                      - show: "כן, ידוע לי מספר החולה"
-                                        value: "yes"
+                                      - show: אני בבידוד כי נחשפתי לחולה מאומת
+                                        value: contact-with-patient
                                         steps:
-                                          - say: מצויין. מה המספר?
-                                          - wait:
-                                              variable: insulation_patient_number
-                                              placeholder: "מספר החולה שפגשתי, בספרות"
-                                          - say: האם זכור לך היום שבו נפגשתם?
+                                          - say: ידוע לך מה מספר החולה שפגשת?
                                           - wait:
                                               options:
-                                              - show: "כן, זכור לי התאריך"
+                                              - show: "כן, ידוע לי מספר החולה"
                                                 value: "yes"
-                                                steps: 
-                                                - say: מה היה התאריך?
+                                                steps:
+                                                - say: מצויין. מה המספר?
                                                 - wait:
-                                                    variable: insulation_exposure_date
-                                                    placeholder: "תאריך: dd/mm/yy"
-                                                    input-kind: date
-                                              - show: "לא זכור לי"
-                                                value: "no"
-                                      - show: "לא ידוע לי"
-                                        value: "no"
-                              - show: אני בבידוד כי חוויתי תסמינים
-                                value: has_symptoms
-                              - show: אני בבידוד מרצוני האישי                    
-                                value: voluntary
-                      - show: "אני חולה בקורונה (מאומת בבדיקת מעבדה)"
-                        value: diagnosed
-                        steps:
-                          - wait:
-                              variable: diagnosed_location
-                              options:                 
-                              - show: אשפוז בבית חולים
-                                value: hospital
-                              - show: בבית מלון
-                                value: hotel
-                              - show: בבית
-                                value: home
-                              - show: החלמתי ואני בבית
-                                value: recovered
-                      - show: "אני לא בבידוד"
-                        class: other
-                        value: "none"
+                                                    variable: insulation_patient_number
+                                                    placeholder: "מספר החולה שפגשתי, בספרות"
+                                                - say: האם זכור לך היום שבו נפגשתם?
+                                                - wait:
+                                                    options:
+                                                    - show: "כן, זכור לי התאריך"
+                                                      value: "yes"
+                                                      steps: 
+                                                      - say: מה היה התאריך?
+                                                      - wait:
+                                                          variable: insulation_exposure_date
+                                                          placeholder: "תאריך: dd/mm/yy"
+                                                          input-kind: date
+                                                    - show: "לא זכור לי"
+                                                      value: "no"
+                                                    - show: "לא ידוע לי"
+                                                      value: "no"
+                                - show: אני בבידוד כי חוויתי תסמינים
+                                  value: has_symptoms
+                                - show: אני בבידוד מרצוני האישי                    
+                                  value: voluntary
+                                - show: "אני לא בבידוד"
+                                  class: other
+                                  value: "none"
 
     - name: routine
       steps:
+        - say: "יש כמה שאלות חשובות שנשאל רק פעם בשבוע, כדי להקל על הדיווח:"
         - switch:
             arg: _is_adult
             cases:
@@ -657,7 +681,7 @@
                                                 cases:
                                                 - default: true
                                                   steps:
-                                                  - say: האם ביקור בבית תפילה הוא חלק מהשיגרה שלך?                  
+                                                  - say: האם ביקרת בבית תפילה הוא חלק מהשיגרה שלך?                  
                                                 - match: male
                                                   steps:
                                                   - say: האם אתה נוהג לבקר בבית תפילה באופן קבוע?
@@ -818,7 +842,7 @@
             cases:
             - match: feel_good
               steps:
-                - say: "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף."
+                - say: "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה הזו לעקוב מידי יום אחר חום הגוף."
                 - say: "האם כבר נמדד חום היום?"
                 - wait:
                     options:
@@ -934,7 +958,7 @@
                     field: symptoms_headache
                   - show: כאבי גרון
                     field: symptoms_sore_throat
-                  - show: כאב בטן
+                  - show: כאבי בטן
                     field: symptoms_abdominal_pain
                   - show: |-
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
@@ -949,28 +973,38 @@
 
     - name: exposures
       steps:
-        - say: "חשוב לנו לדעת -"
+        - say: "הרבה אנשים נפגשים עכשיו, בעבודה ובמקומות אחרים -"
         - say: "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים"
         - wait:
+            variable: public_place
             options:
-              - show: כן, שהיתי בקרבת אנשים נוספים
+              - show: כן, שהיתי בקרבת אנשים נוספים יותר מרבע שעה
                 steps:
-                - say: כמה מהם מבוגרים מעל גיל 18?
+                - say: האם זה היה במקום ציבורי גדול?
+                - say: ... למשל, מקום עבודה, בית ספר או מרכז מסחרי?
                 - wait:
-                    variable: _met_above_18
-                    placeholder: מספר המבוגרים, 0-99
-                    validation: "[0-9]+"
-                    input-kind: number
-                    input-min: 0
-                    input-max: 99
-                - say: וכמה ילדים מתחת לגיל 18?
-                - wait:
-                    variable: _met_under_18
-                    placeholder: מספר הילדים, 0-99
-                    validation: "[0-9]+"
-                    input-kind: number
-                    input-min: 0
-                    input-max: 99
+                    options:
+                    - show: כן
+                      value: true 
+                    - show: לא
+                      value: false
+                      steps:
+                      - say: וכמה מהאנשים האלה, פחות או יותר, היו מבוגרים מעל גיל 18
+                      - wait:
+                          variable: _met_above_18
+                          placeholder: מספר המבוגרים, 0-99
+                          validation: "[0-9]+"
+                          input-kind: number
+                          input-min: 0
+                          input-max: 99
+                    - say: וכמה ילדים מתחת לגיל 18?
+                    - wait:
+                        variable: _met_under_18
+                        placeholder: מספר הילדים, 0-99
+                        validation: "[0-9]+"
+                        input-kind: number
+                        input-min: 0
+                        input-max: 99
               - show: לא, רק עם בני הבית
 
         - do:
@@ -984,7 +1018,7 @@
         - goto: share
         # - goto: dynamic_update
         - goto: affiliations
-        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה… 
+        - say: סיימנו עם השאלות להיום. ככל שנמשיך לדווח ולעקוב נדע טוב יותר להתכונן ולהתמודד עם המגפה, ולשמור על עצמנו ועל היקרים לנו.
         - say: תודה רבה, נתראה מחר?
         - wait:
             options:
@@ -1049,7 +1083,7 @@
 
     - name: share
       steps:
-        - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
+        - say: עוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
         - wait:
             variable: event_share_action
             options:
@@ -1218,7 +1252,7 @@
 - name: generic-translation-assets ## <-- keep me last!
   keys:
     - name: calendarTitle
-      show: זמן לדיווח הבריאות היומי!
+      show: זמן לדיווח היומי למאבק בקורונה!
     - name: calendarBody
       show: "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה \U0001F4AA\U0001F3FD!"
     - name: reminder:notification
