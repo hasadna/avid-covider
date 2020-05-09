@@ -30,6 +30,7 @@ describe('[Sanity] should click "ben" for a new user', () => {
   let page: AppPage;
 
   beforeAll(async () => {
+    browser.restartSync();
     page = new AppPage();
     await page.navigateTo();
     await page.clearLocalStorage();
