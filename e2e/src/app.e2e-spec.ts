@@ -54,6 +54,9 @@ describe('[Flow] Reporting For a first address on a device', () => {
   const answers: Array<AnswerTestDataType> = [0, 24, STR.telAvivYaffo, STR.herzl];
   const alias = `${STR.ben} 24 ${STR.from}${STR.herzl} ${STR.telAvivYaffo}`;
 
+  // add basic Flow: 4 random asnwers, no PCR, no isulation
+  // answers.push(null, null, null, null, 1, 3);
+
   beforeAll(async() => {
     browser.restartSync();
     page = new AppPage();
@@ -66,10 +69,12 @@ describe('[Flow] Reporting For a first address on a device', () => {
 
     await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
-    const wouldSend = await browser.executeScript('return window.wouldSend;');
-    log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
+    const wouldSend = await page.getWouldSend();
+    expect(wouldSend).toBeDefined();
+    expect(wouldSend).not.toBeNull();
     expect(wouldSend['alias']).toBeDefined();
     expect(wouldSend['alias']).toEqual(alias);
+    log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
   });
 });
 
@@ -78,6 +83,9 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
   // bat 30 from balfour raanana
   const beforeAllanswers: Array<AnswerTestDataType> = [1, 30, STR.raanana, STR.balfour];
   const alias = `${STR.bat} 30 ${STR.from}${STR.balfour} ${STR.raanana}`;
+
+  // add basic Flow: 4 random asnwers, no PCR, no isulation
+  // beforeAllanswers.push(null, null, null, null, 1, 3);
 
   beforeAll(async () => {
     browser.restartSync();
@@ -106,7 +114,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     showTestMessage(page, 'START: should be able to start a new report after 1 day');
     // set last report date one day earlier - 'wait a day' simulation
     const script = `
-      var reports = JSON.parse(window.localStorage.reports);
+      var reports = JSON.parse(window.localStorage.getItem('reports'));
       var d = new Date(reports[0][0]);
       d.setDate(d.getDate()-2)
       reports[0][0] = d.toISOString();
@@ -118,7 +126,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     const answers = [0];  // choose another report for the same alias
     await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
-    const wouldSend = await browser.executeScript('return window.wouldSend;');
+    const wouldSend = await page.getWouldSend();
     log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
     expect(wouldSend['alias']).toBeDefined();
     expect(wouldSend['alias']).toEqual(alias);
