@@ -115,7 +115,7 @@
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
 
             &.desktop {
-                width: 300px;
+                width: 350px;
             }
 
             .scale, .no-info {
@@ -133,6 +133,9 @@
                     span:nth-child(4) { background-color: #ff8caf; }
                     span:nth-child(5) { background-color: #ff5fd8; }
                     span:nth-child(6) { background-color: #f700ff; }
+                }
+                .scale-rows {
+                    margin: 0 10px;
                 }
             }
             .no-info {
@@ -168,14 +171,13 @@
                 .numbers {
                     display: flex;
                     flex-flow: row;
-                    justify-content: space-evenly;
+                    justify-content: space-between;
                     align-items: flex-end;
                     span {
                         font-size: 12px;
                         font-weight: normal;
                         font-style: normal;
                         color: #959d9d;
-                        width: 0;
                     }
                 }
                 .colors {
