@@ -34,7 +34,11 @@
             display: flex;
             flex-flow: row;
             align-items: center;
-            justify-content: stretch;
+            justify-content: fled-start;
+
+            &.ltr {
+                justify-content: fled-end;
+            }
 
             span {
                 height: 8px;
