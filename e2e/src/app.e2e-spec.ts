@@ -55,7 +55,7 @@ describe('[Flow] Reporting For a first address on a device', () => {
   const answers: Array<AnswerTestDataType> = [0, 24, STR.telAvivYaffo, STR.herzl];
   const alias = `${STR.ben} 24 ${STR.from}${STR.herzl} ${STR.telAvivYaffo}`;
 
-  // add basic Flow: 4 random asnwers, no PCR, no isulation
+  // add basic Flow: 4 random answers, no PCR, no isulation
   // answers.push(null, null, null, null, 1, 3);
 
   beforeAll(async() => {
@@ -85,7 +85,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
   const beforeAllanswers: Array<AnswerTestDataType> = [1, 30, STR.raanana, STR.balfour];
   const alias = `${STR.bat} 30 ${STR.from}${STR.balfour} ${STR.raanana}`;
   let uid;
-  // add basic Flow: 4 random asnwers, no PCR, no isulation
+  // add basic Flow: 4 random answers, no PCR, no isulation
   // beforeAllanswers.push(null, null, null, null, 1, 3);
 
   beforeAll(async () => {
