@@ -1,0 +1,24 @@
+<div class='header' (click)='open = !open' [class.open]='open'>
+  <span class='name'>{{ city_name }}</span>
+  <span class='timeline'>
+    <span [class]='scoreClasses(score)' *ngFor='let score of item.scores'></span>
+  </span>
+  <span class='toggle'></span>
+</div>
+<div class='dropdown' *ngIf='open'>
+  <div class='map'>
+    <img [src]='"https://avid-covider.phonaris.com" + item.image.url'/>
+  </div>
+  <div class='stats'>
+    <div class='stat'>
+    </div>
+    <div class='stat'>
+      <div class='number'>
+        {{ current.nr.toLocaleString() }}
+      </div>
+      <div class='text' i18n>
+        מדווחים בשבוע האחרון
+      </div>
+    </div>
+  </div>
+</div>

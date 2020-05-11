@@ -4,6 +4,7 @@ import { VERSION } from '../constants';
 import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
 import { ReportStoreService } from '../report-store.service';
+import { CityRankingService } from '../city-ranking.service';
 
 @Component({
   selector: 'app-intro-page',
@@ -24,7 +25,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   breaks: any = {};
   seenNudge = false;
   mapInit = false;
-  _tab = 'about';
+  _tab = 'results';
   copies = [1, 1];
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
@@ -36,6 +37,7 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
               public layout: LayoutService,
               public mapService: MapService,
               private storage: ReportStoreService,
+              public cityRanking: CityRankingService,
               @Inject(LOCALE_ID) public locale) {}
 
   ngOnInit() {

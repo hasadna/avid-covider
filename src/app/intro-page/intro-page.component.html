@@ -53,9 +53,20 @@
 
       <div class='tabs'>
         <div class='tab-selectors'>
-          <!--div class='tab-selector' [class.active]='tab==="results"' i18n (click)='tab="results"'>תוצאות עדכניות</div-->
+          <div class='tab-selector' [class.active]='tab==="results"' i18n (click)='tab="results"'>תוצאות</div>
           <div class='tab-selector' [class.active]='tab==="about"' i18n (click)='tab="about"'>אודות המחקר</div>
           <div class='tab-selector' [class.active]='tab==="media"' i18n (click)='tab="media"'>מדיה</div>
+        </div>
+        <div class='tab-content' *ngIf='tab==="results"'>
+          <h2 i18n>תוצאות עדכניות:</h2>
+          <p i18n>מדד coronaisrael.org, מנסה לחזות את מוקדי התפרצות הקורונה הבאים בעזרת ניתוח מידע מהציבור על התפתחות תסמיני הנגיף. לקחנו את הדיווחים שסיפקתם לנו וניתחנו את התסמינים ואת הגיאוגרפיה באמצעות אלגוריתמים של ביג דאטה ובינה מלאכותית.</p>
+          <p i18n>התוצאות המוצגות מבוססות על מודל חיזוי שמשקלל דווחים של אנשים על תסמינים המקושרים ל COVID-19. הערים והיישובים בהן שכיחות התסמינים שדווחה הייתה הגבוהה ביותר הן העשויות להיות מוקדי התפרצות בימים הקרובים. התוצאות מוצגות עבור יישובים בהם לפחות 30 אנשים דווחו על תסמינים.</p>
+          <p i18n>המידע יתעדכן על בסיס יומי.</p>
+          <h1 i18n>מדרג התסמינים</h1>
+          <ng-container *ngFor='let item of (cityRanking.ranking | async)'>
+            <app-city-results [item]='item'>
+            </app-city-results>
+          </ng-container>
         </div>
         <div class='tab-content' *ngIf='tab==="about"'>
           <h2 i18n>אודות המחקר:</h2>

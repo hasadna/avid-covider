@@ -1,0 +1,109 @@
+@import url('../../common.less');
+
+:host {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    align-items: stretch;
+    border-radius: 4px;
+    background-color: rgba(44, 60, 59, 0.08);
+    margin-top: 4px;
+  
+    .header {
+        font-size: 16px;
+        font-weight: 500;
+        color: @charcoal;
+        padding: 8px;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: stretch;
+        cursor: pointer;
+
+        &.open {
+            font-weight: bold;
+        }
+
+        .name {
+            flex: 1 1 auto;
+        }
+
+        .timeline {
+            flex: 1 0 50%;
+            direction: ltr;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: stretch;
+
+            span {
+                height: 8px;
+                width: 16px;
+                border-radius: 1px;
+                border: solid 1px rgba(0, 0, 0, 0.25);
+                margin: 0 -0.5px;
+                
+                &:last-child {
+                    height: 16px;
+                    border-radius: 2px;
+                    border: solid 1px #ffffff;
+                }
+            }
+        }
+
+        .toggle {
+            flex: 0 0 auto;
+            background-image: url(../../assets/img/charcoal-chevron-down.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 32px;
+            height: 24px;
+        }
+
+        &.open {
+            .toggle {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .dropdown {
+        .map {
+            width: 100%;
+            padding: 0 8px;
+            img {
+                width: 100%;
+                border-radius: 4px;
+            }    
+        }
+        .stats {
+            display: flex;
+            flex-flow: row;
+            padding: 8px;
+
+            .stat {
+                flex: 0 0 50%;
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                justify-content: flex-start;
+                &:last-child {
+                    justify-content: flex-end;
+                }
+                .number {
+                    white-space: nowrap;
+                    font-size: 24px;
+                    font-weight: normal;                  
+                    color: @charcoal;
+                    margin: 0 5px;
+                }
+                .text {
+                    font-size: 12px;
+                    font-weight: normal;
+                    line-height: 0.83;
+                    color: @bluegreen;
+                }
+            }
+        }
+    }
+}

@@ -20,6 +20,7 @@ import { HeatmapComponent } from './heatmap/heatmap.component';
 import { ToasterComponent } from './toaster/toaster.component';
 import { BannerComponent } from './banner/banner.component';
 import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component';
+import { CityResultsComponent } from './city-results/city-results.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     HeatmapComponent,
     ToasterComponent,
     BannerComponent,
-    ReminderWidgetComponent
+    ReminderWidgetComponent,
+    CityResultsComponent
   ],
   imports: [
     BrowserModule,
