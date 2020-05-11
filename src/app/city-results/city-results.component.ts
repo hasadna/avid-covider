@@ -37,4 +37,13 @@ export class CityResultsComponent implements OnInit {
     return 'band' + (this.colorScale.length - 1);
   }
 
+  openMap() {
+    this.mapService.moveTo(
+        this.item.image.center[0],
+        this.item.image.center[1],
+        this.item.image.zoom
+    );
+    this.mapService.openMap();
+  }
+
 }

@@ -42,7 +42,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
         this.map = new mapboxgl.Map({
           container: 'fullscreen-map',
           style: 'mapbox://styles/wios/ck9qrvmgv1utk1is4aw2xjxrh' + (PRODUCTION ? '' : '/draft'),
-          center: [this.mapService.lat, this.mapService.lng],
+          center: [this.mapService.lon, this.mapService.lat],
           minZoom: 3,
           zoom: this.mapService.zoom
         });
@@ -59,6 +59,7 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
           this.map.setPaintProperty('city-pattern', 'fill-pattern', md.city_fill_pattern_cases);
           this.map.setPaintProperty('neighborhood-fill', 'fill-color', md.neighborhood_fill_color_cases);
           this.map.setPaintProperty('neighborhood-pattern', 'fill-pattern', md.neighborhood_fill_pattern_cases);
+          this.map.flyTo({center: [this.mapService.lon, this.mapService.lat]});
           for (const f of ['settlement-major-label', 'settlement-minor-label', 'settlement-subdivision-label', 'road-label-simple-new']) {
             if (this.i18n.ltr) {
               this.map.setLayoutProperty(f, 'text-field', [

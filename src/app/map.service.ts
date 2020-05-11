@@ -17,8 +17,8 @@ export class MapService {
   mapVisible = false;
   mapVisibleStream = new Subject();
   _init = false;
-  lat = 34.785;
-  lng = 32.075;
+  lon = 34.785;
+  lat = 32.075;
   zoom = 11;
   public configStream = new ReplaySubject<any>(1);
   public config: any;
@@ -82,5 +82,16 @@ export class MapService {
     this.mapVisible = true;
     this.mapVisibleStream.next(this.mapVisible);
     this.storage.setEvent('hp_map_open');
+  }
+
+  openMainMap() {
+    this.moveTo(32.075, 34.785, 11);
+    this.openMap();
+  }
+
+  moveTo(lat, lon, zoom) {
+    this.lat = lat;
+    this.lon = lon;
+    this.zoom = zoom;
   }
 }

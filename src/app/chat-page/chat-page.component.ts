@@ -454,7 +454,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
         show_map: async () => {
-          this.mapService.openMap();
+          this.mapService.openMainMap();
           return new Promise((resolve, reject) => {
             this.mapService.mapVisibleStream.pipe(first()).subscribe(() => {
               resolve();
