@@ -106,8 +106,8 @@ Useful sources in case you are new to e2e / protractor
 * [Getting started](https://medium.com/@TammyTorres/e2e-testing-on-angular-app-with-protractor-tips-included-f3d5f65a8816)
 * [video tutorial E2E with angular](https://www.youtube.com/watch?v=LCSwmJwRU1U) 
 
-Concept
-Our E2E stack have 3 parts (all included in `e2e` directory):
+###### Concepts
+Our E2E stack have 3 layers (all included in `e2e` directory):
 * A page object (`app.po.ts`) - use to interact with page elements
 * Chat flow (`chat-flow.e2e.ts`) - simulate a complete report interaction (randomly / by answers array)
 * Specs (like `app.e2e-spec.ts`) - actual tests are here, written with [Jasmin](https://jasmine.github.io/)
@@ -117,7 +117,24 @@ The util file (`utils.e2e.ts`) contain small utility functions which does not in
 The basic idea is: tests in spec file may use either chat-flow mechanism (`simulateChatFlow`) to simulate a complete report interaction, page object to check spec element, or both.<br>
 Internally, chat-flow mechanism uses page object to interact with DOM elements.
 
-Scripts:
+###### Chat flow layer
+The main function of this layer is `simulateChatFlow`. it can be Invoked either with or without answers array.
+It will invoke a chat loop which will end when the report is done (see step 4)
+The chat loop identical in both cases (with/without answers): 
+1. wait for next question to be rendered to DOM
+2. log question to console
+3. simulate answer: If answer data exist - use it, else answer randomally.
+4. check if `wouldSend` object avaible, if so - end the chat loop.
+
+About **answers array**: each cell represent an answer.
+You're not have to provide all the answers for an entire chat script - For example, if you provide array with 6 cells (6 answers), the chat flow layer will answer questions 7 & up randomly. Addionally, providing a `null` as an asnwer will also trigger a random answer. For exampl, If you only care about asnwers 5-6, you can provide answer array liek the following:
+```
+// 4 random answers, q5 - index 1, q6 - index 3
+const asnwers = [null, null, null, null, 1, 3];
+await simulateChatFlow(page, beforeAllanswers);
+```  
+
+###### Scripts:
 
 - `e2e` - angular default 
 - `e2e:ci` - uses `ci.conf` instead of default config. uses headless chrome.
