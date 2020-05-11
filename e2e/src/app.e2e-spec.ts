@@ -84,7 +84,7 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
   // bat 30 from balfour raanana
   const beforeAllanswers: Array<AnswerTestDataType> = [1, 30, STR.raanana, STR.balfour];
   const alias = `${STR.bat} 30 ${STR.from}${STR.balfour} ${STR.raanana}`;
-
+  let uid;
   // add basic Flow: 4 random asnwers, no PCR, no isulation
   // beforeAllanswers.push(null, null, null, null, 1, 3);
 
@@ -96,6 +96,8 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     await showTestMessage(page, 'BEFOREALL: [Flow] Returning user can not start a new report on the same day');
     // fill random user report for 'alias'
     await simulateChatFlow(page, beforeAllanswers);
+    const wouldSend = await page.getWouldSend();
+    uid = wouldSend['uid'];
   });
 
   it('should NOT start a new report in the same day', async () => {
@@ -128,8 +130,9 @@ describe('[Flow] Returning user can not start a new report on the same day', () 
     await simulateChatFlow(page, answers);
     // report sent - get wouldSend object
     const wouldSend = await page.getWouldSend();
-    log(`*** wouldSend[alias] : ${wouldSend['alias']} *** `);
+    log(`*** wouldSend[alias | uid] : ${wouldSend['alias']} |  ${wouldSend['uid']} *** `);
     expect(wouldSend['alias']).toBeDefined();
     expect(wouldSend['alias']).toEqual(alias);
+    expect(wouldSend['uid']).toEqual(uid);
   });
 });
