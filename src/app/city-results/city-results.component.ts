@@ -13,11 +13,13 @@ export class CityResultsComponent implements OnInit {
   city_name = '';
   current = {};
   colorScale: any[];
+  ready = false;
   open = false;
 
   constructor(@Inject(LOCALE_ID) private locale, private mapService: MapService) {
     this.mapService.configStream.pipe(first()).subscribe((config: any) => {
       this.colorScale = config.color_scale;
+      this.ready = true;
     });
   }
 

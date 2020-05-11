@@ -1,4 +1,4 @@
-<div class='header' (click)='open = !open' [class.open]='open'>
+<div class='header' (click)='open = !open' [class.open]='open' *ngIf='ready'>
   <span class='name'>{{ city_name }}</span>
   <span class='timeline'>
     <span [class]='scoreClasses(score)' *ngFor='let score of item.scores'></span>
