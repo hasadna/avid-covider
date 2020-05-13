@@ -585,7 +585,7 @@
                                           - say: וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?
                                           - wait:
                                               variable: routine_workplace_weekly_hours
-                                              input-type: number
+                                              input-kind: number
                                               input-step: 1
                                               input-min: 0
                                               input-max: 168
