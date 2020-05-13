@@ -67,7 +67,7 @@
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
                     - "דיווח חדש בכתובת אחרת"
-                    - "כל בני ביתי כבר דיווחו"
+                    - "זהו להיום"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
