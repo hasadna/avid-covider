@@ -29,12 +29,16 @@ export class CityResultsComponent implements OnInit {
   }
 
   scoreClasses(score) {
+    let ret = '';
+    if (score.nr < 200) {
+      ret += 'band-noinfo ';
+    }
     for (let i = 0 ; i < this.colorScale.length ; i++) {
       if (score.sr <= this.colorScale[i][0]) {
-        return 'band' + i;
+        return ret + 'band' + i;
       }
     }
-    return 'band' + (this.colorScale.length - 1);
+    return ret + 'band' + (this.colorScale.length - 1);
   }
 
   openMap() {
