@@ -471,15 +471,15 @@
             - undefined: true
               steps:
               - switch:
+                arg: sex
                 cases:
-                  arg: sex
-                  match: female
+                - match: female
                   steps:
                   - say: האם את חולה בקורונה כרגע?
-                  match: male
+                - match: male
                   steps:
                   - say: האם אתה חולה בקורונה כרגע?
-                  match: other
+                - match: other
                   steps:
                   - say: האם יש לך קורונה כרגע?
 
@@ -542,35 +542,36 @@
                                       variable: insulation_returned_from_abroad_date
                                       placeholder: "תאריך: dd/mm/yy"
                                       input-kind: date
-                                      options:
-                                      - show: אני בבידוד כי נחשפתי לחולה מאומת
-                                        value: contact-with-patient
-                                        steps:
-                                          - say: ידוע לך מה מספר החולה שפגשת?
-                                          - wait:
-                                              options:
-                                              - show: "כן, ידוע לי מספר החולה"
-                                                value: "yes"
-                                                steps:
-                                                - say: מצויין. מה המספר?
-                                                - wait:
-                                                    variable: insulation_patient_number
-                                                    placeholder: "מספר החולה שפגשתי, בספרות"
-                                                - say: האם זכור לך היום שבו נפגשתם?
-                                                - wait:
-                                                    options:
-                                                    - show: "כן, זכור לי התאריך"
-                                                      value: "yes"
-                                                      steps: 
-                                                      - say: מה היה התאריך?
-                                                      - wait:
-                                                          variable: insulation_exposure_date
-                                                          placeholder: "תאריך: dd/mm/yy"
-                                                          input-kind: date
-                                                    - show: "לא זכור לי"
-                                                      value: "no"
-                                                    - show: "לא ידוע לי"
-                                                      value: "no"
+
+                                - show: אני בבידוד כי נחשפתי לחולה מאומת
+                                  value: contact-with-patient
+                                  steps:
+                                  - say: ידוע לך מה מספר החולה שפגשת?
+                                  - wait:
+                                    options:
+                                    - show: "כן, ידוע לי מספר החולה"
+                                      value: "yes"
+                                      steps:
+                                      - say: מצויין. מה המספר?
+                                      - wait:
+                                          variable: insulation_patient_number
+                                          placeholder: "מספר החולה שפגשתי, בספרות"
+                                          input-type: number
+                                      - say: האם זכור לך היום שבו נפגשתם?
+                                      - wait:
+                                        options:
+                                          - show: "כן, זכור לי התאריך"
+                                            value: "yes"
+                                            steps: 
+                                            - say: מה היה התאריך?
+                                            - wait:
+                                                 variable: insulation_exposure_date
+                                                 placeholder: "תאריך: dd/mm/yy"
+                                                 input-kind: date
+                                          - show: "לא זכור לי"
+                                            value: "no"
+                                    - show: "לא ידוע לי"
+                                      value: "no"
                                 - show: אני בבידוד כי חוויתי תסמינים
                                   value: has_symptoms
                                 - show: אני בבידוד מרצוני האישי                    
