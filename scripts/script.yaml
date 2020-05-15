@@ -30,7 +30,7 @@
               steps:
               - say: הי! טוב לראותך שוב
               - say: יחד איתך ננסה להבין מה הסיכוי להתפרצות מחודשת של נגיף הקורונה באזור שלך
-              - say: אם אחרי הדיווח שלך אפשר יהיה לקבל גם דיווח לגבי בני הבית או המשפחה שלך, זה יעזור מאוד
+              - say: אם אחרי הדיווח שלך נוכל לקבל גם דיווח לגבי בני הבית או המשפחה שלך, זה יעזור מאוד
 
     - name: reporting-loop
       steps:
@@ -489,6 +489,8 @@
                   - show: "כן, אני חולה בקורונה (מאומת בבדיקת מעבדה)"
                     value: diagnosed
                     steps:
+                      - say: לא נעים, החלמה מהירה.. 
+                      - say: איפה עוברת עליך התקופה הנוכחית? 
                       - wait:
                           variable: diagnosed_location
                           options:                 
@@ -498,8 +500,12 @@
                             value: hotel
                           - show: בבית
                             value: home
-                          - show: החלמתי ואני בבית
-                            value: recovered
+                          - show: החלמתי, אבל אני עוד בבית
+                            value: home_recovered
+                          - show: במקום אחר
+                            class: other
+                            value: "none"                            
+
                   - show: לא, אין לי קורונה  
                     value: none
                     steps:
@@ -569,9 +575,10 @@
                                   value: has_symptoms
                                 - show: אני בבידוד מרצוני האישי                    
                                   value: voluntary
-                                - show: "אני לא בבידוד"
-                                  class: other
-                                  value: "none"
+
+                          - show: "אני לא בבידוד או באשפוז"
+                            class: other
+                            value: "none"
 
     - name: routine
       steps:
