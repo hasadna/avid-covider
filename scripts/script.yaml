@@ -985,36 +985,30 @@
         - say: "הרבה אנשים נפגשים עכשיו, בעבודה ובמקומות אחרים -"
         - say: "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים"
         - wait:
-            variable: public_place
             options:
-              - show: כן, שהיתי בקרבת אנשים נוספים יותר מרבע שעה
-                steps:
-                - say: האם זה היה במקום ציבורי גדול?
-                - say: ... למשל, מקום עבודה, בית ספר או מרכז מסחרי?
-                - wait:
-                    options:
-                    - show: כן
-                      value: true 
-                    - show: לא
-                      value: false
-                      steps:
-                      - say: וכמה מהאנשים האלה, פחות או יותר, היו מבוגרים מעל גיל 18
-                      - wait:
-                          variable: _met_above_18
-                          placeholder: מספר המבוגרים, 0-99
-                          validation: "[0-9]+"
-                          input-kind: number
-                          input-min: 0
-                          input-max: 99
-                    - say: וכמה ילדים מתחת לגיל 18?
-                    - wait:
-                        variable: _met_under_18
-                        placeholder: מספר הילדים, 0-99
-                        validation: "[0-9]+"
-                        input-kind: number
-                        input-min: 0
-                        input-max: 99
-              - show: לא, רק עם בני הבית
+            - show: לא
+              value: false
+            - show: כן
+              value: true
+              steps:
+              - say: וכמה מהם היו מבוגרים מעל גיל 18?
+              - wait:
+                  variable: _met_above_18
+                  placeholder: מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                  required: false
+                  validation: "[0-9]+"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 99
+              - say: וכמה ילדים מתחת לגיל 18?
+              - wait:
+                  variable: _met_under_18
+                  placeholder: מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                  required: false
+                  validation: "[0-9]+"
+                  input-kind: number
+                  input-min: 0
+                  input-max: 99
 
         - do:
             cmd: calculate_met_daily
