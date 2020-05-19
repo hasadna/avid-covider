@@ -21,6 +21,7 @@ import { ToasterComponent } from './toaster/toaster.component';
 import { BannerComponent } from './banner/banner.component';
 import { ReminderWidgetComponent } from './reminder-widget/reminder-widget.component';
 import { CityResultsComponent } from './city-results/city-results.component';
+import { MapPageComponent } from './map-page/map-page.component';
 
 Sentry.init({
   dsn: 'https://3ab8c72ec2704d1ca45a22019db1ae17@sentry.io/5170583',
@@ -37,6 +38,7 @@ export class SentryErrorHandler implements ErrorHandler {
 }
 
 const appRoutes: Routes = [
+  { path: 'map', component: MapPageComponent },
   { path: '', component: MainPageComponent },
 ];
 
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     ToasterComponent,
     BannerComponent,
     ReminderWidgetComponent,
-    CityResultsComponent
+    CityResultsComponent,
+    MapPageComponent
   ],
   imports: [
     BrowserModule,
