@@ -534,7 +534,13 @@
                     direction: ltr;
                     display: flex;
                     flex-flow: row;
-                    padding-left: 30px;
+                    &.ltr {
+                        justify-content: flex-end;
+                        padding-right: 60px;
+                    }
+                    &:not(.ltr) {
+                        padding-left: 30px;
+                    }
                     font-size: 12px;
                     font-weight: normal;
                     padding-top: 4px;
@@ -564,7 +570,11 @@
                         margin-left: 30px;
                         color: @charcoal;
                     }
-
+                    &.ltr {
+                        .label {
+                            display: none;
+                        }
+                    }
                 }
             }
 

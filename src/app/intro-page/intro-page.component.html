@@ -91,10 +91,10 @@
                 <span class='square band-noinfo'></span>
               </span>
             </div>
-            <div class='towns-dates' *ngIf='national'>
+            <div class='towns-dates' *ngIf='national' appLtr>
               <span class='single-date'>{{dateSpan[0]}}</span>
               <span class='single-date'>{{dateSpan[1]}}</span>
-              <span class='label' i18n>עדכון אחרון</span>
+              <span class='label' i18n>עדכון אחרון:</span>
             </div>
           </div>
           <app-city-results *ngIf='national' [item]='national' [dropdown]='false'></app-city-results>
