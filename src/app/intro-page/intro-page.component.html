@@ -71,12 +71,33 @@
                   לרמת תסמינים נמוכה מאוד.</p>
           <p i18n>המדרג מתייחס לדמיון בתסמינים בין כלל הדיווחים באזור לבין הדיווחים של חולי קורונה (COVID-19). הצבעים משקפים רק את רמת הדיווח על התסמינים, אך אינם משקפים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה באותו אזור. כמו כן, התסמינים המוצגים נפוצים אצל חולים בנגיף הקורונה אך אינם ספציפיים למחלה זו וייתכן שהם משקפים תחלואה במחלות אחרות.</p>
 
-
-          <h1 i18n>מדרג התסמינים</h1>
-          <div class='towns'>
-            <span i18n>הישובים לפי סדר ריכוז התסמינים</span>
-            <span class='fake-toggle'></span>
+          <div class='towns-title' i18n>מדרג התסמינים בחודש האחרון</div>
+          <div class='towns-header'>
+            <div class='towns-legend' appLtr>
+              <span class='label' i18n>רמת תסמיני קורונה:</span>
+              <span class='legend'>
+                <span class='tag' i18n>נמוכה</span>
+                <span class='square band0'></span>
+                <span class='square band1'></span>
+                <span class='square band2'></span>
+                <span class='square band3'></span>
+                <span class='square band4'></span>
+                <span class='square band5'></span>
+                <span class='tag' i18n>גבוהה</span>
+              </span>
+              <div class='sep'></div>
+              <span class='noinfo' appLtr>
+                <span class='tag' i18n>חוסר מידע</span>
+                <span class='square band-noinfo'></span>
+              </span>
+            </div>
+            <div class='towns-dates' *ngIf='national'>
+              <span class='single-date'>{{dateSpan[0]}}</span>
+              <span class='single-date'>{{dateSpan[1]}}</span>
+              <span class='label' i18n>עדכון אחרון</span>
+            </div>
           </div>
+          <app-city-results *ngIf='national' [item]='national' [dropdown]='false'></app-city-results>
           <ng-container *ngFor='let item of (cityRanking.ranking | async)'>
             <app-city-results [item]='item'>
             </app-city-results>
@@ -285,6 +306,7 @@
         <a href='https://www.hasadna.org.il/coronabot/privacy' i18n target='_blank'>מדיניות פרטיות</a><br/>
         <a href="mailto:coronabot@hasadna.org" i18n>יצירת קשר</a><br/>
         <p>
+          <a href='https://github.com/hasadna/avid-covider-raw-data' i18n target='_blank'>נתונים גולמיים</a>&nbsp;|&nbsp;
           <a href='https://github.com/hasadna/avid-covider' i18n target='_blank'>קוד המקור</a>&nbsp;|&nbsp;
           <span i18n>גירסא</span>&nbsp;<span>{{version}}</span>
         </p>

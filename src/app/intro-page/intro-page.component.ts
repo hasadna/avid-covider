@@ -5,6 +5,7 @@ import { LayoutService } from '../layout.service';
 import { MapService } from '../map.service';
 import { ReportStoreService } from '../report-store.service';
 import { CityRankingService } from '../city-ranking.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-intro-page',
@@ -27,6 +28,8 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   mapInit = false;
   _tab = 'results';
   copies = [1, 1];
+  national: any = null;
+  dateSpan = [];
 
   @ViewChild('notificationTitle') notificationTitle: ElementRef;
   @ViewChild('notificationBody') notificationBody: ElementRef;
@@ -38,7 +41,15 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
               public mapService: MapService,
               private storage: ReportStoreService,
               public cityRanking: CityRankingService,
-              @Inject(LOCALE_ID) public locale) {}
+              @Inject(LOCALE_ID) public locale) {
+    this.cityRanking.national.pipe(first()).subscribe((national) => {
+      this.national = national;
+      this.dateSpan = [
+        national.scores[0].date.split('-').slice(1).reverse().join('/'),
+        national.scores[national.scores.length - 1].date.split('-').slice(1).reverse().join('/'),
+      ];
+    });
+  }
 
   ngOnInit() {
     this.tab = this._tab;

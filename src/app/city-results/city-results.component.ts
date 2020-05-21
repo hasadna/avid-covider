@@ -10,6 +10,8 @@ import { first } from 'rxjs/operators';
 export class CityResultsComponent implements OnInit {
 
   @Input() item;
+  @Input() dropdown = true;
+
   city_name = '';
   current = {};
   colorScale: any[];
@@ -24,7 +26,7 @@ export class CityResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.city_name = this.item.translations[this.locale] || this.item.translations.he;
+    this.city_name = this.item.translations ? (this.item.translations[this.locale] || this.item.translations.he) : '';
     this.current = this.item.scores[this.item.scores.length - 1];
   }
 

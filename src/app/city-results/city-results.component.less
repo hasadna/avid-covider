@@ -1,13 +1,20 @@
 @import url('../../common.less');
 
 :host {
+    width: 100%;
+}
+
+.card {
     display: flex;
     width: 100%;
     flex-flow: column;
     align-items: stretch;
     border-radius: 4px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
-    border: solid 1px #eef0f0;
+    border: solid 1px transparent;
+    &.open {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+        border-color: #eef0f0;    
+    }
     background-color: #ffffff;
 
     margin-top: 4px;
@@ -21,7 +28,6 @@
         flex-flow: row;
         align-items: center;
         justify-content: stretch;
-        cursor: pointer;
 
         &.open {
             font-weight: bold;
@@ -47,24 +53,30 @@
                 height: 8px;
                 width: 8px;
                 border-radius: 4px;
-                margin: 0 4px;
+                border: solid 1px #ffffff;
+                margin: 0 -2px;
                 
                 &:last-child {
                     height: 16px;
                     width: 16px;
                     border-radius: 8px;
-                    margin: 0 1px;
                 }
             }
         }
 
         .toggle {
             flex: 0 0 auto;
-            background-image: url(../../assets/img/charcoal-chevron-down.svg);
-            background-repeat: no-repeat;
-            background-position: center;
             width: 32px;
             height: 24px;
+        }
+
+        &:not(.fake) {
+            cursor: pointer;
+            .toggle {
+                background-image: url(../../assets/img/charcoal-chevron-down.svg);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
         }
 
         &.open {
@@ -111,15 +123,21 @@
             .stat {
                 flex: 0 0 50%;
                 display: flex;
-                flex-flow: row;
+                flex-flow: row wrap;
                 align-items: center;
                 justify-content: center;
                 .level {
                     font-size: 12px;
                     font-weight: 500;
                     color: @charcoal;
+                    white-space: normal;
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: center;
+
                     span {
                         margin: 0 5px;
+                        white-space: nowrap;
                     }
                 }
                 .number {
@@ -134,6 +152,7 @@
                     font-weight: normal;
                     line-height: 0.83;
                     color: @cool-grey;
+                    white-space: nowrap;
                 }
             }
         }
