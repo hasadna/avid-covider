@@ -19,15 +19,18 @@
             - match: new                                                           # <--- First report on device
               steps:
               - say: טוב שבאת,
-              - say: התשובות שלך לכמה שאלות קצרות יעזרו מאוד במאמץ המשותף לעצור את התפרצות הקורונה
-              - say: אם זה בסדר, אבקש לדעת כמה פרטים אנונימיים לטובת המחקר
+              - say: כולם מנסים לחזור לשיגרה מסויימת אבל מגפת הקורונה לא נעלמה
+              - say: התשובות שלך לכמה שאלות, והמשך הדיווח, יעזור לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים
+              - say: להתפרצות מחודשת של המחלה ולהיערך אליה בהתאם.
+              - say: כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרטיות שלך
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
               - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
               - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
             - match: returning                                                     # <--- Previous reports found on device
               steps:
               - say: הי! טוב לראותך שוב
-              - say: הדיווחים שלך ושל אחרים עוזרים לנו מאוד במחקר ובניסיון להיאבק בקורונה
+              - say: יחד איתך ננסה להבין מה הסיכוי להתפרצות מחודשת של נגיף הקורונה באזור שלך
+              - say: אם אחרי הדיווח שלך נוכל לקבל גם דיווח לגבי בני הבית או המשפחה שלך, זה יעזור מאוד
 
     - name: reporting-loop
       steps:
@@ -186,7 +189,7 @@
               - record
             variable: _is_adult
 
-        - do:                                   # <---- check whether the reporter is an adult (18 years old and older) or a minor
+        - do:                                   # <---- check whether the reporter is an adult (65 years old and older) or a minor
             cmd: is_old
             params: 
               - record
@@ -262,11 +265,11 @@
                   - default: true
                   - undefined: true
                     steps:
-                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן?
+                    - say: האם מקום המגורים הנוכחי שלך הוא דיור מוגן או בית אבות?
                     - wait:
                         variable: is_assisted_living
                         options:
-                          - show: כן, דיור מוגן
+                          - show: כן, דיור מוגן או בית אבות
                             value: true
                           - show: לא
                             value: false
@@ -418,7 +421,7 @@
               - show: אובחנתי כחולה בקורונה
                 value: positive
                 steps:
-                  - say: אוי, זה בטח לא פשוט.  החלמה מהירה
+                  - say: אוי, זה בטח לא פשוט. החלמה מהירה
               - show: אין לי קורונה
                 value: negative
                 steps:
@@ -551,6 +554,7 @@
 
     - name: routine
       steps:
+        - say: "יש כמה שאלות חשובות שנשאל רק פעם בשבוע, כדי להקל על הדיווח:"
         - switch:
             arg: _is_adult
             cases:
@@ -652,18 +656,7 @@
                                           - default: true 
                                           - undefined: true 
                                             steps:
-                                            - switch:
-                                                arg: sex
-                                                cases:
-                                                - default: true
-                                                  steps:
-                                                  - say: האם ביקור בבית תפילה הוא חלק מהשיגרה שלך?                  
-                                                - match: male
-                                                  steps:
-                                                  - say: האם אתה נוהג לבקר בבית תפילה באופן קבוע?
-                                                - match: female
-                                                  steps:
-                                                  - say: האם את נוהגת לבקר בבית תפילה באופן קבוע?
+                                            - say: האם ביקרת בבית תפילה באופן שגרתי השבוע?
                                             - wait:
                                                 variable: routine_visits_prayer_house
                                                 options:
@@ -802,7 +795,7 @@
             cases:
             - match: feel_good
               steps:
-                - say: "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה כזו לקיים מעקב יומי אחר חום הגוף."
+                - say: "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה הזו למדוד כל יום את חום הגוף."
                 - say: "האם כבר נמדד חום היום?"
                 - wait:
                     options:
@@ -918,7 +911,7 @@
                     field: symptoms_headache
                   - show: כאבי גרון
                     field: symptoms_sore_throat
-                  - show: כאב בטן
+                  - show: כאבי בטן
                     field: symptoms_abdominal_pain
                   - show: |-
                       <span class='empty'>אף אחד מהתסמינים האלה</span>
@@ -933,16 +926,18 @@
 
     - name: exposures
       steps:
-        - say: "חשוב לנו לדעת -"
+        - say: "הרבה אנשים נפגשים עכשיו, בעבודה ובמקומות אחרים -"
         - say: "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים"
         - wait:
             options:
-              - show: כן, שהיתי בקרבת אנשים נוספים
+              - show: לא
+              - show: כן
                 steps:
-                - say: כמה מהם מבוגרים מעל גיל 18?
+                - say: וכמה מהם היו מבוגרים מעל גיל 18?
                 - wait:
                     variable: _met_above_18
-                    placeholder: מספר המבוגרים, 0-99
+                    placeholder: מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                    required: false
                     validation: "[0-9]+"
                     input-kind: number
                     input-min: 0
@@ -950,12 +945,12 @@
                 - say: וכמה ילדים מתחת לגיל 18?
                 - wait:
                     variable: _met_under_18
-                    placeholder: מספר הילדים, 0-99
+                    placeholder: מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                    required: false
                     validation: "[0-9]+"
                     input-kind: number
                     input-min: 0
                     input-max: 99
-              - show: לא, רק עם בני הבית
 
         - do:
             cmd: calculate_met_daily
@@ -1009,7 +1004,7 @@
 
     - name: share
       steps:
-        - say: ועוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
+        - say: עוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?
         - wait:
             variable: event_share_action
             options:
@@ -1178,7 +1173,7 @@
 - name: generic-translation-assets ## <-- keep me last!
   keys:
     - name: calendarTitle
-      show: זמן לדיווח הבריאות היומי!
+      show: זמן לדיווח היומי למאבק בקורונה!
     - name: calendarBody
       show: "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה \U0001F4AA\U0001F3FD!"
     - name: reminder:notification
