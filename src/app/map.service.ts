@@ -3,7 +3,7 @@ import { SourceService } from './source.service';
 import { first, catchError } from 'rxjs/operators';
 
 import * as mapboxgl from 'mapbox-gl';
-import { Subject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
 import { ReportStoreService } from './report-store.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -17,9 +17,10 @@ export class MapService {
   mapVisible = false;
   mapVisibleStream = new Subject();
   _init = false;
-  lat = 34.785;
-  lng = 32.075;
+  lon = 34.785;
+  lat = 32.075;
   zoom = 11;
+  public configStream = new ReplaySubject<any>(1);
   public config: any;
 
   constructor(private source: SourceService, private storage: ReportStoreService, private http: HttpClient) {
@@ -30,28 +31,31 @@ export class MapService {
         this.storage.setEvent('share_map_open');
       }
     });
+    this.http.get('/data/map_coloring.json')
+        .pipe(
+          catchError(() => {
+            return this.http.get('https://avid-covider.phonaris.com/data/map_coloring.json');
+          })
+        ).subscribe((data) => {
+          this.configStream.next(data);
+        });
   }
 
   init(callback) {
     if (this._init) {
       setTimeout(() => { callback(); }, 100);
     } else {
-      this.http.get('/data/map_coloring.json')
-        .pipe(
-          catchError(() => {
-            return this.http.get('https://avid-covider.phonaris.com/data/map_coloring.json?a=1');
-          })
-        ).subscribe((data) => {
-          this._init = true;
-          this.config = data;
-          (<any>mapboxgl).accessToken = 'pk.eyJ1Ijoid2lvcyIsImEiOiJjazh4ZXZ6Z24wejdtM3JvN2F1MHdlc2Z4In0.vz7knGcRWWGE4LGOLx8c7g';
-          mapboxgl.setRTLTextPlugin(
-            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
-            null,
-            true // Lazy load the plugin
-          );
-          callback();
-        });
+      this.configStream.pipe(first()).subscribe((config) => {
+        this._init = true;
+        this.config = config;
+        (<any>mapboxgl).accessToken = 'pk.eyJ1Ijoid2lvcyIsImEiOiJjazh4ZXZ6Z24wejdtM3JvN2F1MHdlc2Z4In0.vz7knGcRWWGE4LGOLx8c7g';
+        mapboxgl.setRTLTextPlugin(
+          'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+          null,
+          true // Lazy load the plugin
+        );
+        callback();
+      });
     }
   }
 
@@ -78,5 +82,16 @@ export class MapService {
     this.mapVisible = true;
     this.mapVisibleStream.next(this.mapVisible);
     this.storage.setEvent('hp_map_open');
+  }
+
+  openMainMap() {
+    this.moveTo(32.075, 34.785, 11);
+    this.openMap();
+  }
+
+  moveTo(lat, lon, zoom) {
+    this.lat = lat;
+    this.lon = lon;
+    this.zoom = zoom;
   }
 }

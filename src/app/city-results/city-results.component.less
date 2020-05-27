@@ -1,0 +1,160 @@
+@import url('../../common.less');
+
+:host {
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    width: 100%;
+    flex-flow: column;
+    align-items: stretch;
+    border-radius: 4px;
+    border: solid 1px transparent;
+    &.open {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+        border-color: #eef0f0;    
+    }
+    background-color: #ffffff;
+
+    margin-top: 4px;
+  
+    .header {
+        font-size: 16px;
+        font-weight: 500;
+        color: @charcoal;
+        padding: 8px;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: stretch;
+
+        &.open {
+            font-weight: bold;
+        }
+
+        .name {
+            flex: 1 1 auto;
+        }
+
+        .timeline {
+            flex: 1 0 50%;
+            direction: ltr;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: flex-start;
+
+            &.ltr {
+                justify-content: flex-end;
+            }
+
+            span {
+                height: 8px;
+                width: 8px;
+                border-radius: 4px;
+                border: solid 1px #ffffff;
+                margin: 0 -2px;
+                
+                &:last-child {
+                    height: 16px;
+                    width: 16px;
+                    border-radius: 8px;
+                }
+            }
+        }
+
+        .toggle {
+            flex: 0 0 auto;
+            width: 32px;
+            height: 24px;
+        }
+
+        &:not(.fake) {
+            cursor: pointer;
+            .toggle {
+                background-image: url(../../assets/img/charcoal-chevron-down.svg);
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        &.open {
+            .toggle {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .dropdown {
+        .map {
+            width: 100%;
+            padding: 0 8px;
+            .map-thumbnail {
+                width: 100%;
+                border-radius: 4px;
+                width: 100%;
+                height: 0px;
+                padding-bottom: 57%;
+                cursor: pointer;
+                background-size: cover;
+                background-position: center;
+                position: relative;
+
+                .enlarge {
+                    position: absolute;
+                    top: 8px;
+                    left: 8px;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 20px;
+                    background-color: rgba(44, 60, 59, 0.5);
+                    background-image: url(../../assets/img/resize-enlarge.svg);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            }    
+        }
+        .stats {
+            display: flex;
+            flex-flow: row;
+            padding: 8px;
+
+            .stat {
+                flex: 0 0 50%;
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: center;
+                .level {
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: @charcoal;
+                    white-space: normal;
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: center;
+
+                    span {
+                        margin: 0 5px;
+                        white-space: nowrap;
+                    }
+                }
+                .number {
+                    white-space: nowrap;
+                    font-size: 12px;
+                    font-weight: normal;                  
+                    color: @bluegreen;
+                    margin: 0 5px;
+                }
+                .text {
+                    font-size: 12px;
+                    font-weight: normal;
+                    line-height: 0.83;
+                    color: @cool-grey;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

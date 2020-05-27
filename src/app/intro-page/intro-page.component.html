@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class='hero'>
-      <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMap()' [style.background-image]='"url(" + mapService.static() + ")"'>
+      <div class='map-thumbnail' *ngIf='layout.desktop' (click)='mapService.openMainMap()' [style.background-image]='"url(" + mapService.static() + ")"'>
         <div class='enlarge'></div>
       </div>
       <h1 i18n appLtr>נכנסים לשגרה החדשה</h1>
@@ -53,9 +53,55 @@
 
       <div class='tabs'>
         <div class='tab-selectors'>
-          <!--div class='tab-selector' [class.active]='tab==="results"' i18n (click)='tab="results"'>תוצאות עדכניות</div-->
+          <div class='tab-selector' [class.active]='tab==="results"' i18n (click)='tab="results"'>תוצאות</div>
           <div class='tab-selector' [class.active]='tab==="about"' i18n (click)='tab="about"'>אודות המחקר</div>
           <div class='tab-selector' [class.active]='tab==="media"' i18n (click)='tab="media"'>מדיה</div>
+        </div>
+        <div class='tab-content' *ngIf='tab==="results"'>
+          <h2 i18n>תוצאות עדכניות:</h2>
+
+          <p i18n>מדד coronaisrael.org מנסה לחזות את מוקדי התפרצות הקורונה בעזרת ניתוח מידע מהציבור על התפתחות תסמיני הנגיף והתנהגות הציבור. המפה מתעדכנת מידי יום על בסיס ניתוח המידע שאתם מדווחים לנו, בעזרת אלגוריתמים של ביג דאטה ובינה מלאכותית.</p>
+          <p i18n>התוצאות מוצגות עבור ערים או ישובים עם יותר מ-200 דיווחים ב-7 הימים האחרונים.</p>
+          <p i18n>אמינות המפה והתחזית יגדלו ככל שכמות הנתונים המעודכנים תגדל - לכן, חשוב להמשיך לדווח ולספר על השאלון לאחרים.</p>
+
+          <p i18n>האזורים צבועים על פי רמת תסמיני קורונה לפי <a href='https://www.medrxiv.org/content/10.1101/2020.05.18.20105569v1.article-info' target='_blank'>המודל המחקרי של מכון ויצמן.</a> מסגול
+                    <span class='band-square band5'></span>
+                  עבור רמת תסמינים גבוהה עד צהוב 
+                    <span class='band-square band0'></span>
+                  לרמת תסמינים נמוכה מאוד.</p>
+          <p i18n>המדרג מתייחס לדמיון בתסמינים בין כלל הדיווחים באזור לבין הדיווחים של חולי קורונה (COVID-19). הצבעים משקפים רק את רמת הדיווח על התסמינים, אך אינם משקפים את מדד הסיכון לתחלואה בנגיף הקורונה או את מצב התחלואה באותו אזור. כמו כן, התסמינים המוצגים נפוצים אצל חולים בנגיף הקורונה אך אינם ספציפיים למחלה זו וייתכן שהם משקפים תחלואה במחלות אחרות.</p>
+
+          <div class='towns-title' i18n>מדרג התסמינים בחודש האחרון</div>
+          <div class='towns-header'>
+            <div class='towns-legend' appLtr>
+              <span class='label' i18n>רמת תסמיני קורונה:</span>
+              <span class='legend'>
+                <span class='tag' i18n>נמוכה</span>
+                <span class='square band0'></span>
+                <span class='square band1'></span>
+                <span class='square band2'></span>
+                <span class='square band3'></span>
+                <span class='square band4'></span>
+                <span class='square band5'></span>
+                <span class='tag' i18n>גבוהה</span>
+              </span>
+              <div class='sep'></div>
+              <span class='noinfo' appLtr>
+                <span class='tag' i18n>חוסר מידע</span>
+                <span class='square band-noinfo'></span>
+              </span>
+            </div>
+            <div class='towns-dates' *ngIf='national' appLtr>
+              <span class='single-date'>{{dateSpan[0]}}</span>
+              <span class='single-date'>{{dateSpan[1]}}</span>
+              <span class='label' i18n>עדכון אחרון:</span>
+            </div>
+          </div>
+          <app-city-results *ngIf='national' [item]='national' [dropdown]='false'></app-city-results>
+          <ng-container *ngFor='let item of (cityRanking.ranking | async)'>
+            <app-city-results [item]='item'>
+            </app-city-results>
+          </ng-container>
         </div>
         <div class='tab-content' *ngIf='tab==="about"'>
           <h2 i18n>אודות המחקר:</h2>
@@ -95,6 +141,10 @@
             <div class='article'>
               <img src='assets/img/medarxiv-logo.png'>
               <a href='https://www.medrxiv.org/content/10.1101/2020.04.02.20051284v1.article-info' target='_blank'>Building an International Consortium for Tracking Coronavirus Health Status</a>
+            </div>
+            <div class='article'>
+              <img src='assets/img/medarxiv-logo.png'>
+              <a href='https://www.medrxiv.org/content/10.1101/2020.05.18.20105569v1.article-info' target='_blank'>Who should we test for COVID-19? A triage model built from national symptom surveys</a>
             </div>
           </div>
 
@@ -258,8 +308,10 @@
       <div class='links'>
         <a href='https://www.hasadna.org.il/coronabot/participant-form' i18n target='_blank'>תנאי ההשתתפות במחקר</a>&nbsp;|&nbsp;
         <a href='https://www.hasadna.org.il/coronabot/privacy' i18n target='_blank'>מדיניות פרטיות</a><br/>
-        <a href="mailto:coronabot@hasadna.org" i18n>יצירת קשר</a><br/>
+        <a href="mailto:coronabot@hasadna.org" i18n>יצירת קשר</a>&nbsp;|&nbsp;
+        <a href="https://docs.google.com/document/d/177OKr-lk-ilJKsk1wwqjfhqcS-hfJnYVV-CML0_oc8Q/edit?usp=sharing" i18n target='_blank'>שאלות נפוצות</a><br/>
         <p>
+          <a href='https://github.com/hasadna/avid-covider-raw-data' i18n target='_blank'>נתונים גולמיים</a>&nbsp;|&nbsp;
           <a href='https://github.com/hasadna/avid-covider' i18n target='_blank'>קוד המקור</a>&nbsp;|&nbsp;
           <span i18n>גירסא</span>&nbsp;<span>{{version}}</span>
         </p>

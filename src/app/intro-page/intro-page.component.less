@@ -122,7 +122,7 @@
             position: sticky;
             top: 0;
             background-color: #fff;
-            z-index: 1;
+            z-index: 2;
             height: @headerSize;
 
             > .handle {
@@ -229,6 +229,10 @@
                 line-height: 1.5;
                 color: @aubergine;
                 margin-bottom: 40px;
+
+                a {
+                    text-decoration: underline;
+                }
             }
         
             .tabs {
@@ -424,6 +428,162 @@
                     }
                 }
             }
+
+            .towns-title {
+                font-size: 22px !important;
+                font-weight: 300 !important;
+                margin-bottom: 24px !important;
+                color: @aubergine;
+            }
+    
+            .towns-header {
+                position: sticky;
+                top: 60px;
+                z-index: 1;
+                background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 65px, rgba(255,255,255,0) 100%); 
+                width: 100%;
+                padding-top: 8px;
+                margin-bottom: -16px;
+
+                .towns-legend {
+                    width: ~'calc(100% + 32px)';
+                    overflow: hidden;
+                    padding: 0 12px;
+                    background-color: @white;
+    
+                    &:not(.ltr) {
+                        margin-right: -16px;
+                    }
+                    &.ltr {
+                        margin-left: -16px;
+                    }
+    
+                    height: 30px;
+                    border-radius: 4px;
+                    display: flex;
+                    flex-flow: row;
+                    align-items: center;
+                    
+                    .label {
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: @charcoal;
+                    }
+    
+                    .tag {
+                        font-size: 12px;
+                        font-weight: normal;
+                        color: #959d9d;
+                    }
+    
+                    .legend {
+                        direction: ltr;
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        padding: 0 2px;
+        
+                        .tag {
+                            margin: 0 4px;
+                        }
+    
+                        .square {
+                            display: block;
+                            width: 11px;
+                            height: 8px;
+                            margin: 0 0.5px;
+    
+                            &:nth-child(2) {
+                                border-top-left-radius: 4px;
+                                border-bottom-left-radius: 4px;
+                            }
+                            &:nth-last-child(2) {
+                                border-top-right-radius: 4px;
+                                border-bottom-right-radius: 4px;
+                            }
+                        }
+                    }
+    
+                    .sep {
+                        width: 0;
+                        border-right: solid 1px #ffffff;
+                        height: 24px;
+    
+                        &:not(.ltr) {
+                            margin-right: auto;
+                            margin-left: 7px;
+                        }
+                        &.ltr {
+                            margin-left: auto;
+                            margin-right: 7px;
+                        }
+                    }
+                    .noinfo {
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        padding: 0 2px;
+    
+                        .square {
+                            display: block;
+                            width: 11px;
+                            height: 8px;
+                            margin: 0 2px;
+                        }
+                    }
+                }
+
+                .towns-dates {
+                    width: 100%;
+                    direction: ltr;
+                    display: flex;
+                    flex-flow: row;
+                    &.ltr {
+                        justify-content: flex-end;
+                        padding-right: 60px;
+                    }
+                    &:not(.ltr) {
+                        padding-left: 30px;
+                    }
+                    font-size: 12px;
+                    font-weight: normal;
+                    padding-top: 4px;
+
+                    .single-date {
+                        color: @cool-grey;
+                        width: 0;
+                        text-align: center;
+                        position: relative;
+                        &:first-child {
+                            margin-right: 120px;
+                        }
+                        &:after {
+                            content: '';
+                            display: inline-block;
+                            text-align: center;
+                            position: relative;
+                            width: 1px;
+                            height: 12px;
+                            top: 0px;
+                            left: 12px;
+                            border-right: dashed thin @cool-grey;
+                        }
+                    }
+                    .label {
+                        text-align: left;
+                        margin-left: 30px;
+                        color: @charcoal;
+                        direction: rtl;
+                    }
+                    &.ltr {
+                        .label {
+                            direction: ltr;
+                            display: none;
+                        }
+                    }
+                }
+            }
+
 
             .caption {
                 .text {

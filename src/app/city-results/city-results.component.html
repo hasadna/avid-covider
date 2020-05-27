@@ -1,0 +1,40 @@
+<div class='card' [class.open]='open'>
+  <div class='header' (click)='open = dropdown && !open' [class.open]='open' *ngIf='ready'  [class.fake]='!dropdown'>
+    <span class='name' *ngIf='dropdown'>{{ city_name }}</span>
+    <span class='name' *ngIf='!dropdown' i18n>כל הארץ</span>
+    <span class='timeline' appLtr>
+      <span [class]='scoreClasses(score)' *ngFor='let score of item.scores'></span>
+    </span>
+    <span class='toggle'></span>
+  </div>
+  <div class='dropdown' *ngIf='open && dropdown'>
+    <div class='map'>
+      <div class='map-thumbnail' (click)='openMap()' [style.background-image]='"url(" + "https://avid-covider.phonaris.com" + item.image.url + ")"'>
+        <div class='enlarge'></div>
+      </div>
+    </div>
+    <div class='stats'>
+      <div class='stat'>
+        <div class='level'>
+          <span i18n>רמת תסמינים</span>
+          <span [class]='scoreClasses(item.scores[item.scores.length-1])'>
+            <span class='band0-active' i18n>נמוכה מאוד</span>
+            <span class='band1-active' i18n>נמוכה</span>
+            <span class='band2-active' i18n>בינונית-נמוכה</span>
+            <span class='band3-active' i18n>בינונית</span>
+            <span class='band4-active' i18n>בינונית-גבוהה</span>
+            <span class='band5-active' i18n>גבוהה</span>
+          </span>
+        </div>
+      </div>
+      <div class='stat'>
+        <div class='number'>
+          {{ current.nr.toLocaleString() }}
+        </div>
+        <div class='text' i18n>
+          מדווחים בשבוע האחרון
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

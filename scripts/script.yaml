@@ -22,7 +22,7 @@
               - say: כולם מנסים לחזור לשיגרה מסויימת אבל מגפת הקורונה לא נעלמה
               - say: התשובות שלך לכמה שאלות, והמשך הדיווח, יעזור לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים
               - say: להתפרצות מחודשת של המחלה ולהיערך אליה בהתאם.
-              - say: כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרטיות שלך             
+              - say: כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרטיות שלך
               - say: נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים
               - say: הכי טוב כשכולם מדווחים על עצמם בכל יום
               - say: אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם
@@ -70,7 +70,7 @@
                   params:
                     - "דיווח חדש ב{{street}} {{city_town}}"
                     - "דיווח חדש בכתובת אחרת"
-                    - "כל בני ביתי כבר דיווחו"
+                    - "זהו להיום"
               - wait:                                                    # <---- wait for the user choice of the current reporter
                   optionsFrom: _report_options
                   variable: _report_selection
@@ -618,7 +618,7 @@
                                           - say: וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?
                                           - wait:
                                               variable: routine_workplace_weekly_hours
-                                              input-type: number
+                                              input-kind: number
                                               input-step: 1
                                               input-min: 0
                                               input-max: 168
@@ -685,18 +685,7 @@
                                           - default: true 
                                           - undefined: true 
                                             steps:
-                                            - switch:
-                                                arg: sex
-                                                cases:
-                                                - default: true
-                                                  steps:
-                                                  - say: האם ביקרת בבית תפילה כחלק מהשיגרה השבוע?                  
-                                                - match: male
-                                                  steps:
-                                                  - say: האם אתה נוהג לבקר בבית תפילה באופן קבוע?
-                                                - match: female
-                                                  steps:
-                                                  - say: האם את נוהגת לבקר בבית תפילה באופן קבוע?
+                                            - say: האם ביקרת בבית תפילה באופן שגרתי השבוע?
                                             - wait:
                                                 variable: routine_visits_prayer_house
                                                 options:
@@ -747,22 +736,6 @@
                                         variable: routine_wears_mask
                                         options:
                                         - show: כן, תמיד
-                                          value: always
-                                        - show: רוב הזמן
-                                          value: mostly_yes
-                                        - show: בחלק קטן מהזמן
-                                          value: mostly_no
-                                        - show: לא
-                                          value: never
-                                        - show: לא רוצה להשיב
-                                          value: no_response
-                                          class: "other"
-
-                                    - say: "ומה עם כפפות?"
-                                    - wait:
-                                        variable: routine_wears_gloves
-                                        options:
-                                        - show: כן, כל הזמן
                                           value: always
                                         - show: רוב הזמן
                                           value: mostly_yes
@@ -986,29 +959,27 @@
         - say: "האם ביממה האחרונה שהית בקרבת אנשים (<b>שאינם בני הבית</b>) למשך יותר מ-15 דקות ובמרחק של פחות מ-2 מטרים"
         - wait:
             options:
-            - show: לא
-              value: false
-            - show: כן
-              value: true
-              steps:
-              - say: וכמה מהם היו מבוגרים מעל גיל 18?
-              - wait:
-                  variable: _met_above_18
-                  placeholder: מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק
-                  required: false
-                  validation: "[0-9]+"
-                  input-kind: number
-                  input-min: 0
-                  input-max: 99
-              - say: וכמה ילדים מתחת לגיל 18?
-              - wait:
-                  variable: _met_under_18
-                  placeholder: מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק
-                  required: false
-                  validation: "[0-9]+"
-                  input-kind: number
-                  input-min: 0
-                  input-max: 99
+              - show: לא
+              - show: כן
+                steps:
+                - say: וכמה מהם היו מבוגרים מעל גיל 18?
+                - wait:
+                    variable: _met_above_18
+                    placeholder: מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                    required: false
+                    validation: "[0-9]+"
+                    input-kind: number
+                    input-min: 0
+                    input-max: 99
+                - say: וכמה ילדים מתחת לגיל 18?
+                - wait:
+                    variable: _met_under_18
+                    placeholder: מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק
+                    required: false
+                    validation: "[0-9]+"
+                    input-kind: number
+                    input-min: 0
+                    input-max: 99
 
         - do:
             cmd: calculate_met_daily
@@ -1030,57 +1001,38 @@
 
     - name: affiliations
       steps:
-        - do:
-            variable: _affiliates_should_ask
-            cmd: affiliates_should_ask
-        - switch:
-            arg: _affiliates_should_ask
-            cases:
-              - match: false
-                steps:
-                  - pop: end-of-report
-              - default: true
+        - say: רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?
+        - wait:
+            variable: affiliate_questionnaires_preference
+            options:
+              - show: כן, בשמחה
+                value: ok
+              - show: לא תודה, נתראה מחר!
+                value: later
         - switch:
             arg: affiliate_questionnaires_preference
             cases:
-              - match: never
-              - default: true
+              - match: ok
                 steps:
-                - say: האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?
-                - wait:
-                    variable: affiliate_questionnaires_preference
-                    options:
-                      - show: כן, בשמחה
-                        value: ok
-                      - show: לא, בפעם אחרת
-                        value: later
-                      - show: לא, אף פעם
-                        value: never
-                - switch:
-                    arg: affiliate_questionnaires_preference
-                    cases:
-                      - match: ok
-                        steps:
-                          - goto: affiliate-alon-chen
-                      - default: true
+                  - goto: affiliate-alon-chen
+              - default: true
               
     - name: affiliate-alon-chen
       steps:
         - say: פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
-        - say: לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?
+        - say: מי ישיב על השאלון?
+        - do:
+            cmd: affiliate_alon_chen_prepare
+            variable: _affiliate_alon_chen_options
         - wait:
-            variable: affiliate_questionnaires_preference_alon_chen
-            options:
-              - show: אשמח להשתתף במחקר
-                value: ok
-                steps:
-                  - say: תודה רבה, נתראה מחר!
-                  - do:
-                      cmd: affiliate_alon_chen
-                  - goto: complete
-              - show: לא, בפעם אחרת
-                value: pass
-
+            variable: _affiliate_alon_chen_choice
+            optionsFrom: _affiliate_alon_chen_options
+        - do:
+            cmd: affiliate_alon_chen_action
+            params:
+              - record
+              - _affiliate_alon_chen_choice
+  
     # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
     #   steps:    
 

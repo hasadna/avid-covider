@@ -454,7 +454,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           return citySuggestions[this.locale] || citySuggestions['en'];
         },
         show_map: async () => {
-          this.mapService.openMap();
+          this.mapService.openMainMap();
           return new Promise((resolve, reject) => {
             this.mapService.mapVisibleStream.pipe(first()).subscribe(() => {
               resolve();
@@ -521,7 +521,32 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           // Keeping this function in case we'd like to implement a more complex logic
           return true;
         },
-        affiliate_alon_chen: () => {
+        affiliate_alon_chen_prepare: () => {
+          const aliases = {};
+          const sliceIdx = PRODUCTION ? 10 : 16;
+          const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
+          for (const report of this.storage.reports) {
+            if (!report[1].alias) {
+              continue;
+            }
+            const alias = report[1].alias;
+            if (report[0].indexOf(today_prefix) === 0) {
+              aliases[alias] = report;
+            }
+          }
+          const options = [];
+          const aliases_list = Object.keys(aliases);
+          for (const alias of aliases_list) {
+            const option: any = {};
+            Object.assign(option, {
+              show: alias,
+              value: aliases[alias][1].uid
+            });
+            options.push(option);
+          }
+          return options;
+        },
+        affiliate_alon_chen_action: (record, field_name) => {
           const links = {
             he: '1FAIpQLSfbO0mKvS5q5DFEjTrtP6nDsPjeCLjKNknX9Ywzwl7sSTl8jA/viewform?usp=pp_url&entry.356067021=',
             en: '1FAIpQLSd9HQDsN1WaikNr0QVrdnG7dKWuevbxR2L1v8Uh62mTHM6c4A/viewform?usp=pp_url&entry.101300820=',
@@ -530,8 +555,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             fr: '1FAIpQLSf6hU2H_JaiKMCWnGKptxLWFMdAZnUFuik_kIUiFPm2uqp8xQ/viewform?usp=pp_url&entry.1895607011=',
             ru: '1FAIpQLSfNyO_jtY0K8dWCJ4UvceKgAgcs-BZ4khBYdW55wgq8rFLmnw/viewform?usp=pp_url&entry.2022038576='
           };
+          const uid = record[field_name];
           const prefix = 'https://docs.google.com/forms/d/e/';
-          const link = prefix + (links[this.locale] || links.he) + this.storage.device.main_uid;
+          const link = prefix + (links[this.locale] || links.he) + uid;
           window.open(link, '_blank');
         },
         save_report: (record) => {
