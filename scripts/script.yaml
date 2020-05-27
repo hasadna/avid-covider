@@ -725,22 +725,6 @@
                                           value: no_response
                                           class: "other"
 
-                                    - say: "ומה עם כפפות?"
-                                    - wait:
-                                        variable: routine_wears_gloves
-                                        options:
-                                        - show: כן, כל הזמן
-                                          value: always
-                                        - show: רוב הזמן
-                                          value: mostly_yes
-                                        - show: בחלק קטן מהזמן
-                                          value: mostly_no
-                                        - show: לא
-                                          value: never
-                                        - show: לא רוצה להשיב
-                                          value: no_response
-                                          class: "other"
-
                                 - show: לא, נשארתי בבית
                                   value: false
 
