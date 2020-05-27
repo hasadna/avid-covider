@@ -938,7 +938,6 @@
                     variable: _met_above_18
                     placeholder: מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק
                     required: false
-                    validation: "[0-9]+"
                     input-kind: number
                     input-min: 0
                     input-max: 99
@@ -947,7 +946,6 @@
                     variable: _met_under_18
                     placeholder: מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק
                     required: false
-                    validation: "[0-9]+"
                     input-kind: number
                     input-min: 0
                     input-max: 99
