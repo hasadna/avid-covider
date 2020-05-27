@@ -180,7 +180,7 @@ export const script = {
                           "params": [
                             "דיווח חדש ב{{street}} {{city_town}}",
                             "דיווח חדש בכתובת אחרת",
-                            "כל בני ביתי כבר דיווחו"
+                            "זהו להיום"
                           ],
                           "variable": "_report_options"
                         },
@@ -1373,10 +1373,10 @@ export const script = {
                                                     {
                                                       "uid": "2b3b0adc62",
                                                       "wait": {
+                                                        "input-kind": "number",
                                                         "input-max": 168,
                                                         "input-min": 0,
                                                         "input-step": 1,
-                                                        "input-type": "number",
                                                         "placeholder": "מספר השעות, בערך",
                                                         "variable": "routine_workplace_weekly_hours"
                                                       }
@@ -2321,24 +2321,6 @@ export const script = {
             {
               "goto": "affiliations",
               "uid": "ccc68125a7"
-            },
-            {
-              "say": "סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה…",
-              "uid": "87a44257a2"
-            },
-            {
-              "say": "תודה רבה, נתראה מחר?",
-              "uid": "5427b26490"
-            },
-            {
-              "uid": "60d63009b1",
-              "wait": {
-                "options": [
-                  {
-                    "show": "בטח!"
-                  }
-                ]
-              }
             }
           ],
           "uid": "a92af82c81"
@@ -2347,90 +2329,41 @@ export const script = {
           "name": "affiliations",
           "steps": [
             {
-              "do": {
-                "cmd": "affiliates_should_ask",
-                "variable": "_affiliates_should_ask"
-              },
-              "uid": "4326fae447"
+              "say": "רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?",
+              "uid": "ff1f78ef9a"
             },
             {
-              "switch": {
-                "arg": "_affiliates_should_ask",
-                "cases": [
+              "uid": "8284345c1b",
+              "wait": {
+                "options": [
                   {
-                    "match": false,
-                    "steps": [
-                      {
-                        "pop": "end-of-report",
-                        "uid": "65abfbcf12"
-                      }
-                    ],
-                    "uid": "e8a030509d"
+                    "show": "כן, בשמחה",
+                    "value": "ok"
                   },
                   {
-                    "default": true
+                    "show": "לא תודה, נתראה מחר!",
+                    "value": "later"
                   }
-                ]
-              },
-              "uid": "d5c1bb2dcb"
+                ],
+                "variable": "affiliate_questionnaires_preference"
+              }
             },
             {
               "switch": {
                 "arg": "affiliate_questionnaires_preference",
                 "cases": [
                   {
-                    "match": "never"
-                  },
-                  {
-                    "default": true,
+                    "match": "ok",
                     "steps": [
                       {
-                        "say": "האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?",
-                        "uid": "d24e2af160"
-                      },
-                      {
-                        "uid": "4186bee39c",
-                        "wait": {
-                          "options": [
-                            {
-                              "show": "כן, בשמחה",
-                              "value": "ok"
-                            },
-                            {
-                              "show": "לא, בפעם אחרת",
-                              "value": "later"
-                            },
-                            {
-                              "show": "לא, אף פעם",
-                              "value": "never"
-                            }
-                          ],
-                          "variable": "affiliate_questionnaires_preference"
-                        }
-                      },
-                      {
-                        "switch": {
-                          "arg": "affiliate_questionnaires_preference",
-                          "cases": [
-                            {
-                              "match": "ok",
-                              "steps": [
-                                {
-                                  "goto": "affiliate-alon-chen",
-                                  "uid": "a3de1702b9"
-                                }
-                              ],
-                              "uid": "9c54ccfbba"
-                            },
-                            {
-                              "default": true
-                            }
-                          ]
-                        },
-                        "uid": "c53d2fe49e"
+                        "goto": "affiliate-alon-chen",
+                        "uid": "f95c4ac5be"
                       }
                     ],
-                    "uid": "cc6b917bab"
+                    "uid": "34201dd1c8"
+                  },
+                  {
+                    "default": true
                   }
                 ]
               },
@@ -2447,41 +2380,32 @@ export const script = {
               "uid": "ed824c7891"
             },
             {
-              "say": "לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?",
-              "uid": "157579fe76"
+              "say": "מי ישיב על השאלון?",
+              "uid": "6532b6aa50"
             },
             {
-              "uid": "19f8eb5c80",
+              "do": {
+                "cmd": "affiliate_alon_chen_prepare",
+                "variable": "_affiliate_alon_chen_options"
+              },
+              "uid": "5831418d24"
+            },
+            {
+              "uid": "5439660974",
               "wait": {
-                "options": [
-                  {
-                    "show": "אשמח להשתתף במחקר",
-                    "steps": [
-                      {
-                        "say": "תודה רבה, נתראה מחר!",
-                        "uid": "c4b59f6f31"
-                      },
-                      {
-                        "do": {
-                          "cmd": "affiliate_alon_chen"
-                        },
-                        "uid": "3e2d803d4a"
-                      },
-                      {
-                        "goto": "complete",
-                        "uid": "f8b9576e1f"
-                      }
-                    ],
-                    "uid": "a37063e62c",
-                    "value": "ok"
-                  },
-                  {
-                    "show": "לא, בפעם אחרת",
-                    "value": "pass"
-                  }
-                ],
-                "variable": "affiliate_questionnaires_preference_alon_chen"
+                "optionsFrom": "_affiliate_alon_chen_options",
+                "variable": "_affiliate_alon_chen_choice"
               }
+            },
+            {
+              "do": {
+                "cmd": "affiliate_alon_chen_action",
+                "params": [
+                  "record",
+                  "_affiliate_alon_chen_choice"
+                ]
+              },
+              "uid": "d82c7b1986"
             }
           ],
           "uid": "91e09012bf"

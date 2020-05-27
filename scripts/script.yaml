@@ -984,65 +984,41 @@
         - goto: share
         # - goto: dynamic_update
         - goto: affiliations
-        - say: סיימנו עם השאלות להיום. בזכותך התקרבנו עוד צעד אחד לסוף של זה… 
-        - say: תודה רבה, נתראה מחר?
-        - wait:
-            options:
-              - show: בטח!
 
     - name: affiliations
       steps:
-        - do:
-            variable: _affiliates_should_ask
-            cmd: affiliates_should_ask
-        - switch:
-            arg: _affiliates_should_ask
-            cases:
-              - match: false
-                steps:
-                  - pop: end-of-report
-              - default: true
+        - say: רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?
+        - wait:
+            variable: affiliate_questionnaires_preference
+            options:
+              - show: כן, בשמחה
+                value: ok
+              - show: לא תודה, נתראה מחר!
+                value: later
         - switch:
             arg: affiliate_questionnaires_preference
             cases:
-              - match: never
-              - default: true
+              - match: ok
                 steps:
-                - say: האם נוכל להציע לכם להשתתף במחקרים נוספים של מדעני מכון ויצמן?
-                - wait:
-                    variable: affiliate_questionnaires_preference
-                    options:
-                      - show: כן, בשמחה
-                        value: ok
-                      - show: לא, בפעם אחרת
-                        value: later
-                      - show: לא, אף פעם
-                        value: never
-                - switch:
-                    arg: affiliate_questionnaires_preference
-                    cases:
-                      - match: ok
-                        steps:
-                          - goto: affiliate-alon-chen
-                      - default: true
+                  - goto: affiliate-alon-chen
+              - default: true
               
     - name: affiliate-alon-chen
       steps:
         - say: פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
-        - say: לאור מכלול ההשפעות של תקופה זו על חיינו, האם נוכל לשאול אותך גם על מצב רוחך?
+        - say: מי ישיב על השאלון?
+        - do:
+            cmd: affiliate_alon_chen_prepare
+            variable: _affiliate_alon_chen_options
         - wait:
-            variable: affiliate_questionnaires_preference_alon_chen
-            options:
-              - show: אשמח להשתתף במחקר
-                value: ok
-                steps:
-                  - say: תודה רבה, נתראה מחר!
-                  - do:
-                      cmd: affiliate_alon_chen
-                  - goto: complete
-              - show: לא, בפעם אחרת
-                value: pass
-
+            variable: _affiliate_alon_chen_choice
+            optionsFrom: _affiliate_alon_chen_options
+        - do:
+            cmd: affiliate_alon_chen_action
+            params:
+              - record
+              - _affiliate_alon_chen_choice
+  
     # - name: dynamic_update                            # this is where we currently show map, and soon will add insihgts
     #   steps:    
 
