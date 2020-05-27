@@ -3,7 +3,7 @@
   </div>
   <div class='close-button' (click)='mapService.closeMap()' *ngIf='!infoboxActive && closeButton'></div>
   <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='infoButton'>?</div>
-  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false' [class.desktop]='layout.desktop'>
+  <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false; true' [class.desktop]='layout.desktop'>
     <div class='close-button'></div>
     <div class='infobox-content'>
       <h3 i18n>קורונה:<br/>
