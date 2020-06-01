@@ -1197,7 +1197,10 @@
                                           input-min: 0
                                           input-max: 100
                                           input-step: 1
-                      
+                  - say: בנוסף לסימפטומים שתיארת שאתה חש כרגע, האם חשת סימפטומים נוספים בימים האחרונים? אם כן אנא ציין
+                  - wait:
+                      variable: symptoms_other
+                      required: false
     - name: current-report-temperature
       steps:
         - switch:
