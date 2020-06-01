@@ -202,7 +202,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member', 'is_assisted_living',
-                'precondition.*', 'hospitalization.*', 'covid.*', 'insulation.*', 'exposure.*',
+                'precondition.*', 'hospitalization.*', 'covid.*', 'insulation.*',
                 'general_feeling', 'routine.*', '_household.*', '_public_service_last_reported_yes', 'uid'
               ])
             });
@@ -367,24 +367,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`Age check error: ${err}.\n Age value: ${record.age}`);
           }
         },
-        in_insulation: (record: any) => {
-          return (record.exposure_status === 'insulation_with_family' || record.exposure_status === 'insulation');
-        },
-        clear_fields: (record: any, ...fields: string[]) => {
-          for (const re of fields) {
-            const regexp = new RegExp('^' + re + '$');
-            const keys = Object.keys(record);
-            for (const key of keys) {
-              if (regexp.test(key)) {
-                try {
-                  delete record[key];
-                } catch (e) {
-                  console.log('Failed to delete key', key, 'from', record, ':', e);
-                }
-              }
-            }
-          }
-        },
         calculate_alias: (record, male_alias, female_alias, other_alias) => {
           if (record.sex === 'male') {
             return this.fillIn(record, male_alias);
@@ -399,14 +381,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
-        },
-        show_map: async () => {
-          this.mapService.openMainMap();
-          return new Promise((resolve, reject) => {
-            this.mapService.mapVisibleStream.pipe(first()).subscribe(() => {
-              resolve();
-            });
-          });
         },
         share_action: async () => {
           if (this.shareService.shareWidgetSupported) {
@@ -463,10 +437,6 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         install_telegram: () => {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
-        },
-        affiliates_should_ask: () => {
-          // Keeping this function in case we'd like to implement a more complex logic
-          return true;
         },
         affiliate_alon_chen_prepare: () => {
           const aliases = {};
