@@ -297,6 +297,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           }
         },
         clear_insulation_reason: (record: any) => {
+          record.insulation_reason = record.insulation_reason || 'none';
           if (record.insulation_status === 'none') {
             record.insulation_reason = 'none';
           }

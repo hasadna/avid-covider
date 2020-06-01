@@ -657,7 +657,6 @@
 
     - name: routine
       steps:
-        - say: "יש כמה שאלות חשובות שנשאל רק פעם בשבוע, כדי להקל על הדיווח:"
         - switch:
             arg: _is_adult
             cases:
@@ -675,6 +674,7 @@
                         - match: false
                         - match: true
                           steps:
+                          - say: "יש כמה שאלות חשובות שנשאל רק פעם בשבוע, כדי להקל על הדיווח:"
                           - say: האם יצאת מהבית במהלך השבוע האחרון?
                           - wait:
                               variable: routine_left_the_house
