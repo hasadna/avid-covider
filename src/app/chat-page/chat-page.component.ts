@@ -165,6 +165,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       {
         clear: () => {
           this.runner.record = Object.assign({}, this.storage.device);
+        },
+        clear_state: () => {
           this.runner.state = {};
         },
         load_local_storage: (record: any) => {

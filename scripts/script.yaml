@@ -48,6 +48,8 @@
             cmd: save_report
             params:
               - record
+        - do:
+            cmd: clear_state
         - say: מצויין, השלמנו את הדיווח היומי עבור {{alias}}
         - goto: reporting-loop
               
