@@ -1641,39 +1641,30 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "say": "כן, אני עדיין באשפוז",
+                              "show": "כן, אני עדיין באשפוז",
                               "value": true
                             },
                             {
-                              "say": "לא, כבר שוחררתי",
+                              "show": "לא, כבר שוחררתי",
                               "steps": [
                                 {
                                   "say": "מתי השתחחרת?",
-                                  "uid": "cb7d956fb7"
+                                  "uid": "0352533352"
                                 },
                                 {
-                                  "uid": "5c95aa5c26",
+                                  "uid": "1982132cbc",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_end_date"
                                   }
                                 },
                                 {
                                   "goto": "hospitalization_icu",
-                                  "uid": "36ae517c47"
+                                  "uid": "381c102ad1"
                                 }
                               ],
-                              "uid": "d37f5cdbee",
+                              "uid": "b9be6ac33c",
                               "value": false
                             }
                           ],
@@ -1695,97 +1686,61 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "say": "כן, אני באשפוז",
+                              "show": "כן, אני באשפוז",
                               "steps": [
                                 {
                                   "say": "מתי התחיל האשפוז?",
-                                  "uid": "aa41d2fe67"
+                                  "uid": "003e7eb968"
                                 },
                                 {
-                                  "uid": "0d5ff01cc8",
+                                  "uid": "d5ed1a5a21",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_start_date"
                                   }
                                 }
                               ],
-                              "uid": "010c599d3f",
+                              "uid": "ac4acbf859",
                               "value": true
                             },
                             {
-                              "say": "כן, אבל כבר שוחררתי",
+                              "show": "כן, אבל כבר שוחררתי",
                               "steps": [
                                 {
                                   "say": "מתי התחיל האשפוז?",
-                                  "uid": "ed23e05be1"
+                                  "uid": "0e6390ab45"
                                 },
                                 {
-                                  "uid": "c542099195",
+                                  "uid": "2cefde5551",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_start_date"
                                   }
                                 },
                                 {
                                   "say": "ומתי השתחחרת?",
-                                  "uid": "c788c1696b"
+                                  "uid": "18cf21cb21"
                                 },
                                 {
-                                  "uid": "6a25fe2beb",
+                                  "uid": "9811408bb4",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_end_date"
                                   }
                                 },
                                 {
                                   "goto": "hospitalization_icu",
-                                  "uid": "803f4b130e"
+                                  "uid": "e070f48b08"
                                 }
                               ],
-                              "uid": "05c62958c9",
+                              "uid": "978912bced",
                               "value": false
                             },
                             {
-                              "say": {
-                                ".tx": {
-                                  "_": "לא",
-                                  "ar": "لا",
-                                  "en": "No",
-                                  "es": "No",
-                                  "fr": "Non",
-                                  "ru": "Нет"
-                                }
-                              },
+                              "show": "לא",
                               "value": false
                             }
                           ],
@@ -1806,97 +1761,61 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "say": "כן, אני באשפוז כרגע",
+                              "show": "כן, אני באשפוז כרגע",
                               "steps": [
                                 {
                                   "say": "מתי התחיל האשפוז?",
-                                  "uid": "8c1d4ccdd5"
+                                  "uid": "ce0ed668eb"
                                 },
                                 {
-                                  "uid": "05caaf3195",
+                                  "uid": "6152857719",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_start_date"
                                   }
                                 }
                               ],
-                              "uid": "7a843864c5",
+                              "uid": "caec131f19",
                               "value": true
                             },
                             {
-                              "say": "כן, וכבר שוחררתי",
+                              "show": "כן, וכבר שוחררתי",
                               "steps": [
                                 {
                                   "say": "באיזה תאריך התאשפזת?",
-                                  "uid": "873f5d69d8"
+                                  "uid": "496c2251de"
                                 },
                                 {
-                                  "uid": "1c89fa8f15",
+                                  "uid": "194d503791",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_start_date"
                                   }
                                 },
                                 {
                                   "say": "ומתי השתחחרת?",
-                                  "uid": "4c7281e78a"
+                                  "uid": "a4e5e9cd6d"
                                 },
                                 {
-                                  "uid": "d780129835",
+                                  "uid": "119bf85925",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "hospitalization_end_date"
                                   }
                                 },
                                 {
                                   "goto": "hospitalization_icu",
-                                  "uid": "a499492cae"
+                                  "uid": "14da066f39"
                                 }
                               ],
-                              "uid": "54b28c94a1",
+                              "uid": "b4f6acaa01",
                               "value": false
                             },
                             {
-                              "say": {
-                                ".tx": {
-                                  "_": "לא",
-                                  "ar": "لا",
-                                  "en": "No",
-                                  "es": "No",
-                                  "fr": "Non",
-                                  "ru": "Нет"
-                                }
-                              },
+                              "show": "לא",
                               "value": false
                             }
                           ],
@@ -1935,23 +1854,14 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "say": {
-                      ".tx": {
-                        "_": "כן",
-                        "ar": "نعم",
-                        "en": "Yes",
-                        "es": "Sí",
-                        "fr": "Oui",
-                        "ru": "Да"
-                      }
-                    },
+                    "show": "כן",
                     "steps": [
                       {
                         "say": "כמה ימים אושפזת שם?",
-                        "uid": "3e9b5615af"
+                        "uid": "00a1564b2b"
                       },
                       {
-                        "uid": "d946d50583",
+                        "uid": "52a10d9e52",
                         "wait": {
                           "input-kind": "number",
                           "input-max": 999,
@@ -1962,20 +1872,11 @@ export const script = {
                         }
                       }
                     ],
-                    "uid": "d9e0ed57d5",
+                    "uid": "8728a54b34",
                     "value": true
                   },
                   {
-                    "say": {
-                      ".tx": {
-                        "_": "לא",
-                        "ar": "لا",
-                        "en": "No",
-                        "es": "No",
-                        "fr": "Non",
-                        "ru": "Нет"
-                      }
-                    },
+                    "show": "לא",
                     "value": false
                   }
                 ],
@@ -2175,55 +2076,19 @@ export const script = {
                                   "wait": {
                                     "options": [
                                       {
-                                        "say": {
-                                          ".tx": {
-                                            "_": "אני בבידוד כי חזרתי מחו״ל לאחרונה",
-                                            "ar": "أنا بحجر صحي لأنني كنت مسافر/ة",
-                                            "en": "I'm under quarantine because I recently returned from a foreign country",
-                                            "es": "Estoy en cuarentena ya que regresé últimamente del exterior",
-                                            "fr": "Je suis en confinement car je viens de rentrer de l'étranger",
-                                            "ru": "Я на карантине, вследствие недавнего возвращения из-за границы"
-                                          }
-                                        },
+                                        "show": "אני בבידוד כי חזרתי מחו״ל לאחרונה",
                                         "value": "back_from_abroad"
                                       },
                                       {
-                                        "say": {
-                                          ".tx": {
-                                            "_": "אני בבידוד כי נחשפתי לחולה מאומת",
-                                            "ar": "أنا بحجر صحي لأنني تعرضت لمريض/ة تم التحقق منه/ا",
-                                            "en": "I'm under quarantine because I've been exposed to a verified patient",
-                                            "es": "Estoy en aislamiento porque he estado expuesto a un enfermo confirmado",
-                                            "fr": "Je suis en confinement car j'ai été exposé à un malade confirmé",
-                                            "ru": "Я на карантине вследствие нахождения рядом с подтвержденным больным"
-                                          }
-                                        },
+                                        "show": "אני בבידוד כי נחשפתי לחולה מאומת",
                                         "value": "contact_with_patient"
                                       },
                                       {
-                                        "say": {
-                                          ".tx": {
-                                            "_": "אני בבידוד כי חוויתי תסמינים",
-                                            "ar": "أنا موجود/ة بحجر صحي لأنني شعرت بأعراض",
-                                            "en": "I'm under quarantine because I've exhibited symptoms ",
-                                            "es": "Estoy en aislamiento porque he padecido síntomas",
-                                            "fr": "Je suis en confinement parce-que j'ai eu des symptômes",
-                                            "ru": "Я на карантине вследствие появления симптомов"
-                                          }
-                                        },
+                                        "show": "אני בבידוד כי חוויתי תסמינים",
                                         "value": "has_symptoms"
                                       },
                                       {
-                                        "say": {
-                                          ".tx": {
-                                            "_": "אני בבידוד מרצוני האישי",
-                                            "ar": "أنا موجود/ة بحجر صحي بإختياري الشخصي",
-                                            "en": "I'm isolated by my own choice",
-                                            "es": "Estoy en aislamiento por propia voluntad",
-                                            "fr": "Je suis en confinement de mon plein gré",
-                                            "ru": "Я на добровольной самоизоляции"
-                                          }
-                                        },
+                                        "show": "אני בבידוד מרצוני האישי",
                                         "value": "voluntary"
                                       }
                                     ],

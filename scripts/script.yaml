@@ -463,9 +463,9 @@
                   - wait:
                       variable: hospitalization_status
                       options:
-                        - say: כן, אני עדיין באשפוז
+                        - show: כן, אני עדיין באשפוז
                           value: true
-                        - say: לא, כבר שוחררתי
+                        - show: לא, כבר שוחררתי
                           value: false
                           steps:
                             - say: מתי השתחחרת?
@@ -481,7 +481,7 @@
                   - wait:
                       variable: hospitalization_status
                       options:
-                        - say: כן, אני באשפוז
+                        - show: כן, אני באשפוז
                           value: true
                           steps:
                             - say: מתי התחיל האשפוז?
@@ -489,7 +489,7 @@
                                 variable: hospitalization_start_date
                                 placeholder: "תאריך: dd/mm/yy"
                                 input-kind: date
-                        - say: כן, אבל כבר שוחררתי
+                        - show: כן, אבל כבר שוחררתי
                           value: false
                           steps:
                             - say: מתי התחיל האשפוז?
@@ -503,7 +503,7 @@
                                 placeholder: "תאריך: dd/mm/yy"
                                 input-kind: date
                             - goto: hospitalization_icu
-                        - say: לא
+                        - show: לא
                           value: false
 
               - undefined: true
@@ -512,7 +512,7 @@
                   - wait:
                       variable: hospitalization_status
                       options:
-                        - say: כן, אני באשפוז כרגע
+                        - show: כן, אני באשפוז כרגע
                           value: true
                           steps:
                             - say: מתי התחיל האשפוז?
@@ -521,7 +521,7 @@
                                 placeholder: "תאריך: dd/mm/yy"
                                 input-kind: date
 
-                        - say: כן, וכבר שוחררתי
+                        - show: כן, וכבר שוחררתי
                           value: false
                           steps:
                             - say: באיזה תאריך התאשפזת?
@@ -536,7 +536,7 @@
                                 input-kind: date
                             - goto: hospitalization_icu
 
-                        - say: לא
+                        - show: לא
                           value: false
 
         - do:
@@ -551,7 +551,7 @@
         - wait:
             variable: hospitalization_icu_required
             options:
-              - say: כן
+              - show: כן
                 value: true
                 steps:
                   - say: כמה ימים אושפזת שם?
@@ -563,7 +563,7 @@
                       input-max: 999
                       placeholder: מספר הימים  
 
-              - say: לא
+              - show: לא
                 value: false
 
     - name: insulation
@@ -641,13 +641,13 @@
                             - wait:
                                 variable: insulation_reason
                                 options:
-                                  - say: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                                  - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
                                     value: back_from_abroad
-                                  - say: אני בבידוד כי נחשפתי לחולה מאומת
+                                  - show: אני בבידוד כי נחשפתי לחולה מאומת
                                     value: contact_with_patient
-                                  - say: אני בבידוד כי חוויתי תסמינים
+                                  - show: אני בבידוד כי חוויתי תסמינים
                                     value: has_symptoms
-                                  - say: אני בבידוד מרצוני האישי
+                                  - show: אני בבידוד מרצוני האישי
                                     value: voluntary
                             - say: ממתי אתם בבידוד?
                             - wait:
