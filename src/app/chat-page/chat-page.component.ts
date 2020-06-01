@@ -202,8 +202,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member', 'is_assisted_living',
-                'precondition.*', 'insulation.*', 'exposure.*', 'general_feeling', 'routine.*',
-                '_household.*', '_public_service_last_reported_yes', 'uid'
+                'precondition.*', 'hospitalization.*', 'covid.*', 'insulation.*', 'exposure.*',
+                'general_feeling', 'routine.*', '_household.*', '_public_service_last_reported_yes', 'uid'
               ])
             });
             options.push(option);
@@ -276,87 +276,28 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             console.error(`household past data check failed: ${err}`);
           }
         },
-        fetch_covid19_check_question_data: (record: any) => {
-          try {
-            let _covid19_check_question_status = 'dont_ask';
-            let _covid19_check_question_date = 0;
-            let _covid19_check_date = 0;
-            let covid19_check_date = null;
-            let _covid19_check_result = null;
-
-            for (const report of this.storage.reports) {
-              const r = report[1];
-              if (r.alias === record.alias) {
-                try {
-                  _covid19_check_question_date = parseInt(r._covid19_check_question_date, 10);
-                  _covid19_check_date = parseInt(r._covid19_check_date, 10);
-                  covid19_check_date = r.covid19_check_date;
-                  _covid19_check_result = r._covid19_check_result;
-                } catch (err) {
-                  console.error(`Bad covid19 old report data ${err}, ${r}`);
-                }
+        handle_no_covid: (record: any) => {
+          if (!record.covid_status) {
+            if (record.hospitalization_status) {
+              record.hospitalization_status = false;
+            }
+            for (const k of Object.keys(record)) {
+              if (k.indexOf('symptoms_') >= 0 && k.indexOf('_duration') >= 0) {
+                delete record[k];
               }
             }
-            const MULTIPLIER = PRODUCTION ? 86400 * 1000 : 60 * 1000;
-            const question_period = MULTIPLIER * 7;   // question's interval (days)
-            const missing_question_period = MULTIPLIER * 1;   // question's interval (days)
-            const pending_result_timeout = MULTIPLIER * 14; // missing results interval (days)
-            const TODAY = Date.now().valueOf();
-
-            if (_covid19_check_question_date) {
-              console.log(`Last covid19 Question was asked on ${new Date(_covid19_check_question_date).toISOString()}`);
-            }
-            if (_covid19_check_result === 'positive') { // Positive - never ask
-              console.log('covid19 check question: will not ask due to "positive" report');
-              _covid19_check_question_status = 'dont_ask';
-            } else if (!_covid19_check_question_date) { // Never asked - always ask
-              _covid19_check_question_status = 'first_time';
-            } else if (_covid19_check_result === 'result_missing') { // Missing result
-              if (!!_covid19_check_date &&
-                  ((TODAY - _covid19_check_question_date) > missing_question_period) &&
-                  ((TODAY - _covid19_check_date) < pending_result_timeout)) {
-                    // we didn't ask in last day, it wasn't 2 weeks since the check date
-                    _covid19_check_question_status = 'missing_result';
-                    record._covid19_check_question_status_missing = true;
-              }
-            } else if (TODAY - _covid19_check_question_date > question_period) {
-              // We didn't ask for more than a week, let's ask again
-              console.log('covid19 check question: will ask since one week passed');
-              _covid19_check_question_status = 'ask_again';
-            } else {
-              // We couldn't find a reason to ask
-              console.log('covid19 check question: no reason to ask user');
-              _covid19_check_question_status = 'dont_ask';
-            }
-            if (_covid19_check_question_status !== 'dont_ask') {
-              // In case we're going to ask, set the question date to now
-              _covid19_check_question_date = TODAY;
-            }
-
-            Object.assign(record, {
-              _covid19_check_question_status,
-              _covid19_check_question_date,
-              _covid19_check_date,
-              covid19_check_date,
-              _covid19_check_result
-            });
-          } catch (err) {
-            console.error(`covid19 check question failed: ${err}`);
           }
         },
-        save_covid19_check_question_data: (record: any) => {
-          if (record.covid19_check_date) {
-            if (!PRODUCTION) {
-              // Reset the check date otherwise testing this won't be possible
-              record.covid19_check_date = (new Date()).toISOString();
-            }
-            try {
-              record._covid19_check_date = Date.parse(record.covid19_check_date).valueOf();
-            } catch (e) {
-              console.log('Failed to parse date', record.covid19_check_date, e);
-            }
+        clear_insulation_status: (record: any) => {
+          if (record.hospitalization_status && record.insulation_status) {
+            record.insulation_status = 'none';
+            record.insulation_reason = 'none';
           }
-          record.covid19_check_result = record._covid19_check_result;
+        },
+        clear_insulation_reason: (record: any) => {
+          if (record.insulation_status === 'none') {
+            record.insulation_reason = 'none';
+          }
         },
         need_to_ask_about_routine: (record: any) => {
           const routine_last_asked = record.routine_last_asked || 0;
@@ -385,6 +326,12 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         calculate_met_daily: (record: any) => {
           try {
             const _household_data_available = true;
+            if (!record._met_above_18 && record._met_above_18 !== 0) {
+              return;
+            }
+            if (!record._met_under_18 && record._met_under_18 !== 0) {
+              return;
+            }
             let met_above_18 =
               parseInt(record._household_adults || 0, 10) +
               parseInt(record._met_above_18 || 0, 10);

@@ -38,8 +38,11 @@
             cmd: clear
         - goto: personal-details
         - goto: preconditions-check
-        - goto: covid19-checks
+
+        - goto: covid19
+        - goto: hospitalization
         - goto: insulation
+
         - goto: routine
         - goto: current-report
         - goto: exposures
@@ -345,212 +348,312 @@
                 class: other
                 value: never
 
-    - name: covid19-checks
-      steps:  
-        - do:
-            cmd: fetch_covid19_check_question_data   ## load the relevant reporter's data, return the plan for the current report
-                                                           # swtich values: "first_time" (new users), 
-                                                           # "ask again", 
-                                                           # "don't ask", 
-                                                           # "ask for missing check results"
-
-                                                            ## logic:
-                                                            ## - no date of asking the question before (and new user) --> "first time" 
-                                                            ## - returning users with question date >= 7 days --> "ask again"
-                                                            ## - returning users with quesion date < 7 days OR returning users with POSITIVE check rsult ---> "dont_ask"  
-                                                            ## -  if there is a missing result from the last two weeks --> "ask for missing check results"
-                                                            ##    in case of previous "positive" check result, the result and the check date to be submitted with the current report as well
-            params:
-              - record
-        - switch:
-            arg: _covid19_check_question_status
-            cases:
-              - match: missing_result                                 ## check if there is a pending check result
-                steps:
-                  - say: סיפרת לנו בדיווח קודם שנבדקת לקורונה… האם כבר קיבלת את תוצאות הבדיקה?         # future task: add the date of the check to the question (covid19_check_date)
-                  - wait:
-                      options:
-                        - show: "כן, הגיעו תוצאות הבדיקה"
-                          steps:
-                            - goto: covid19_check_ask_for_results
-                        - show: "לא"
-              - match: first_time                          # <---- for new reporters, ask for last check
-                steps:
-                  - say: האם נבדקת לקורונה בעבר (בדיקת PCR)?
-                  - wait:
-                      options:
-                      - show: כן, נבדקתי
-                        value: true
-                        steps:
-                          - say: באיזה תאריך נבדקת בפעם האחרונה?
-                          - wait:
-                              variable: covid19_check_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                          - goto: covid19_check_ask_for_results
-                      - show: לא
-                        value: false
-              - match: ask_again                         # <---- for returning reporters, pass
-                steps:
-                  - say: האם נבדקת בשבוע האחרון לקורונה, בבדיקת PCR?
-                  - wait:
-                      options:
-                      - show: כן, נבדקתי
-                        steps:
-                          - say: באיזה יום זה היה?
-                          - wait:
-                              variable: covid19_check_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                          - goto: covid19_check_ask_for_results
-                      - show: לא
-
-              - default: true                           # don't ask
-            
-        - do:
-            cmd: save_covid19_check_question_data         # <--- save the following entires: question date, check date and the check result.                                                         
-            params:
-              - record
-
-    - name: covid19_check_ask_for_results
+    - name: covid19
       steps:
-        - say: ומה היתה תוצאת הבדיקה?
+        - switch:
+            arg: covid_positive
+            cases:
+              - undefined: true
+                steps:
+                  - say: האם אובחנת בעבר כחולה בקורונה בבדיקת PCR?
+                  - wait:
+                      variable: covid_positive
+                      options:
+                        - show: כן
+                          value: true
+                          steps:
+                            - say: מתי קיבלת את האבחנה החיובית?
+                            - wait:
+                                variable: covid_last_positive_results_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+
+                        - show: כן, אבל החלמתי מאז
+                          value: false
+                          steps:
+                            - say: מתי קיבלת את האבחנה החיובית?
+                            - wait:
+                                variable: covid_last_positive_results_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - say: האם ביצעת מאז בדיקה נוספת שמסקנתה היתה שאין לך קורונה?
+                            - wait:
+                                options:
+                                  - show: כן
+                                    steps:
+                                      - say: מתי זה היה?
+                                      - wait:
+                                          variable: covid_last_negative_results_date
+                                          placeholder: "תאריך: dd/mm/yy"
+                                          input-kind: date
+        
+                                  - show: לא
+                        - show: לא
+                          value: false
+              - default: true
+                steps:
+                  - say: האם אובחנת מאז הדיווח האחרון כחולה בקורונה בבדיקת PCR?
+                  - switch:
+                      arg: covid_positive
+                      cases:
+                      - match: true
+                        steps:
+                          - wait:
+                              variable: covid_positive
+                              options:
+                                - show: אני עדיין חולה
+                                  value: true
+                                - show: ביצעתי בדיקה אבל קיבלתי תוצאה שלילית
+                                  value: false
+                                  steps:
+                                    - say: מתי זה היה?
+                                    - wait:
+                                        variable: covid_last_negative_results_date
+                                        placeholder: "תאריך: dd/mm/yy"
+                                        input-kind: date
+                                - show: לא, אבל החלמתי מהקורונה
+                                  value: false
+
+                      - match: false
+                        steps:
+                          - wait:
+                              variable: covid_positive
+                              options:
+                                - show: כן
+                                  value: true
+                                  steps:
+                                    - say: מתי זה היה?
+                                    - wait:
+                                        variable: covid_last_positive_results_date
+                                        placeholder: "תאריך: dd/mm/yy"
+                                        input-kind: date
+                                - show: ביצעתי בדיקה אבל קיבלתי תוצאה שלילית
+                                  value: false
+                                  steps:
+                                    - say: מתי זה היה?
+                                    - wait:
+                                        variable: covid_last_negative_results_date
+                                        placeholder: "תאריך: dd/mm/yy"
+                                        input-kind: date
+
+                                - show: לא
+                                  value: false
+
+        - do:
+            cmd: handle_no_covid
+            params:
+              - record
+
+
+    - name: hospitalization
+      steps:
+        - switch:
+            arg: covid_positive
+            cases:
+              - match: true
+              - default: true
+                steps:
+                  - pop: reporting-loop
+        - switch:
+            arg: hospitalization_status
+            cases:
+              - match: true
+                steps:
+                  - say: האם אתם עדיין באשפוז?
+                  - wait:
+                      variable: hospitalization_status
+                      options:
+                        - say: כן, אני עדיין באשפוז
+                          value: true
+                        - say: לא, כבר שוחררתי
+                          value: false
+                          steps:
+                            - say: מתי השתחחרת?
+                            - wait:
+                                variable: hospitalization_end_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - goto: hospitalization_icu
+
+              - match: false
+                steps:
+                  - say: האם מאז הדיווח האחרון התאשפזתם?
+                  - wait:
+                      variable: hospitalization_status
+                      options:
+                        - say: כן, אני באשפוז
+                          value: true
+                          steps:
+                            - say: מתי התחיל האשפוז?
+                            - wait:
+                                variable: hospitalization_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                        - say: כן, אבל כבר שוחררתי
+                          value: false
+                          steps:
+                            - say: מתי התחיל האשפוז?
+                            - wait:
+                                variable: hospitalization_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - say: ומתי השתחחרת?
+                            - wait:
+                                variable: hospitalization_end_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - goto: hospitalization_icu
+                        - say: לא
+                          value: false
+
+              - undefined: true
+                steps:
+                  - say: האם בעקבות זאת נזקקת לאשפוז?
+                  - wait:
+                      variable: hospitalization_status
+                      options:
+                        - say: כן, אני באשפוז כרגע
+                          value: true
+                          steps:
+                            - say: מתי התחיל האשפוז?
+                            - wait:
+                                variable: hospitalization_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+
+                        - say: כן, וכבר שוחררתי
+                          value: false
+                          steps:
+                            - say: באיזה תאריך התאשפזת?
+                            - wait:
+                                variable: hospitalization_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - say: ומתי השתחחרת?
+                            - wait:
+                                variable: hospitalization_end_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
+                            - goto: hospitalization_icu
+
+                        - say: לא
+                          value: false
+
+        - do:
+            cmd: clear_insulation_status
+            params:
+              - record
+
+
+    - name: hospitalization_icu
+      steps:
+        - say: האם אושפזת גם בטיפול נמרץ?
         - wait:
-            variable: _covid19_check_result
+            variable: hospitalization_icu_required
             options:
-              - show: אובחנתי כחולה בקורונה
-                value: positive
+              - say: כן
+                value: true
                 steps:
-                  - say: אוי, זה בטח לא פשוט. החלמה מהירה
-              - show: אין לי קורונה
-                value: negative
-                steps:
-                  - say: משמח לשמוע, נקווה שימשיך ככה
-              - show: עוד לא קיבלתי את תוצאות הבדיקה
-                value: result_missing
-                unless: _covid19_check_question_status_missing
-                steps:
-                - say: אנחנו מחזיקים לך אצבעות
+                  - say: כמה ימים אושפזת שם?
+                  - wait:
+                      variable: hospitalization_icu_duration
+                      input-kind: number
+                      input-step: 1
+                      input-min: 1
+                      input-max: 999
+                      placeholder: מספר הימים  
+
+              - say: לא
+                value: false
 
     - name: insulation
       steps:
         - switch:
-            arg: exposure_status
+            arg: hospitalization_status
             cases:
-              - undefined: true           
+              - match: true
                 steps:
-                  - say: עכשיו, מה בנוגע לבידוד?
+                  - pop: reporting-loop
+              - default: true
+        - switch:
+            arg: insulation_status
+            cases:
+              - undefined: true
+                steps:
+                  - say: האם אתם כרגע בבידוד?
+                  - wait:
+                      variable: insulation_status
+                      options:
+                        - show: כן, בבית שלי ובנפרד מבני משפחתי
+                          value: insulation
+                        - show: כן, בבית שלי
+                          value: insulation_with_family
+                        - show: כן, במלון
+                          value: insulation_hotel
+                        - show: אני לא בבידוד
+                          value: none
+              - match: none
+                steps:
+                  - say: האם מאז הדיווח האחרון נכנסת לבידוד?
+                  - wait:
+                      variable: insulation_status
+                      options:
+                        - show: כן, בבית שלי ובנפרד מבני משפחתי
+                          value: insulation
+                        - show: כן, בבית שלי
+                          value: insulation_with_family
+                        - show: כן, במלון
+                          value: insulation_hotel
+                        - show: לא
+                          value: none
+              - default: true
+                steps:
+                  - say: האם אתם עדיין בבידוד?
+                  - wait:
+                      variable: insulation_status
+                      options:
+                        - show: כן, בבית שלי ובנפרד מבני משפחתי
+                          value: insulation
+                        - show: כן, בבית שלי
+                          value: insulation_with_family
+                        - show: כן, במלון
+                          value: insulation_hotel
+                        - show: אני כבר לא בבידוד
+                          value: none
+
+        - do:
+            cmd: clear_insulation_reason
+            params:
+              - record
+        - switch:
+            arg: insulation_status
+            cases:
+              - match: none
               - default: true
                 steps:
                   - switch:
-                      arg: exposure_status
-                      cases:        
-                      - pattern: "(insulation_with_family|insulation|diagnosed)" 
-                        steps:
-                          - say: "הדיווח הקודם היה על בידוד או אישפוז. האם משהו השתנה?"
-                      - default: true
-                        steps:
-                          - say: "בדיווח הקודם לא הוזכר בידוד או אשפוז. האם משהו השתנה?"
-                  - wait:
-                      options:
-                        - show: לא, המצב דומה
-                        - show: כן, משהו השתנה
+                      arg: insulation_reason
+                      cases:
+                        - default: true
+                        - match: none
                           steps:
-                            - say: אז מה השתנה?
-                            - do:
-                                cmd: clear_fields
-                                params:
-                                  - record
-                                  - exposure.*
-                                  - insulation.*
-
-        - switch:
-            arg: exposure_status
-            cases:
-              - default: true
-              - undefined: true
-                steps:
-                - wait:
-                    variable: exposure_status
-                    options:
-                      - show: אני ומשפחתי בבידוד, ושוהים יחד באותם החדרים
-                        value: insulation_with_family
-                        steps:
-                          - say: "באיזה תאריך התחיל הבידוד?"
-                          - wait:
-                              variable: insulation_start_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                      - show: אני בבידוד מבני משפחה, ובחדר סגור
-                        value: "insulation"
-                        steps:
-                          - say: "באיזה תאריך התחיל הבידוד?"
-                          - wait:
-                              variable: insulation_start_date
-                              placeholder: "תאריך: dd/mm/yy"
-                              input-kind: date
-                          - say: מה הסיבה לשהות שלך בבידוד?
-                          - wait:
-                              variable: insulation_reason
-                              options:
-                              - show: אני בבידוד כי חזרתי מחו״ל לאחרונה
-                                value: back-from-abroad
-                                steps: 
-                                  - say: "מתי חזרת לארץ?"
-                                  - wait:
-                                      variable: insulation_returned_from_abroad_date
-                                      placeholder: "תאריך: dd/mm/yy"
-                                      input-kind: date
-                                      options:
-                              - show: אני בבידוד כי נחשפתי לחולה מאומת
-                                value: contact-with-patient
-                                steps:
-                                  - say: ידוע לך מה מספר החולה שפגשת?
-                                  - wait:
-                                      options:
-                                      - show: "כן, ידוע לי מספר החולה"
-                                        value: "yes"
-                                        steps:
-                                          - say: מצויין. מה המספר?
-                                          - wait:
-                                              variable: insulation_patient_number
-                                              placeholder: "מספר החולה שפגשתי, בספרות"
-                                          - say: האם זכור לך היום שבו נפגשתם?
-                                          - wait:
-                                              options:
-                                              - show: "כן, זכור לי התאריך"
-                                                value: "yes"
-                                                steps: 
-                                                - say: מה היה התאריך?
-                                                - wait:
-                                                    variable: insulation_exposure_date
-                                                    placeholder: "תאריך: dd/mm/yy"
-                                                    input-kind: date
-                                              - show: "לא זכור לי"
-                                                value: "no"
-                                      - show: "לא ידוע לי"
-                                        value: "no"
-                              - show: אני בבידוד כי חוויתי תסמינים
-                                value: has_symptoms
-                              - show: אני בבידוד מרצוני האישי                    
-                                value: voluntary
-                      - show: "אני חולה בקורונה (מאומת בבדיקת מעבדה)"
-                        value: diagnosed
-                        steps:
-                          - wait:
-                              variable: diagnosed_location
-                              options:                 
-                              - show: אשפוז בבית חולים
-                                value: hospital
-                              - show: בבית מלון
-                                value: hotel
-                              - show: בבית
-                                value: home
-                              - show: החלמתי ואני בבית
-                                value: recovered
-                      - show: "אני לא בבידוד"
-                        class: other
-                        value: "none"
+                            - say: למה אתם בבידוד?
+                            - wait:
+                                variable: insulation_reason
+                                options:
+                                  - say: אני בבידוד כי חזרתי מחו״ל לאחרונה
+                                    value: back_from_abroad
+                                  - say: אני בבידוד כי נחשפתי לחולה מאומת
+                                    value: contact_with_patient
+                                  - say: אני בבידוד כי חוויתי תסמינים
+                                    value: has_symptoms
+                                  - say: אני בבידוד מרצוני האישי
+                                    value: voluntary
+                            - say: ממתי אתם בבידוד?
+                            - wait:
+                                variable: insulation_start_date
+                                placeholder: "תאריך: dd/mm/yy"
+                                input-kind: date
 
     - name: routine
       steps:
@@ -788,6 +891,313 @@
         - goto: current-report-pain-symptoms
         - goto: current-report-temperature
 
+        - switch:
+            arg: covid_positive
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - switch:
+                      arg: symptoms_breath_shortness
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_breath_shortness_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל קוצר הנשימה?
+                                      - wait:
+                                          variable: symptoms_breath_shortness_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_diarrhea
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_diarrhea_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השלשול?
+                                      - wait:
+                                          variable: symptoms_diarrhea_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_lack_of_appetite_or_skipping_meals
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_lack_of_appetite_or_skipping_meals_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל חוסר התיאבון?
+                                      - wait:
+                                          variable: symptoms_lack_of_appetite_or_skipping_meals_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_nausea_and_vomiting
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_nausea_and_vomiting_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הבחילה או ההקאות?
+                                      - wait:
+                                          variable: symptoms_nausea_and_vomiting_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_chills
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_chills_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הצמרמורות?
+                                      - wait:
+                                          variable: symptoms_chills_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_confusion
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_confusion_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל הבלבול?
+                                      - wait:
+                                          variable: symptoms_confusion_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_tiredness_or_fatigue
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_tiredness_or_fatigue_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו העייפות או החולשה?
+                                      - wait:
+                                          variable: symptoms_tiredness_or_fatigue_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_smell_taste_loss
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_smell_taste_loss_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים אבד חוש הטעם או הריח?
+                                      - wait:
+                                          variable: symptoms_smell_taste_loss_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_clogged_nose
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_clogged_nose_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הנזלת או הגודש באף?
+                                      - wait:
+                                          variable: symptoms_clogged_nose_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_dry_cough
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_dry_cough_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השיעול היבש?
+                                      - wait:
+                                          variable: symptoms_dry_cough_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_moist_cough
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_moist_cough_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?
+                                      - wait:
+                                          variable: symptoms_moist_cough_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_muscles_pain
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_muscles_pain_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו כאבי השרירים?
+                                      - wait:
+                                          variable: symptoms_muscles_pain_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_headache
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_headache_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו כאבי הראש?
+                                      - wait:
+                                          variable: symptoms_headache_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_sore_throat
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_sore_throat_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו כאבי הגרון?
+                                      - wait:
+                                          variable: symptoms_sore_throat_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_abdominal_pain
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_abdominal_pain_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו כאבי הבטן?
+                                      - wait:
+                                          variable: symptoms_abdominal_pain_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                      
     - name: current-report-temperature
       steps:
         - switch:
@@ -983,7 +1393,7 @@
     - name: affiliate-alon-chen
       steps:
         - say: פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.
-        - say: מי ישיב על השאלון?
+        - say: עבור מי הדיווח?
         - do:
             cmd: affiliate_alon_chen_prepare
             variable: _affiliate_alon_chen_options
