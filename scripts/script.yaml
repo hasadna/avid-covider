@@ -1367,10 +1367,10 @@
 
     - name: end-of-report
       steps:
+        - goto: affiliations
         - goto: set-reminder
         - goto: share
         # - goto: dynamic_update
-        - goto: affiliations
 
     - name: affiliations
       steps:
@@ -1380,7 +1380,7 @@
             options:
               - show: כן, בשמחה
                 value: ok
-              - show: לא תודה, נתראה מחר!
+              - show: בפעם אחרת
                 value: later
         - switch:
             arg: affiliate_questionnaires_preference
@@ -1397,6 +1397,8 @@
         - do:
             cmd: affiliate_alon_chen_prepare
             variable: _affiliate_alon_chen_options
+            params:
+              - בעצם, לא היום
         - wait:
             variable: _affiliate_alon_chen_choice
             optionsFrom: _affiliate_alon_chen_options

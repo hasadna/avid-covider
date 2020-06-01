@@ -441,7 +441,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         install_telegram: () => {
           window.open(`https://t.me/coronaisrael_reminder_bot?start=${this.locale}`, '_blank');
         },
-        affiliate_alon_chen_prepare: () => {
+        affiliate_alon_chen_prepare: (later_option) => {
           const aliases = {};
           const sliceIdx = PRODUCTION ? 10 : 16;
           const today_prefix = (new Date()).toISOString().slice(0, sliceIdx);
@@ -464,6 +464,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             });
             options.push(option);
           }
+          options.push({
+            show: later_option, value: 'no-uid', steps: []
+          });
           return options;
         },
         affiliate_alon_chen_action: (record, field_name) => {
