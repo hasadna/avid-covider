@@ -580,7 +580,7 @@
             cases:
               - undefined: true
                 steps:
-                  - say: האם אתם כרגע בבידוד?
+                  - say: האם היית היום בבידוד?
                   - wait:
                       variable: insulation_status
                       options:
