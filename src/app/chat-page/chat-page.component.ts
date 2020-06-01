@@ -329,7 +329,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         calculate_met_daily: (record: any) => {
           try {
             const _household_data_available = true;
-            if (record._met_above_18 || record._met_above_18 === 0) {
+            if (record._met_above_18 || record._met_above_18 === 0 || record._met_above_18 === '0') {
               let met_above_18 =
                 parseInt(record._household_adults || 0, 10) +
                 parseInt(record._met_above_18 || 0, 10);
@@ -338,7 +338,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               }
               Object.assign(record, {met_above_18, _household_data_available});
             }
-            if (record._met_under_18 || record._met_under_18 === 0) {
+            if (record._met_under_18 || record._met_under_18 === 0 || record._met_under_18 === '0') {
               let met_under_18 =
                 parseInt(record._household_minors || 0, 10) +
                 parseInt(record._met_under_18 || 0, 10);
