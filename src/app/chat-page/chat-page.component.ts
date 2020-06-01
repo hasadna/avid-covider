@@ -60,7 +60,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
     this.runner.timeout = environment.chatRunnerTimeout;
-    this.runner.debug = true;
+    this.runner.debug = false;
     this.runner.fixme = () => {
       this.restart();
     };
@@ -202,7 +202,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
                 'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member', 'is_assisted_living',
-                'precondition.*', 'hospitalization.*', 'covid.*', 'insulation.*',
+                'precondition.*', 'hospitalization.*', 'covid_.*', 'insulation.*',
                 'general_feeling', 'routine.*', '_household.*', '_public_service_last_reported_yes', 'uid'
               ])
             });
