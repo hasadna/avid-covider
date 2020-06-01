@@ -887,7 +887,6 @@
         - goto: current-report-top-level-symptoms
         - goto: current-report-cough-symptoms
         - goto: current-report-pain-symptoms
-        - goto: current-report-temperature
 
         - switch:
             arg: covid_positive
@@ -1195,10 +1194,13 @@
                                           input-min: 0
                                           input-max: 100
                                           input-step: 1
-                  - say: בנוסף לסימפטומים שתיארת, האם חשת סימפטומים נוספים בימים האחרונים? אם כן, נשמח לפירוט
+                  - say: האם חשת בתסמינים אחרים בימים האחרונים? אם כן, מהם?
                   - wait:
                       variable: symptoms_other
                       required: false
+
+        - goto: current-report-temperature
+
     - name: current-report-temperature
       steps:
         - switch:
