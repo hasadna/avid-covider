@@ -60,7 +60,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
     this.content = new ContentManager();
     this.runner = new ScriptRunnerImpl(this.http, this.content, this.locale);
     this.runner.timeout = environment.chatRunnerTimeout;
-    this.runner.debug = false;
+    this.runner.debug = true;
     this.runner.fixme = () => {
       this.restart();
     };
@@ -277,7 +277,8 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           }
         },
         handle_no_covid: (record: any) => {
-          if (!record.covid_status) {
+          record.covid_positive = record.covid_positive === 'true';
+          if (!record.covid_positive) {
             if (record.hospitalization_status) {
               record.hospitalization_status = false;
             }
@@ -289,6 +290,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           }
         },
         clear_insulation_status: (record: any) => {
+          record.hospitalization_status = record.hospitalization_status === 'true';
           if (record.hospitalization_status && record.insulation_status) {
             record.insulation_status = 'none';
             record.insulation_reason = 'none';

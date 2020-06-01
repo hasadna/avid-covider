@@ -360,7 +360,7 @@
                       variable: covid_positive
                       options:
                         - show: כן
-                          value: true
+                          value: "true"
                           steps:
                             - say: מתי קיבלת את האבחנה החיובית?
                             - wait:
@@ -369,7 +369,7 @@
                                 input-kind: date
 
                         - show: כן, אבל החלמתי מאז
-                          value: false
+                          value: "recovered"
                           steps:
                             - say: מתי קיבלת את האבחנה החיובית?
                             - wait:
@@ -389,7 +389,7 @@
         
                                   - show: לא
                         - show: לא
-                          value: false
+                          value: "no"
               - default: true
                 steps:
                   - say: האם אובחנת מאז הדיווח האחרון כחולה בקורונה בבדיקת PCR?
@@ -402,9 +402,9 @@
                               variable: covid_positive
                               options:
                                 - show: אני עדיין חולה
-                                  value: true
+                                  value: "true"
                                 - show: ביצעתי בדיקה אבל קיבלתי תוצאה שלילית
-                                  value: false
+                                  value: "false"
                                   steps:
                                     - say: מתי זה היה?
                                     - wait:
@@ -412,7 +412,7 @@
                                         placeholder: "תאריך: dd/mm/yy"
                                         input-kind: date
                                 - show: לא, אבל החלמתי מהקורונה
-                                  value: false
+                                  value: "recovered"
 
                       - match: false
                         steps:
@@ -420,7 +420,7 @@
                               variable: covid_positive
                               options:
                                 - show: כן
-                                  value: true
+                                  value: "true"
                                   steps:
                                     - say: מתי זה היה?
                                     - wait:
@@ -428,7 +428,7 @@
                                         placeholder: "תאריך: dd/mm/yy"
                                         input-kind: date
                                 - show: ביצעתי בדיקה אבל קיבלתי תוצאה שלילית
-                                  value: false
+                                  value: "false"
                                   steps:
                                     - say: מתי זה היה?
                                     - wait:
@@ -437,7 +437,7 @@
                                         input-kind: date
 
                                 - show: לא
-                                  value: false
+                                  value: "no"
 
         - do:
             cmd: handle_no_covid
@@ -464,9 +464,9 @@
                       variable: hospitalization_status
                       options:
                         - show: כן, אני עדיין באשפוז
-                          value: true
+                          value: "true"
                         - show: לא, כבר שוחררתי
-                          value: false
+                          value: "false"
                           steps:
                             - say: מתי השתחחרת?
                             - wait:
@@ -482,7 +482,7 @@
                       variable: hospitalization_status
                       options:
                         - show: כן, אני באשפוז
-                          value: true
+                          value: "true"
                           steps:
                             - say: מתי התחיל האשפוז?
                             - wait:
@@ -490,7 +490,7 @@
                                 placeholder: "תאריך: dd/mm/yy"
                                 input-kind: date
                         - show: כן, אבל כבר שוחררתי
-                          value: false
+                          value: "false"
                           steps:
                             - say: מתי התחיל האשפוז?
                             - wait:
@@ -504,7 +504,7 @@
                                 input-kind: date
                             - goto: hospitalization_icu
                         - show: לא
-                          value: false
+                          value: "no"
 
               - undefined: true
                 steps:
@@ -513,7 +513,7 @@
                       variable: hospitalization_status
                       options:
                         - show: כן, אני באשפוז כרגע
-                          value: true
+                          value: "true"
                           steps:
                             - say: מתי התחיל האשפוז?
                             - wait:
@@ -522,7 +522,7 @@
                                 input-kind: date
 
                         - show: כן, וכבר שוחררתי
-                          value: false
+                          value: "false"
                           steps:
                             - say: באיזה תאריך התאשפזת?
                             - wait:
@@ -537,7 +537,7 @@
                             - goto: hospitalization_icu
 
                         - show: לא
-                          value: false
+                          value: "no"
 
         - do:
             cmd: clear_insulation_status
