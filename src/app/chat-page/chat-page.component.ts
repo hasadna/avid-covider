@@ -272,7 +272,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
                 }
               }
             }
-            Object.assign(record, {_household_adults, _household_minors, _household_data_available});
+            const household_data = {_household_adults, _household_minors, _household_data_available};
+            console.log(household_data);
+            Object.assign(record, household_data);
           } catch (err) {
             console.error(`household past data check failed: ${err}`);
           }
