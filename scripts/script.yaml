@@ -886,241 +886,241 @@
       steps:
         - goto: current-report-top-level-symptoms
         - switch:
-          arg: covid_positive
-          cases:
-            - default: true
-            - match: true
-              steps:
-                - switch:
-                    arg: symptoms_breath_shortness
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_breath_shortness_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל קוצר הנשימה?
-                                    - wait:
-                                        variable: symptoms_breath_shortness_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_diarrhea
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_diarrhea_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל השלשול?
-                                    - wait:
-                                        variable: symptoms_diarrhea_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_lack_of_appetite_or_skipping_meals
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_lack_of_appetite_or_skipping_meals_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל חוסר התיאבון?
-                                    - wait:
-                                        variable: symptoms_lack_of_appetite_or_skipping_meals_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_nausea_and_vomiting
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_nausea_and_vomiting_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחילו הבחילה או ההקאות?
-                                    - wait:
-                                        variable: symptoms_nausea_and_vomiting_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_chills
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_chills_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחילו הצמרמורות?
-                                    - wait:
-                                        variable: symptoms_chills_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_confusion
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_confusion_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל הבלבול?
-                                    - wait:
-                                        variable: symptoms_confusion_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_tiredness_or_fatigue
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_tiredness_or_fatigue_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחילו העייפות או החולשה?
-                                    - wait:
-                                        variable: symptoms_tiredness_or_fatigue_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_smell_taste_loss
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_smell_taste_loss_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים אבד חוש הטעם או הריח?
-                                    - wait:
-                                        variable: symptoms_smell_taste_loss_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
+            arg: covid_positive
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - switch:
+                      arg: symptoms_breath_shortness
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_breath_shortness_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל קוצר הנשימה?
+                                      - wait:
+                                          variable: symptoms_breath_shortness_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_diarrhea
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_diarrhea_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השלשול?
+                                      - wait:
+                                          variable: symptoms_diarrhea_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_lack_of_appetite_or_skipping_meals
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_lack_of_appetite_or_skipping_meals_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל חוסר התיאבון?
+                                      - wait:
+                                          variable: symptoms_lack_of_appetite_or_skipping_meals_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_nausea_and_vomiting
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_nausea_and_vomiting_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הבחילה או ההקאות?
+                                      - wait:
+                                          variable: symptoms_nausea_and_vomiting_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_chills
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_chills_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הצמרמורות?
+                                      - wait:
+                                          variable: symptoms_chills_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_confusion
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_confusion_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל הבלבול?
+                                      - wait:
+                                          variable: symptoms_confusion_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_tiredness_or_fatigue
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_tiredness_or_fatigue_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו העייפות או החולשה?
+                                      - wait:
+                                          variable: symptoms_tiredness_or_fatigue_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_smell_taste_loss
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_smell_taste_loss_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים אבד חוש הטעם או הריח?
+                                      - wait:
+                                          variable: symptoms_smell_taste_loss_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
 
 
         - goto: current-report-cough-symptoms
 
         - switch:
-          arg: covid_positive
-          cases:
-            - default: true
-            - match: true
-              steps:
-                - switch:
-                    arg: symptoms_clogged_nose
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_clogged_nose_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחילו הנזלת או הגודש באף?
-                                    - wait:
-                                        variable: symptoms_clogged_nose_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_dry_cough
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_dry_cough_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל השיעול היבש?
-                                    - wait:
-                                        variable: symptoms_dry_cough_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
-                - switch:
-                    arg: symptoms_moist_cough
-                    cases:
-                      - default: true
-                      - match: true
-                        steps:
-                          - switch:
-                              arg: symptoms_moist_cough_duration
-                              cases:
-                                - default: true
-                                - undefined: true
-                                  steps:
-                                    - say: לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?
-                                    - wait:
-                                        variable: symptoms_moist_cough_duration
-                                        placeholder: מספר הימים
-                                        input-kind: number
-                                        input-min: 0
-                                        input-max: 100
-                                        input-step: 1
+            arg: covid_positive
+            cases:
+              - default: true
+              - match: true
+                steps:
+                  - switch:
+                      arg: symptoms_clogged_nose
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_clogged_nose_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילו הנזלת או הגודש באף?
+                                      - wait:
+                                          variable: symptoms_clogged_nose_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_dry_cough
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_dry_cough_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השיעול היבש?
+                                      - wait:
+                                          variable: symptoms_dry_cough_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
+                  - switch:
+                      arg: symptoms_moist_cough
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_moist_cough_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?
+                                      - wait:
+                                          variable: symptoms_moist_cough_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
 
         - goto: current-report-pain-symptoms
 

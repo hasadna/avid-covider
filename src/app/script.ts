@@ -61,16 +61,12 @@ export const script = {
                         "uid": "c3ab2ebcbb"
                       },
                       {
-                        "say": "התשובות שלך לכמה שאלות, והמשך הדיווח, יעזור לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים",
-                        "uid": "01bc408cee"
-                      },
-                      {
-                        "say": "להתפרצות מחודשת של המחלה ולהיערך אליה בהתאם.",
-                        "uid": "c4a7d4988c"
+                        "say": "התשובות שלך לכמה שאלות, והמשך הדיווח, יעזור לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים להתפרצות מחודשת של המחלה ולהיערך אליה בהתאם.",
+                        "uid": "239b0a819f"
                       },
                       {
                         "say": "כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרטיות שלך",
-                        "uid": "5e1c79d848"
+                        "uid": "7f3883f25d"
                       },
                       {
                         "say": {
@@ -83,33 +79,11 @@ export const script = {
                             "ru": "Начнем с вопросов о Вашем здоровье. После этого Вы сможете также заполнить отчет и о других членах семьи."
                           }
                         },
-                        "uid": "6f783ce725"
+                        "uid": "9be6fe3059"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "הכי טוב כשכולם מדווחים על עצמם בכל יום",
-                            "ar": "مُفضّل أن يقوم الجميع بتعبئة الإستبيان عن أنفسهم يوميًا",
-                            "en": "The best way is to have each family member report how they are feeling every day",
-                            "es": "Lo mejor es que todos informen sobre sí mismos cada día",
-                            "fr": "Le mieux serait que chacun remplisse ce questionnaire chaque jour",
-                            "ru": "Лучше всего когда каждый ежедневно заполняет анкету сам за себя"
-                          }
-                        },
-                        "uid": "f1043bc389"
-                      },
-                      {
-                        "say": {
-                          ".tx": {
-                            "_": "אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
-                            "ar": "لكن إذا كان صعب, ممكن تقرأ/ي لهم الأسئلة أو ببساطة أن تُجيب/ي بإسمهم",
-                            "en": "Or, if it's more convenient, you can read them the questions or just answer for them",
-                            "es": "Pero si no es posible, puedes leerles las preguntas o responder en su lugar",
-                            "fr": "Mais si cela ne convient pas, vous pouvez leur lire les questions ou simplement répondre en leur nom",
-                            "ru": "Но если не получается, вы можете зачитать им вопросы или просто заполнить за них"
-                          }
-                        },
-                        "uid": "93a206c5eb"
+                        "say": "הכי טוב כשכולם מדווחים על עצמם בכל יום אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
+                        "uid": "699dcb90b1"
                       }
                     ],
                     "uid": "804186b089"
@@ -1687,8 +1661,8 @@ export const script = {
                     "match": false,
                     "steps": [
                       {
-                        "say": "האם מאז הדיווח האחרון התאשפזתם?",
-                        "uid": "4d0cf6b161"
+                        "say": "האם מאז הדיווח האחרון התאשפזת?",
+                        "uid": "b2b4c28abb"
                       },
                       {
                         "uid": "b4a5afd08c",
@@ -2272,10 +2246,6 @@ export const script = {
           "name": "routine",
           "steps": [
             {
-              "say": "יש כמה שאלות חשובות שנשאל רק פעם בשבוע, כדי להקל על הדיווח:",
-              "uid": "34551c8034"
-            },
-            {
               "switch": {
                 "arg": "_is_adult",
                 "cases": [
@@ -2293,7 +2263,7 @@ export const script = {
                           ],
                           "variable": "_need_to_ask_about_routine"
                         },
-                        "uid": "b2031df9db"
+                        "uid": "d123f70a2f"
                       },
                       {
                         "switch": {
@@ -2306,6 +2276,10 @@ export const script = {
                               "match": true,
                               "steps": [
                                 {
+                                  "say": "יש כמה שאלות חשובות שאנחנו שואלים את כולם, רק פעם בשבוע, כדי להקל על הדיווח",
+                                  "uid": "70432ecbd9"
+                                },
+                                {
                                   "say": {
                                     ".tx": {
                                       "_": "האם יצאת מהבית במהלך השבוע האחרון?",
@@ -2315,10 +2289,10 @@ export const script = {
                                       "ru": "Вы выходили из дома на последней неделе?"
                                     }
                                   },
-                                  "uid": "44f3e4e52e"
+                                  "uid": "8bafa8745f"
                                 },
                                 {
-                                  "uid": "b7e8cc2257",
+                                  "uid": "c7c2b7ae3b",
                                   "wait": {
                                     "options": [
                                       {
@@ -2342,10 +2316,10 @@ export const script = {
                                                 "ru": "Работаете ли вы на постоянной работе вне дома в эти дни?"
                                               }
                                             },
-                                            "uid": "71812ec9b9"
+                                            "uid": "7b88d96580"
                                           },
                                           {
-                                            "uid": "7dcfb4b2b4",
+                                            "uid": "5933885ce5",
                                             "wait": {
                                               "options": [
                                                 {
@@ -2369,10 +2343,10 @@ export const script = {
                                                           "ru": "И сколько часов вы работали, примерно?"
                                                         }
                                                       },
-                                                      "uid": "ca94fcc4c7"
+                                                      "uid": "850997e473"
                                                     },
                                                     {
-                                                      "uid": "f6d289e1ef",
+                                                      "uid": "107bde58ff",
                                                       "wait": {
                                                         "input-kind": "number",
                                                         "input-max": 168,
@@ -2400,10 +2374,10 @@ export const script = {
                                                           "ru": "Вы работали в одном и том же месте?"
                                                         }
                                                       },
-                                                      "uid": "57e01c5729"
+                                                      "uid": "7c7fbfa879"
                                                     },
                                                     {
-                                                      "uid": "7b215663ab",
+                                                      "uid": "d918add3f0",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -2427,10 +2401,10 @@ export const script = {
                                                                     "ru": "Можно узнать, где находится ваше место работы? Это поможет нашему исследованию."
                                                                   }
                                                                 },
-                                                                "uid": "97de196678"
+                                                                "uid": "fdd50e0a64"
                                                               },
                                                               {
-                                                                "uid": "a1d6d5dcb5",
+                                                                "uid": "b83516d55c",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
@@ -2450,7 +2424,7 @@ export const script = {
                                                                             "cmd": "prepare_city_town_suggestions",
                                                                             "variable": "_cityTownSuggestions"
                                                                           },
-                                                                          "uid": "06a677a3b1"
+                                                                          "uid": "d0e04c7771"
                                                                         },
                                                                         {
                                                                           "say": {
@@ -2462,10 +2436,10 @@ export const script = {
                                                                               "ru": "Где находится ваше место работы?"
                                                                             }
                                                                           },
-                                                                          "uid": "3e11eb5f2b"
+                                                                          "uid": "931fc80ab5"
                                                                         },
                                                                         {
-                                                                          "uid": "6e86dfa392",
+                                                                          "uid": "5e47aa5161",
                                                                           "wait": {
                                                                             "placeholder": {
                                                                               ".tx": {
@@ -2491,10 +2465,10 @@ export const script = {
                                                                               "ru": "А на какой улице?"
                                                                             }
                                                                           },
-                                                                          "uid": "6ff869c295"
+                                                                          "uid": "0bccf5b0e5"
                                                                         },
                                                                         {
-                                                                          "uid": "0f220f8eb9",
+                                                                          "uid": "a89bee4d9f",
                                                                           "wait": {
                                                                             "placeholder": {
                                                                               ".tx": {
@@ -2511,7 +2485,7 @@ export const script = {
                                                                           }
                                                                         }
                                                                       ],
-                                                                      "uid": "d7611cc61c"
+                                                                      "uid": "f17f5c976a"
                                                                     },
                                                                     {
                                                                       "show": {
@@ -2528,7 +2502,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "b273ae3125",
+                                                            "uid": "f8c00971a4",
                                                             "value": true
                                                           },
                                                           {
@@ -2558,10 +2532,10 @@ export const script = {
                                                           "ru": "Был ли день на последней неделе на работе когда вы обслужили больше 10 человек?"
                                                         }
                                                       },
-                                                      "uid": "20992d3980"
+                                                      "uid": "8a11b12c78"
                                                     },
                                                     {
-                                                      "uid": "8b649afa4a",
+                                                      "uid": "7624cea157",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -2610,10 +2584,10 @@ export const script = {
                                                                     "ru": "Работаете ли вы как медицинский персонал (уход за больными или прием публики)?"
                                                                   }
                                                                 },
-                                                                "uid": "666a3024f8"
+                                                                "uid": "969b12fa58"
                                                               },
                                                               {
-                                                                "uid": "34d7cd7fc8",
+                                                                "uid": "c9422ff637",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
@@ -2647,7 +2621,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "0adf3e0f19",
+                                                            "uid": "9c546da722",
                                                             "undefined": true
                                                           },
                                                           {
@@ -2655,10 +2629,10 @@ export const script = {
                                                           }
                                                         ]
                                                       },
-                                                      "uid": "17e86692f1"
+                                                      "uid": "273740c611"
                                                     }
                                                   ],
-                                                  "uid": "a0f4d59d3d",
+                                                  "uid": "9144a2a011",
                                                   "value": true
                                                 },
                                                 {
@@ -2689,10 +2663,10 @@ export const script = {
                                                   "steps": [
                                                     {
                                                       "say": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
-                                                      "uid": "e9123e12d1"
+                                                      "uid": "a9e258ffc0"
                                                     },
                                                     {
-                                                      "uid": "3801608b74",
+                                                      "uid": "1b06a0b67c",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -2739,12 +2713,12 @@ export const script = {
                                                       }
                                                     }
                                                   ],
-                                                  "uid": "b939efd2c9",
+                                                  "uid": "56ab1578fa",
                                                   "undefined": true
                                                 }
                                               ]
                                             },
-                                            "uid": "f8ca3cbd0c"
+                                            "uid": "604b87b2fa"
                                           },
                                           {
                                             "say": {
@@ -2756,10 +2730,10 @@ export const script = {
                                                 "ru": "Вы пользовались общественным транспортом на последней неделе?"
                                               }
                                             },
-                                            "uid": "5a733cbfe0"
+                                            "uid": "a007204d93"
                                           },
                                           {
-                                            "uid": "62cf386f54",
+                                            "uid": "4c49e43d38",
                                             "wait": {
                                               "options": [
                                                 {
@@ -2784,10 +2758,10 @@ export const script = {
                                                           "ru": "Какими средствами транспорта вы пользовались на этой неделе?"
                                                         }
                                                       },
-                                                      "uid": "8146704b1b"
+                                                      "uid": "1f45084eb3"
                                                     },
                                                     {
-                                                      "uid": "89e163b6b8",
+                                                      "uid": "e66c79d6a0",
                                                       "wait": {
                                                         "multi": true,
                                                         "options": [
@@ -2863,10 +2837,10 @@ export const script = {
                                                           "_var"
                                                         ]
                                                       },
-                                                      "uid": "e4b31d4ada"
+                                                      "uid": "782bbe4de9"
                                                     }
                                                   ],
-                                                  "uid": "aade4e52b3",
+                                                  "uid": "2a3efd7875",
                                                   "value": true
                                                 },
                                                 {
@@ -2896,10 +2870,10 @@ export const script = {
                                                 "ru": "Носили ли вы маску, когда вы выходили  из дома?"
                                               }
                                             },
-                                            "uid": "95141f8250"
+                                            "uid": "44823f1fb5"
                                           },
                                           {
-                                            "uid": "f84df7b457",
+                                            "uid": "50f8e3113f",
                                             "wait": {
                                               "options": [
                                                 {
@@ -2969,7 +2943,7 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "2876d69830",
+                                        "uid": "cd859cb293",
                                         "value": true
                                       },
                                       {
@@ -2989,18 +2963,18 @@ export const script = {
                                   }
                                 }
                               ],
-                              "uid": "36851909c8"
+                              "uid": "62733e4d1a"
                             }
                           ]
                         },
-                        "uid": "4f0505d696"
+                        "uid": "af42d37006"
                       }
                     ],
-                    "uid": "f3231364c4"
+                    "uid": "90170cc2ae"
                   }
                 ]
               },
-              "uid": "8544921ffc"
+              "uid": "90c08917a3"
             },
             {
               "do": {
@@ -3009,7 +2983,7 @@ export const script = {
                   "record"
                 ]
               },
-              "uid": "c3bb2594a7"
+              "uid": "05b12f15e3"
             }
           ],
           "uid": "abf65cdc49"
@@ -3334,18 +3308,6 @@ export const script = {
               "uid": "b19e056d7d"
             },
             {
-              "goto": "current-report-cough-symptoms",
-              "uid": "cb252a9f1a"
-            },
-            {
-              "goto": "current-report-pain-symptoms",
-              "uid": "03cd72e122"
-            },
-            {
-              "goto": "current-report-temperature",
-              "uid": "4cd7908fba"
-            },
-            {
               "switch": {
                 "arg": "covid_positive",
                 "cases": [
@@ -3376,10 +3338,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל קוצר הנשימה?",
-                                            "uid": "0ec7092954"
+                                            "uid": "2a8800a52b"
                                           },
                                           {
-                                            "uid": "33d33638ef",
+                                            "uid": "779cfb1604",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3390,19 +3352,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "b3f0b38eb2",
+                                        "uid": "3afff12eb1",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "da147db9c0"
+                                  "uid": "f1b96eef48"
                                 }
                               ],
-                              "uid": "67fae4ec6f"
+                              "uid": "4d707461bf"
                             }
                           ]
                         },
-                        "uid": "05b55c1ee1"
+                        "uid": "9e1e6b8383"
                       },
                       {
                         "switch": {
@@ -3425,10 +3387,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל השלשול?",
-                                            "uid": "844adf2fbf"
+                                            "uid": "5e59d6a798"
                                           },
                                           {
-                                            "uid": "f46bee8509",
+                                            "uid": "d68be552b9",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3439,19 +3401,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "409bec6ae0",
+                                        "uid": "d3434a03d8",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "65079b40c6"
+                                  "uid": "2562d7c244"
                                 }
                               ],
-                              "uid": "fddcbc1da5"
+                              "uid": "fa3ca3d060"
                             }
                           ]
                         },
-                        "uid": "a389abb04d"
+                        "uid": "68c4e0dcba"
                       },
                       {
                         "switch": {
@@ -3474,10 +3436,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל חוסר התיאבון?",
-                                            "uid": "8bf39b46a7"
+                                            "uid": "a42bd47193"
                                           },
                                           {
-                                            "uid": "25e2edc623",
+                                            "uid": "3e5124d488",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3488,19 +3450,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "7db0fe72cc",
+                                        "uid": "d2e60ba522",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "2dcc1e2d22"
+                                  "uid": "60de0a50c7"
                                 }
                               ],
-                              "uid": "240d0aa054"
+                              "uid": "3598d1a781"
                             }
                           ]
                         },
-                        "uid": "6fea2785dd"
+                        "uid": "1a9f83a54b"
                       },
                       {
                         "switch": {
@@ -3523,10 +3485,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו הבחילה או ההקאות?",
-                                            "uid": "06d34de059"
+                                            "uid": "118da79362"
                                           },
                                           {
-                                            "uid": "8fd24987f5",
+                                            "uid": "250f5442ec",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3537,19 +3499,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "84fabf94a1",
+                                        "uid": "b24bb5dee7",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "5001592761"
+                                  "uid": "8ecc1a4d70"
                                 }
                               ],
-                              "uid": "3eea384a6f"
+                              "uid": "6ab51540a2"
                             }
                           ]
                         },
-                        "uid": "6e5058ca8b"
+                        "uid": "03f21f64cc"
                       },
                       {
                         "switch": {
@@ -3572,10 +3534,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו הצמרמורות?",
-                                            "uid": "7804e66d00"
+                                            "uid": "b55829037e"
                                           },
                                           {
-                                            "uid": "4d372fc8bd",
+                                            "uid": "bfc55485b6",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3586,19 +3548,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "00db922722",
+                                        "uid": "74c9e414bc",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "af7b3a5d8a"
+                                  "uid": "ba0543ed45"
                                 }
                               ],
-                              "uid": "5fd4cfe99f"
+                              "uid": "def29e8126"
                             }
                           ]
                         },
-                        "uid": "36d7e31cb3"
+                        "uid": "8b0a85cd20"
                       },
                       {
                         "switch": {
@@ -3621,10 +3583,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל הבלבול?",
-                                            "uid": "3ceb0b65b0"
+                                            "uid": "e620d40de8"
                                           },
                                           {
-                                            "uid": "afc45276ab",
+                                            "uid": "c13668b4fe",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3635,19 +3597,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "29eb5cf9ea",
+                                        "uid": "0b090c4e46",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "158bd4aae7"
+                                  "uid": "13c2e896cc"
                                 }
                               ],
-                              "uid": "0199171180"
+                              "uid": "4ad7f6a969"
                             }
                           ]
                         },
-                        "uid": "e14bee6c9a"
+                        "uid": "2459975b04"
                       },
                       {
                         "switch": {
@@ -3670,10 +3632,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו העייפות או החולשה?",
-                                            "uid": "4343186c16"
+                                            "uid": "1f71c7f769"
                                           },
                                           {
-                                            "uid": "0a32286fc4",
+                                            "uid": "5d6891ae2e",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3684,19 +3646,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "96a4c0a164",
+                                        "uid": "c82333d212",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "e2e2dfa627"
+                                  "uid": "04bcdb9709"
                                 }
                               ],
-                              "uid": "257a67e52d"
+                              "uid": "c0fe66691f"
                             }
                           ]
                         },
-                        "uid": "4eb683fa41"
+                        "uid": "8b19b442a1"
                       },
                       {
                         "switch": {
@@ -3719,10 +3681,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים אבד חוש הטעם או הריח?",
-                                            "uid": "7ad59a33eb"
+                                            "uid": "8b90f2ae49"
                                           },
                                           {
-                                            "uid": "4d776ee600",
+                                            "uid": "8d42655c03",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3733,20 +3695,41 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "3ed2991527",
+                                        "uid": "98cd3d0187",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "6593c54ad9"
+                                  "uid": "bcee851b4d"
                                 }
                               ],
-                              "uid": "2d413312c6"
+                              "uid": "9181786365"
                             }
                           ]
                         },
-                        "uid": "ecf2a124c1"
-                      },
+                        "uid": "0fb41f8b30"
+                      }
+                    ],
+                    "uid": "6a027bc505"
+                  }
+                ]
+              },
+              "uid": "0c4f3047e4"
+            },
+            {
+              "goto": "current-report-cough-symptoms",
+              "uid": "03cd72e122"
+            },
+            {
+              "switch": {
+                "arg": "covid_positive",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
                       {
                         "switch": {
                           "arg": "symptoms_clogged_nose",
@@ -3768,10 +3751,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו הנזלת או הגודש באף?",
-                                            "uid": "4040f68bb9"
+                                            "uid": "bbe0375689"
                                           },
                                           {
-                                            "uid": "8c0d69ec17",
+                                            "uid": "d42e3d25c2",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3782,19 +3765,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "3498adeade",
+                                        "uid": "ba82d4c0db",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "3a09d03f45"
+                                  "uid": "b1893354fa"
                                 }
                               ],
-                              "uid": "438a687fc2"
+                              "uid": "9c17f2a27e"
                             }
                           ]
                         },
-                        "uid": "bed6155189"
+                        "uid": "165db47f6e"
                       },
                       {
                         "switch": {
@@ -3817,10 +3800,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל השיעול היבש?",
-                                            "uid": "8b310b0612"
+                                            "uid": "b4687914b5"
                                           },
                                           {
-                                            "uid": "810510ca63",
+                                            "uid": "c0116cf9c5",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3831,19 +3814,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "049ba5c23e",
+                                        "uid": "1e24fba892",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "ae3690c2b7"
+                                  "uid": "48f6924e2a"
                                 }
                               ],
-                              "uid": "a827eea94a"
+                              "uid": "dfa19ea797"
                             }
                           ]
                         },
-                        "uid": "c104e45042"
+                        "uid": "3c533e14ad"
                       },
                       {
                         "switch": {
@@ -3866,10 +3849,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?",
-                                            "uid": "5108cf1b36"
+                                            "uid": "6eaf71986a"
                                           },
                                           {
-                                            "uid": "cb49f16084",
+                                            "uid": "4d8fb70313",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3880,20 +3863,41 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "2db47154da",
+                                        "uid": "1f608f981a",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "bae4086186"
+                                  "uid": "637628be27"
                                 }
                               ],
-                              "uid": "d0cc6986e5"
+                              "uid": "26589be41f"
                             }
                           ]
                         },
-                        "uid": "563edd51cf"
-                      },
+                        "uid": "6224f709fa"
+                      }
+                    ],
+                    "uid": "7cff6d6206"
+                  }
+                ]
+              },
+              "uid": "6b5fc30955"
+            },
+            {
+              "goto": "current-report-pain-symptoms",
+              "uid": "aea4b47313"
+            },
+            {
+              "switch": {
+                "arg": "covid_positive",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": true,
+                    "steps": [
                       {
                         "switch": {
                           "arg": "symptoms_muscles_pain",
@@ -3915,10 +3919,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו כאבי השרירים?",
-                                            "uid": "53977ddb79"
+                                            "uid": "e79cf18615"
                                           },
                                           {
-                                            "uid": "86255a08fd",
+                                            "uid": "9d6fe76ee2",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3929,19 +3933,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "89e1d60a3d",
+                                        "uid": "2bdc76a06d",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "859da6cc74"
+                                  "uid": "7b2b76e1af"
                                 }
                               ],
-                              "uid": "b49f88f882"
+                              "uid": "3c41187877"
                             }
                           ]
                         },
-                        "uid": "3cb7bfef54"
+                        "uid": "332b6cae56"
                       },
                       {
                         "switch": {
@@ -3964,10 +3968,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו כאבי הראש?",
-                                            "uid": "e7d8b3c5c4"
+                                            "uid": "b8938a9fc2"
                                           },
                                           {
-                                            "uid": "033229b625",
+                                            "uid": "fea3e82d47",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -3978,19 +3982,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "fa15ccd78c",
+                                        "uid": "ee8a88a839",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "fceb75db2b"
+                                  "uid": "497b4829bb"
                                 }
                               ],
-                              "uid": "219307890d"
+                              "uid": "cae56528b2"
                             }
                           ]
                         },
-                        "uid": "74640e8837"
+                        "uid": "22e749b6a9"
                       },
                       {
                         "switch": {
@@ -4013,10 +4017,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו כאבי הגרון?",
-                                            "uid": "2db2a3f88b"
+                                            "uid": "444959570f"
                                           },
                                           {
-                                            "uid": "f89704d9cb",
+                                            "uid": "1b1e62cf97",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -4027,19 +4031,19 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "6b90c8a6c1",
+                                        "uid": "1ac6a3d25c",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "fa9c6e6235"
+                                  "uid": "09ede370aa"
                                 }
                               ],
-                              "uid": "9f42e5822e"
+                              "uid": "23111a2d54"
                             }
                           ]
                         },
-                        "uid": "48aa344fb5"
+                        "uid": "a4b7e3e9a3"
                       },
                       {
                         "switch": {
@@ -4062,10 +4066,10 @@ export const script = {
                                         "steps": [
                                           {
                                             "say": "לפני כמה ימים התחילו כאבי הבטן?",
-                                            "uid": "5cb763c44f"
+                                            "uid": "f6aaee15a0"
                                           },
                                           {
-                                            "uid": "d0be1f97e9",
+                                            "uid": "a2a5054e79",
                                             "wait": {
                                               "input-kind": "number",
                                               "input-max": 100,
@@ -4076,26 +4080,41 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "10470282e3",
+                                        "uid": "b7c12c065f",
                                         "undefined": true
                                       }
                                     ]
                                   },
-                                  "uid": "aaca649aa8"
+                                  "uid": "b4c3797f67"
                                 }
                               ],
-                              "uid": "7137ec5e2d"
+                              "uid": "5caf353644"
                             }
                           ]
                         },
-                        "uid": "8d740dc0c0"
+                        "uid": "e97a02db19"
+                      },
+                      {
+                        "say": "האם חשת בתסמינים אחרים בימים האחרונים? אם כן, מהם?",
+                        "uid": "acaf7b9e12"
+                      },
+                      {
+                        "uid": "11ebf08e79",
+                        "wait": {
+                          "required": false,
+                          "variable": "symptoms_other"
+                        }
                       }
                     ],
-                    "uid": "3405c7b0dc"
+                    "uid": "c271568304"
                   }
                 ]
               },
-              "uid": "b1751fe2c8"
+              "uid": "4ba9341e28"
+            },
+            {
+              "goto": "current-report-temperature",
+              "uid": "fc3ed878ac"
             }
           ],
           "uid": "ee520e19a7"
@@ -4765,15 +4784,15 @@ export const script = {
           "name": "end-of-report",
           "steps": [
             {
-              "goto": "set-reminder",
+              "goto": "affiliations",
               "uid": "02d5f52542"
             },
             {
-              "goto": "share",
+              "goto": "set-reminder",
               "uid": "33392c8ecc"
             },
             {
-              "goto": "affiliations",
+              "goto": "share",
               "uid": "ccc68125a7"
             }
           ],
@@ -4783,28 +4802,19 @@ export const script = {
           "name": "affiliations",
           "steps": [
             {
-              "say": "רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?",
-              "uid": "ff1f78ef9a"
+              "say": "ועכשיו, רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?",
+              "uid": "1d2d438c5d"
             },
             {
               "uid": "8284345c1b",
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "כן, בשמחה",
-                        "ar": "نعم, يُسعدني ذلك",
-                        "en": "Yes, with pleasure",
-                        "es": "Sí, será un placer",
-                        "fr": "Oui, avec plaisir",
-                        "ru": "Да, с удовольствием"
-                      }
-                    },
+                    "show": "כן, רוצה",
                     "value": "ok"
                   },
                   {
-                    "show": "לא תודה, נתראה מחר!",
+                    "show": "בפעם אחרת",
                     "value": "later"
                   }
                 ],
@@ -4857,6 +4867,9 @@ export const script = {
             {
               "do": {
                 "cmd": "affiliate_alon_chen_prepare",
+                "params": [
+                  "בעצם, לא היום"
+                ],
                 "variable": "_affiliate_alon_chen_options"
               },
               "uid": "5831418d24"
