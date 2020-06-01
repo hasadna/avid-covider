@@ -475,7 +475,7 @@
 
               - match: false
                 steps:
-                  - say: האם מאז הדיווח האחרון התאשפזתם?
+                  - say: האם מאז הדיווח האחרון התאשפזת?
                   - wait:
                       variable: hospitalization_status
                       options:
