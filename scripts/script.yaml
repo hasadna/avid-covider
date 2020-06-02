@@ -412,7 +412,7 @@
                                         placeholder: "תאריך: dd/mm/yy"
                                         input-kind: date
                                 - show: לא, אבל החלמתי מהקורונה
-                                  value: "recovered"
+                                  value: "cured"
 
                       - match: false
                         steps:
@@ -439,6 +439,13 @@
                                 - show: לא
                                   value: "no"
 
+        - switch:
+            arg: covid_positive
+            cases:
+              - default: true
+              - match: recovered
+                steps:
+                  - goto: hospitalization-inner
         - do:
             cmd: handle_no_covid
             params:
@@ -454,6 +461,10 @@
               - default: true
                 steps:
                   - pop: reporting-loop
+        - goto: hospitalization-inner
+
+    - name: hospitalization-inner
+      steps:
         - switch:
             arg: hospitalization_status
             cases:
