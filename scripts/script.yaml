@@ -279,6 +279,24 @@
                           - show: לא רוצה להשיב
                             value: no_response
 
+        - switch:
+            arg: _is_adult
+            cases:
+            - default: true
+            - match: false 
+              steps:
+              - switch:
+                  arg: school_name
+                  cases:
+                  - default: true
+                  - undefined: true
+                    steps:
+                    - say: אם הנך לומד בבית-ספר או מוסד חינוכי אחר, מה שמו?
+                    - wait:
+                        variable: school_name
+                        placeholder: שם המוסד החינוכי
+                        required: false
+
     - name: preconditions-check
       steps:
         - switch:

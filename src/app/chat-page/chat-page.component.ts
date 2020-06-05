@@ -204,7 +204,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             Object.assign(option, {
               show: alias,
               value: this.selectFields(aliases[alias][1], [
-                'alias', 'age', 'sex', 'city_town', 'street', 'medical_staff_member', 'is_assisted_living',
+                'alias', 'age', 'sex', 'city_town', 'street', 'school_name', 'medical_staff_member', 'is_assisted_living',
                 'precondition.*', 'hospitalization.*', 'covid_.*', 'insulation.*', 'symptoms_.*_duration',
                 'general_feeling', 'routine.*', '_household.*', '_public_service_last_reported_yes', 'uid'
               ])

@@ -44,16 +44,7 @@ export const script = {
                     "match": "new",
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "טוב שבאת,",
-                            "ar": "ممتاز انك جيت/ي,",
-                            "en": "How good of you to drop by,",
-                            "es": "Qué bueno que viniste,",
-                            "fr": "Merci de votre participation,",
-                            "ru": "Как хорошо что вы здесь,"
-                          }
-                        },
+                        "say": "טוב שבאת,",
                         "uid": "432fe8e599"
                       },
                       {
@@ -69,16 +60,7 @@ export const script = {
                         "uid": "7f3883f25d"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
-                            "ar": "أولا نملأ إستبيانك انت, ولاحقا ممكن تعبئة إستبيان لأشخاص آخرين من عائلتك",
-                            "en": "Let's start with reporting how you are feeling. After that, you can submit another report for your family members",
-                            "es": "Empezaremos con tu informe, y después también será posible informar acerca de otros miembros de la familia",
-                            "fr": "Commençons à remplir ce questionnaire sur votre état de santé. Vous aurez aussi la possibilité de le remplir pour d'autres membres de votre famille",
-                            "ru": "Начнем с вопросов о Вашем здоровье. После этого Вы сможете также заполнить отчет и о других членах семьи."
-                          }
-                        },
+                        "say": "נתחיל בדיווח עבורך, בסופו יתאפשר גם דיווח עבור בני משפחה נוספים",
                         "uid": "9be6fe3059"
                       },
                       {
@@ -92,16 +74,7 @@ export const script = {
                     "match": "returning",
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "הי! טוב לראותך שוב",
-                            "ar": "مرحبا! مبسوطين برجعتك",
-                            "en": "Hi! Nice to see you here again",
-                            "es": "Hola, ¡qué bueno verte de nuevo!",
-                            "fr": "Bonjour ! Ravi de vous revoir",
-                            "ru": "Здравствуйте, рады вас снова видеть!"
-                          }
-                        },
+                        "say": "הי! טוב לראותך שוב",
                         "uid": "a4f3f4c1ff"
                       },
                       {
@@ -179,15 +152,7 @@ export const script = {
               "uid": "6344743efc"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "מצויין, השלמנו את הדיווח היומי עבור {{alias}}",
-                  "ar": "ممتاز, أنهينا تعبئة الإستبيان ل{{alias}}",
-                  "en": "Excellent. We're done with the daily form for {{alias}}",
-                  "fr": "Super, nous avons fini ce questionnaire pour {{alias}}",
-                  "ru": "Отлично, закончили докладывать про {{alias}}"
-                }
-              },
+              "say": "מצויין, השלמנו את הדיווח היומי עבור {{alias}}",
               "uid": "3948da65c8"
             },
             {
@@ -220,51 +185,16 @@ export const script = {
                     "match": "returning",
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "עבור מי ברצונך לדווח עכשיו?",
-                            "ar": "لمن تريد/ين تعبئة الإستبيان التالي؟",
-                            "en": "Whose health would you like to report about next? ",
-                            "es": "¿Sobre quién deseas informar ahora?",
-                            "fr": "Pour qui souhaitez-vous remplir ce questionnaire maintenant ?",
-                            "ru": "За кого вы хотите заполнить отчет?"
-                          }
-                        },
+                        "say": "עבור מי ברצונך לדווח עכשיו?",
                         "uid": "4c16166fd3"
                       },
                       {
                         "do": {
                           "cmd": "fetch_previous_reports",
                           "params": [
-                            {
-                              ".tx": {
-                                "_": "דיווח חדש ב{{street}} {{city_town}}",
-                                "ar": "تعبئة إستبيان جديد ب {{street}} مدينة {{city_town}}",
-                                "en": "a new report in {{street}}, in {{city_town}}",
-                                "es": "Nuevo informe en {{street}} {{city_town}}",
-                                "fr": "Nouveau rapport de {{street}} {{city_town}}",
-                                "ru": "Новый отчёт, с улицы {{street}} в городе {{city_town}}"
-                              }
-                            },
-                            {
-                              ".tx": {
-                                "_": "דיווח חדש בכתובת אחרת",
-                                "ar": "إستبيان جديد بمكان سكن آخر",
-                                "en": "New report for a different address",
-                                "es": "Nuevo informe en otra dirección",
-                                "fr": "Nouveau rapport pour une adresse différente",
-                                "ru": "Новый отчёт по другому адресу"
-                              }
-                            },
-                            {
-                              ".tx": {
-                                "_": "זהו להיום",
-                                "ar": "إنتهينا لهذا اليوم",
-                                "en": "That's it for today",
-                                "fr": "C'est tout pour aujourd'hui",
-                                "ru": "На сегодня у нас всё"
-                              }
-                            }
+                            "דיווח חדש ב{{street}} {{city_town}}",
+                            "דיווח חדש בכתובת אחרת",
+                            "זהו להיום"
                           ],
                           "variable": "_report_options"
                         },
@@ -301,16 +231,7 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "בן? בת?",
-                            "ar": "ذكر؟ أنثى؟",
-                            "en": "Male? Female?",
-                            "es": "¿Hombre? ¿Mujer?",
-                            "fr": "Homme ? Femme ? ",
-                            "ru": "Женщина или мужчина?"
-                          }
-                        },
+                        "say": "בן? בת?",
                         "uid": "289a7b45d8"
                       },
                       {
@@ -318,41 +239,15 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "show": {
-                                ".tx": {
-                                  "_": "בן",
-                                  "ar": "ذكر",
-                                  "en": "Male",
-                                  "es": "Hombre",
-                                  "fr": "Homme",
-                                  "ru": "Мужчина"
-                                }
-                              },
+                              "show": "בן",
                               "value": "male"
                             },
                             {
-                              "show": {
-                                ".tx": {
-                                  "_": "בת",
-                                  "ar": "أنثى",
-                                  "en": "Female",
-                                  "es": "Mujer",
-                                  "fr": "Femme",
-                                  "ru": "Женщина"
-                                }
-                              },
+                              "show": "בת",
                               "value": "female"
                             },
                             {
-                              "show": {
-                                ".tx": {
-                                  "_": "אחר",
-                                  "ar": "آخر",
-                                  "en": "other",
-                                  "fr": "Autre",
-                                  "ru": "Другое"
-                                }
-                              },
+                              "show": "אחר",
                               "value": "other"
                             }
                           ],
@@ -384,16 +279,7 @@ export const script = {
                               "match": "male",
                               "steps": [
                                 {
-                                  "say": {
-                                    ".tx": {
-                                      "_": "בן כמה?",
-                                      "ar": "عُمره؟",
-                                      "en": "How many years old?",
-                                      "es": "¿Cuántos años tienes?",
-                                      "fr": "Votre âge ?",
-                                      "ru": "Ваш возраст"
-                                    }
-                                  },
+                                  "say": "בן כמה?",
                                   "uid": "1fb50d3ac9"
                                 }
                               ],
@@ -403,16 +289,7 @@ export const script = {
                               "match": "female",
                               "steps": [
                                 {
-                                  "say": {
-                                    ".tx": {
-                                      "_": "בת כמה?",
-                                      "ar": "عمرها؟",
-                                      "en": "How many years old?",
-                                      "es": "¿Cuántos años tienes?",
-                                      "fr": "Votre âge ?",
-                                      "ru": "Ваш возраст"
-                                    }
-                                  },
+                                  "say": "בת כמה?",
                                   "uid": "c8e292635e"
                                 }
                               ],
@@ -422,15 +299,7 @@ export const script = {
                               "match": "other",
                               "steps": [
                                 {
-                                  "say": {
-                                    ".tx": {
-                                      "_": "מה הגיל שלך?",
-                                      "ar": "ما هو عمرك؟",
-                                      "en": "How old are you?",
-                                      "fr": "Quel âge avez-vous ?",
-                                      "ru": "Сколько вам лет?"
-                                    }
-                                  },
+                                  "say": "מה הגיל שלך?",
                                   "uid": "bd3c405fc4"
                                 }
                               ],
@@ -446,16 +315,7 @@ export const script = {
                           "input-kind": "number",
                           "input-max": 120,
                           "input-min": 0,
-                          "placeholder": {
-                            ".tx": {
-                              "_": "גיל, 0-120",
-                              "ar": "جيل، 0-120",
-                              "en": "Age, 0-120",
-                              "es": "Edad, 0-120",
-                              "fr": "Âge, 0-120",
-                              "ru": "Возраст, 0-120"
-                            }
-                          },
+                          "placeholder": "גיל, 0-120",
                           "variable": "age"
                         }
                       }
@@ -484,31 +344,13 @@ export const script = {
                         "uid": "b9d21cf202"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "מה הוא מקום המגורים?",
-                            "ar": "شو مكان السكن؟",
-                            "en": "Where do you live?",
-                            "es": "¿En dónde vives?",
-                            "fr": "Votre lieu de résidence ?",
-                            "ru": "Где вы проживаете?"
-                          }
-                        },
+                        "say": "מה הוא מקום המגורים?",
                         "uid": "4c0abfecc9"
                       },
                       {
                         "uid": "174bb25fa7",
                         "wait": {
-                          "placeholder": {
-                            ".tx": {
-                              "_": "שם העיר או הישוב",
-                              "ar": "إسم المدينة أو القرية",
-                              "en": "Place of residence",
-                              "es": "Nombre de la ciudad o la localidad",
-                              "fr": "Nom de la ville ou de la localité",
-                              "ru": "Название города или поселка"
-                            }
-                          },
+                          "placeholder": "שם העיר או הישוב",
                           "suggestionsFrom": "_cityTownSuggestions",
                           "variable": "city_town"
                         }
@@ -531,31 +373,13 @@ export const script = {
                   {
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "שם הרחוב?",
-                            "ar": "إسم الشارع؟",
-                            "en": "Street name?",
-                            "es": "¿En qué calle?",
-                            "fr": "Nom de la rue ?",
-                            "ru": "Название улицы?"
-                          }
-                        },
+                        "say": "שם הרחוב?",
                         "uid": "2966b83d86"
                       },
                       {
                         "uid": "4fdca8e817",
                         "wait": {
-                          "placeholder": {
-                            ".tx": {
-                              "_": "שם הרחוב, אם ידוע",
-                              "ar": "إسم الشارع، إذا معروف",
-                              "en": "Street name, if known",
-                              "es": "Nombre de la calle, si se sabe",
-                              "fr": "Nom de la rue, s'il est connu",
-                              "ru": "Название улицы, если известно"
-                            }
-                          },
+                          "placeholder": "שם הרחוב, אם ידוע",
                           "required": false,
                           "variable": "street"
                         }
@@ -619,49 +443,16 @@ export const script = {
                           "cmd": "calculate_alias",
                           "params": [
                             "record",
-                            {
-                              ".tx": {
-                                "_": "בן {{age}} מ{{_location}}",
-                                "ar": "إبن ال {{age}} من{{_location}}",
-                                "en": "{{age}} year old male from {{location}}",
-                                "fr": "{{age}} ans de {{_location}}",
-                                "ru": "Мужчина, проживающий на  {{_location}}, возраст: {{age}}"
-                              }
-                            },
-                            {
-                              ".tx": {
-                                "_": "בת {{age}} מ{{_location}}",
-                                "ar": "إبنة ال {{age}} من{{_location}}",
-                                "en": "{{age}} year old female from {{location}}",
-                                "fr": "{{age}} ans de {{_location}}",
-                                "ru": "Женщина, проживающая на  {{_location}}, возраст: {{age}}"
-                              }
-                            },
-                            {
-                              ".tx": {
-                                "_": "גיל {{age}} מ{{_location}}",
-                                "ar": "العُمر {{age}} من{{_location}}",
-                                "en": "{{age}} year old person from {{location}}",
-                                "fr": "Âge {{age}} de {{_location}}",
-                                "ru": "Возраст  {{age}}, адрес {{_location}}"
-                              }
-                            }
+                            "בן {{age}} מ{{_location}}",
+                            "בת {{age}} מ{{_location}}",
+                            "גיל {{age}} מ{{_location}}"
                           ],
                           "variable": "alias"
                         },
                         "uid": "78b65b0a08"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}",
-                            "ar": "ممتاز, من أجل المحافظة على خصوصيتك, في المرات القادمة سوف نسميك {{alias}}",
-                            "en": "Great. In the interest of privacy, in your following daily reports we'll address you as  {{alias}}",
-                            "es": "Excelente, para preservar tu privacidad, en los próximos informes, te llamaremos simplemente  {{alias}}",
-                            "fr": "Parfait, afin de protéger votre confidentialité, dans les prochains questionnaires, nous vous appellerons simplement {{alias}}",
-                            "ru": "Отлично. Чтобы сохранить вашу конфиденциальность, в следующих отчётах мы просто вас будем называть {{alias}}"
-                          }
-                        },
+                        "say": "נהדר, בכדי לשמור על הפרטיות שלך, בדיווחים הבאים נקרא לך פשוט {{alias}}",
                         "uid": "125852a6c1"
                       }
                     ],
@@ -715,28 +506,11 @@ export const script = {
                     "default": true,
                     "steps": [
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -",
-                            "ar": "لدينا بعض الأسئلة (سوف نسألها مرة واحدة فقط) حول البيت في {{_location}} -",
-                            "en": "We have some questions (which we will ask just once) about the house on  {{street}}, {{city_town}}",
-                            "fr": "Nous avons quelques questions (que nous ne poserons qu'une seule fois) concernant la maison située {{_location}} -",
-                            "ru": "У нас есть несколько вопросов (которые больше не будем повторять) о  доме на {{_location}}"
-                          }
-                        },
+                        "say": "יש לנו כמה שאלות (שנשאל פעם אחת) לגבי הבית ב{{_location}} -",
                         "uid": "e51b127ea6"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "כמה מבוגרים מעל לגיל 18 גרים בבית?",
-                            "ar": "عدد الأشخاص البالغين فوق جيل ال 18 الذين يسكنون في البيت؟",
-                            "en": "How many adults over 18 years old live in the house?",
-                            "es": "¿Cuántas personas mayores de 18 años viven en la casa?",
-                            "fr": "Combien d'adultes de plus de 18 ans vivent dans le foyer ?",
-                            "ru": "Сколько взрослых старше 18 лет живут в доме?"
-                          }
-                        },
+                        "say": "כמה מבוגרים מעל לגיל 18 גרים בבית?",
                         "uid": "ddaadab144"
                       },
                       {
@@ -752,16 +526,7 @@ export const script = {
                                     "input-kind": "number",
                                     "input-max": 99,
                                     "input-min": 1,
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "מספר המבוגרים ,1-99",
-                                        "ar": " عدد الأشخاص البالغين, 1-99",
-                                        "en": "Number of adults, 1-99",
-                                        "es": "Cantidad de adultos, 1-99",
-                                        "fr": "Nombre d'adultes, 1-99",
-                                        "ru": "Количество взрослых, 1-99"
-                                      }
-                                    },
+                                    "placeholder": "מספר המבוגרים ,1-99",
                                     "validation": "[0-9]+",
                                     "variable": "_household_adults"
                                   }
@@ -778,16 +543,7 @@ export const script = {
                                     "input-kind": "number",
                                     "input-max": 99,
                                     "input-min": 0,
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "מספר המבוגרים ,0-99",
-                                        "ar": "عدد الأشخاص البالغين, 0-99",
-                                        "en": "Number of adults, 0-99",
-                                        "es": "Cantidad de adultos, 0-99",
-                                        "fr": "Nombre d'adultes, 0-99",
-                                        "ru": "Количество взрослых, 0-99"
-                                      }
-                                    },
+                                    "placeholder": "מספר המבוגרים ,0-99",
                                     "validation": "[0-9]+",
                                     "variable": "_household_adults"
                                   }
@@ -800,16 +556,7 @@ export const script = {
                         "uid": "6aa687cb41"
                       },
                       {
-                        "say": {
-                          ".tx": {
-                            "_": "וכמה ילדים מתחת לגיל 18?",
-                            "ar": "وكم عدد الأطفال تحت جيل 18؟",
-                            "en": "And how many children under 18?",
-                            "es": "¿ y cuántos menores de 18 años?",
-                            "fr": "Et combien d'enfants de moins de 18 ans ?",
-                            "ru": "А сколько детей до 18 лет?"
-                          }
-                        },
+                        "say": "וכמה ילדים מתחת לגיל 18?",
                         "uid": "d8a5d22932"
                       },
                       {
@@ -825,16 +572,7 @@ export const script = {
                                     "input-kind": "number",
                                     "input-max": 99,
                                     "input-min": 0,
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "מספר הילדים, 0-99",
-                                        "ar": "عدد الأطفال, 0-99",
-                                        "en": "Number of children, 0-99",
-                                        "es": "Cantidad de niños, 0-99",
-                                        "fr": "Nombre d'enfants, 0-99",
-                                        "ru": "Количество детей, 0-99"
-                                      }
-                                    },
+                                    "placeholder": "מספר הילדים, 0-99",
                                     "validation": "[0-9]+",
                                     "variable": "_household_minors"
                                   }
@@ -851,16 +589,7 @@ export const script = {
                                     "input-kind": "number",
                                     "input-max": 99,
                                     "input-min": 1,
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "מספר הילדים, 1-99",
-                                        "ar": "عدد الأطفال, 1-99",
-                                        "en": "Number of children, 1-99",
-                                        "es": "Cantidad de niños, 1-99",
-                                        "fr": "Nombre d'enfants, 1-99",
-                                        "ru": "Количество детей, 1-99"
-                                      }
-                                    },
+                                    "placeholder": "מספר הילדים, 1-99",
                                     "validation": "[0-9]+",
                                     "variable": "_household_minors"
                                   }
@@ -911,28 +640,11 @@ export const script = {
                                         "value": true
                                       },
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "לא",
-                                            "ar": "لا",
-                                            "en": "No",
-                                            "es": "No",
-                                            "fr": "Non",
-                                            "ru": "Нет"
-                                          }
-                                        },
+                                        "show": "לא",
                                         "value": false
                                       },
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "לא רוצה להשיב",
-                                            "ar": "لا أريد الإجابة",
-                                            "en": "I prefer not to answer",
-                                            "fr": "Je ne veux pas répondre",
-                                            "ru": "Я не хочу отвечать на этот вопрос"
-                                          }
-                                        },
+                                        "show": "לא רוצה להשיב",
                                         "value": "no_response"
                                       }
                                     ],
@@ -953,6 +665,52 @@ export const script = {
                 ]
               },
               "uid": "4158ebe000"
+            },
+            {
+              "switch": {
+                "arg": "_is_adult",
+                "cases": [
+                  {
+                    "default": true
+                  },
+                  {
+                    "match": false,
+                    "steps": [
+                      {
+                        "switch": {
+                          "arg": "school_name",
+                          "cases": [
+                            {
+                              "default": true
+                            },
+                            {
+                              "steps": [
+                                {
+                                  "say": "אם הנך לומד בבית-ספר או מוסד חינוכי אחר, מה שמו?",
+                                  "uid": "134c074a20"
+                                },
+                                {
+                                  "uid": "6f0065690c",
+                                  "wait": {
+                                    "placeholder": "שם המוסד החינוכי",
+                                    "required": false,
+                                    "variable": "school_name"
+                                  }
+                                }
+                              ],
+                              "uid": "b87805209c",
+                              "undefined": true
+                            }
+                          ]
+                        },
+                        "uid": "c4dfcc9e26"
+                      }
+                    ],
+                    "uid": "aab04298d2"
+                  }
+                ]
+              },
+              "uid": "19c9f82474"
             }
           ],
           "uid": "ab5b28894d"
@@ -988,16 +746,7 @@ export const script = {
           "name": "preconditions",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:",
-                  "ar": "بدي أسألك عن أمراض, اللي مهم لإلنا نعرف إذا تم تشخيصك بأي منها الآن أو في السابق:",
-                  "en": "I'm going to ask about diseases, it's important to know whether you were diagnosed with them in the past and/or you are suffering from them now:",
-                  "es": "Te preguntaré sobre algunas enfermedades, que es importante que sepamos si te las han diagnosticado en el pasado:",
-                  "fr": "Je vais vous poser des questions sur différentes maladies, et il est important pour nous de savoir si vous avez été diagnostiqué dans le passé ou si vous en souffrez aujourd'hui:",
-                  "ru": "Мы бы хотели задать вопрос о болезнях, которые были у вас диагностированы, в прошлом или в настоящем:"
-                }
-              },
+              "say": "אשאל אותך על מחלות, שחשוב לנו לדעת אם אובחנו אצלך בעבר או שיש לך כיום:",
               "uid": "6861e5ea76"
             },
             {
@@ -1019,16 +768,7 @@ export const script = {
               "uid": "8159f08bcb"
             },
             {
-              "say": {
-                ".tx": {
-                  "_": "אוקיי, עברנו את זה…",
-                  "ar": "أوكي, مرقنا..",
-                  "en": "OK, we're done with that...",
-                  "es": "OK, lo pasamos... ",
-                  "fr": "D'accord, nous en avons fini avec ça...",
-                  "ru": "Так, это мы прошли..."
-                }
-              },
+              "say": "אוקיי, עברנו את זה…",
               "uid": "d5409965b6"
             }
           ],
@@ -1044,107 +784,35 @@ export const script = {
                 "options": [
                   {
                     "field": "precondition_chronic_diabetes",
-                    "show": {
-                      ".tx": {
-                        "_": "סוכרת",
-                        "ar": "سُكري",
-                        "en": "Diabetes",
-                        "es": "Diabetes",
-                        "fr": "Diabète",
-                        "ru": "Диабет"
-                      }
-                    }
+                    "show": "סוכרת"
                   },
                   {
                     "field": "precondition_chronic_hypertension",
-                    "show": {
-                      ".tx": {
-                        "_": "בעיית יתר לחץ דם",
-                        "ar": "أعاني من ضغط دم عالي",
-                        "en": "Hypertension",
-                        "es": "Hipertensión arterial",
-                        "fr": "Problème d'hypertension",
-                        "ru": "Высокое давление"
-                      }
-                    }
+                    "show": "בעיית יתר לחץ דם"
                   },
                   {
                     "field": "precondition_chronic_ischemic_heart_disease_or_stroke",
-                    "show": {
-                      ".tx": {
-                        "_": "מחלת לב, כלי דם או שבץ",
-                        "ar": "أمراض قلب, أوعية دموية أو جلطة",
-                        "en": "Coronary artery disease, stroke or Cardiovascular disease",
-                        "es": "Enfermedades del corazón, vasos sanguíneos o derrames cerebrales",
-                        "fr": "Maladie cardiaque, artérielle ou AVC",
-                        "ru": "Сердечно-сосудистое заболевание или инсульт"
-                      }
-                    }
+                    "show": "מחלת לב, כלי דם או שבץ"
                   },
                   {
                     "field": "precondition_chronic_lung_disease",
-                    "show": {
-                      ".tx": {
-                        "_": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)",
-                        "ar": "مرض مُزمن بالرئات يشمل ربو - Asthma (بإستثناء ربو بالطفولة) ",
-                        "en": "Chronic pulmonary disease including asthma (not including childhood asthma)",
-                        "es": "Enfermedad pulmonar crónica incluyendo asma (sin asma en la infancia)",
-                        "fr": "Maladie pulmonaire chronique, y compris l'asthme (sans asthme infantile)",
-                        "ru": "Хроническая болезнь легких, включая астму (но не детскую астму)"
-                      }
-                    }
+                    "show": "מחלת ריאות כרונית כולל אסתמה (ללא אסתמה בילדות)"
                   },
                   {
                     "field": "precondition_chronic_cancer",
-                    "show": {
-                      ".tx": {
-                        "_": "סרטן",
-                        "ar": "سرطان",
-                        "en": "Cancer",
-                        "es": "Cáncer",
-                        "fr": "Cancer",
-                        "ru": "Рак"
-                      }
-                    }
+                    "show": "סרטן"
                   },
                   {
                     "field": "precondition_chronic_kidney_failure",
-                    "show": {
-                      ".tx": {
-                        "_": "אי ספיקת כליות",
-                        "ar": "قصور كلوي",
-                        "en": "Renal failure",
-                        "es": "Insuficiencia renal",
-                        "fr": "Insuffisance rénale",
-                        "ru": "Почечная недостаточность"
-                      }
-                    }
+                    "show": "אי ספיקת כליות"
                   },
                   {
                     "field": "precondition_chronic_immune_system_suppression",
-                    "show": {
-                      ".tx": {
-                        "_": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון",
-                        "ar": "نقص بالمناعة يشمل إستخدام أدوية التي تُضعف جهاز المناعة",
-                        "en": "Immunosupression, including taking immunosuppressant drugs",
-                        "es": "Inmunosupresión incluyendo el consumo de remedios que inhiben el sistema inmunológico",
-                        "fr": "Immunodéficience, y compris la prise de médicaments immunosupresseurs",
-                        "ru": "Иммуносупрессия, включая прием лекарств, подавляющих иммунную систему"
-                      }
-                    }
+                    "show": "דיכוי חיסוני לרבות נטילת תרופות המדכאות את מערכת החיסון"
                   },
                   {
                     "class": "other",
-                    "show": {
-                      ".tx": {
-                        "_": "<span class='empty'>אף אחת ממחלות הרקע הללו</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>ללא מחלות רקע</span>",
-                        "ar": "<span class='empty'>ولا أي واحد من هاي الأمراض</span>\n<span class='not-empty'>بس </span>\n<span class='none-selected'>لا يوجد أمراض</span>",
-                        "en": "<span class='empty'>None of these diseases</span>\n<span class='not-empty'>That's it</span>\n<span class='none-selected'>None of these diseases</span>",
-                        "es": "<span class='empty'>Ninguna de estas enfermedades</span>\n<span class='not-empty'>Eso es todo</span>\n<span class='none-selected'>No hay enfermedades previas</span>",
-                        "fr": "<span class='empty'>Aucun des ces antécédents médicaux</span>\n<span class='not-empty'>C'est tout</span>\n<span class='none-selected'>Pas d'antécédents médicaux </span>",
-                        "ru": "<span class='empty'>Ни одного из этих фоновых заболеваний</span>\n<span class='not-empty'>Всё</span>\n<span class='none-selected'>Нет фоновых заболеваний</span>"
-                      }
-                    }
+                    "show": "<span class='empty'>אף אחת ממחלות הרקע הללו</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>ללא מחלות רקע</span>"
                   }
                 ],
                 "variable": "_var"
@@ -1167,16 +835,7 @@ export const script = {
           "name": "preconditions-smoking",
           "steps": [
             {
-              "say": {
-                ".tx": {
-                  "_": "מה לגבי עישון?",
-                  "ar": "شو مع التدخين؟",
-                  "en": "How about smoking?",
-                  "es": "¿Qué podemos decir sobre el fumar?",
-                  "fr": "Fumez-vous ?",
-                  "ru": "Как насчет курения?"
-                }
-              },
+              "say": "מה לגבי עישון?",
               "uid": "92a9456fa5"
             },
             {
@@ -1184,56 +843,20 @@ export const script = {
               "wait": {
                 "options": [
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישון יומיומי",
-                        "ar": "تدخين بشكل يومي",
-                        "en": "I smoke daily",
-                        "es": "Fumo diariamente",
-                        "fr": "Je fume quotidiennement ",
-                        "ru": "ежедневное курение"
-                      }
-                    },
+                    "show": "עישון יומיומי",
                     "value": "daily_smoker"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישנתי בעבר, הפסקתי לפני פחות מחמש שנים",
-                        "ar": "دخنت في السابق, توقفت قبل أقل من خمس سنوات",
-                        "en": "I smoked in the past, stopped less than 5 years ago",
-                        "es": "Fumé en el pasado, dejé hace menos de cinco años",
-                        "fr": "J'ai fumé dans le passé, j'ai arrêté il y a moins de cinq ans",
-                        "ru": "Я курил/а раньше, бросил/а менее пяти лет назад"
-                      }
-                    },
+                    "show": "עישנתי בעבר, הפסקתי לפני פחות מחמש שנים",
                     "value": "short_past_smoker"
                   },
                   {
-                    "show": {
-                      ".tx": {
-                        "_": "עישנתי בעבר, לפני יותר מחמש שנים",
-                        "ar": "دخنت في السابق, قبل أكثر من خمس سنوات",
-                        "en": "I smoked in the past, more than 5 years ago",
-                        "es": "Fumé en el pasado, hace más de cinco años",
-                        "fr": "J'ai fumé dans le passé, il y a plus de cinq ans",
-                        "ru": "Я курил/а раньше, бросил/а более пяти лет назад"
-                      }
-                    },
+                    "show": "עישנתי בעבר, לפני יותר מחמש שנים",
                     "value": "long_past_smoker"
                   },
                   {
                     "class": "other",
-                    "show": {
-                      ".tx": {
-                        "_": "אף פעם",
-                        "ar": "ولا مرة",
-                        "en": "Never",
-                        "es": "Nunca",
-                        "fr": "Jamais",
-                        "ru": "Никогда"
-                      }
-                    },
+                    "show": "אף פעם",
                     "value": "never"
                   }
                 ],
@@ -1261,16 +884,7 @@ export const script = {
                         "wait": {
                           "options": [
                             {
-                              "show": {
-                                ".tx": {
-                                  "_": "כן",
-                                  "ar": "نعم",
-                                  "en": "Yes",
-                                  "es": "Sí",
-                                  "fr": "Oui",
-                                  "ru": "Да"
-                                }
-                              },
+                              "show": "כן",
                               "steps": [
                                 {
                                   "say": "מתי קיבלת את האבחנה החיובית?",
@@ -1280,16 +894,7 @@ export const script = {
                                   "uid": "186a59dd63",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "covid_last_positive_results_date"
                                   }
                                 }
@@ -1308,16 +913,7 @@ export const script = {
                                   "uid": "778f5bcb78",
                                   "wait": {
                                     "input-kind": "date",
-                                    "placeholder": {
-                                      ".tx": {
-                                        "_": "תאריך: dd/mm/yy",
-                                        "ar": "تاريخ: dd/mm/yy",
-                                        "en": "date: dd/mm/yy",
-                                        "es": "Fecha: dd.mm.aa",
-                                        "fr": "Date: dd/mm/yy",
-                                        "ru": "Число: dd/mm/yy"
-                                      }
-                                    },
+                                    "placeholder": "תאריך: dd/mm/yy",
                                     "variable": "covid_last_positive_results_date"
                                   }
                                 },
@@ -1330,16 +926,7 @@ export const script = {
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "כן",
-                                            "ar": "نعم",
-                                            "en": "Yes",
-                                            "es": "Sí",
-                                            "fr": "Oui",
-                                            "ru": "Да"
-                                          }
-                                        },
+                                        "show": "כן",
                                         "steps": [
                                           {
                                             "say": "מתי זה היה?",
@@ -1349,16 +936,7 @@ export const script = {
                                             "uid": "be993dc128",
                                             "wait": {
                                               "input-kind": "date",
-                                              "placeholder": {
-                                                ".tx": {
-                                                  "_": "תאריך: dd/mm/yy",
-                                                  "ar": "تاريخ: dd/mm/yy",
-                                                  "en": "date: dd/mm/yy",
-                                                  "es": "Fecha: dd.mm.aa",
-                                                  "fr": "Date: dd/mm/yy",
-                                                  "ru": "Число: dd/mm/yy"
-                                                }
-                                              },
+                                              "placeholder": "תאריך: dd/mm/yy",
                                               "variable": "covid_last_negative_results_date"
                                             }
                                           }
@@ -1366,16 +944,7 @@ export const script = {
                                         "uid": "eab855794d"
                                       },
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "לא",
-                                            "ar": "لا",
-                                            "en": "No",
-                                            "es": "No",
-                                            "fr": "Non",
-                                            "ru": "Нет"
-                                          }
-                                        }
+                                        "show": "לא"
                                       }
                                     ]
                                   }
@@ -1385,16 +954,7 @@ export const script = {
                               "value": "recovered"
                             },
                             {
-                              "show": {
-                                ".tx": {
-                                  "_": "לא",
-                                  "ar": "لا",
-                                  "en": "No",
-                                  "es": "No",
-                                  "fr": "Non",
-                                  "ru": "Нет"
-                                }
-                              },
+                              "show": "לא",
                               "value": "no"
                             }
                           ],
@@ -1438,16 +998,7 @@ export const script = {
                                             "uid": "e2675f76bd",
                                             "wait": {
                                               "input-kind": "date",
-                                              "placeholder": {
-                                                ".tx": {
-                                                  "_": "תאריך: dd/mm/yy",
-                                                  "ar": "تاريخ: dd/mm/yy",
-                                                  "en": "date: dd/mm/yy",
-                                                  "es": "Fecha: dd.mm.aa",
-                                                  "fr": "Date: dd/mm/yy",
-                                                  "ru": "Число: dd/mm/yy"
-                                                }
-                                              },
+                                              "placeholder": "תאריך: dd/mm/yy",
                                               "variable": "covid_last_negative_results_date"
                                             }
                                           }
@@ -1474,16 +1025,7 @@ export const script = {
                                   "wait": {
                                     "options": [
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "כן",
-                                            "ar": "نعم",
-                                            "en": "Yes",
-                                            "es": "Sí",
-                                            "fr": "Oui",
-                                            "ru": "Да"
-                                          }
-                                        },
+                                        "show": "כן",
                                         "steps": [
                                           {
                                             "say": "מתי זה היה?",
@@ -1493,16 +1035,7 @@ export const script = {
                                             "uid": "2e49546db7",
                                             "wait": {
                                               "input-kind": "date",
-                                              "placeholder": {
-                                                ".tx": {
-                                                  "_": "תאריך: dd/mm/yy",
-                                                  "ar": "تاريخ: dd/mm/yy",
-                                                  "en": "date: dd/mm/yy",
-                                                  "es": "Fecha: dd.mm.aa",
-                                                  "fr": "Date: dd/mm/yy",
-                                                  "ru": "Число: dd/mm/yy"
-                                                }
-                                              },
+                                              "placeholder": "תאריך: dd/mm/yy",
                                               "variable": "covid_last_positive_results_date"
                                             }
                                           }
@@ -1521,16 +1054,7 @@ export const script = {
                                             "uid": "bdc6d68cf5",
                                             "wait": {
                                               "input-kind": "date",
-                                              "placeholder": {
-                                                ".tx": {
-                                                  "_": "תאריך: dd/mm/yy",
-                                                  "ar": "تاريخ: dd/mm/yy",
-                                                  "en": "date: dd/mm/yy",
-                                                  "es": "Fecha: dd.mm.aa",
-                                                  "fr": "Date: dd/mm/yy",
-                                                  "ru": "Число: dd/mm/yy"
-                                                }
-                                              },
+                                              "placeholder": "תאריך: dd/mm/yy",
                                               "variable": "covid_last_negative_results_date"
                                             }
                                           }
@@ -1539,16 +1063,7 @@ export const script = {
                                         "value": "false"
                                       },
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "לא",
-                                            "ar": "لا",
-                                            "en": "No",
-                                            "es": "No",
-                                            "fr": "Non",
-                                            "ru": "Нет"
-                                          }
-                                        },
+                                        "show": "לא",
                                         "value": "no"
                                       }
                                     ],
@@ -4353,81 +3868,27 @@ export const script = {
         },
         {
           "name": "calendarBody",
-          "show": {
-            ".tx": {
-              "_": "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!",
-              "ar": "حان الوقت ان تخبرونا مجددًا كيف حالكم! معًا فقط سوف نهزم الكورونا💪🏽!",
-              "en": "Time to report again about how you're doing! It takes all of us to beat the Corona virus 💪🏽!",
-              "es": "¡Llegó la hora de nos vuelvas a contar cómo te sientes! Sólo juntos venceremos a coronavirus 💪🏽!",
-              "fr": "Il est de nouveau temps de décrire votre état de santé ! Nous allons gagner contre le Corona ensemble !",
-              "ru": "Пора снова заполнить отчёт о здоровье! Вместе мы победим Коронавирус! "
-            }
-          }
+          "show": "הגיע הזמן לדווח שוב כיצד אתם מרגישים! רק ביחד ננצח את הקורונה 💪🏽!"
         },
         {
           "name": "reminder:notification",
-          "show": {
-            ".tx": {
-              "_": "התראה בדפדפן",
-              "ar": "تنبيه في المتصفح",
-              "en": "Browser alert",
-              "es": "Alerta en el navegador",
-              "fr": "Alerte dans le navigateur ",
-              "ru": "Уведомление в браузере"
-            }
-          }
+          "show": "התראה בדפדפן"
         },
         {
           "name": "reminder:calendar",
-          "show": {
-            ".tx": {
-              "_": "תזכורת ביומן",
-              "ar": "تذكير في اليوميات",
-              "en": "Calendar reminder",
-              "es": "Recordatorio diario",
-              "fr": "Rappel au calendrier",
-              "ru": "Напоминание в календаре"
-            }
-          }
+          "show": "תזכורת ביומן"
         },
         {
           "name": "reminder:android-app",
-          "show": {
-            ".tx": {
-              "_": "אפליקציית האנדרואיד שלנו",
-              "ar": "تطبيقنا في الأندرويد",
-              "en": "Our Android application",
-              "es": "Nuestra aplicación de Android",
-              "fr": "Notre application Android",
-              "ru": "Наша аппликация для Android"
-            }
-          }
+          "show": "אפליקציית האנדרואיד שלנו"
         },
         {
           "name": "reminder:iphone-app",
-          "show": {
-            ".tx": {
-              "_": "אפליקציית האייפון שלנו",
-              "ar": "تطبيقنا في الأيفون",
-              "en": "Our iPhone application",
-              "es": "Nuestra aplicación de iOS",
-              "fr": "Notre application Iphone",
-              "ru": "Наша аппликация для iPhone"
-            }
-          }
+          "show": "אפליקציית האייפון שלנו"
         },
         {
           "name": "reminder:telegram",
-          "show": {
-            ".tx": {
-              "_": "בוט טלגרם",
-              "ar": "بوت تيليغرام",
-              "en": "Telegram bot",
-              "es": "Telegram bot",
-              "fr": "Bot Telegram",
-              "ru": "Бот в Telegram"
-            }
-          }
+          "show": "בוט טלגרם"
         }
       ],
       "name": "generic-translation-assets"
