@@ -214,13 +214,13 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           const lastReport = this.storage.reports.length - 1;
           options.push({
             show: this.fillIn(this.storage.reports[lastReport][1], same_address_text),
-            value: this.selectFields(this.storage.reports[lastReport][1], [
+            value: Object.assign(this.selectFields(this.storage.reports[lastReport][1], [
               'city_town', 'street'
-            ])
+            ]), {_existing_user: 'new'})
           });
           options.push({
             show: new_address_text,
-            value: {}
+            value: {_existing_user:  'new'}
           });
           if (reported_today) {
             options.push({
