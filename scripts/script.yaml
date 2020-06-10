@@ -915,9 +915,14 @@
 
     - name: current-report-symptoms
       steps:
+        - do:
+            cmd: should_check_for_duration
+            params:
+              - record
+            variable: _should_check_for_duration
         - goto: current-report-top-level-symptoms
         - switch:
-            arg: covid_positive
+            arg: _should_check_for_duration
             cases:
               - default: true
               - match: true
@@ -1087,7 +1092,7 @@
         - goto: current-report-cough-symptoms
 
         - switch:
-            arg: covid_positive
+            arg: _should_check_for_duration
             cases:
               - default: true
               - match: true
@@ -1156,7 +1161,7 @@
         - goto: current-report-pain-symptoms
 
         - switch:
-            arg: covid_positive
+            arg: _should_check_for_duration
             cases:
               - default: true
               - match: true

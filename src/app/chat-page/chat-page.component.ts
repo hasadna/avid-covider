@@ -307,6 +307,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             record.insulation_reason = 'none';
           }
         },
+        should_check_for_duration: (record: any) => {
+          return !!record.covid_positive || record._existing_user === 'new';
+        },
         need_to_ask_about_routine: (record: any) => {
           const routine_last_asked = record.routine_last_asked || 0;
           const timeout = PRODUCTION ? 86400 * 7 * 1000 : 7 * 60 * 1000;
