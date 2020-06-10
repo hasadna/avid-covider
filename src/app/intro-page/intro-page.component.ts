@@ -99,7 +99,6 @@ export class IntroPageComponent implements OnInit, AfterViewInit {
   }
 
   toggleIfScrolledDown(ev, scroll0?) {
-    console.log('toggleIfScrolledDown', this.fullMap, this.layout.mobile, scroll0, this.container.nativeElement.scrollTop);
     if (this.layout.mobile && (scroll0 || this.container.nativeElement.scrollTop === 0)) {
       window.setTimeout(() => {
         this.fullMap = !this.fullMap;

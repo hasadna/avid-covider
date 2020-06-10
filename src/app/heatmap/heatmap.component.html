@@ -1,6 +1,53 @@
 <div class='container' [style.padding]='padding + "px"'>
   <div id='fullscreen-map'>
   </div>
+  <div class='popup' *ngIf='popupVisible' [style.top]='popupTop' [style.left]='popupLeft'>
+    <div class='inner'>
+      <div class='main'>
+        <div class='title'>{{ popupData.txCityName }}</div>
+        <div class='calendar'>
+          <div class='calendar-row' *ngFor='let week of popupData.scores'>
+            <div class='calendar-item' *ngFor='let day of week' [class.round]='!!day.nr || day.nr === 0'>
+              <ng-container *ngIf='!day.nr && day.nr !== 0'>
+                <span i18n *ngIf='day.weekday === 0'>א</span>
+                <span i18n *ngIf='day.weekday === 1'>ב</span>
+                <span i18n *ngIf='day.weekday === 2'>ג</span>
+                <span i18n *ngIf='day.weekday === 3'>ד</span>
+                <span i18n *ngIf='day.weekday === 4'>ה</span>
+                <span i18n *ngIf='day.weekday === 5'>ו</span>
+                <span i18n *ngIf='day.weekday === 6'>ש</span>
+              </ng-container>
+              <ng-container *ngIf='day.nr || day.nr === 0'>
+                <span [class]='mapService.scoreClasses(day)'>
+                </span>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class='level'>
+          <span i18n *ngIf='popupData.nr > 40'>רמת תסמינים&nbsp;</span>
+          <span [class]='mapService.scoreClasses(popupData)'>
+            <span class='band0-active' i18n>נמוכה מאוד</span>
+            <span class='band1-active' i18n>נמוכה</span>
+            <span class='band2-active' i18n>בינונית-נמוכה</span>
+            <span class='band3-active' i18n>בינונית</span>
+            <span class='band4-active' i18n>בינונית-גבוהה</span>
+            <span class='band5-active' i18n>גבוהה</span>
+            <span class='band-none-active' i18n>אין מספיק נתונים לניתוח</span>
+          </span>
+        </div>
+        <div class='confidence'>
+          <span *ngIf='popupData.nr > 200' i18n>(בוודאות גבוהה)</span>
+          <span *ngIf='popupData.nr <= 200 && popupData.nr > 40' i18n>(בוודאות בינונית)</span>
+        </div>
+      </div>
+      <div class='footer'>
+        <span class='number'>{{ (popupData.nr || 0).toLocaleString() }}</span>&nbsp;
+        <span i18n>דיווחים השבוע</span>
+      </div>
+    </div>
+    <div class='notch'></div>
+  </div>
   <div class='close-button' (click)='mapService.closeMap()' *ngIf='!infoboxActive && closeButton'></div>
   <div class='question-button' (click)='infoboxActive = !infoboxActive' [class.active]='infoboxActive' *ngIf='infoButton'>?</div>
   <div class='infobox' *ngIf='infoboxActive' (click)='infoboxActive=false; true' [class.desktop]='layout.desktop'>

@@ -18,9 +18,8 @@ export class CityResultsComponent implements OnInit {
   ready = false;
   open = false;
 
-  constructor(@Inject(LOCALE_ID) private locale, private mapService: MapService) {
+  constructor(@Inject(LOCALE_ID) private locale, public mapService: MapService) {
     this.mapService.configStream.pipe(first()).subscribe((config: any) => {
-      this.colorScale = config.color_scale;
       this.ready = true;
     });
   }
@@ -28,19 +27,6 @@ export class CityResultsComponent implements OnInit {
   ngOnInit() {
     this.city_name = this.item.translations ? (this.item.translations[this.locale] || this.item.translations.he) : '';
     this.current = this.item.scores[this.item.scores.length - 1];
-  }
-
-  scoreClasses(score) {
-    let ret = '';
-    if (score.nr < 200) {
-      ret += 'band-noinfo ';
-    }
-    for (let i = 0 ; i < this.colorScale.length ; i++) {
-      if (score.sr <= this.colorScale[i][0]) {
-        return ret + 'band' + i;
-      }
-    }
-    return ret + 'band' + (this.colorScale.length - 1);
   }
 
   openMap() {

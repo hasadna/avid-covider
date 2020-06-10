@@ -8,11 +8,126 @@
         padding-bottom: 68px;
         width: 100%;
         height: 100%;
+        position: relative;
         
         #fullscreen-map {
             width: 100%;
             height: 100%;
             border-radius: 8px;
+        }
+
+        .popup {
+            position: absolute;
+            z-index: 10;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(-100%);
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+            .notch {
+                display: block;
+                position: relative;
+                width: 14px;
+                height: 14px;
+                transform: rotate(-45deg);
+                border-radius: 2px;
+                background-color: #eef0f0;
+                top: -10px;
+            }
+
+            .inner {
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
+
+                display: flex;
+                flex-flow: column;
+                border-radius: 4px;
+                background-color: #ffffff;
+                overflow: hidden;
+        
+                .main {
+                    width: 100%;
+                    background-color: #ffffff;
+                    padding: 8px;
+                    display: flex;
+                    flex-flow: column;
+                    align-items: center;
+        
+    
+                    .title {
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: @charcoal;
+                    }
+    
+                    .calendar {
+                        margin: 8px 0;
+                        display: flex;
+                        flex-flow: column;
+                        align-items: center;
+                        direction: ltr;
+        
+                        .calendar-row {
+                            display: flex;
+                            flex-flow: row;
+                            align-items: center;
+    
+                            .calendar-item {
+                                display: block;
+                                margin: 4px;
+                                width: 8px;
+                                height: 8px;
+    
+                                &.round {
+                                    border-radius: 4px;
+                                    overflow: hidden;
+                                }
+    
+                                span {
+                                    font-size: 12px;
+                                    color: #959d9d;
+                                    display: block;
+                                    min-height: 8px;
+                                    width: 8px;
+                                    line-height: 8px;
+                                }
+                            }
+                        }
+                    }
+    
+                    .level {
+                        font-size: 12px;
+                        font-weight: 500;
+                        color: @charcoal;
+                        white-space: nowrap;
+                    }
+
+                    .confidence {
+                        font-size: 12px;
+                        white-space: nowrap;
+                        font-weight: normal;
+                        color: @cool-grey;
+                    }
+    
+                }
+    
+                .footer {
+                    width: 100%;
+                    background-color: #eff0f0;
+                    padding: 8px;
+                    text-align: center;
+
+                    span {
+                        font-size: 12px;
+                        font-weight: normal;
+                        color: @cool-grey;
+    
+                        &.number {
+                            color: @bluegreen;
+                        }
+                    }
+                }
+            }
         }
     
         > .close-button {

@@ -25,7 +25,6 @@ export class MainPageComponent implements OnInit, AfterViewInit {
   }
 
   set tab(value) {
-    console.log('TAB=', value);
     this._tab = value;
   }
 

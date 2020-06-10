@@ -22,6 +22,8 @@ export class MapService {
   zoom = 11;
   public configStream = new ReplaySubject<any>(1);
   public config: any;
+  public popup_data: any = {};
+  colorScale: any;
 
   constructor(private source: SourceService, private storage: ReportStoreService, private http: HttpClient) {
     this.source.sourceStream.pipe(first()).subscribe((_source) => {
@@ -36,8 +38,17 @@ export class MapService {
           catchError(() => {
             return this.http.get('https://avid-covider.phonaris.com/data/map_coloring.json');
           })
-        ).subscribe((data) => {
+        ).subscribe((data: any) => {
+          this.colorScale = data.color_scale;
           this.configStream.next(data);
+        });
+    this.http.get('/data/popup_data.json')
+        .pipe(
+          catchError(() => {
+            return this.http.get('https://avid-covider.phonaris.com/data/popup_data.json');
+          })
+        ).subscribe((data) => {
+          this.popup_data = data;
         });
   }
 
@@ -94,4 +105,22 @@ export class MapService {
     this.lon = lon;
     this.zoom = zoom;
   }
+
+  scoreClasses(score) {
+    let ret = '';
+    if (!score.nr || score.nr < 200) {
+      ret += 'band-noinfo ';
+    }
+    if (score.nr > 40) {
+      for (let i = 0 ; i < this.colorScale.length ; i++) {
+        if (score.sr <= this.colorScale[i][0]) {
+          return ret + 'band' + i;
+        }
+      }
+      return ret + 'band' + (this.colorScale.length - 1);
+    } else {
+      return ret + 'band-none';
+    }
+  }
+
 }

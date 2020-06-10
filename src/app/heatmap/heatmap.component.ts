@@ -5,6 +5,8 @@ import { MapService } from '../map.service';
 import { I18nService } from '../i18n.service';
 import { ReportStoreService } from '../report-store.service';
 import { PRODUCTION } from '../constants';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heatmap',
@@ -17,11 +19,32 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
   @Input() infoButton = true;
   @Input() padding = 16;
   _infoboxActive = false;
+  popupLeft = '';
+  popupTop = '';
+  popupVisible = false;
+  popupData: any = {};
+  popupStream = new Subject<any>();
 
   private map: mapboxgl.Map;
 
   constructor(public layout: LayoutService, public mapService: MapService, private i18n: I18nService,
-              private storage: ReportStoreService, @Inject(LOCALE_ID) private locale) { }
+              private storage: ReportStoreService, @Inject(LOCALE_ID) private locale) {
+    this.popupStream.pipe(
+      debounceTime(250),
+      distinctUntilChanged((prev, curr) => prev.city_id === curr.city_id),
+    ).subscribe((ev) => {
+      this.popupVisible = !!ev.city_id;
+      if (this.popupVisible) {
+        this.popupLeft = (this.padding + ev.location.x) + 'px';
+        this.popupTop = (this.padding + ev.location.y) + 'px';
+        this.popupData = this.mapService.popup_data[ev.city_id] || {};
+
+        this.popupData.txCityName = this.popupData.translations ?
+          (this.popupData.translations[this.locale] || this.popupData.translations.he) :
+          this.popupData.city_name;
+      }
+    });
+  }
 
   ngOnInit() {
   }
@@ -76,6 +99,32 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
               ]);
             }
           }
+        });
+
+        this.map.on('mousemove', 'city-fill', (e) => {
+          // Change the cursor style as a UI indicator.
+
+          const city_id = e.features[0].properties.id;
+          const location = e.point;
+
+          this.map.getCanvas().style.cursor = 'pointer';
+
+          this.popupStream.next({city_id, location})
+        });
+
+        this.map.on('mouseleave', 'city-fill', () => {
+          this.map.getCanvas().style.cursor = '';
+          this.popupStream.next({city_id: null});
+        });
+
+        this.map.on('movestart', () => {
+          this.map.getCanvas().style.cursor = '';
+          this.popupStream.next({city_id: null});
+        });
+
+        this.map.on('zoomstart', () => {
+          this.map.getCanvas().style.cursor = '';
+          this.popupStream.next({city_id: null});
         });
       } catch (e) {
         console.log('Failed to instantiate map', e);
