@@ -7,7 +7,9 @@
         <div class='title'>{{ popupData.txCityName }}</div>
         <div class='calendar'>
           <div class='calendar-row' *ngFor='let week of popupData.scores'>
-            <div class='calendar-item' *ngFor='let day of week' [class.round]='!!day.nr || day.nr === 0'>
+            <div class='calendar-item' *ngFor='let day of week'
+                 [class.round]='!!day.nr || day.nr === 0'
+                 [class.large]='!!day.dom'>
               <ng-container *ngIf='!day.nr && day.nr !== 0'>
                 <span i18n *ngIf='day.weekday === 0'>א</span>
                 <span i18n *ngIf='day.weekday === 1'>ב</span>
@@ -18,8 +20,7 @@
                 <span i18n *ngIf='day.weekday === 6'>ש</span>
               </ng-container>
               <ng-container *ngIf='day.nr || day.nr === 0'>
-                <span [class]='mapService.scoreClasses(day)'>
-                </span>
+                <span [class]='mapService.scoreClasses(day)'>{{ day.dom || ''}}</span>
               </ng-container>
             </div>
           </div>
