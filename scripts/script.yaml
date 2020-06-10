@@ -497,7 +497,7 @@
                         - show: לא, כבר שוחררתי
                           value: "false"
                           steps:
-                            - say: מתי השתחחרת?
+                            - say: מתי השתחררת?
                             - wait:
                                 variable: hospitalization_end_date
                                 placeholder: "תאריך: dd/mm/yy"
@@ -1250,6 +1250,7 @@
                   - wait:
                       variable: symptoms_other
                       required: false
+                      placeholder: פרטו את התסמינים
 
         - goto: current-report-temperature
 
