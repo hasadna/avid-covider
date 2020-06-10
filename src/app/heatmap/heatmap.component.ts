@@ -111,15 +111,15 @@ export class HeatmapComponent implements OnInit, AfterViewInit {
           this.popupStream.next({city_id, location});
         });
 
-        // this.map.on('click', 'city-fill', (e) => {
+        this.map.on('click', 'city-fill', (e) => {
 
-        //   const city_id = e.features[0].properties.id;
-        //   const location = e.point;
+          const city_id = e.features[0].properties.id;
+          const location = e.point;
 
-        //   this.map.getCanvas().style.cursor = 'pointer';
+          this.map.getCanvas().style.cursor = 'pointer';
 
-        //   this.popupStream.next({city_id, location});
-        // });
+          this.popupStream.next({city_id, location});
+        });
 
         this.map.on('mouseleave', 'city-fill', () => {
           this.map.getCanvas().style.cursor = '';
