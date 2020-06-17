@@ -738,7 +738,7 @@
                               cases:
                                 - default: true
                                 - match: empty
-                                - steps:
+                                  steps:
                                     - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
                                     - wait:
                                         variable: routine_workplace_is_outside
@@ -850,7 +850,7 @@
                               cases:
                                 - default: true
                                 - match: empty
-                                - steps:
+                                  steps:
                                     - switch:
                                         arg: routine_visits_prayer_house
                                         cases:

@@ -2986,230 +2986,102 @@ export const script = {
                                         "default": true
                                       },
                                       {
-                                        "match": "empty"
-                                      },
-                                      {
+                                        "match": "empty",
                                         "steps": [
                                           {
-                                            "say": {
-                                              ".tx": {
-                                                "_": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
-                                                "ar": "هل لديك عمل ثابت خارج المنزل في هذه الأيام؟",
-                                                "en": "In this period, do you work regularly outside of your home?",
-                                                "es": "¿Tiene un trabajo permanente fuera del hogar en estos días?",
-                                                "fr": "Avez-vous un emploi régulier en dehors de la maison ces jours-ci ?",
-                                                "ru": "Работаете ли вы на постоянной работе вне дома в эти дни?"
-                                              }
-                                            },
-                                            "uid": "6f12727f11"
+                                            "say": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
+                                            "uid": "a83f9158f0"
                                           },
                                           {
-                                            "uid": "4dc0bda1fa",
+                                            "uid": "677348cb41",
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "כן, יש עבודה מחוץ לבית",
-                                                      "ar": "نعم, أنا أعمل خارج المنزل",
-                                                      "en": "Yes, I work outside my home",
-                                                      "es": "Si, trabajo fuera de casa",
-                                                      "fr": "Oui, je travail en dehors de la maison",
-                                                      "ru": "Да, работал/а вне дома"
-                                                    }
-                                                  },
+                                                  "show": "כן, יש עבודה מחוץ לבית",
                                                   "steps": [
                                                     {
-                                                      "say": {
-                                                        ".tx": {
-                                                          "_": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
-                                                          "ar": "وكم ساعة, تقريبًا, عملت هناك في الأسبوع السابق؟ ",
-                                                          "en": "Approximately how many hours did you work during the last week?",
-                                                          "es": "¿Y cuántas horas, más o menos, trabajó allí la semana pasada?",
-                                                          "fr": "Et combien d'heures, plus ou moins, y avez-vous travaillé la semaine dernière ?",
-                                                          "ru": "И сколько часов вы работали, примерно?"
-                                                        }
-                                                      },
-                                                      "uid": "5f18c46a8b"
+                                                      "say": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
+                                                      "uid": "1ef1036328"
                                                     },
                                                     {
-                                                      "uid": "83b280a0b1",
+                                                      "uid": "83bd7dfdc2",
                                                       "wait": {
                                                         "input-kind": "number",
                                                         "input-max": 168,
                                                         "input-min": 0,
                                                         "input-step": 1,
-                                                        "placeholder": {
-                                                          ".tx": {
-                                                            "_": "מספר השעות, בערך",
-                                                            "ar": "عدد الساعات, تقريبًا",
-                                                            "en": "Approximately how many hours?",
-                                                            "es": "El número de horas, aproximadamente",
-                                                            "fr": "Le nombre d'heures, à peu près",
-                                                            "ru": "Количество часов, примерно"
-                                                          }
-                                                        },
+                                                        "placeholder": "מספר השעות, בערך",
                                                         "variable": "routine_workplace_weekly_hours"
                                                       }
                                                     },
                                                     {
-                                                      "say": {
-                                                        ".tx": {
-                                                          "_": "האם העבודה במקום קבוע?",
-                                                          "ar": "هل تعمل/ين في مكان ثابت؟",
-                                                          "en": "Is your workplace in a fixed location?",
-                                                          "es": "¿El trabajo está en un lugar fijo?",
-                                                          "fr": "Votre lieu de travail est il fixe?",
-                                                          "ru": "Вы работали в одном и том же месте?"
-                                                        }
-                                                      },
-                                                      "uid": "b09af4b3f8"
+                                                      "say": "האם העבודה במקום קבוע?",
+                                                      "uid": "b65135628b"
                                                     },
                                                     {
-                                                      "uid": "ef5a1ee71d",
+                                                      "uid": "9c1bc87256",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "כן, במקום קבוע",
-                                                                "ar": "نعم, في مكان ثابت",
-                                                                "en": "Yes, in a permanent location",
-                                                                "es": "Si, en un lugar fijo",
-                                                                "fr": "Oui, mon lieu de travail est fixe",
-                                                                "ru": "Да, в постоянном месте"
-                                                              }
-                                                            },
+                                                            "show": "כן, במקום קבוע",
                                                             "steps": [
                                                               {
-                                                                "say": {
-                                                                  ".tx": {
-                                                                    "_": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
-                                                                    "ar": "هل بإمكاننا أن نسأل عن عنوان عملك؟ من الممكن أن يُساعدنا هذا في البحث",
-                                                                    "en": "Can we ask where you work? It could help our research",
-                                                                    "es": "¿Podemos preguntar dónde está el lugar de trabajo? Nos puede ayudar con la investigación.",
-                                                                    "fr": "Pouvons-nous demander où se trouve votre lieu de travail? Cela peut nous aider dans la recherche",
-                                                                    "ru": "Можно узнать, где находится ваше место работы? Это поможет нашему исследованию."
-                                                                  }
-                                                                },
-                                                                "uid": "23f8da71ba"
+                                                                "say": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
+                                                                "uid": "66817c727b"
                                                               },
                                                               {
-                                                                "uid": "cfd73cc513",
+                                                                "uid": "13d03716f5",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
-                                                                      "show": {
-                                                                        ".tx": {
-                                                                          "_": "כן, בטח",
-                                                                          "ar": "نعم, طبعًا",
-                                                                          "en": "Yes, sure",
-                                                                          "es": "Sí, seguro",
-                                                                          "fr": "Oui, bien sûr",
-                                                                          "ru": "Да, конечно"
-                                                                        }
-                                                                      },
+                                                                      "show": "כן, בטח",
                                                                       "steps": [
                                                                         {
                                                                           "do": {
                                                                             "cmd": "prepare_city_town_suggestions",
                                                                             "variable": "_cityTownSuggestions"
                                                                           },
-                                                                          "uid": "af2bfe15e4"
+                                                                          "uid": "fc3a718d88"
                                                                         },
                                                                         {
-                                                                          "say": {
-                                                                            ".tx": {
-                                                                              "_": "איפה נמצא מקום העבודה?",
-                                                                              "ar": "أين يوجد مكان عملك؟",
-                                                                              "en": "Where is your workplace located?",
-                                                                              "es": "¿Dónde está el lugar de trabajo?",
-                                                                              "fr": "Où se trouve votre lieu de travail?",
-                                                                              "ru": "Где находится ваше место работы?"
-                                                                            }
-                                                                          },
-                                                                          "uid": "1288d5cbe3"
+                                                                          "say": "איפה נמצא מקום העבודה?",
+                                                                          "uid": "03736bc9e9"
                                                                         },
                                                                         {
-                                                                          "uid": "184782fedf",
+                                                                          "uid": "0a1c2609f3",
                                                                           "wait": {
-                                                                            "placeholder": {
-                                                                              ".tx": {
-                                                                                "_": "שם העיר או הישוב",
-                                                                                "ar": "إسم المدينة أو القرية",
-                                                                                "en": "Place of residence",
-                                                                                "es": "Nombre de la ciudad o la localidad",
-                                                                                "fr": "Nom de la ville ou de la localité",
-                                                                                "ru": "Название города или поселка"
-                                                                              }
-                                                                            },
+                                                                            "placeholder": "שם העיר או הישוב",
                                                                             "suggestionsFrom": "_cityTownSuggestions",
                                                                             "variable": "routine_workplace_city_town"
                                                                           }
                                                                         },
                                                                         {
-                                                                          "say": {
-                                                                            ".tx": {
-                                                                              "_": "ובאיזה רחוב זה?",
-                                                                              "ar": "وفي أي شارع؟",
-                                                                              "en": "Which street?",
-                                                                              "es": "¿Y en qué calle está?",
-                                                                              "fr": "Et quel est le nom de la rue ? ",
-                                                                              "ru": "А на какой улице?"
-                                                                            }
-                                                                          },
-                                                                          "uid": "e2c26e25b3"
+                                                                          "say": "ובאיזה רחוב זה?",
+                                                                          "uid": "af2e5a6cea"
                                                                         },
                                                                         {
-                                                                          "uid": "0a5cbfec28",
+                                                                          "uid": "aa479218e8",
                                                                           "wait": {
-                                                                            "placeholder": {
-                                                                              ".tx": {
-                                                                                "_": "שם הרחוב, אם ידוע",
-                                                                                "ar": "إسم الشارع، إذا معروف",
-                                                                                "en": "Street name, if known",
-                                                                                "es": "Nombre de la calle, si se sabe",
-                                                                                "fr": "Nom de la rue, s'il est connu",
-                                                                                "ru": "Название улицы, если известно"
-                                                                              }
-                                                                            },
+                                                                            "placeholder": "שם הרחוב, אם ידוע",
                                                                             "required": false,
                                                                             "variable": "routine_workplace_street"
                                                                           }
                                                                         }
                                                                       ],
-                                                                      "uid": "71676b6888"
+                                                                      "uid": "9342fb3752"
                                                                     },
                                                                     {
-                                                                      "show": {
-                                                                        ".tx": {
-                                                                          "_": "עדיף שלא",
-                                                                          "ar": "مُفضل لا",
-                                                                          "en": "I prefer not to answer",
-                                                                          "es": "Preferible que no",
-                                                                          "fr": "Je ne préfère pas",
-                                                                          "ru": "Предпочитаю не отвечать на этот вопрос."
-                                                                        }
-                                                                      }
+                                                                      "show": "עדיף שלא"
                                                                     }
                                                                   ]
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "905bbc73df",
+                                                            "uid": "c927c7ff3e",
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "לא, אין כתובת קבועה בעבודה",
-                                                                "ar": "لا يوجد عنوان ثابت في العمل",
-                                                                "en": "No, I don't have a fixed work address",
-                                                                "es": "No, no hay una dirección fija en el trabajo.",
-                                                                "fr": "Non, je ne travail pas à une adresse fixe",
-                                                                "ru": "Нет, у моего места работы нет постоянного адреса"
-                                                              }
-                                                            },
+                                                            "show": "לא, אין כתובת קבועה בעבודה",
                                                             "value": false
                                                           }
                                                         ],
@@ -3217,46 +3089,19 @@ export const script = {
                                                       }
                                                     },
                                                     {
-                                                      "say": {
-                                                        ".tx": {
-                                                          "_": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
-                                                          "ar": "هل في أحد أيام الأسبوع السابق قمت من خلال عملك بتقديم خدمات وجها لوجه, لأكثر من 10 أشخاص؟",
-                                                          "en": "In any day during the last week, did you serve (face to face) more than 10 people?",
-                                                          "es": "La semana pasada en tu trabajo ¿has atendido, algún día, a más de 10 personas ese mismo día?",
-                                                          "fr": "Dans le cadre de votre profession, avez-vous physiquement aidé plus de 10 personnes au cours des 7 derniers jours ?",
-                                                          "ru": "Был ли день на последней неделе на работе когда вы обслужили больше 10 человек?"
-                                                        }
-                                                      },
-                                                      "uid": "cf6a61a1c8"
+                                                      "say": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
+                                                      "uid": "062de401ff"
                                                     },
                                                     {
-                                                      "uid": "4d2385241d",
+                                                      "uid": "3302e67c08",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "כן, נתתי שירות",
-                                                                "ar": "نعم, أعطيت خدمات",
-                                                                "en": "Yes, I did.",
-                                                                "es": "Sí, he brindado servicio a clientes",
-                                                                "fr": "Oui, j'ai assisté plus de dix personnes",
-                                                                "ru": "Да, обслуживал/а"
-                                                              }
-                                                            },
+                                                            "show": "כן, נתתי שירות",
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "לא נתתי שירות",
-                                                                "ar": "لا, لم أعط أي خدمة",
-                                                                "en": "No, I didn't.",
-                                                                "es": "No, no he dado servicio a clientes",
-                                                                "fr": "Non, je n'ai pas assisté plus de dix personnes",
-                                                                "ru": "Нет, не обслуживал/а"
-                                                              }
-                                                            },
+                                                            "show": "לא נתתי שירות",
                                                             "value": false
                                                           }
                                                         ],
@@ -3270,46 +3115,19 @@ export const script = {
                                                           {
                                                             "steps": [
                                                               {
-                                                                "say": {
-                                                                  ".tx": {
-                                                                    "_": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
-                                                                    "ar": "هل في عملك انت جزء من فريق طبي - الذي يعتني بمرضى أو يستقبل جمهور؟",
-                                                                    "en": "Do you work in a medical team, treating patients or receiving them?",
-                                                                    "es": "¿Es su trabajo parte de un equipo médico: atender pacientes o atender al público?",
-                                                                    "fr": "Faites vous partie d'une équipe médicale dans le cadre de votre travail ? Soignez-vous ou recevez-vous des patients ?",
-                                                                    "ru": "Работаете ли вы как медицинский персонал (уход за больными или прием публики)?"
-                                                                  }
-                                                                },
-                                                                "uid": "feafe65be2"
+                                                                "say": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
+                                                                "uid": "779ebae278"
                                                               },
                                                               {
-                                                                "uid": "0ccd0c1bab",
+                                                                "uid": "2fc8a8cadc",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
-                                                                      "show": {
-                                                                        ".tx": {
-                                                                          "_": "כן, אני חלק מצוות רפואי",
-                                                                          "ar": "نعم, أنا من ضمن فريق طبي",
-                                                                          "en": "Yes, I am a health-care professional",
-                                                                          "es": "Sí, formo parte de un equipo médico",
-                                                                          "fr": "Oui, je fais partie d'une équipe médicale",
-                                                                          "ru": "Да, я часть медицинского персонала."
-                                                                        }
-                                                                      },
+                                                                      "show": "כן, אני חלק מצוות רפואי",
                                                                       "value": true
                                                                     },
                                                                     {
-                                                                      "show": {
-                                                                        ".tx": {
-                                                                          "_": "לא, אני לא",
-                                                                          "ar": "لا, لستُ كذلك",
-                                                                          "en": "No, I'm not",
-                                                                          "es": "No, yo no",
-                                                                          "fr": "Non, je n'en fais pas partie",
-                                                                          "ru": "Нет, я не часть медицинского персонала"
-                                                                        }
-                                                                      },
+                                                                      "show": "לא, אני לא",
                                                                       "value": false
                                                                     }
                                                                   ],
@@ -3317,7 +3135,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "ef4ffa86ca",
+                                                            "uid": "bad25a7905",
                                                             "undefined": true
                                                           },
                                                           {
@@ -3325,23 +3143,14 @@ export const script = {
                                                           }
                                                         ]
                                                       },
-                                                      "uid": "de450c95a0"
+                                                      "uid": "3d0d30e7bb"
                                                     }
                                                   ],
-                                                  "uid": "69e45d2b38",
+                                                  "uid": "a63f7844fd",
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "לא",
-                                                      "ar": "لا",
-                                                      "en": "No",
-                                                      "es": "No",
-                                                      "fr": "Non",
-                                                      "ru": "Нет"
-                                                    }
-                                                  },
+                                                  "show": "לא",
                                                   "value": false
                                                 }
                                               ],
@@ -3349,7 +3158,7 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "3d441383dc"
+                                        "uid": "77cb6786ac"
                                       }
                                     ]
                                   },
@@ -3446,9 +3255,7 @@ export const script = {
                                         "default": true
                                       },
                                       {
-                                        "match": "empty"
-                                      },
-                                      {
+                                        "match": "empty",
                                         "steps": [
                                           {
                                             "switch": {
@@ -3460,60 +3267,24 @@ export const script = {
                                                 {
                                                   "steps": [
                                                     {
-                                                      "say": {
-                                                        ".tx": {
-                                                          "_": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
-                                                          "ar": "هل قمت بزيارة أماكن الصلاة بشكل معتاد خلال هذا الأسبوع؟",
-                                                          "en": "Did you visit a prayer house regularly this week?",
-                                                          "es": "¿Has visitado su templo regularmente esta semana?",
-                                                          "fr": "Vous êtes-vous rendus dans un lieu de prière régulièrement cette semaine ? ",
-                                                          "ru": "Посещали ли вы регулярно молитвенный дом на этой неделе?"
-                                                        }
-                                                      },
-                                                      "uid": "3669d83ab7"
+                                                      "say": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
+                                                      "uid": "55aa85582d"
                                                     },
                                                     {
-                                                      "uid": "dec5331570",
+                                                      "uid": "7c947e6580",
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "כן",
-                                                                "ar": "نعم",
-                                                                "en": "Yes",
-                                                                "es": "Sí",
-                                                                "fr": "Oui",
-                                                                "ru": "Да"
-                                                              }
-                                                            },
+                                                            "show": "כן",
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "לא",
-                                                                "ar": "لا",
-                                                                "en": "No",
-                                                                "es": "No",
-                                                                "fr": "Non",
-                                                                "ru": "Нет"
-                                                              }
-                                                            },
+                                                            "show": "לא",
                                                             "value": false
                                                           },
                                                           {
                                                             "class": "other",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "לא רוצה להשיב",
-                                                                "ar": "لا أريد الإجابة",
-                                                                "en": "I prefer not to answer",
-                                                                "es": "No quiero responder",
-                                                                "fr": "Je ne veux pas répondre",
-                                                                "ru": "Я не хочу отвечать на этот вопрос"
-                                                              }
-                                                            },
+                                                            "show": "לא רוצה להשיב",
                                                             "value": "no_response"
                                                           }
                                                         ],
@@ -3521,124 +3292,52 @@ export const script = {
                                                       }
                                                     }
                                                   ],
-                                                  "uid": "d44b5f0dcc",
+                                                  "uid": "9a70daa206",
                                                   "undefined": true
                                                 }
                                               ]
                                             },
-                                            "uid": "1e2830793e"
+                                            "uid": "bc7deb7c10"
                                           },
                                           {
-                                            "say": {
-                                              ".tx": {
-                                                "_": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
-                                                "ar": "هل قمت بإستخدام المواصلات العامة في الأسبوع السابق؟",
-                                                "en": "Did you use public transport during the last week?",
-                                                "es": "¿Uso transporte público durante la semana pasada?",
-                                                "fr": "Avez-vous utilisé les transports en commun au cours de la dernière semaine ?",
-                                                "ru": "Вы пользовались общественным транспортом на последней неделе?"
-                                              }
-                                            },
-                                            "uid": "a0d1fe80e3"
+                                            "say": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
+                                            "uid": "d575928b15"
                                           },
                                           {
-                                            "uid": "8d1ed2ecd5",
+                                            "uid": "3a55d284cb",
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "כן",
-                                                      "ar": "نعم",
-                                                      "en": "Yes",
-                                                      "es": "Sí",
-                                                      "fr": "Oui",
-                                                      "ru": "Да"
-                                                    }
-                                                  },
+                                                  "show": "כן",
                                                   "steps": [
                                                     {
-                                                      "say": {
-                                                        ".tx": {
-                                                          "_": "במה מאלה השתמשת השבוע?",
-                                                          "ar": "هل قمت بإستخدام أي من هذه؟",
-                                                          "en": "Which of these have you taken during the last week?",
-                                                          "es": "¿Cuál de estos usaste esta semana?",
-                                                          "fr": "Lequel avez-vous utilisé cette semaine ?",
-                                                          "ru": "Какими средствами транспорта вы пользовались на этой неделе?"
-                                                        }
-                                                      },
-                                                      "uid": "ac8a8b04fd"
+                                                      "say": "במה מאלה השתמשת השבוע?",
+                                                      "uid": "b851ff5e82"
                                                     },
                                                     {
-                                                      "uid": "5379f87a9e",
+                                                      "uid": "646184848f",
                                                       "wait": {
                                                         "multi": true,
                                                         "options": [
                                                           {
                                                             "field": "routine_uses_public_transportation_train",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "רכבת",
-                                                                "ar": "قطار",
-                                                                "en": "Train",
-                                                                "es": "Tren",
-                                                                "fr": "Train",
-                                                                "ru": "Поезд"
-                                                              }
-                                                            }
+                                                            "show": "רכבת"
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_bus",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "אוטובוס",
-                                                                "ar": "باص",
-                                                                "en": "Bus",
-                                                                "es": "Autobus",
-                                                                "fr": "Autobus",
-                                                                "ru": "Автобус"
-                                                              }
-                                                            }
+                                                            "show": "אוטובוס"
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_taxi",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "מונית",
-                                                                "ar": "سيارة أجرة",
-                                                                "en": "Taxi",
-                                                                "es": "Taxi",
-                                                                "fr": "Taxi",
-                                                                "ru": "Такси"
-                                                              }
-                                                            }
+                                                            "show": "מונית"
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_other",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "אחר",
-                                                                "ar": "آخر",
-                                                                "en": "Other",
-                                                                "es": "Otro",
-                                                                "fr": "Autre",
-                                                                "ru": "Другое"
-                                                              }
-                                                            }
+                                                            "show": "אחר"
                                                           },
                                                           {
                                                             "class": "other",
-                                                            "show": {
-                                                              ".tx": {
-                                                                "_": "<span class='empty'>בעצם לא</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>",
-                                                                "ar": "<span class='empty'>في الحقيقة لا</span>\n<span class='not-empty'>بس </span>\n<span class='none-selected'>لا يوجد تفاصيل أخرى</span>",
-                                                                "en": "<span class='empty'>Actually, I didn't</span>\n<span class='not-empty'>That's it</span>\n<span class='none-selected'>No further details</span>",
-                                                                "es": "<span class='empty'>Realmente no</span>\n<span class='not-empty'>Listo</span>\n<span class='none-selected'>Sin más detalles</span>",
-                                                                "fr": "<span class='empty'>Pas vraiment</span>\n<span class='not-empty'>C'est tout</span>\n<span class='none-selected'>Pas d'autres détails</span>",
-                                                                "ru": "<span class='empty'>Не использвал/а ничего</span>\n<span class='not-empty'>Готово</span>\n<span class='none-selected'>Ничего не могу добавить</span>"
-                                                              }
-                                                            }
+                                                            "show": "<span class='empty'>בעצם לא</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>"
                                                           }
                                                         ],
                                                         "variable": "_var"
@@ -3652,23 +3351,14 @@ export const script = {
                                                           "_var"
                                                         ]
                                                       },
-                                                      "uid": "81f086b008"
+                                                      "uid": "e29eb759e8"
                                                     }
                                                   ],
-                                                  "uid": "953f46baf3",
+                                                  "uid": "bea066ed77",
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "לא",
-                                                      "ar": "لا",
-                                                      "en": "No",
-                                                      "es": "No",
-                                                      "fr": "Non",
-                                                      "ru": "Нет"
-                                                    }
-                                                  },
+                                                  "show": "לא",
                                                   "value": false
                                                 }
                                               ],
@@ -3676,86 +3366,32 @@ export const script = {
                                             }
                                           },
                                           {
-                                            "say": {
-                                              ".tx": {
-                                                "_": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
-                                                "ar": "هل وضعت كمامة عند خروجك من البيت؟",
-                                                "en": "Did you wear a mask when you went outside?",
-                                                "es": "¿Te pusiste una máscara esta semana cuando saliste de casa?",
-                                                "fr": "Avez-vous porté un masque cette semaine lorsque vous avez quitté la maison ?",
-                                                "ru": "Носили ли вы маску, когда вы выходили  из дома?"
-                                              }
-                                            },
-                                            "uid": "1af2ab28ae"
+                                            "say": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
+                                            "uid": "d7e6447df9"
                                           },
                                           {
-                                            "uid": "413d3437e3",
+                                            "uid": "1a3e3a74ec",
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "כן, תמיד",
-                                                      "ar": "نعم, دائمًا",
-                                                      "en": "Yes, always",
-                                                      "es": "Si, regularmente",
-                                                      "fr": "Oui, toujours",
-                                                      "ru": "Да, всё время"
-                                                    }
-                                                  },
+                                                  "show": "כן, תמיד",
                                                   "value": "always"
                                                 },
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "רוב הזמן",
-                                                      "ar": "أغلب الوقت",
-                                                      "en": "Most of the time",
-                                                      "es": "La mayoria de las veces",
-                                                      "fr": "La plupart du temps",
-                                                      "ru": "Большую часть времени"
-                                                    }
-                                                  },
+                                                  "show": "רוב הזמן",
                                                   "value": "mostly_yes"
                                                 },
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "בחלק קטן מהזמן",
-                                                      "ar": "جزء قليل من الوقت",
-                                                      "en": "A small part of the time",
-                                                      "es": "Muy pocas veces",
-                                                      "fr": "Une fraction du temps",
-                                                      "ru": "Иногда"
-                                                    }
-                                                  },
+                                                  "show": "בחלק קטן מהזמן",
                                                   "value": "mostly_no"
                                                 },
                                                 {
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "לא",
-                                                      "ar": "لا",
-                                                      "en": "No",
-                                                      "es": "No",
-                                                      "fr": "Non",
-                                                      "ru": "Нет"
-                                                    }
-                                                  },
+                                                  "show": "לא",
                                                   "value": "never"
                                                 },
                                                 {
                                                   "class": "other",
-                                                  "show": {
-                                                    ".tx": {
-                                                      "_": "לא רוצה להשיב",
-                                                      "ar": "لا أريد الإجابة",
-                                                      "en": "I prefer not to answer",
-                                                      "es": "No quiero responder",
-                                                      "fr": "Je ne veux pas répondre",
-                                                      "ru": "Я не хочу отвечать на этот вопрос"
-                                                    }
-                                                  },
+                                                  "show": "לא רוצה להשיב",
                                                   "value": "no_response"
                                                 }
                                               ],
@@ -3763,7 +3399,7 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "c373a388f0"
+                                        "uid": "1731c4a924"
                                       },
                                       {
                                         "show": {
