@@ -711,8 +711,8 @@
                               params:
                                 - record
                                 - שיש לך עבודה קבועה מחוץ לבית
-                                - ב:{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}
-                                - שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע.
+                                - ב-{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}
+                                - שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע
                                 - שהעבודה שלך היא כחלק מצוות רפואי
                                 - שהעבודה שלך היא לא כחלק מצוות רפואי
                                 - ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה

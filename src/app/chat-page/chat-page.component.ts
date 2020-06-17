@@ -442,6 +442,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           s_routine_uses_public_transportation_taxi,
           s_routine_uses_public_transportation_other_only,
           s_routine_uses_public_transportation_other,
+          s_routine_uses_public_transportation_none,
           s_routine_wears_mask_always,
           s_routine_wears_mask_mostly_yes,
           s_routine_wears_mask_mostly_no,
@@ -474,6 +475,9 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             } else {
               pt += '<br/> - ' + s_routine_uses_public_transportation_other_only;
             }
+          }
+          if (pt.length === 0) {
+            pt += '<br/>> - ' + s_routine_uses_public_transportation_none;
           }
           ret += pt + '<br/> - ';
           if (record.routine_wears_mask === undefined) {
