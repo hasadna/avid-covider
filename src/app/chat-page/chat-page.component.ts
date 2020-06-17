@@ -596,7 +596,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           payload = this.prepareToSave(payload);
           let obs = null;
           if (PRODUCTION) {
-            obs = this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure', payload);
+            obs = this.http.post('https://europe-west2-custom-cargo-279912.cloudfunctions.net/avid-covider-reports', payload);
           } else {
             console.log('WOULD SEND', payload);
             window['wouldSend'] = payload;  // used by protractor (e2e testing)
@@ -622,7 +622,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
       }),
       switchMap((payload) => {
         if (PRODUCTION) {
-          return this.http.post('https://europe-west2-hasadna-general.cloudfunctions.net/avid-covider-secure-devices', payload);
+          return this.http.post('https://europe-west2-custom-cargo-279912.cloudfunctions.net/avid-covider-devices', payload);
         } else {
           console.log('DEVICE STATE', payload);
           return of({success: true});
