@@ -477,7 +477,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             }
           }
           if (pt.length === 0) {
-            pt += '<br/>> - ' + s_routine_uses_public_transportation_none;
+            pt += '<br/> - ' + s_routine_uses_public_transportation_none;
           }
           ret += pt + '<br/> - ';
           if (record.routine_wears_mask === undefined) {
@@ -575,7 +575,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
             options.push(option);
           }
           options.push({
-            show: later_option, value: 'no-uid', steps: []
+            show: later_option, value: 'no-uid', steps: [{pop: 'affiliations'}]
           });
           return options;
         },

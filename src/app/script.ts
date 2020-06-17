@@ -2907,13 +2907,49 @@ export const script = {
                                     "cmd": "prepare_routine_question_work",
                                     "params": [
                                       "record",
-                                      "שיש לך עבודה קבועה מחוץ לבית",
-                                      "ב-{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}",
-                                      "שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע",
-                                      "שהעבודה שלך היא כחלק מצוות רפואי",
-                                      "שהעבודה שלך היא לא כחלק מצוות רפואי",
-                                      "ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה",
-                                      "ושלא נתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה"
+                                      {
+                                        ".tx": {
+                                          "_": "שיש לך עבודה קבועה מחוץ לבית",
+                                          "en": "that you work regularly outside of your home",
+                                          "fr": "Que vous avez un emploi régulier en dehors de la maison"
+                                        }
+                                      },
+                                      "ב{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}",
+                                      {
+                                        ".tx": {
+                                          "_": "שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע",
+                                          "en": "that you worked about  {{routine_workplace_weekly_hours}} hours per week",
+                                          "fr": "Que vous avez travaillé {{routine_workplace_weekly_hours}} heurs par semaine"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שהעבודה שלך היא כחלק מצוות רפואי",
+                                          "en": "that you work in a medical team",
+                                          "fr": "Que vous faites partie d'une équipe médicale dans le cadre de votre travail"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שהעבודה שלך היא לא כחלק מצוות רפואי",
+                                          "en": "that you don't work in a medical team",
+                                          "fr": "Que vous ne faites pas partie d'une équipe médicale dans le cadre de votre travail"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה",
+                                          "en": "and that you served more than 10 people at work",
+                                          "fr": "Et que vous aviez servi plus de 10 personnes dans une journée de travail"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "ושלא נתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה",
+                                          "en": "and that you didn't serve more than 10 people at work",
+                                          "fr": "Et que vous n'aviez pas servi plus de 10 personnes dans une journée de travail"
+                                        }
+                                      }
                                     ],
                                     "variable": "_prepare_routine_question_work"
                                   },
@@ -2930,11 +2966,17 @@ export const script = {
                                         "default": true,
                                         "steps": [
                                           {
-                                            "say": "בשבוע שעבר דיווחת ש<br/>{{_prepare_routine_question_work}}",
-                                            "uid": "85d66a9e3d"
+                                            "say": "בשבוע שעבר דיווחת<br/>{{_prepare_routine_question_work}}",
+                                            "uid": "c572217dc3"
                                           },
                                           {
-                                            "say": "האם משהו מכל זה השתנה השבוע?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם משהו מכל זה השתנה השבוע?",
+                                                "en": "Did any of that change this week?",
+                                                "fr": "Est-ce que quelque chose parmi tout cela a changé cette semaine ?"
+                                              }
+                                            },
                                             "uid": "b11f544e8e"
                                           },
                                           {
@@ -3358,20 +3400,98 @@ export const script = {
                                     "cmd": "prepare_routine_question_behaviour",
                                     "params": [
                                       "record",
-                                      "שביקרת באופן קבוע בבית תפילה",
-                                      "שלא ביקרת באופן קבוע בבית תפילה",
-                                      "העדפת שלא לדווח על ביקור קבוע בבית תפילה",
-                                      "שנסעת ברכבת",
-                                      "שנסעת באוטובוס",
-                                      "שנסעת במונית",
-                                      "שנסעת בתחבורה ציבורית",
-                                      "שנסעת באמצעי תחבורה ציבורית אחר",
-                                      "שלא השתמשת בתחבורה ציבורית",
-                                      "שחבשת מסכה כל הזמן",
-                                      "שחבשת מסכה רוב הזמן",
-                                      "שחבשת מסכה בחלק קטן מהזמן",
-                                      "שלא חבשת מסכה",
-                                      "העדפת שלא לדווח אם חבשת מסכה מחוץ לבית"
+                                      {
+                                        ".tx": {
+                                          "_": "שביקרת באופן קבוע בבית תפילה",
+                                          "en": "that you visited a house of prayer regularly",
+                                          "fr": "Que vous alliez régulièrement dans un lieu de culte"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שלא ביקרת באופן קבוע בבית תפילה",
+                                          "en": "that you didn't visit a house of prayer regularly",
+                                          "fr": "Que vous n'alliez pas régulièrement dans un lieu de culte"
+                                        }
+                                      },
+                                      "שהעדפת לא לדווח על ביקור קבוע בבית תפילה",
+                                      {
+                                        ".tx": {
+                                          "_": "שנסעת ברכבת",
+                                          "en": "that you took a train",
+                                          "fr": "Que vous aviez pris le train"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שנסעת באוטובוס",
+                                          "en": "that you took a bus",
+                                          "fr": "Que vous aviez pris le bus"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שנסעת במונית",
+                                          "en": "that you took a taxi",
+                                          "fr": "Que vous aviez pris un taxi"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שנסעת בתחבורה ציבורית",
+                                          "en": "that you traveled on public transport",
+                                          "fr": "Que vous aviez pris les transports en commun"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שנסעת באמצעי תחבורה ציבורית אחר",
+                                          "en": "that you traveled on another method of public transport",
+                                          "fr": "Que vous aviez pris d'autres transports en commun"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שלא השתמשת בתחבורה ציבורית",
+                                          "en": "that you didn't travel on public transport",
+                                          "fr": "Que vous n'aviez pas pris les transports en commun"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שחבשת מסכה כל הזמן",
+                                          "en": "that you wore a mask the whole time",
+                                          "fr": "Que vous portiez un masque tout le temps"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שחבשת מסכה רוב הזמן",
+                                          "en": "that you wore a mask most of the time",
+                                          "fr": "Que vous portiez un masque la plupart du temps"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שחבשת מסכה בחלק קטן מהזמן",
+                                          "en": "that you wore a mask some of the time",
+                                          "fr": "Que vous portiez un masque une partie du temps"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "שלא חבשת מסכה",
+                                          "en": "that you didn't wear a mask",
+                                          "fr": "Que vous ne portiez pas de masque"
+                                        }
+                                      },
+                                      {
+                                        ".tx": {
+                                          "_": "העדפת שלא לדווח אם חבשת מסכה מחוץ לבית",
+                                          "en": "you preferred not to report on wearing a mask outside of your home",
+                                          "fr": "Vous préfériez ne pas signaler si vous portiez un masque à l'extérieur de la maison"
+                                        }
+                                      }
                                     ],
                                     "variable": "_prepare_routine_question_behaviour"
                                   },
@@ -3388,11 +3508,23 @@ export const script = {
                                         "default": true,
                                         "steps": [
                                           {
-                                            "say": "בשבוע שעבר סיפרת<br/>{{_prepare_routine_question_behaviour}}",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "בשבוע שעבר סיפרת<br/>{{_prepare_routine_question_behaviour}}",
+                                                "en": "Last week you said that <br/>{{_prepare_routine_question_behaviour}}",
+                                                "fr": "La semaine dernière, vous nous avez dit<br/>{{_prepare_routine_question_behaviour}}"
+                                              }
+                                            },
                                             "uid": "ce06aa3a5b"
                                           },
                                           {
-                                            "say": "האם משהו מכל זה השתנה השבוע?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם משהו מכל זה השתנה השבוע?",
+                                                "en": "Did any of that change this week?",
+                                                "fr": "Quelque chose a-t-il changé parmi tout ça cette semaine ?"
+                                              }
+                                            },
                                             "uid": "ed6ba1919e"
                                           },
                                           {
@@ -3447,7 +3579,16 @@ export const script = {
                                         "match": "empty",
                                         "steps": [
                                           {
-                                            "say": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
+                                                "ar": "هل قمت بزيارة أماكن الصلاة بشكل معتاد خلال هذا الأسبوع؟",
+                                                "en": "Did you visit a prayer house regularly this week?",
+                                                "es": "¿Has visitado su templo regularmente esta semana?",
+                                                "fr": "Vous êtes-vous rendus dans un lieu de culte régulièrement cette semaine ? ",
+                                                "ru": "Посещали ли вы регулярно молитвенный дом на этой неделе?"
+                                              }
+                                            },
                                             "uid": "beeea14718"
                                           },
                                           {
@@ -3455,16 +3596,43 @@ export const script = {
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן",
+                                                      "ar": "نعم",
+                                                      "en": "Yes",
+                                                      "es": "Sí",
+                                                      "fr": "Oui",
+                                                      "ru": "Да"
+                                                    }
+                                                  },
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": "לא",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
                                                   "value": false
                                                 },
                                                 {
                                                   "class": "other",
-                                                  "show": "לא רוצה להשיב",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא רוצה להשיב",
+                                                      "ar": "لا أريد الإجابة",
+                                                      "en": "I prefer not to answer",
+                                                      "es": "No quiero responder",
+                                                      "fr": "Je ne veux pas répondre",
+                                                      "ru": "Я не хочу отвечать на этот вопрос"
+                                                    }
+                                                  },
                                                   "value": "no_response"
                                                 }
                                               ],
@@ -3472,7 +3640,16 @@ export const script = {
                                             }
                                           },
                                           {
-                                            "say": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
+                                                "ar": "هل قمت بإستخدام المواصلات العامة في الأسبوع السابق؟",
+                                                "en": "Did you use public transport during the last week?",
+                                                "es": "¿Uso transporte público durante la semana pasada?",
+                                                "fr": "Avez-vous utilisé les transports en commun au cours de la dernière semaine ?",
+                                                "ru": "Вы пользовались общественным транспортом на последней неделе?"
+                                              }
+                                            },
                                             "uid": "d64369849b"
                                           },
                                           {
@@ -3480,10 +3657,28 @@ export const script = {
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן",
+                                                      "ar": "نعم",
+                                                      "en": "Yes",
+                                                      "es": "Sí",
+                                                      "fr": "Oui",
+                                                      "ru": "Да"
+                                                    }
+                                                  },
                                                   "steps": [
                                                     {
-                                                      "say": "במה מאלה השתמשת השבוע?",
+                                                      "say": {
+                                                        ".tx": {
+                                                          "_": "במה מאלה השתמשת השבוע?",
+                                                          "ar": "هل قمت بإستخدام أي من هذه؟",
+                                                          "en": "Which of these have you taken during the last week?",
+                                                          "es": "¿Cuál de estos usaste esta semana?",
+                                                          "fr": "Lequel avez-vous utilisé cette semaine ?",
+                                                          "ru": "Какими средствами транспорта вы пользовались на этой неделе?"
+                                                        }
+                                                      },
                                                       "uid": "fe21db81f1"
                                                     },
                                                     {
@@ -3493,23 +3688,68 @@ export const script = {
                                                         "options": [
                                                           {
                                                             "field": "routine_uses_public_transportation_train",
-                                                            "show": "רכבת"
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "רכבת",
+                                                                "ar": "قطار",
+                                                                "en": "Train",
+                                                                "es": "Tren",
+                                                                "fr": "Train",
+                                                                "ru": "Поезд"
+                                                              }
+                                                            }
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_bus",
-                                                            "show": "אוטובוס"
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "אוטובוס",
+                                                                "ar": "باص",
+                                                                "en": "Bus",
+                                                                "es": "Autobus",
+                                                                "fr": "Autobus",
+                                                                "ru": "Автобус"
+                                                              }
+                                                            }
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_taxi",
-                                                            "show": "מונית"
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "מונית",
+                                                                "ar": "سيارة أجرة",
+                                                                "en": "Taxi",
+                                                                "es": "Taxi",
+                                                                "fr": "Taxi",
+                                                                "ru": "Такси"
+                                                              }
+                                                            }
                                                           },
                                                           {
                                                             "field": "routine_uses_public_transportation_other",
-                                                            "show": "אחר"
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "אחר",
+                                                                "ar": "آخر",
+                                                                "en": "Other",
+                                                                "es": "Otro",
+                                                                "fr": "Autre",
+                                                                "ru": "Другое"
+                                                              }
+                                                            }
                                                           },
                                                           {
                                                             "class": "other",
-                                                            "show": "<span class='empty'>בעצם לא</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>"
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "<span class='empty'>בעצם לא</span>\n<span class='not-empty'>זהו</span>\n<span class='none-selected'>אין פרטים נוספים</span>",
+                                                                "ar": "<span class='empty'>في الحقيقة لا</span>\n<span class='not-empty'>بس </span>\n<span class='none-selected'>لا يوجد تفاصيل أخرى</span>",
+                                                                "en": "<span class='empty'>Actually, I didn't</span>\n<span class='not-empty'>That's it</span>\n<span class='none-selected'>No further details</span>",
+                                                                "es": "<span class='empty'>Realmente no</span>\n<span class='not-empty'>Listo</span>\n<span class='none-selected'>Sin más detalles</span>",
+                                                                "fr": "<span class='empty'>Pas vraiment</span>\n<span class='not-empty'>C'est tout</span>\n<span class='none-selected'>Pas d'autres détails</span>",
+                                                                "ru": "<span class='empty'>Не использвал/а ничего</span>\n<span class='not-empty'>Готово</span>\n<span class='none-selected'>Ничего не могу добавить</span>"
+                                                              }
+                                                            }
                                                           }
                                                         ],
                                                         "variable": "_var"
@@ -3530,7 +3770,16 @@ export const script = {
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": "לא",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
                                                   "value": false
                                                 }
                                               ],
@@ -3538,7 +3787,16 @@ export const script = {
                                             }
                                           },
                                           {
-                                            "say": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
+                                                "ar": "هل وضعت كمامة عند خروجك من البيت؟",
+                                                "en": "Did you wear a mask when you went outside?",
+                                                "es": "¿Te pusiste una máscara esta semana cuando saliste de casa?",
+                                                "fr": "Avez-vous porté un masque cette semaine lorsque vous avez quitté la maison ?",
+                                                "ru": "Носили ли вы маску, когда вы выходили  из дома?"
+                                              }
+                                            },
                                             "uid": "7e8759beee"
                                           },
                                           {
@@ -3546,24 +3804,69 @@ export const script = {
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן, תמיד",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן, תמיד",
+                                                      "ar": "نعم, دائمًا",
+                                                      "en": "Yes, always",
+                                                      "es": "Si, regularmente",
+                                                      "fr": "Oui, toujours",
+                                                      "ru": "Да, всё время"
+                                                    }
+                                                  },
                                                   "value": "always"
                                                 },
                                                 {
-                                                  "show": "רוב הזמן",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "רוב הזמן",
+                                                      "ar": "أغلب الوقت",
+                                                      "en": "Most of the time",
+                                                      "es": "La mayoria de las veces",
+                                                      "fr": "La plupart du temps",
+                                                      "ru": "Большую часть времени"
+                                                    }
+                                                  },
                                                   "value": "mostly_yes"
                                                 },
                                                 {
-                                                  "show": "בחלק קטן מהזמן",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "בחלק קטן מהזמן",
+                                                      "ar": "جزء قليل من الوقت",
+                                                      "en": "A small part of the time",
+                                                      "es": "Muy pocas veces",
+                                                      "fr": "Une fraction du temps",
+                                                      "ru": "Иногда"
+                                                    }
+                                                  },
                                                   "value": "mostly_no"
                                                 },
                                                 {
-                                                  "show": "לא",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
                                                   "value": "never"
                                                 },
                                                 {
                                                   "class": "other",
-                                                  "show": "לא רוצה להשיב",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא רוצה להשיב",
+                                                      "ar": "لا أريد الإجابة",
+                                                      "en": "I prefer not to answer",
+                                                      "es": "No quiero responder",
+                                                      "fr": "Je ne veux pas répondre",
+                                                      "ru": "Я не хочу отвечать на этот вопрос"
+                                                    }
+                                                  },
                                                   "value": "no_response"
                                                 }
                                               ],
@@ -4511,7 +4814,13 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילה הפריחה?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילה הפריחה?",
+                                                "en": "How many days ago did the rash appear?",
+                                                "fr": "Depuis combien de jours l'éruption a-t-elle commencé ?"
+                                              }
+                                            },
                                             "uid": "34caead99d"
                                           },
                                           {
@@ -5424,7 +5733,13 @@ export const script = {
                   },
                   {
                     "field": "symptoms_rash",
-                    "show": "פריחה על העור"
+                    "show": {
+                      ".tx": {
+                        "_": "פריחה על העור",
+                        "en": "skin rash",
+                        "fr": "Éruption cutanée"
+                      }
+                    }
                   },
                   {
                     "class": "other",

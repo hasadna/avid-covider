@@ -711,7 +711,7 @@
                               params:
                                 - record
                                 - שיש לך עבודה קבועה מחוץ לבית
-                                - ב-{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}
+                                - ב{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}
                                 - שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע
                                 - שהעבודה שלך היא כחלק מצוות רפואי
                                 - שהעבודה שלך היא לא כחלק מצוות רפואי
@@ -724,7 +724,7 @@
                                 - match: empty
                                 - default: true
                                   steps:
-                                    - say: בשבוע שעבר דיווחת ש<br/>{{_prepare_routine_question_work}}
+                                    - say: בשבוע שעבר דיווחת<br/>{{_prepare_routine_question_work}}
                                     - say: האם משהו מכל זה השתנה השבוע?
                                     - wait:
                                         variable: _prepare_routine_question_work
@@ -817,7 +817,7 @@
                                 - record
                                 - שביקרת באופן קבוע בבית תפילה
                                 - שלא ביקרת באופן קבוע בבית תפילה
-                                - העדפת שלא לדווח על ביקור קבוע בבית תפילה
+                                - שהעדפת לא לדווח על ביקור קבוע בבית תפילה
                                 - שנסעת ברכבת
                                 - שנסעת באוטובוס
                                 - שנסעת במונית
