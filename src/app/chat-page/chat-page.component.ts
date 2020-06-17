@@ -321,7 +321,7 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
           return false;
         },
         save_public_service_data: (record: any) => {
-          if (record._served_public_last_fortnight) {
+          if (record.routine_served_public) {
             record._public_service_last_reported_yes = Date.now().valueOf();
           }
           const last_yes = record._public_service_last_reported_yes || 0;
@@ -393,6 +393,103 @@ export class ChatPageComponent implements OnInit, AfterViewInit {
         },
         prepare_city_town_suggestions: () => {
           return citySuggestions[this.locale] || citySuggestions['en'];
+        },
+        prepare_routine_question_work: (record,
+          s_routine_workplace_is_outside,
+          s_routine_workplace_location,
+          s_routine_workplace_weekly_hours,
+          s_medical_staff_member_true,
+          s_medical_staff_member_false,
+          s_routine_served_public_true,
+          s_routine_served_public_false,
+        ) => {
+          let ret = '';
+          if (record.routine_workplace_is_outside === undefined) {
+            return 'empty';
+          } else if (record.routine_workplace_is_outside) {
+            ret += ' - ' + s_routine_workplace_is_outside;
+            if (record.routine_workplace_city_town && record.routine_workplace_street) {
+              ret += ' ' + this.fillIn(record, s_routine_workplace_location);
+            }
+            ret += '<br/>';
+            if (record.routine_workplace_weekly_hours) {
+              ret += ' - ' + this.fillIn(record, s_routine_workplace_weekly_hours) + '<br/> - ';
+            }
+            if (record.medical_staff_member === undefined) {
+              return 'empty';
+            } else if (record.medical_staff_member) {
+              ret += s_medical_staff_member_true;
+            } else {
+              ret += s_medical_staff_member_false;
+            }
+            ret += '<br/> - ';
+            if (record.routine_served_public === undefined) {
+              return 'empty';
+            } else if (record.routine_served_public) {
+              ret += s_routine_served_public_true;
+            } else {
+              ret += s_routine_served_public_false;
+            }
+          }
+          return ret || 'empty';
+        },
+        prepare_routine_question_behaviour: (record,
+          s_routine_visits_prayer_house_true,
+          s_routine_visits_prayer_house_false,
+          s_routine_visits_prayer_house_no_response,
+          s_routine_uses_public_transportation_train,
+          s_routine_uses_public_transportation_bus,
+          s_routine_uses_public_transportation_taxi,
+          s_routine_uses_public_transportation_other,
+          s_routine_uses_public_transportation_other_only,
+          s_routine_wears_mask_always,
+          s_routine_wears_mask_mostly_yes,
+          s_routine_wears_mask_mostly_no,
+          s_routine_wears_mask_never,
+          s_routine_wears_mask_no_response,
+        ) => {
+          let ret = ' - ';
+          if (record.routine_visits_prayer_house === undefined) {
+            return 'empty';
+          } else if (record.routine_visits_prayer_house === 'no_response') {
+            ret += s_routine_visits_prayer_house_no_response;
+          } else if (record.routine_visits_prayer_house) {
+            ret += s_routine_visits_prayer_house_true;
+          } else {
+            ret += s_routine_visits_prayer_house_false;
+          }
+          let pt = '';
+          if (record.routine_uses_public_transportation_train) {
+            pt += '<br/> - ' + s_routine_uses_public_transportation_train;
+          }
+          if (record.routine_uses_public_transportation_bus) {
+            pt += '<br/> - ' + s_routine_uses_public_transportation_bus;
+          }
+          if (record.routine_uses_public_transportation_train) {
+            pt += '<br/> - ' + s_routine_uses_public_transportation_taxi;
+          }
+          if (record.routine_uses_public_transportation_other) {
+            if (pt.length > 0) {
+              pt += '<br/> - ' + s_routine_uses_public_transportation_other;
+            } else {
+              pt += '<br/> - ' + s_routine_uses_public_transportation_other_only;
+            }
+          }
+          ret += pt + '<br/> - ';
+          if (record.routine_wears_mask === undefined) {
+            return 'empty';
+          } else if (record.routine_wears_mask === 'always') {
+            ret += s_routine_wears_mask_always;
+          } else if (record.routine_wears_mask === 'mostly_yes') {
+            ret += s_routine_wears_mask_mostly_yes;
+          } else if (record.routine_wears_mask === 'mostly_no') {
+            ret += s_routine_wears_mask_mostly_no;
+          } else if (record.routine_wears_mask === 'never') {
+            ret += s_routine_wears_mask_never;
+          } else if (record.routine_wears_mask === 'no_response') {
+            ret += s_routine_wears_mask_no_response;
+          }
+          return ret || 'empty';
         },
         share_action: async () => {
           if (this.shareService.shareWidgetSupported) {

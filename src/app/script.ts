@@ -60,7 +60,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "כולם מנסים לחזור לשיגרה מסויימת אבל מגפת הקורונה לא נעלמה",
-                            "en": "Everyone is trying to return to a routine, but the Covid-19 pandemic is not over."
+                            "ar": "الجميع يحاول العودة لحياته المعتادة بشكل ما, لكن وباء الكورونا ما زال بيننا",
+                            "en": "Everyone is trying to return to a routine, but the Covid-19 pandemic is not over.",
+                            "es": "Todos intentan regresar a la rutina, pero la epidemia de Corona no ha desaparecido",
+                            "fr": "Tout le monde essaie de revenir à une certaine routine, mais l'épidémie du Coronavirus n'a pas disparu",
+                            "ru": "Все хотят вернуться к рутине, но эпидемия Короновируса не исчезла "
                           }
                         },
                         "uid": "c3ab2ebcbb"
@@ -69,7 +73,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "התשובות שלך לכמה שאלות, והמשך הדיווח, יעזרו לצוות המחקר של מכון ויצמן לאתר מוקדים אפשריים להתפרצות מחודשת של המחלה ולהיערך אליה בהתאם.",
-                            "en": "Your answers to our questions, and daily reporting, will help the Weizmann Institute research team to locate possible outbreaks of the disease as early as possible and prepare appropriately. "
+                            "ar": "إجابتك عن بعض الأسئلة, والإستمرارية في تعبئة الإستبيان, سوف تساعد فريق البحث في معهد وايزمن بتحديد بؤر التفشي الحديثة للمرض والتعامل معها وفقًا لذلك. ",
+                            "en": "Your answers to our questions, and daily reporting, will help the Weizmann Institute research team to locate possible outbreaks of the disease as early as possible and prepare appropriately. ",
+                            "es": "Sus respuestas, y los informes continuos, ayudarán al equipo de investigación del Instituto Weizmann a encontrar posibles puntos de infección de la enfermedad y así prepararse para ello.",
+                            "fr": "Vos réponses aux quelques questions et les rapports continus aideront l'équipe de recherche de l'Institut Weizmann à trouver les centres de propagation possibles pour une récidive de la maladie et à s'y préparer en conséquence.",
+                            "ru": "Ваши ответы на несколько вопросов, и дополнительные ответы в будущем, помогут команде исследователей Института Вайцмана обнаружить возможные новые вспышки болезни и подготовиться к ним."
                           }
                         },
                         "uid": "352f5a331f"
@@ -78,7 +86,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "כל השאלות והמידע ישארו אנונימיים ויכבדו את הפרטיות שלך",
-                            "en": "All the questions and information will remain anonymous and respect your privacy."
+                            "ar": "جميع الأسئلة والمعلومات ستبقى مجهولة المصدر من أجل إحترام خصوصيتك",
+                            "en": "All the questions and information will remain anonymous and respect your privacy.",
+                            "es": "Todas las preguntas e información permanecerán anónimas y respetarán su privacidad",
+                            "fr": "Toutes les questions et informations resteront anonymes et respecteront votre vie privée",
+                            "ru": "Все ответы и информация останутся анонимными, ваша конфиденциальность будет сохранена."
                           }
                         },
                         "uid": "7f3883f25d"
@@ -100,7 +112,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "הכי טוב כשכולם מדווחים על עצמם בכל יום אבל אם זה לא מסתדר, אפשר להקריא להם את השאלות או פשוט לענות בשמם",
-                            "en": "It's best when everyone reports daily for themselves, but if that is not convenient, you can read them the questions or just answer for them."
+                            "ar": "من المفضل أن يقوم كل واحد بتعبئة إستبيان لنفسه بشكل يومي لكن إذا كان صعب, ممكن ان تقرأ/ي لهم الأسئلة أو ببساطة أن تُجيب/ي بإسمهم",
+                            "en": "It's best when everyone reports daily for themselves, but if that is not convenient, you can read them the questions or just answer for them.",
+                            "es": "Es mejor cuando todos se reportan todos los días, pero si no es posible, puede leerles las preguntas o responder su lugar",
+                            "fr": "Le mieux serait que tout le monde remplisse le questionnaire chaque jour, mais si cela ne fonctionne pas, vous pouvez leur lire les questions ou simplement répondre en leur nom",
+                            "ru": "Лучше когда все докладывают про самих себя, но если это невозможно, можно зачитать им вопросы или просто ответить от их имени."
                           }
                         },
                         "uid": "699dcb90b1"
@@ -128,7 +144,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "ננסה יחד איתך להבין מה הסיכוי להתפרצות מחודשת של קורונה באזור שלך",
-                            "en": "Let's try together to understand the probability of a renewed outbreak of Covid-19 in your location"
+                            "ar": "سنحاول معًا أن نفهم ما هو إحتمال تجدد تفشي الكورنا في منطقتك",
+                            "en": "Let's try together to understand the probability of a renewed outbreak of Covid-19 in your location",
+                            "es": "Trabajaremos juntos para entender cuál es la posibilidad de una nueva erupción de contagios en su área",
+                            "fr": "Nous travaillerons avec vous pour comprendre quelle est la probabilité d'une nouvelle éruption du Coronavirus dans votre région",
+                            "ru": "Вместе с вамы мы попробуем понять, какова вероятность вспышки Коронавируса в вашем районе"
                           }
                         },
                         "uid": "f29e4b1a46"
@@ -137,7 +157,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "אם אחרי הדיווח שלך נוכל לקבל דיווח גם עבור בני המשפחה או בני הבית האחרים, זה יעזור לנו מאוד",
-                            "en": "If, after your report, we can have reports for the rest of your household, it would be very helpful"
+                            "ar": "بعد أن تنتهي من تعبئة إستبيانتك يمكن لسكان بيتك أيضًا أن يقوموا بتعبئة إستبيانات لهم, سوف يساعدنا هذا كثيرًا  ",
+                            "en": "If, after your report, we can have reports for the rest of your household, it would be very helpful",
+                            "es": "Si, después de su informe, también podemos obtener un informe para su familia u otros miembros del hogar, será de gran ayuda para nosotros",
+                            "fr": "Si après avoir rempli votre rapport, nous pouvons également obtenir un rapport pour votre famille ou d'autres membres de la maison, cela nous aidera beaucoup",
+                            "ru": "Если после вашего отчета мы сможем получить ответы и от других членов семьи или жителей вашего дома, это нам очень поможет"
                           }
                         },
                         "uid": "7b5136625b"
@@ -940,7 +964,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "האם מקום המגורים הנוכחי שלך הוא דיור מוגן או בית אבות?",
-                                      "en": "Do you currently live in an assisted living complex or an old age home?"
+                                      "ar": "هل مكان سكنك الحالي هو مسكن للرعاية أو بيت للمُسنين؟",
+                                      "en": "Do you currently live in an assisted living complex or an old age home?",
+                                      "es": "¿Es su residencia actual una vivienda protegida o un hogar de ancianos?",
+                                      "fr": "Votre résidence actuelle est-elle une maison de retraite ?",
+                                      "ru": "Живёте ли вы сейчас в доме для престарелых?"
                                     }
                                   },
                                   "uid": "4d9857d5eb"
@@ -953,7 +981,11 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "כן, דיור מוגן או בית אבות",
-                                            "en": "Yes, an assisted living complex or an old age home"
+                                            "ar": "نعم, مسكن للرعاية أو بيت للمُسنين",
+                                            "en": "Yes, an assisted living complex or an old age home",
+                                            "es": "Si, una vivienda protegida o un hogar de ancianos",
+                                            "fr": "Oui, c'est une maison de retraite ",
+                                            "ru": "Да, в доме для престарелых"
                                           }
                                         },
                                         "value": true
@@ -1023,13 +1055,31 @@ export const script = {
                             {
                               "steps": [
                                 {
-                                  "say": "אם הנך לומד בבית-ספר או מוסד חינוכי אחר, מה שמו?",
+                                  "say": {
+                                    ".tx": {
+                                      "_": "אם הנך לומד בבית-ספר או מוסד חינוכי אחר, מה שמו?",
+                                      "ar": "إذا كنت طالب/ة في المدرسة او في مؤسسة تعليمية أخرى, فما هو إسمها؟",
+                                      "en": "If you are studying at a school or other education institution, what is its name?",
+                                      "es": "Si asiste a una escuela u otra institución educativa, ¿cómo se llama?",
+                                      "fr": "Si vous fréquentez une école ou un autre établissement d'enseignement, quel est son nom ?",
+                                      "ru": "Если вы учитесь в школе или другом учебном заведении, как оно называется?"
+                                    }
+                                  },
                                   "uid": "134c074a20"
                                 },
                                 {
                                   "uid": "6f0065690c",
                                   "wait": {
-                                    "placeholder": "שם המוסד החינוכי",
+                                    "placeholder": {
+                                      ".tx": {
+                                        "_": "שם המוסד החינוכי",
+                                        "ar": "إسم المؤسسة التعليمية",
+                                        "en": "Name of the education institution",
+                                        "es": "El nombre de la institución educativa",
+                                        "fr": "Le nom de l'établissement d'enseignement",
+                                        "ru": "Название учебного заведения"
+                                      }
+                                    },
                                     "required": false,
                                     "variable": "school_name"
                                   }
@@ -1351,7 +1401,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם אובחנת בעבר כחולה בקורונה בבדיקת PCR?",
-                            "en": "Have you been diagnosed as having Covid-19 by a PCR test?"
+                            "ar": "هل تم تشخيصك في السابق كمريض/ة كورونا بواسطة فحص PCR؟",
+                            "en": "Have you been diagnosed as having Covid-19 by a PCR test?",
+                            "es": "¿Le han diagnosticado previamente corona en una prueba de PCR?",
+                            "fr": "Avez-vous déjà été diagnostiqué du Coronavirus lors d'un test PCR ?",
+                            "ru": "Был ли вам когда-либо поставлен диагноз Коронавирус на основании проверки PCR?"
                           }
                         },
                         "uid": "afed2c5692"
@@ -1376,7 +1430,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "מתי קיבלת את האבחנה החיובית?",
-                                      "en": "When did you get the positive diagnosis?"
+                                      "ar": "متى حصلت على تشخيص إيجابي؟ ",
+                                      "en": "When did you get the positive diagnosis?",
+                                      "es": "¿Cuándo recibiste el diagnóstico positivo?",
+                                      "fr": "Quand avez-vous reçu le diagnostic positif ?",
+                                      "ru": "Когда вы получили положительный диагноз?"
                                     }
                                   },
                                   "uid": "7f16a232ed"
@@ -1406,7 +1464,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, אבל החלמתי מאז",
-                                  "en": "Yes, but I have recovered since then"
+                                  "ar": "نعم, شُفيت منذ ذلك الوقت",
+                                  "en": "Yes, but I have recovered since then",
+                                  "es": "Sí, pero desde entonces me he recuperado",
+                                  "fr": "Oui, mais j'ai récupéré depuis",
+                                  "ru": "Да, но с тех пор я выздоровел/а"
                                 }
                               },
                               "steps": [
@@ -1414,7 +1476,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "מתי קיבלת את האבחנה החיובית?",
-                                      "en": "When did you get the positive diagnosis?"
+                                      "ar": "متى حصلت على تشخيص إيجابي؟ ",
+                                      "en": "When did you get the positive diagnosis?",
+                                      "es": "¿Cuándo recibiste el diagnóstico positivo?",
+                                      "fr": "Quand avez-vous reçu le diagnostic positif ?",
+                                      "ru": "Когда вы получили положительный диагноз?"
                                     }
                                   },
                                   "uid": "dc15929ad5"
@@ -1440,7 +1506,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "האם ביצעת מאז בדיקה נוספת שמסקנתה היתה שאין לך קורונה?",
-                                      "en": "Have you tested negative for Covid-19 since then?"
+                                      "ar": "هل قُمت بعمل فحص إضافي الذي كانت نتيجته أنه ليس لديك كورونا؟",
+                                      "en": "Have you tested negative for Covid-19 since then?",
+                                      "es": "¿Desde entonces se ha hecho alguna prueba que resulte negativa, libre de corona?",
+                                      "fr": "Avez-vous déjà fait un autre test qui a conclu que vous n'aviez pas le Coronavirus ?",
+                                      "ru": "Прошли ли вы с тех пор еще один тест, который установил, что у вас нет Коронавируса?"
                                     }
                                   },
                                   "uid": "fde532d03f"
@@ -1465,7 +1535,11 @@ export const script = {
                                             "say": {
                                               ".tx": {
                                                 "_": "מתי זה היה?",
-                                                "en": "When was it?"
+                                                "ar": "متى حدث هذا؟",
+                                                "en": "When was it?",
+                                                "es": "¿Cuándo fue?",
+                                                "fr": "Quand était-ce ?",
+                                                "ru": "Когда это было?"
                                               }
                                             },
                                             "uid": "162650d6c6"
@@ -1537,7 +1611,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם אובחנת מאז הדיווח האחרון כחולה בקורונה בבדיקת PCR?",
-                            "en": "Have you been diagnosed as having Covid-19 by a PCR test since then?"
+                            "ar": "هل تم تأكيد إصابتك بالكورونا منذ الإستبيان الأخير بواسطة فحص PCR؟",
+                            "en": "Have you been diagnosed as having Covid-19 by a PCR test since then?",
+                            "es": "¿Le han diagnosticado Corona por medio de la prueba de PCR desde el último informe?",
+                            "fr": "Avez-vous déjà été diagnostiqué du Coronavirus lors d'un test PCR depuis votre dernier rapport ?",
+                            "ru": "Был ли вам с момента последнего отчёта поставлен диагноз Коронавирус на основании проверки PCR?"
                           }
                         },
                         "uid": "ccd52a84a3"
@@ -1557,7 +1635,11 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "אני עדיין חולה",
-                                            "en": "I am still ill"
+                                            "ar": "ما زلتُ مريض/ة",
+                                            "en": "I am still ill",
+                                            "es": "Sigo enfermo",
+                                            "fr": "Je suis toujours malade",
+                                            "ru": "Я ещё болею"
                                           }
                                         },
                                         "value": "true"
@@ -1566,7 +1648,11 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "ביצעתי בדיקה אבל קיבלתי תוצאה שלילית",
-                                            "en": "I was tested but got a negative result"
+                                            "ar": "قمتُ بعمل فحص لكنني حصلت على نتيجة سلبية ",
+                                            "en": "I was tested but got a negative result",
+                                            "es": "Hice una prueba pero obtuve un resultado negativo",
+                                            "fr": "J'ai fait un test mais j'ai obtenu un résultat négatif",
+                                            "ru": "Я проходил/а тест, но результат был отрицательным"
                                           }
                                         },
                                         "steps": [
@@ -1574,7 +1660,11 @@ export const script = {
                                             "say": {
                                               ".tx": {
                                                 "_": "מתי זה היה?",
-                                                "en": "When was it?"
+                                                "ar": "متى حدث هذا؟",
+                                                "en": "When was it?",
+                                                "es": "¿Cuándo fue?",
+                                                "fr": "Quand était-ce ?",
+                                                "ru": "Когда это было?"
                                               }
                                             },
                                             "uid": "cfcf3745a1"
@@ -1604,7 +1694,11 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "לא, אבל החלמתי מהקורונה",
-                                            "en": "No, but I have recovered from Covid-19"
+                                            "ar": "لا, لكن شُفيت من الكورونا",
+                                            "en": "No, but I have recovered from Covid-19",
+                                            "es": "No, pero me recuperé del coronavirus",
+                                            "fr": "Non, mais j'ai récupéré du Coronavirus",
+                                            "ru": "Нет, но я выздоровел/а от Коронавируса"
                                           }
                                         },
                                         "value": "cured"
@@ -1639,7 +1733,11 @@ export const script = {
                                             "say": {
                                               ".tx": {
                                                 "_": "מתי זה היה?",
-                                                "en": "When was it?"
+                                                "ar": "متى حدث هذا؟",
+                                                "en": "When was it?",
+                                                "es": "¿Cuándo fue?",
+                                                "fr": "Quand était-ce ?",
+                                                "ru": "Когда это было?"
                                               }
                                             },
                                             "uid": "263b1d0512"
@@ -1669,7 +1767,11 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "ביצעתי בדיקה אבל קיבלתי תוצאה שלילית",
-                                            "en": "I was tested but got a negative result"
+                                            "ar": "قمتُ بعمل فحص لكنني حصلت على نتيجة سلبية ",
+                                            "en": "I was tested but got a negative result",
+                                            "es": "Hice una prueba pero obtuve un resultado negativo",
+                                            "fr": "J'ai fait un test mais j'ai obtenu un résultat négatif",
+                                            "ru": "Я проходил/а тест, но результат был отрицательным"
                                           }
                                         },
                                         "steps": [
@@ -1677,7 +1779,11 @@ export const script = {
                                             "say": {
                                               ".tx": {
                                                 "_": "מתי זה היה?",
-                                                "en": "When was it?"
+                                                "ar": "متى حدث هذا؟",
+                                                "en": "When was it?",
+                                                "es": "¿Cuándo fue?",
+                                                "fr": "Quand était-ce ?",
+                                                "ru": "Когда это было?"
                                               }
                                             },
                                             "uid": "8d96ca7c1f"
@@ -1812,7 +1918,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם אתם עדיין באשפוז?",
-                            "en": "Are you still hospitalized?"
+                            "ar": "هل ما زلت تتعالج/ين في المستشفى؟",
+                            "en": "Are you still hospitalized?",
+                            "es": "¿Sigues en el hospital?",
+                            "fr": "Êtes-vous toujours à l'hôpital?",
+                            "ru": "Вы еще госпитализированы?"
                           }
                         },
                         "uid": "d0542cea27"
@@ -1825,7 +1935,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, אני עדיין באשפוז",
-                                  "en": "Yes, I am still hospitalized"
+                                  "ar": "نعم, ما زلت أتعالج في المستشفى",
+                                  "en": "Yes, I am still hospitalized",
+                                  "es": "Si, todavia estoy en el hospital",
+                                  "fr": "Oui, je suis toujours à l'hôpital",
+                                  "ru": "Да, я все ещё госпитализирован/а"
                                 }
                               },
                               "value": "true"
@@ -1834,18 +1948,26 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "לא, כבר שוחררתי",
-                                  "en": "No, I have been released"
+                                  "ar": "لا, لقد تم إرسالي إلى المنزل",
+                                  "en": "No, I have been released",
+                                  "es": "No, ya me dieron de alta",
+                                  "fr": "Non, j'ai déjà été libéré",
+                                  "ru": "Нет, меня уже выписали"
                                 }
                               },
                               "steps": [
                                 {
                                   "say": {
                                     ".tx": {
-                                      "_": "מתי השתחחרת?",
-                                      "en": "When were you released?"
+                                      "_": "מתי השתחררת?",
+                                      "ar": "متى تم إرسالك إلى المنزل؟",
+                                      "en": "When were you released?",
+                                      "es": "¿Cuándo te dieron de alta del hospital?",
+                                      "fr": "Quand avez vous été libéré ?",
+                                      "ru": "Когда вас выписали?"
                                     }
                                   },
-                                  "uid": "e8bd67e582"
+                                  "uid": "e4dc5c328f"
                                 },
                                 {
                                   "uid": "6426ae3f34",
@@ -1886,7 +2008,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם מאז הדיווח האחרון התאשפזת?",
-                            "en": "Have you been hospitalized since your last report?"
+                            "ar": "هل تم نقلك للعلاج في المستشفى منذ الإستبيان الأخير؟",
+                            "en": "Have you been hospitalized since your last report?",
+                            "es": "¿Ha sido hospitalizado desde el último informe?",
+                            "fr": "Avez-vous été hospitalisé depuis le dernier rapport ?",
+                            "ru": "Были ли вы госпитализированы с момента вашего последнего отчёта?"
                           }
                         },
                         "uid": "f43046c98a"
@@ -1899,7 +2025,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, אני באשפוז",
-                                  "en": "Yes, I am hospitalized"
+                                  "ar": "نعم, أنا أتعالج في المستشفى",
+                                  "en": "Yes, I am hospitalized",
+                                  "es": "Si, estoy en el hospital",
+                                  "fr": "Oui, je suis à l'hôpital",
+                                  "ru": "Да, я госпитализирован/а"
                                 }
                               },
                               "steps": [
@@ -1907,7 +2037,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "מתי התחיל האשפוז?",
-                                      "en": "When did your hospitalization start?"
+                                      "ar": "متى بدأ العلاج في المستشفى؟",
+                                      "en": "When did your hospitalization start?",
+                                      "es": "¿Cuándo te hospitalizaron?",
+                                      "fr": "Depuis quand êtes vous a l'hôpital ?",
+                                      "ru": "Когда вас госпитализировали?"
                                     }
                                   },
                                   "uid": "34a8cd2274"
@@ -1937,7 +2071,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, אבל כבר שוחררתי",
-                                  "en": "Yes, but I was released already"
+                                  "ar": "نعم, لكن تم إرسالي إلى المنزل",
+                                  "en": "Yes, but I was released already",
+                                  "es": "Sí, pero ya me dieron de alta ",
+                                  "fr": "Oui, mais j'ai déjà été libéré",
+                                  "ru": "Да, но меня уже выписали"
                                 }
                               },
                               "steps": [
@@ -1945,7 +2083,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "מתי התחיל האשפוז?",
-                                      "en": "When did your hospitalization start?"
+                                      "ar": "متى بدأ العلاج في المستشفى؟",
+                                      "en": "When did your hospitalization start?",
+                                      "es": "¿Cuándo te hospitalizaron?",
+                                      "fr": "Depuis quand êtes vous a l'hôpital ?",
+                                      "ru": "Когда вас госпитализировали?"
                                     }
                                   },
                                   "uid": "048d7528c3"
@@ -1971,7 +2113,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ומתי השתחחרת?",
-                                      "en": "And when were you released?"
+                                      "ar": "ومتى تم إرسالك إلى المنزل؟",
+                                      "en": "And when were you released?",
+                                      "es": "¿Y cuándo te dieron de alta?",
+                                      "fr": "Et quand avez vous été libéré ?",
+                                      "ru": "А когда вас выписали?"
                                     }
                                   },
                                   "uid": "3a81fc34c3"
@@ -2027,7 +2173,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם בעקבות זאת נזקקת לאשפוז?",
-                            "en": "Did you require hospitalization?"
+                            "ar": "هل احتجت بعد ذلك لدخول المستشفى؟ ",
+                            "en": "Did you require hospitalization?",
+                            "es": "¿Posteriormente necesitó hospitalización?",
+                            "fr": "Avez-vous par la suite eu besoin d'une hospitalisation ?",
+                            "ru": "Были ли вы госпитализированы из-за этого?"
                           }
                         },
                         "uid": "92087271f7"
@@ -2040,7 +2190,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, אני באשפוז כרגע",
-                                  "en": "Yes, I am currently hospitalized"
+                                  "ar": "نعم, أنا أتعالج في المستشفى الآن",
+                                  "en": "Yes, I am currently hospitalized",
+                                  "es": "Si, estoy en el hospital",
+                                  "fr": "Oui, je suis à l'hôpital en ce moment même",
+                                  "ru": "Да, я сейчас госпитализирован/а"
                                 }
                               },
                               "steps": [
@@ -2048,7 +2202,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "מתי התחיל האשפוז?",
-                                      "en": "When did your hospitalization start?"
+                                      "ar": "متى بدأ العلاج في المستشفى؟",
+                                      "en": "When did your hospitalization start?",
+                                      "es": "¿Cuándo te hospitalizaron?",
+                                      "fr": "Depuis quand êtes vous a l'hôpital ?",
+                                      "ru": "Когда вас госпитализировали?"
                                     }
                                   },
                                   "uid": "dfc713d6da"
@@ -2078,7 +2236,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, וכבר שוחררתי",
-                                  "en": "Yes, and I have been released already"
+                                  "ar": "نعم, ولقد تم إرسالي إلى المنزل",
+                                  "en": "Yes, and I have been released already",
+                                  "es": "Sí, y ya me dieron de alta ",
+                                  "fr": "Oui, et j'ai déjà été libéré",
+                                  "ru": "Да, и меня уже выписали"
                                 }
                               },
                               "steps": [
@@ -2086,7 +2248,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "באיזה תאריך התאשפזת?",
-                                      "en": "On what date were you hospitalized?"
+                                      "ar": "في أي تاريخ بدأ علاجك في المستشفى؟",
+                                      "en": "On what date were you hospitalized?",
+                                      "es": "¿En qué fecha fuiste hospitalizado?",
+                                      "fr": "À quelle date avez-vous été hospitalisé ?",
+                                      "ru": "Какого числа вас госпитализировали?"
                                     }
                                   },
                                   "uid": "ec80e0bc03"
@@ -2112,7 +2278,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ומתי השתחחרת?",
-                                      "en": "And when were you released?"
+                                      "ar": "ومتى تم إرسالك إلى المنزل؟",
+                                      "en": "And when were you released?",
+                                      "es": "¿Y cuándo te dieron de alta?",
+                                      "fr": "Et quand avez vous été libéré ?",
+                                      "ru": "И когда вас выписали?"
                                     }
                                   },
                                   "uid": "cc9fa3e95f"
@@ -2186,7 +2356,11 @@ export const script = {
               "say": {
                 ".tx": {
                   "_": "האם אושפזת גם בטיפול נמרץ?",
-                  "en": "Were you in intensive care?"
+                  "ar": "هل تم علاجك في وحدة العناية المركزة؟",
+                  "en": "Were you in intensive care?",
+                  "es": "¿Ha sido hospitalizado también en cuidados intensivos?",
+                  "fr": "Avez-vous également été hospitalisé en soins intensifs ?",
+                  "ru": "Были ли вы госпитализированы в реанимации?"
                 }
               },
               "uid": "c643ef4687"
@@ -2211,7 +2385,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "כמה ימים אושפזת שם?",
-                            "en": "For how many days were you hospitalized there?"
+                            "ar": "كم يوم تعالجت هناك؟ ",
+                            "en": "For how many days were you hospitalized there?",
+                            "es": "¿Cuántos días estuvo hospitalizado allí?",
+                            "fr": "Combien de jours y avez-vous été hospitalisé ?",
+                            "ru": "Сколько дней вы были госпитализированы?"
                           }
                         },
                         "uid": "00a1564b2b"
@@ -2226,7 +2404,11 @@ export const script = {
                           "placeholder": {
                             ".tx": {
                               "_": "מספר הימים",
-                              "en": "Number of days"
+                              "ar": "عدد الأيام",
+                              "en": "Number of days",
+                              "es": "Número de días",
+                              "fr": "Quelques jours",
+                              "ru": "Кол-во дней"
                             }
                           },
                           "variable": "hospitalization_icu_duration"
@@ -2290,7 +2472,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם היית היום בבידוד?",
-                            "en": "Were you quarantined today?"
+                            "ar": "هل كنت اليوم في حجر صحي؟",
+                            "en": "Were you quarantined today?",
+                            "es": "¿Has estado aislado hoy?",
+                            "fr": "Avez-vous été en isolement aujourd'hui ?",
+                            "ru": "Были ли вы сегодня в карантине?"
                           }
                         },
                         "uid": "0b124ce172"
@@ -2303,7 +2489,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי ובנפרד מבני משפחתי",
-                                  "en": "Yes, at home, separate from other family members"
+                                  "ar": "نعم, في منزلي وبإنعزال تام عن أفراد عائلتي",
+                                  "en": "Yes, at home, separate from other family members",
+                                  "es": "Si, en mi casa y separado de mi familia",
+                                  "fr": "Oui, chez moi et séparé de ma famille",
+                                  "ru": "Да, дома и отдельно от семьи"
                                 }
                               },
                               "value": "insulation"
@@ -2312,7 +2502,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי",
-                                  "en": "Yes, at home"
+                                  "ar": "نعم, في منزلي",
+                                  "en": "Yes, at home",
+                                  "es": "Si, en mi casa",
+                                  "fr": "Oui, chez moi",
+                                  "ru": "Да, дома"
                                 }
                               },
                               "value": "insulation_with_family"
@@ -2321,7 +2515,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, במלון",
-                                  "en": "Yes, at a hotel"
+                                  "ar": "نعم, في الفندق",
+                                  "en": "Yes, at a hotel",
+                                  "es": "Si, en un hotel",
+                                  "fr": "Oui, à l'hôtel",
+                                  "ru": "Да, в гостинице"
                                 }
                               },
                               "value": "insulation_hotel"
@@ -2354,7 +2552,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם מאז הדיווח האחרון נכנסת לבידוד?",
-                            "en": "Have you been quarantined since your last report?"
+                            "ar": "هل دخلت إلى الحجر الصحي منذ الإستبيان الأخير؟",
+                            "en": "Have you been quarantined since your last report?",
+                            "es": "¿Has estado aislado desde el último informe?",
+                            "fr": "Êtes-vous entré en isolement depuis le dernier rapport ?",
+                            "ru": "Были ли вы помещены в карантин с момента вашего последнего отчёта?"
                           }
                         },
                         "uid": "272b5b815c"
@@ -2367,7 +2569,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי ובנפרד מבני משפחתי",
-                                  "en": "Yes, at home, separate from other family members"
+                                  "ar": "نعم, في منزلي وبإنعزال تام عن أفراد عائلتي",
+                                  "en": "Yes, at home, separate from other family members",
+                                  "es": "Si, en mi casa y separado de mi familia",
+                                  "fr": "Oui, chez moi et séparé de ma famille",
+                                  "ru": "Да, дома и отдельно от семьи"
                                 }
                               },
                               "value": "insulation"
@@ -2376,7 +2582,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי",
-                                  "en": "Yes, at home"
+                                  "ar": "نعم, في منزلي",
+                                  "en": "Yes, at home",
+                                  "es": "Si, en mi casa",
+                                  "fr": "Oui, chez moi",
+                                  "ru": "Да, дома"
                                 }
                               },
                               "value": "insulation_with_family"
@@ -2385,7 +2595,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, במלון",
-                                  "en": "Yes, at a hotel"
+                                  "ar": "نعم, في الفندق",
+                                  "en": "Yes, at a hotel",
+                                  "es": "Si, en un hotel",
+                                  "fr": "Oui, à l'hôtel",
+                                  "ru": "Да, в гостинице"
                                 }
                               },
                               "value": "insulation_hotel"
@@ -2417,7 +2631,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "האם אתם עדיין בבידוד?",
-                            "en": "Are you still quarantined?"
+                            "ar": "هل ما زلت في الحجر الصحي؟",
+                            "en": "Are you still quarantined?",
+                            "es": "¿Sigues en aislamiento?",
+                            "fr": "Êtes-vous toujours en isolement ? ",
+                            "ru": "Вы еще на карантине?"
                           }
                         },
                         "uid": "0ad79180c2"
@@ -2430,7 +2648,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי ובנפרד מבני משפחתי",
-                                  "en": "Yes, at home, separate from other family members"
+                                  "ar": "نعم, في منزلي وبإنعزال تام من أفراد عائلتي",
+                                  "en": "Yes, at home, separate from other family members",
+                                  "es": "Si, en mi casa y separado de mi familia",
+                                  "fr": "Oui, chez moi et séparé de ma famille",
+                                  "ru": "Да, дома и отдельно от семьи"
                                 }
                               },
                               "value": "insulation"
@@ -2439,7 +2661,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, בבית שלי",
-                                  "en": "Yes, at home"
+                                  "ar": "نعم, في منزلي",
+                                  "en": "Yes, at home",
+                                  "es": "Si, en mi casa",
+                                  "fr": "Oui, chez moi",
+                                  "ru": "Да, дома"
                                 }
                               },
                               "value": "insulation_with_family"
@@ -2448,7 +2674,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כן, במלון",
-                                  "en": "Yes, at a hotel"
+                                  "ar": "نعم, في الفندق",
+                                  "en": "Yes, at a hotel",
+                                  "es": "Si, en un hotel",
+                                  "fr": "Oui, à l'hôtel",
+                                  "ru": "Да, в гостинице"
                                 }
                               },
                               "value": "insulation_hotel"
@@ -2457,7 +2687,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "אני כבר לא בבידוד",
-                                  "en": "I'm not quarantined any longer"
+                                  "ar": "أنا لست بحجر صحي",
+                                  "en": "I'm not quarantined any longer",
+                                  "es": "Ya no estoy en aislamiento",
+                                  "fr": "Je ne suis pas en isolement",
+                                  "ru": "Я уже не на карантине"
                                 }
                               },
                               "value": "none"
@@ -2506,7 +2740,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "למה אתם בבידוד?",
-                                      "en": "Why are you quarantined?"
+                                      "ar": "لماذا أنت في حجر صحي؟",
+                                      "en": "Why are you quarantined?",
+                                      "es": "¿Por qué estás en aislamiento?",
+                                      "fr": "Pourquoi êtes-vous en isolement ? ",
+                                      "ru": "Почемы вы на карантине?"
                                     }
                                   },
                                   "uid": "20f22515e1"
@@ -2532,7 +2770,7 @@ export const script = {
                                         "show": {
                                           ".tx": {
                                             "_": "אני בבידוד כי נחשפתי לחולה מאומת",
-                                            "ar": "أنا بحجر صحي لأنني تعرضت لمريض/ة تم التحقق منه/ا",
+                                            "ar": "أنا بحجر صحي لأنني تواصلت مع مريض/ة تم التحقق منه/ا",
                                             "en": "I'm under quarantine because I've been exposed to a verified patient",
                                             "es": "Estoy en aislamiento porque he estado expuesto a un enfermo confirmado",
                                             "fr": "Je suis en confinement car j'ai été exposé à un malade confirmé",
@@ -2575,7 +2813,11 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ממתי אתם בבידוד?",
-                                      "en": "Since when were you quarantined"
+                                      "ar": "منذ متى أنتم في حجر صحي؟",
+                                      "en": "Since when were you quarantined",
+                                      "es": "¿Desde cuándo estas en aislamiento?",
+                                      "fr": "Depuis quand êtes-vous en isolement ?",
+                                      "ru": "Когда начался карантин?"
                                     }
                                   },
                                   "uid": "66571e9448"
@@ -2651,39 +2893,102 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "יש כמה שאלות חשובות שאנחנו שואלים את כולם, רק פעם בשבוע, כדי להקל על הדיווח",
-                                      "en": "There are some important questions that we ask everyone once a week, to make it easier for you to report"
+                                      "ar": "يوجد بعض الأسئلة المهمة التي نسألها للجميع, مرة واحدة فقط كل أسبوع, من أجل تسهيل تعبئة الإستبيان",
+                                      "en": "There are some important questions that we ask everyone once a week, to make it easier for you to report",
+                                      "es": "Hay algunas preguntas importantes que les hacemos a todos, solo una vez por semana, para facilitar los informes",
+                                      "fr": "Il y a quelques questions importantes que nous posons à tout le monde, juste une fois par semaine, pour faciliter le remplissage du questionnaire",
+                                      "ru": "Есть несколько вопросов которые мы задаем всем только раз в неделю, чтобы облегчить доклад"
                                     }
                                   },
                                   "uid": "70432ecbd9"
                                 },
                                 {
-                                  "say": {
-                                    ".tx": {
-                                      "_": "האם יצאת מהבית במהלך השבוע האחרון?",
-                                      "ar": "هل خرجت من البيت في الأسبوع السابق؟",
-                                      "en": "Have you been outside your home during the last week?",
-                                      "es": "¿Saliste de casa la semana pasada?",
-                                      "fr": "Avez-vous quitté la maison au cours de la dernière semaine ?",
-                                      "ru": "Вы выходили из дома на последней неделе?"
-                                    }
+                                  "do": {
+                                    "cmd": "prepare_routine_question_work",
+                                    "params": [
+                                      "record",
+                                      "שיש לך עבודה קבועה מחוץ לבית",
+                                      "ב:{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}",
+                                      "שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע.",
+                                      "שהעבודה שלך היא כחלק מצוות רפואי",
+                                      "שהעבודה שלך היא לא כחלק מצוות רפואי",
+                                      "ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה",
+                                      "ושלא נתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה"
+                                    ],
+                                    "variable": "_prepare_routine_question_work"
                                   },
-                                  "uid": "8bafa8745f"
+                                  "uid": "a83bac7f2f"
                                 },
                                 {
-                                  "uid": "c7c2b7ae3b",
-                                  "wait": {
-                                    "options": [
+                                  "switch": {
+                                    "arg": "_prepare_routine_question_work",
+                                    "cases": [
                                       {
-                                        "show": {
-                                          ".tx": {
-                                            "_": "כן, יצאתי",
-                                            "ar": "نعم, خرجت",
-                                            "en": "Yes, I have",
-                                            "es": "Si, salí",
-                                            "fr": "Oui, je suis sorti",
-                                            "ru": "Да, выходил/а"
+                                        "match": "empty"
+                                      },
+                                      {
+                                        "default": true,
+                                        "steps": [
+                                          {
+                                            "say": "בשבוע שעבר דיווחת ש<br/>{{_prepare_routine_question_work}}",
+                                            "uid": "85d66a9e3d"
+                                          },
+                                          {
+                                            "say": "האם משהו מכל זה השתנה השבוע?",
+                                            "uid": "b11f544e8e"
+                                          },
+                                          {
+                                            "uid": "770d2b4d28",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן",
+                                                      "ar": "نعم",
+                                                      "en": "Yes",
+                                                      "es": "Sí",
+                                                      "fr": "Oui",
+                                                      "ru": "Да"
+                                                    }
+                                                  },
+                                                  "value": "empty"
+                                                },
+                                                {
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
+                                                  "value": "full"
+                                                }
+                                              ],
+                                              "variable": "_prepare_routine_question_work"
+                                            }
                                           }
-                                        },
+                                        ],
+                                        "uid": "21b6d5e367"
+                                      }
+                                    ]
+                                  },
+                                  "uid": "f4840f1d84"
+                                },
+                                {
+                                  "switch": {
+                                    "arg": "_prepare_routine_question_work",
+                                    "cases": [
+                                      {
+                                        "default": true
+                                      },
+                                      {
+                                        "match": "empty"
+                                      },
+                                      {
                                         "steps": [
                                           {
                                             "say": {
@@ -2696,10 +3001,10 @@ export const script = {
                                                 "ru": "Работаете ли вы на постоянной работе вне дома в эти дни?"
                                               }
                                             },
-                                            "uid": "7b88d96580"
+                                            "uid": "6f12727f11"
                                           },
                                           {
-                                            "uid": "5933885ce5",
+                                            "uid": "4dc0bda1fa",
                                             "wait": {
                                               "options": [
                                                 {
@@ -2725,10 +3030,10 @@ export const script = {
                                                           "ru": "И сколько часов вы работали, примерно?"
                                                         }
                                                       },
-                                                      "uid": "850997e473"
+                                                      "uid": "5f18c46a8b"
                                                     },
                                                     {
-                                                      "uid": "107bde58ff",
+                                                      "uid": "83b280a0b1",
                                                       "wait": {
                                                         "input-kind": "number",
                                                         "input-max": 168,
@@ -2758,10 +3063,10 @@ export const script = {
                                                           "ru": "Вы работали в одном и том же месте?"
                                                         }
                                                       },
-                                                      "uid": "7c7fbfa879"
+                                                      "uid": "b09af4b3f8"
                                                     },
                                                     {
-                                                      "uid": "d918add3f0",
+                                                      "uid": "ef5a1ee71d",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -2787,10 +3092,10 @@ export const script = {
                                                                     "ru": "Можно узнать, где находится ваше место работы? Это поможет нашему исследованию."
                                                                   }
                                                                 },
-                                                                "uid": "fdd50e0a64"
+                                                                "uid": "23f8da71ba"
                                                               },
                                                               {
-                                                                "uid": "b83516d55c",
+                                                                "uid": "cfd73cc513",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
@@ -2810,7 +3115,7 @@ export const script = {
                                                                             "cmd": "prepare_city_town_suggestions",
                                                                             "variable": "_cityTownSuggestions"
                                                                           },
-                                                                          "uid": "d0e04c7771"
+                                                                          "uid": "af2bfe15e4"
                                                                         },
                                                                         {
                                                                           "say": {
@@ -2823,10 +3128,10 @@ export const script = {
                                                                               "ru": "Где находится ваше место работы?"
                                                                             }
                                                                           },
-                                                                          "uid": "931fc80ab5"
+                                                                          "uid": "1288d5cbe3"
                                                                         },
                                                                         {
-                                                                          "uid": "5e47aa5161",
+                                                                          "uid": "184782fedf",
                                                                           "wait": {
                                                                             "placeholder": {
                                                                               ".tx": {
@@ -2853,10 +3158,10 @@ export const script = {
                                                                               "ru": "А на какой улице?"
                                                                             }
                                                                           },
-                                                                          "uid": "0bccf5b0e5"
+                                                                          "uid": "e2c26e25b3"
                                                                         },
                                                                         {
-                                                                          "uid": "a89bee4d9f",
+                                                                          "uid": "0a5cbfec28",
                                                                           "wait": {
                                                                             "placeholder": {
                                                                               ".tx": {
@@ -2873,7 +3178,7 @@ export const script = {
                                                                           }
                                                                         }
                                                                       ],
-                                                                      "uid": "f17f5c976a"
+                                                                      "uid": "71676b6888"
                                                                     },
                                                                     {
                                                                       "show": {
@@ -2891,7 +3196,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "f8c00971a4",
+                                                            "uid": "905bbc73df",
                                                             "value": true
                                                           },
                                                           {
@@ -2922,10 +3227,10 @@ export const script = {
                                                           "ru": "Был ли день на последней неделе на работе когда вы обслужили больше 10 человек?"
                                                         }
                                                       },
-                                                      "uid": "8a11b12c78"
+                                                      "uid": "cf6a61a1c8"
                                                     },
                                                     {
-                                                      "uid": "7624cea157",
+                                                      "uid": "4d2385241d",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -2955,7 +3260,7 @@ export const script = {
                                                             "value": false
                                                           }
                                                         ],
-                                                        "variable": "_served_public_last_fortnight"
+                                                        "variable": "routine_served_public"
                                                       }
                                                     },
                                                     {
@@ -2975,10 +3280,10 @@ export const script = {
                                                                     "ru": "Работаете ли вы как медицинский персонал (уход за больными или прием публики)?"
                                                                   }
                                                                 },
-                                                                "uid": "969b12fa58"
+                                                                "uid": "feafe65be2"
                                                               },
                                                               {
-                                                                "uid": "c9422ff637",
+                                                                "uid": "0ccd0c1bab",
                                                                 "wait": {
                                                                   "options": [
                                                                     {
@@ -3012,7 +3317,7 @@ export const script = {
                                                                 }
                                                               }
                                                             ],
-                                                            "uid": "9c546da722",
+                                                            "uid": "ef4ffa86ca",
                                                             "undefined": true
                                                           },
                                                           {
@@ -3020,10 +3325,10 @@ export const script = {
                                                           }
                                                         ]
                                                       },
-                                                      "uid": "273740c611"
+                                                      "uid": "de450c95a0"
                                                     }
                                                   ],
-                                                  "uid": "9144a2a011",
+                                                  "uid": "69e45d2b38",
                                                   "value": true
                                                 },
                                                 {
@@ -3042,7 +3347,109 @@ export const script = {
                                               ],
                                               "variable": "routine_workplace_is_outside"
                                             }
+                                          }
+                                        ],
+                                        "uid": "3d441383dc"
+                                      }
+                                    ]
+                                  },
+                                  "uid": "efecadbed0"
+                                },
+                                {
+                                  "do": {
+                                    "cmd": "prepare_routine_question_behaviour",
+                                    "params": [
+                                      "record",
+                                      "שביקרת באופן קבוע בבית תפילה",
+                                      "שלא ביקרת באופן קבוע בבית תפילה",
+                                      "העדפת שלא לדווח על ביקור קבוע בבית תפילה",
+                                      "שנסעת ברכבת",
+                                      "שנסעת באוטובוס",
+                                      "שנסעת במונית",
+                                      "שנסעת בתחבורה ציבורית",
+                                      "שנסעת באמצעי תחבורה ציבורית אחר",
+                                      "שלא השתמשת בתחבורה ציבורית",
+                                      "שחבשת מסכה כל הזמן",
+                                      "שחבשת מסכה רוב הזמן",
+                                      "שחבשת מסכה בחלק קטן מהזמן",
+                                      "שלא חבשת מסכה",
+                                      "העדפת שלא לדווח אם חבשת מסכה מחוץ לבית"
+                                    ],
+                                    "variable": "_prepare_routine_question_behaviour"
+                                  },
+                                  "uid": "89a8e8e6b3"
+                                },
+                                {
+                                  "switch": {
+                                    "arg": "_prepare_routine_question_behaviour",
+                                    "cases": [
+                                      {
+                                        "match": "empty"
+                                      },
+                                      {
+                                        "default": true,
+                                        "steps": [
+                                          {
+                                            "say": "בשבוע שעבר סיפרת<br/>{{_prepare_routine_question_behaviour}}",
+                                            "uid": "ce06aa3a5b"
                                           },
+                                          {
+                                            "say": "האם משהו מכל זה השתנה השבוע?",
+                                            "uid": "ed6ba1919e"
+                                          },
+                                          {
+                                            "uid": "ea42ed52ba",
+                                            "wait": {
+                                              "options": [
+                                                {
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן",
+                                                      "ar": "نعم",
+                                                      "en": "Yes",
+                                                      "es": "Sí",
+                                                      "fr": "Oui",
+                                                      "ru": "Да"
+                                                    }
+                                                  },
+                                                  "value": "empty"
+                                                },
+                                                {
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
+                                                  "value": "full"
+                                                }
+                                              ],
+                                              "variable": "_prepare_routine_question_behaviour"
+                                            }
+                                          }
+                                        ],
+                                        "uid": "9140c66ca1"
+                                      }
+                                    ]
+                                  },
+                                  "uid": "2fd3a21bc2"
+                                },
+                                {
+                                  "switch": {
+                                    "arg": "_prepare_routine_question_behaviour",
+                                    "cases": [
+                                      {
+                                        "default": true
+                                      },
+                                      {
+                                        "match": "empty"
+                                      },
+                                      {
+                                        "steps": [
                                           {
                                             "switch": {
                                               "arg": "routine_visits_prayer_house",
@@ -3056,13 +3463,17 @@ export const script = {
                                                       "say": {
                                                         ".tx": {
                                                           "_": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
-                                                          "en": "Did you visit a prayer house regularly this week?"
+                                                          "ar": "هل قمت بزيارة أماكن الصلاة بشكل معتاد خلال هذا الأسبوع؟",
+                                                          "en": "Did you visit a prayer house regularly this week?",
+                                                          "es": "¿Has visitado su templo regularmente esta semana?",
+                                                          "fr": "Vous êtes-vous rendus dans un lieu de prière régulièrement cette semaine ? ",
+                                                          "ru": "Посещали ли вы регулярно молитвенный дом на этой неделе?"
                                                         }
                                                       },
-                                                      "uid": "a9e258ffc0"
+                                                      "uid": "3669d83ab7"
                                                     },
                                                     {
-                                                      "uid": "1b06a0b67c",
+                                                      "uid": "dec5331570",
                                                       "wait": {
                                                         "options": [
                                                           {
@@ -3110,12 +3521,12 @@ export const script = {
                                                       }
                                                     }
                                                   ],
-                                                  "uid": "56ab1578fa",
+                                                  "uid": "d44b5f0dcc",
                                                   "undefined": true
                                                 }
                                               ]
                                             },
-                                            "uid": "604b87b2fa"
+                                            "uid": "1e2830793e"
                                           },
                                           {
                                             "say": {
@@ -3128,10 +3539,10 @@ export const script = {
                                                 "ru": "Вы пользовались общественным транспортом на последней неделе?"
                                               }
                                             },
-                                            "uid": "a007204d93"
+                                            "uid": "a0d1fe80e3"
                                           },
                                           {
-                                            "uid": "4c49e43d38",
+                                            "uid": "8d1ed2ecd5",
                                             "wait": {
                                               "options": [
                                                 {
@@ -3157,10 +3568,10 @@ export const script = {
                                                           "ru": "Какими средствами транспорта вы пользовались на этой неделе?"
                                                         }
                                                       },
-                                                      "uid": "1f45084eb3"
+                                                      "uid": "ac8a8b04fd"
                                                     },
                                                     {
-                                                      "uid": "e66c79d6a0",
+                                                      "uid": "5379f87a9e",
                                                       "wait": {
                                                         "multi": true,
                                                         "options": [
@@ -3241,10 +3652,10 @@ export const script = {
                                                           "_var"
                                                         ]
                                                       },
-                                                      "uid": "782bbe4de9"
+                                                      "uid": "81f086b008"
                                                     }
                                                   ],
-                                                  "uid": "2a3efd7875",
+                                                  "uid": "953f46baf3",
                                                   "value": true
                                                 },
                                                 {
@@ -3275,10 +3686,10 @@ export const script = {
                                                 "ru": "Носили ли вы маску, когда вы выходили  из дома?"
                                               }
                                             },
-                                            "uid": "44823f1fb5"
+                                            "uid": "1af2ab28ae"
                                           },
                                           {
-                                            "uid": "50f8e3113f",
+                                            "uid": "413d3437e3",
                                             "wait": {
                                               "options": [
                                                 {
@@ -3352,8 +3763,7 @@ export const script = {
                                             }
                                           }
                                         ],
-                                        "uid": "cd859cb293",
-                                        "value": true
+                                        "uid": "c373a388f0"
                                       },
                                       {
                                         "show": {
@@ -3368,9 +3778,9 @@ export const script = {
                                         },
                                         "value": false
                                       }
-                                    ],
-                                    "variable": "routine_left_the_house"
-                                  }
+                                    ]
+                                  },
+                                  "uid": "1d1aa9087b"
                                 }
                               ],
                               "uid": "62733e4d1a"
@@ -3454,7 +3864,7 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
-                                      "ar": "فقط للتأكد, هل عندك أحد هاي الأعراض؟",
+                                      "ar": "فقط للتأكد, هل لديك أحد هذه الأعراض؟",
                                       "en": "To be on the safe side: experiencing any of the following symptoms?",
                                       "es": "Sólo para estar seguros, ¿sufres de algunos de estos síntomas?",
                                       "fr": "Pour être sûr, avez-vous l'un de ces symptômes ?",
@@ -3552,7 +3962,7 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
-                                      "ar": "فقط للتأكد, هل عندك أحد هاي الأعراض؟",
+                                      "ar": "فقط للتأكد, هل لديك أحد هذه الأعراض؟",
                                       "en": "To be on the safe side: experiencing any of the following symptoms?",
                                       "es": "Sólo para estar seguros, ¿sufres de algunos de estos síntomas?",
                                       "fr": "Pour être sûr, avez-vous l'un de ces symptômes ?",
@@ -3650,7 +4060,7 @@ export const script = {
                                   "say": {
                                     ".tx": {
                                       "_": "ליתר בטחון, האם יש משהו מהתסמינים האלה?",
-                                      "ar": "فقط للتأكد, هل عندك أحد هاي الأعراض؟",
+                                      "ar": "فقط للتأكد, هل لديك أحد هذه الأعراض؟",
                                       "en": "To be on the safe side: experiencing any of the following symptoms?",
                                       "es": "Sólo para estar seguros, ¿sufres de algunos de estos síntomas?",
                                       "fr": "Pour être sûr, avez-vous l'un de ces symptômes ?",
@@ -3757,7 +4167,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל קוצר הנשימה?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל קוצר הנשימה?",
+                                                "ar": "قبل كم يوم بدأ ضيق التنفس؟",
+                                                "en": "How many days ago did the shortness of breath start?",
+                                                "es": "¿Hace cuántos días comenzó la dificultad para respirar?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des essoufflements ?",
+                                                "ru": "Сколько дней назад появилась одышка?"
+                                              }
+                                            },
                                             "uid": "631aad4533"
                                           },
                                           {
@@ -3767,7 +4186,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_breath_shortness_duration"
                                             }
                                           }
@@ -3806,7 +4234,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל השלשול?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל השלשול?",
+                                                "ar": "قبل كم يوم بدأ الإسهال؟",
+                                                "en": "How many days ago did the diarrhea start?",
+                                                "es": "¿Hace cuántos días comenzó la diarrea?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir de la diarrhée ?",
+                                                "ru": "Сколько дней назад начался понос?"
+                                              }
+                                            },
                                             "uid": "a298331ba6"
                                           },
                                           {
@@ -3816,7 +4253,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_diarrhea_duration"
                                             }
                                           }
@@ -3855,7 +4301,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל חוסר התיאבון?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל חוסר התיאבון?",
+                                                "ar": "قبل كم يوم بدأ فقدان الشهية؟",
+                                                "en": "How many days ago did your loss of appetite start?",
+                                                "es": "¿Hace cuántos días comenzó la falta de apetito?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir un manque d'appétit ?",
+                                                "ru": "Сколько дней назад у вас пропал аппетит?"
+                                              }
+                                            },
                                             "uid": "1d6fd8fdd2"
                                           },
                                           {
@@ -3865,7 +4320,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_lack_of_appetite_or_skipping_meals_duration"
                                             }
                                           }
@@ -3904,7 +4368,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו הבחילה או ההקאות?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו הבחילה או ההקאות?",
+                                                "ar": "قبل كم يوم بدأ الغثيان أو التقيؤ؟",
+                                                "en": "How many days ago did your nausea/vomiting start?",
+                                                "es": "¿Hace cuántos días comenzaron las náuseas o vómitos?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des nausées ou vomissements ?",
+                                                "ru": "Сколько дней назад началась тошнота или рвота?"
+                                              }
+                                            },
                                             "uid": "42c16427a6"
                                           },
                                           {
@@ -3914,7 +4387,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_nausea_and_vomiting_duration"
                                             }
                                           }
@@ -3953,7 +4435,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו הצמרמורות?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו הצמרמורות?",
+                                                "ar": "قبل كم يوم بدأت الإرتجافات؟",
+                                                "en": "How many days ago did your chills start?",
+                                                "es": "¿Hace cuántos días comenzaron los escalofríos?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des frissons  ?",
+                                                "ru": "Сколько дней назад началась дрожь?"
+                                              }
+                                            },
                                             "uid": "52c942befb"
                                           },
                                           {
@@ -3963,7 +4454,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_chills_duration"
                                             }
                                           }
@@ -4002,7 +4502,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל הבלבול?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל הבלבול?",
+                                                "ar": "قبل كم يوم بدأ الهذيان؟",
+                                                "en": "How many days ago did your confusion start?",
+                                                "es": "¿Hace cuántos días comenzó a sentirse confundido?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des états de confusion ?",
+                                                "ru": "Сколько дней назад началась растерянность?"
+                                              }
+                                            },
                                             "uid": "def668eb32"
                                           },
                                           {
@@ -4012,7 +4521,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_confusion_duration"
                                             }
                                           }
@@ -4051,7 +4569,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו העייפות או החולשה?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו העייפות או החולשה?",
+                                                "ar": "قبل كم يوم بدأ التعب أو الضعف؟",
+                                                "en": "How many days ago did your tiredness/weakness start?",
+                                                "es": "¿Hace cuántos días comenzó la fatiga o la debilidad?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à ressentir de la faiblesse ou de la fatigue ?",
+                                                "ru": "Сколько дней назад вы начали чувствовать усталость или слабость?"
+                                              }
+                                            },
                                             "uid": "f64a3ca6c1"
                                           },
                                           {
@@ -4061,7 +4588,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_tiredness_or_fatigue_duration"
                                             }
                                           }
@@ -4100,7 +4636,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים אבד חוש הטעם או הריח?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים אבד חוש הטעם או הריח?",
+                                                "ar": "قبل كم يوم فقدت حاسة التذوق أو الشم؟",
+                                                "en": "How many days ago did you lose your sense of taste or smell?",
+                                                "es": "¿Hace cuántos días perdió el sentido del gusto o el olfato?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à perdre le sens du goût ou de l'odorat ?",
+                                                "ru": "Сколько дней назад вы потеряли чувство вкуса или обоняние?"
+                                              }
+                                            },
                                             "uid": "9dbcf1aaa1"
                                           },
                                           {
@@ -4110,7 +4655,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_smell_taste_loss_duration"
                                             }
                                           }
@@ -4128,6 +4682,64 @@ export const script = {
                           ]
                         },
                         "uid": "6dcb10a7e0"
+                      },
+                      {
+                        "switch": {
+                          "arg": "symptoms_rash",
+                          "cases": [
+                            {
+                              "default": true
+                            },
+                            {
+                              "match": true,
+                              "steps": [
+                                {
+                                  "switch": {
+                                    "arg": "symptoms_rash_duration",
+                                    "cases": [
+                                      {
+                                        "default": true
+                                      },
+                                      {
+                                        "steps": [
+                                          {
+                                            "say": "לפני כמה ימים התחילה הפריחה?",
+                                            "uid": "34caead99d"
+                                          },
+                                          {
+                                            "uid": "f623212a58",
+                                            "wait": {
+                                              "input-kind": "number",
+                                              "input-max": 100,
+                                              "input-min": 0,
+                                              "input-step": 1,
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
+                                              "variable": "symptoms_rash_duration"
+                                            }
+                                          }
+                                        ],
+                                        "uid": "1be718b729",
+                                        "undefined": true
+                                      }
+                                    ]
+                                  },
+                                  "uid": "0615475893"
+                                }
+                              ],
+                              "uid": "7aa064b02a"
+                            }
+                          ]
+                        },
+                        "uid": "956625a9d4"
                       }
                     ],
                     "uid": "6b80372a3e"
@@ -4170,7 +4782,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו הנזלת או הגודש באף?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו הנזלת או הגודש באף?",
+                                                "ar": "قبل كم يوم بدأ سيلان الأنف أو الإنسداد في الأنف؟",
+                                                "en": "How many days ago did the runny or blocked nose start?",
+                                                "es": "¿Hace cuántos días comenzó la congestión y la secreción nasal?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir le nez qui coule ?",
+                                                "ru": "Сколько дней назад у вас появился насморк или заложенный нос?"
+                                              }
+                                            },
                                             "uid": "4bb15b65f3"
                                           },
                                           {
@@ -4180,7 +4801,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_clogged_nose_duration"
                                             }
                                           }
@@ -4219,7 +4849,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל השיעול היבש?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל השיעול היבש?",
+                                                "ar": "قبل كم يوم بدأ السُعال الجاف؟",
+                                                "en": "How many days ago did the dry cough start?",
+                                                "es": "¿Hace cuántos días comenzó la tos seca?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir une toux sèche ?",
+                                                "ru": "Сколько дней назад у вас начался сухой кашель?"
+                                              }
+                                            },
                                             "uid": "a01597a7ee"
                                           },
                                           {
@@ -4229,7 +4868,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_dry_cough_duration"
                                             }
                                           }
@@ -4268,7 +4916,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחיל השיעול הלח, או השיעול עם הכיח?",
+                                                "ar": "قبل كم يوم بدأ السُعال الرطب, أو السُعال مع البلغم؟",
+                                                "en": "How many days ago did the wet cough (or mucus) start?",
+                                                "es": "¿Cuándo comenzó una tos húmeda, o una tos con esputo?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir une toux grasse ou toux avec crachats ?",
+                                                "ru": "Сколько дней назад начался влажный кашель или кашель с мокротой?"
+                                              }
+                                            },
                                             "uid": "92477ced39"
                                           },
                                           {
@@ -4278,7 +4935,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_moist_cough_duration"
                                             }
                                           }
@@ -4338,7 +5004,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו כאבי השרירים?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו כאבי השרירים?",
+                                                "ar": "قبل كم يوم بدأت أوجاع العضلات؟",
+                                                "en": "How many days ago did the muscle pains start?",
+                                                "es": "¿Hace cuántos días comenzaron los dolores de musculares?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des douleurs musculaires ?",
+                                                "ru": "Сколько дней назад у вас начались боли в мышцах?"
+                                              }
+                                            },
                                             "uid": "770a5aadee"
                                           },
                                           {
@@ -4348,7 +5023,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_muscles_pain_duration"
                                             }
                                           }
@@ -4387,7 +5071,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו כאבי הראש?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו כאבי הראש?",
+                                                "ar": "قبل كم يوم بدأت أوجاع الرأس؟",
+                                                "en": "How many days ago did the headaches start?",
+                                                "es": "¿Hace cuántos días comenzaron los dolores de cabeza?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des maux de tête ?",
+                                                "ru": "Сколько дней назад началась головная боль?"
+                                              }
+                                            },
                                             "uid": "19b8292859"
                                           },
                                           {
@@ -4397,7 +5090,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_headache_duration"
                                             }
                                           }
@@ -4436,7 +5138,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו כאבי הגרון?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו כאבי הגרון?",
+                                                "ar": "قبل كم يوم بدأت أوجاع الحلق؟",
+                                                "en": "How many days ago did the sore throat start?",
+                                                "es": "¿Hace cuántos días comenzaron los dolores de garganta?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des maux de gorge ?",
+                                                "ru": "Сколько дней назад у вас появилась боль в горле?"
+                                              }
+                                            },
                                             "uid": "ee550afdc1"
                                           },
                                           {
@@ -4446,7 +5157,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_sore_throat_duration"
                                             }
                                           }
@@ -4485,7 +5205,16 @@ export const script = {
                                       {
                                         "steps": [
                                           {
-                                            "say": "לפני כמה ימים התחילו כאבי הבטן?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "לפני כמה ימים התחילו כאבי הבטן?",
+                                                "ar": "قبل كم يوم بدأت أوجاع البطن؟",
+                                                "en": "How many days ago did the stomach ache start?",
+                                                "es": "¿Hace cuántos días comenzó el dolor abdominal?",
+                                                "fr": "Il y a quelques jours, avez-vous commencé à avoir des maux de ventre ?",
+                                                "ru": "Сколько дней назад появились боли в животе?"
+                                              }
+                                            },
                                             "uid": "f6f3102ba5"
                                           },
                                           {
@@ -4495,7 +5224,16 @@ export const script = {
                                               "input-max": 100,
                                               "input-min": 0,
                                               "input-step": 1,
-                                              "placeholder": "מספר הימים",
+                                              "placeholder": {
+                                                ".tx": {
+                                                  "_": "מספר הימים",
+                                                  "ar": "عدد الأيام",
+                                                  "en": "Number of days",
+                                                  "es": "Número de días",
+                                                  "fr": "Quelques jours",
+                                                  "ru": "Кол-во дней"
+                                                }
+                                              },
                                               "variable": "symptoms_abdominal_pain_duration"
                                             }
                                           }
@@ -4515,12 +5253,31 @@ export const script = {
                         "uid": "2cbf1360eb"
                       },
                       {
-                        "say": "האם חשת בתסמינים אחרים בימים האחרונים? אם כן, מהם?",
+                        "say": {
+                          ".tx": {
+                            "_": "האם חשת בתסמינים אחרים בימים האחרונים? אם כן, מהם?",
+                            "ar": "هل شعرت بأعراض أخرى في الأيام الأخيرة؟ اذا نعم, فما هي؟",
+                            "en": "Have you felt any other symptoms during the last few days? If so, what?",
+                            "es": "¿Has experimentado otros síntomas en los últimos días? ¿Si es así, cuáles?",
+                            "fr": "Avez-vous ressenti d'autres symptômes ces derniers jours? Si oui, lequel?",
+                            "ru": "Ощущали ли вы другие симптомы в последние дни? Если да, какие?"
+                          }
+                        },
                         "uid": "ed6ed4fb37"
                       },
                       {
                         "uid": "83d542472f",
                         "wait": {
+                          "placeholder": {
+                            ".tx": {
+                              "_": "פרטו את התסמינים",
+                              "ar": "إشرح ما هي الأعراض",
+                              "en": "Give details of the symptoms",
+                              "es": "Detalle los síntomas",
+                              "fr": "Énumérer les symptômes",
+                              "ru": "Перечислите симптомы"
+                            }
+                          },
                           "required": false,
                           "variable": "symptoms_other"
                         }
@@ -4553,7 +5310,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "למרות שאמרת קודם שההרגשה טובה, כדאי בתקופה הזו למדוד כל יום את חום הגוף.",
-                            "en": "Even though you reported feeling well, in this period it's good to take one's temperature daily."
+                            "ar": "بالرغم من انك ذكرت سابقًا أنك تشعر/ين بتحسن, من المُستحسن في هذه الفترة تتبع درجة حرارة الجسم بشكل يومي.",
+                            "en": "Even though you reported feeling well, in this period it's good to take one's temperature daily.",
+                            "es": "A pesar de que has informado sentirte bien, durante este período es conveniente controlar la fiebre a diario.",
+                            "fr": "Même si vous vous sentez bien, il est recommandé pendant cette période de surveiller quotidiennement la température de votre corps.",
+                            "ru": "Несмотря на то, что вы раньше сказали, что вы хорошо себя чувствуете, в эти дни стоит ежедневно измерять температуру."
                           }
                         },
                         "uid": "91f940ab0c"
@@ -4845,13 +5606,17 @@ export const script = {
                     "show": {
                       ".tx": {
                         "_": "איבדתי את חוש הטעם או הריח",
-                        "ar": "فقدت الإحساس بالأطعمة أو بالروائح",
+                        "ar": "فقدت حاسة التذوق أو الشم",
                         "en": "Lost my sense of taste or smell",
                         "es": "Pérdida del sentido del olfato o el gusto",
                         "fr": "J'ai perdu le sens du goût ou l'odorat",
                         "ru": "Я потерял/а чувство вкуса или запаха"
                       }
                     }
+                  },
+                  {
+                    "field": "symptoms_rash",
+                    "show": "פריחה על העור"
                   },
                   {
                     "class": "other",
@@ -5065,7 +5830,11 @@ export const script = {
                               "show": {
                                 ".tx": {
                                   "_": "כאבי בטן",
-                                  "en": "stomach aches"
+                                  "ar": "أوجاع في البطن",
+                                  "en": "stomach aches",
+                                  "es": "Dolor de panza",
+                                  "fr": "Douleurs abdominales",
+                                  "ru": "Боли в животе"
                                 }
                               }
                             },
@@ -5113,7 +5882,11 @@ export const script = {
               "say": {
                 ".tx": {
                   "_": "הרבה אנשים נפגשים עכשיו, בעבודה ובמקומות אחרים -",
-                  "en": "Many people meet now, at work and in other places -"
+                  "ar": "الكثير من الأشخاص يجتمعون الآن, في العمل وفي أماكن أخرى -",
+                  "en": "Many people meet now, at work and in other places -",
+                  "es": "Mucha gente se reune ahora, en el trabajo y en otros lugares - ",
+                  "fr": "Beaucoup de gens se rencontrent maintenant, au travail et ailleurs -",
+                  "ru": "Много людей встречаются сейчас на работе и в других местах -"
                 }
               },
               "uid": "868eb1b3f6"
@@ -5163,7 +5936,11 @@ export const script = {
                         "say": {
                           ".tx": {
                             "_": "וכמה מהם היו מבוגרים מעל גיל 18?",
-                            "en": "How many of them were adults over the age of 18?"
+                            "ar": "وكم عدد الأشخاص البالغين فوق جيل ال 18؟",
+                            "en": "How many of them were adults over the age of 18?",
+                            "es": "¿Cuántos de ellos son adultos mayores de 18 años?",
+                            "fr": "Combien d'entre eux sont des adultes de plus de 18 ans ?",
+                            "ru": "А сколько из них взрослые старше 18 лет?"
                           }
                         },
                         "uid": "7f12f102aa"
@@ -5177,7 +5954,11 @@ export const script = {
                           "placeholder": {
                             ".tx": {
                               "_": "מספר המבוגרים, 0-99, אם לא ידוע ניתן להשאיר ריק",
-                              "en": "Number of adults, 0-99, can be left empty if not known"
+                              "ar": "عدد الأشخاص البالغين, 0-99, في حال لم يكن معروف بإمكانك تركه فارغًا",
+                              "en": "Number of adults, 0-99, can be left empty if not known",
+                              "es": "Número de adultos, 0-99, si se desconoce, puede dejarse en blanco",
+                              "fr": "Nombre d'adultes, 0-99, si inconnu peut être laissé vide",
+                              "ru": "Кол-во взрослых, только если известно, 0-99, "
                             }
                           },
                           "required": false,
@@ -5206,7 +5987,11 @@ export const script = {
                           "placeholder": {
                             ".tx": {
                               "_": "מספר הילדים, 0-99, אם לא ידוע ניתן להשאיר ריק",
-                              "en": "Number of children, 0-99, can be left blank if not known"
+                              "ar": "عدد الأطفال, 0-99, في حال لم يكن معروف بإمكانك تركه فارغًا",
+                              "en": "Number of children, 0-99, can be left blank if not known",
+                              "es": "Número de niños, 0-99, si se desconoce, puede dejarse en blanco",
+                              "fr": "Nombre d'enfants, 0-99, si inconnu peut être laissé vide",
+                              "ru": "Кол-во детей, только если известно, 0-99, "
                             }
                           },
                           "required": false,
@@ -5256,7 +6041,11 @@ export const script = {
               "say": {
                 ".tx": {
                   "_": "ועכשיו, רוצה לענות גם על מספר שאלות לגבי תחושת לחץ ומצב רוח?",
-                  "en": "Now, would you answer some questions about stress and mood?"
+                  "ar": "والآن, هل تريد/ين الإجابة أيضًا على عدد من الأسئلة المتعلقة بالشعور بالتوتر والمزاج؟ ",
+                  "en": "Now, would you answer some questions about stress and mood?",
+                  "es": "Y ahora, ¿le gustaría responder algunas preguntas sobre estrés y su estado de ánimo?",
+                  "fr": "Et maintenant, aimeriez-vous répondre à quelques questions sur les sentiments de stresse et l'humeur ?",
+                  "ru": "А сейчас можно предложить вам ответить на несколько вопросов об ощущении стресс и настроении?"
                 }
               },
               "uid": "1d2d438c5d"
@@ -5269,7 +6058,11 @@ export const script = {
                     "show": {
                       ".tx": {
                         "_": "כן, רוצה",
-                        "en": "Yes, I would"
+                        "ar": "نعم, أريد",
+                        "en": "Yes, I would",
+                        "es": "Si, me gustaría",
+                        "fr": "Oui",
+                        "ru": "Да, можно"
                       }
                     },
                     "value": "ok"
@@ -5278,7 +6071,11 @@ export const script = {
                     "show": {
                       ".tx": {
                         "_": "בפעם אחרת",
-                        "en": "Another time"
+                        "ar": "في مرة أخرى",
+                        "en": "Another time",
+                        "es": "En otro momento",
+                        "fr": "Une autre fois",
+                        "ru": "В другой раз"
                       }
                     },
                     "value": "later"
@@ -5320,6 +6117,7 @@ export const script = {
                   "_": "פרופ׳ אלון חן ממכון וייצמן וצוותו חוקרים היבטים שונים של הנוירוביולוגיה של לחץ, ומבקשים את עזרת הציבור במילוי שאלון המעריך את רמת הלחץ והחרדה בקרב האוכלוסייה, למיפוי השפעותיה, גורמיה ואסטרטגיות ההתמודדות איתה.",
                   "ar": "بروفيسور ألون حن وفريقه من معهد وايزمن يبحثون جوانب مُختلفة من بيولوجيا الأعصاب تحت الضغوطات, ويطلبون مُساعدة الجمهور بتعبئة إستبيان الذي يُقيّم مستوى التوتر والقلق بين السكان لتحديد آثاره, أسبابه وطرق للتكيف معه.",
                   "en": "Professor Alon Chen of the Weizmann Institute and his team are researching different aspects of the neurobiology of stress, and are requesting help from the public by completing a questionnaire that estimates the level of stress and anxiety in the population and maps its effects, causes, and coping strategies.",
+                  "es": "El profesor Alon Chen del Instituto Weizmann y su equipo están investigando varios aspectos de la neurobiología del estrés y están pidiendo la ayuda del público para completar un cuestionario que evalúa el nivel de estrés y ansiedad entre la población, para entender sus efectos, factores y estrategias de afrontamiento.",
                   "fr": "Le professeur Alon Chen de l'Institut Weizmann et son équipe étudient divers aspects de la neurobiologie du stress. Ils demandent l'aide du public pour remplir un questionnaire qui évalue le niveau de stress et d'anxiété dans la population, afin de cartographier ses effets, ses facteurs et ses stratégies d'adaptation.",
                   "ru": "Профессор Алон Хен из Института Вайцмана и его группа исследуют нейробиологические эффекты стресса и просят публику заполнить анкету, которая оценивает уровень стресса среди населения. Это поможет исследователям оценить влияние стресса, его причины и предложить стратегию по его преодолению."
                 }
@@ -5330,7 +6128,11 @@ export const script = {
               "say": {
                 ".tx": {
                   "_": "עבור מי הדיווח?",
-                  "en": "For whom is the report?"
+                  "ar": "مِن أجل مَن الإستبيان التالي؟",
+                  "en": "For whom is the report?",
+                  "es": "¿Sobre quién esta informando?",
+                  "fr": "Pour qui est le rapport ?",
+                  "ru": "За кого отчет?"
                 }
               },
               "uid": "a18a5913a8"
@@ -5342,7 +6144,11 @@ export const script = {
                   {
                     ".tx": {
                       "_": "בעצם, לא היום",
-                      "en": "Not tody"
+                      "ar": "في الواقع, ليس اليوم",
+                      "en": "Not tody",
+                      "es": "En realidad, hoy no",
+                      "fr": "En fait, pas aujourd'hui",
+                      "ru": "Нет, не сегодня"
                     }
                   }
                 ],
@@ -5377,7 +6183,11 @@ export const script = {
               "say": {
                 ".tx": {
                   "_": "עוד עניין קטן… יעזור מאוד אם גם החברים והקרובים שלך ישתתפו. רוצה לשתף אותם?",
-                  "en": "One more thing... it would really help if your friends and relatives also participate. Would you like to let them know about the report?"
+                  "ar": "هناك مسألة أخرى...سيُساعدنا كثيرًا إذا إشترك أيضًا أصدقاؤك وأقاربك. هل تُريد/ين مُشاركتهم؟",
+                  "en": "One more thing... it would really help if your friends and relatives also participate. Would you like to let them know about the report?",
+                  "es": "Otro detalle... Ayudaría mucho si participarán también tus conocidos. ¿Quieres compartir esto con ellos?",
+                  "fr": "Une autre petite question… cela aiderait beaucoup si vos amis et vos proches remplissent également ce questionnaire. Vous voulez partager ce questionnaire ?",
+                  "ru": "И ещё одно маленькое дело... Нам очень поможет, если ваши друзья и родственники примут участие в нашем проекте.  Хотите с ними поделиться?"
                 }
               },
               "uid": "4e48cfc7d6"
@@ -5945,7 +6755,11 @@ export const script = {
           "show": {
             ".tx": {
               "_": "זמן לדיווח היומי למאבק בקורונה!",
-              "en": "Time for your daily report in the battle against Covid-19!"
+              "ar": "حان وقت التبليغ اليومي لمواجهة الكورونا!",
+              "en": "Time for your daily report in the battle against Covid-19!",
+              "es": "¡Es hora del informe diario para la lucha contra coronavirus!",
+              "fr": "C'est le moment du rapport quotidien pour le combat contre le Corona !",
+              "ru": "Пора заполнить ежедневный отчёт для борьбы с Коронавирусом!"
             }
           }
         },

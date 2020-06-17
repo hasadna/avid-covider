@@ -704,13 +704,41 @@
                         - match: true
                           steps:
                           - say: "יש כמה שאלות חשובות שאנחנו שואלים את כולם, רק פעם בשבוע, כדי להקל על הדיווח"
-                          - say: האם יצאת מהבית במהלך השבוע האחרון?
-                          - wait:
-                              variable: routine_left_the_house
-                              options:
-                                - show: כן, יצאתי
-                                  value: true
+
+                          - do:
+                              cmd: prepare_routine_question_work
+                              variable: _prepare_routine_question_work
+                              params:
+                                - record
+                                - שיש לך עבודה קבועה מחוץ לבית
+                                - ב:{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}
+                                - שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע.
+                                - שהעבודה שלך היא כחלק מצוות רפואי
+                                - שהעבודה שלך היא לא כחלק מצוות רפואי
+                                - ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה
+                                - ושלא נתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה
+                          
+                          - switch:
+                              arg: _prepare_routine_question_work
+                              cases:
+                                - match: empty
+                                - default: true
                                   steps:
+                                    - say: בשבוע שעבר דיווחת ש<br/>{{_prepare_routine_question_work}}
+                                    - say: האם משהו מכל זה השתנה השבוע?
+                                    - wait:
+                                        variable: _prepare_routine_question_work
+                                        options:
+                                          - show: כן
+                                            value: empty
+                                          - show: לא
+                                            value: full
+                          - switch: 
+                              arg: _prepare_routine_question_work
+                              cases:
+                                - default: true
+                                - match: empty
+                                - steps:
                                     - say: האם יש לך עבודה קבועה מחוץ לבית בימים אלה?
                                     - wait:
                                         variable: routine_workplace_is_outside
@@ -757,7 +785,7 @@
                 
                                           - say: "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?"
                                           - wait:
-                                              variable: _served_public_last_fortnight
+                                              variable: routine_served_public
                                               options:
                                               - show: כן, נתתי שירות
                                                 value: true
@@ -781,7 +809,48 @@
                 
                                         - show: לא
                                           value: false
-          
+
+                          - do:
+                              cmd: prepare_routine_question_behaviour
+                              variable: _prepare_routine_question_behaviour
+                              params:
+                                - record
+                                - שביקרת באופן קבוע בבית תפילה
+                                - שלא ביקרת באופן קבוע בבית תפילה
+                                - העדפת שלא לדווח על ביקור קבוע בבית תפילה
+                                - שנסעת ברכבת
+                                - שנסעת באוטובוס
+                                - שנסעת במונית
+                                - שנסעת בתחבורה ציבורית
+                                - שנסעת באמצעי תחבורה ציבורית אחר
+                                - שלא השתמשת בתחבורה ציבורית
+                                - שחבשת מסכה כל הזמן
+                                - שחבשת מסכה רוב הזמן
+                                - שחבשת מסכה בחלק קטן מהזמן
+                                - שלא חבשת מסכה
+                                - העדפת שלא לדווח אם חבשת מסכה מחוץ לבית
+                          
+                          - switch:
+                              arg: _prepare_routine_question_behaviour
+                              cases:
+                                - match: empty
+                                - default: true
+                                  steps:
+                                    - say: בשבוע שעבר סיפרת<br/>{{_prepare_routine_question_behaviour}}
+                                    - say: האם משהו מכל זה השתנה השבוע?
+                                    - wait:
+                                        variable: _prepare_routine_question_behaviour
+                                        options:
+                                          - show: כן
+                                            value: empty
+                                          - show: לא
+                                            value: full
+                          - switch: 
+                              arg: _prepare_routine_question_behaviour
+                              cases:
+                                - default: true
+                                - match: empty
+                                - steps:
                                     - switch:
                                         arg: routine_visits_prayer_house
                                         cases:
@@ -1087,6 +1156,26 @@
                                           input-min: 0
                                           input-max: 100
                                           input-step: 1
+                  - switch:
+                      arg: symptoms_rash
+                      cases:
+                        - default: true
+                        - match: true
+                          steps:
+                            - switch:
+                                arg: symptoms_rash_duration
+                                cases:
+                                  - default: true
+                                  - undefined: true
+                                    steps:
+                                      - say: לפני כמה ימים התחילה הפריחה?
+                                      - wait:
+                                          variable: symptoms_rash_duration
+                                          placeholder: מספר הימים
+                                          input-kind: number
+                                          input-min: 0
+                                          input-max: 100
+                                          input-step: 1
 
 
         - goto: current-report-cough-symptoms
@@ -1317,6 +1406,8 @@
               field: symptoms_tiredness_or_fatigue
             - show: איבדתי את חוש הטעם או הריח
               field: symptoms_smell_taste_loss
+            - show: פריחה על העור
+              field: symptoms_rash
             - show: |-
                 <span class='empty'>אף אחד מהתסמינים האלה</span>
                 <span class='not-empty'>זהו</span>
