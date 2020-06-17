@@ -2908,8 +2908,8 @@ export const script = {
                                     "params": [
                                       "record",
                                       "שיש לך עבודה קבועה מחוץ לבית",
-                                      "ב:{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}",
-                                      "שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע.",
+                                      "ב-{{routine_workplace_city_town}}, ברחוב {{routine_workplace_street}}",
+                                      "שעבדת כ-{{routine_workplace_weekly_hours}} שעות בשבוע",
                                       "שהעבודה שלך היא כחלק מצוות רפואי",
                                       "שהעבודה שלך היא לא כחלק מצוות רפואי",
                                       "ושנתת שירות ביום אחד ליותר מ-10 אנשים במסגרת העבודה",
@@ -2989,7 +2989,16 @@ export const script = {
                                         "match": "empty",
                                         "steps": [
                                           {
-                                            "say": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
+                                            "say": {
+                                              ".tx": {
+                                                "_": "האם יש לך עבודה קבועה מחוץ לבית בימים אלה?",
+                                                "ar": "هل لديك عمل ثابت خارج المنزل في هذه الأيام؟",
+                                                "en": "In this period, do you work regularly outside of your home?",
+                                                "es": "¿Tiene un trabajo permanente fuera del hogar en estos días?",
+                                                "fr": "Avez-vous un emploi régulier en dehors de la maison ces jours-ci ?",
+                                                "ru": "Работаете ли вы на постоянной работе вне дома в эти дни?"
+                                              }
+                                            },
                                             "uid": "a83f9158f0"
                                           },
                                           {
@@ -2997,10 +3006,28 @@ export const script = {
                                             "wait": {
                                               "options": [
                                                 {
-                                                  "show": "כן, יש עבודה מחוץ לבית",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "כן, יש עבודה מחוץ לבית",
+                                                      "ar": "نعم, أنا أعمل خارج المنزل",
+                                                      "en": "Yes, I work outside my home",
+                                                      "es": "Si, trabajo fuera de casa",
+                                                      "fr": "Oui, je travail en dehors de la maison",
+                                                      "ru": "Да, работал/а вне дома"
+                                                    }
+                                                  },
                                                   "steps": [
                                                     {
-                                                      "say": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
+                                                      "say": {
+                                                        ".tx": {
+                                                          "_": "וכמה שעות, פחות או יותר, עבדת שם בשבוע האחרון?",
+                                                          "ar": "وكم ساعة, تقريبًا, عملت هناك في الأسبوع السابق؟ ",
+                                                          "en": "Approximately how many hours did you work during the last week?",
+                                                          "es": "¿Y cuántas horas, más o menos, trabajó allí la semana pasada?",
+                                                          "fr": "Et combien d'heures, plus ou moins, y avez-vous travaillé la semaine dernière ?",
+                                                          "ru": "И сколько часов вы работали, примерно?"
+                                                        }
+                                                      },
                                                       "uid": "1ef1036328"
                                                     },
                                                     {
@@ -3010,12 +3037,30 @@ export const script = {
                                                         "input-max": 168,
                                                         "input-min": 0,
                                                         "input-step": 1,
-                                                        "placeholder": "מספר השעות, בערך",
+                                                        "placeholder": {
+                                                          ".tx": {
+                                                            "_": "מספר השעות, בערך",
+                                                            "ar": "عدد الساعات, تقريبًا",
+                                                            "en": "Approximately how many hours?",
+                                                            "es": "El número de horas, aproximadamente",
+                                                            "fr": "Le nombre d'heures, à peu près",
+                                                            "ru": "Количество часов, примерно"
+                                                          }
+                                                        },
                                                         "variable": "routine_workplace_weekly_hours"
                                                       }
                                                     },
                                                     {
-                                                      "say": "האם העבודה במקום קבוע?",
+                                                      "say": {
+                                                        ".tx": {
+                                                          "_": "האם העבודה במקום קבוע?",
+                                                          "ar": "هل تعمل/ين في مكان ثابت؟",
+                                                          "en": "Is your workplace in a fixed location?",
+                                                          "es": "¿El trabajo está en un lugar fijo?",
+                                                          "fr": "Votre lieu de travail est il fixe?",
+                                                          "ru": "Вы работали в одном и том же месте?"
+                                                        }
+                                                      },
                                                       "uid": "b65135628b"
                                                     },
                                                     {
@@ -3023,10 +3068,28 @@ export const script = {
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": "כן, במקום קבוע",
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "כן, במקום קבוע",
+                                                                "ar": "نعم, في مكان ثابت",
+                                                                "en": "Yes, in a permanent location",
+                                                                "es": "Si, en un lugar fijo",
+                                                                "fr": "Oui, mon lieu de travail est fixe",
+                                                                "ru": "Да, в постоянном месте"
+                                                              }
+                                                            },
                                                             "steps": [
                                                               {
-                                                                "say": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
+                                                                "say": {
+                                                                  ".tx": {
+                                                                    "_": "אפשר לשאול איפה נמצא מקום העבודה? זה יכול לעזור לנו במחקר",
+                                                                    "ar": "هل بإمكاننا أن نسأل عن عنوان عملك؟ من الممكن أن يُساعدنا هذا في البحث",
+                                                                    "en": "Can we ask where you work? It could help our research",
+                                                                    "es": "¿Podemos preguntar dónde está el lugar de trabajo? Nos puede ayudar con la investigación.",
+                                                                    "fr": "Pouvons-nous demander où se trouve votre lieu de travail? Cela peut nous aider dans la recherche",
+                                                                    "ru": "Можно узнать, где находится ваше место работы? Это поможет нашему исследованию."
+                                                                  }
+                                                                },
                                                                 "uid": "66817c727b"
                                                               },
                                                               {
@@ -3034,7 +3097,16 @@ export const script = {
                                                                 "wait": {
                                                                   "options": [
                                                                     {
-                                                                      "show": "כן, בטח",
+                                                                      "show": {
+                                                                        ".tx": {
+                                                                          "_": "כן, בטח",
+                                                                          "ar": "نعم, طبعًا",
+                                                                          "en": "Yes, sure",
+                                                                          "es": "Sí, seguro",
+                                                                          "fr": "Oui, bien sûr",
+                                                                          "ru": "Да, конечно"
+                                                                        }
+                                                                      },
                                                                       "steps": [
                                                                         {
                                                                           "do": {
@@ -3044,25 +3116,61 @@ export const script = {
                                                                           "uid": "fc3a718d88"
                                                                         },
                                                                         {
-                                                                          "say": "איפה נמצא מקום העבודה?",
+                                                                          "say": {
+                                                                            ".tx": {
+                                                                              "_": "איפה נמצא מקום העבודה?",
+                                                                              "ar": "أين يوجد مكان عملك؟",
+                                                                              "en": "Where is your workplace located?",
+                                                                              "es": "¿Dónde está el lugar de trabajo?",
+                                                                              "fr": "Où se trouve votre lieu de travail?",
+                                                                              "ru": "Где находится ваше место работы?"
+                                                                            }
+                                                                          },
                                                                           "uid": "03736bc9e9"
                                                                         },
                                                                         {
                                                                           "uid": "0a1c2609f3",
                                                                           "wait": {
-                                                                            "placeholder": "שם העיר או הישוב",
+                                                                            "placeholder": {
+                                                                              ".tx": {
+                                                                                "_": "שם העיר או הישוב",
+                                                                                "ar": "إسم المدينة أو القرية",
+                                                                                "en": "Place of residence",
+                                                                                "es": "Nombre de la ciudad o la localidad",
+                                                                                "fr": "Nom de la ville ou de la localité",
+                                                                                "ru": "Название города или поселка"
+                                                                              }
+                                                                            },
                                                                             "suggestionsFrom": "_cityTownSuggestions",
                                                                             "variable": "routine_workplace_city_town"
                                                                           }
                                                                         },
                                                                         {
-                                                                          "say": "ובאיזה רחוב זה?",
+                                                                          "say": {
+                                                                            ".tx": {
+                                                                              "_": "ובאיזה רחוב זה?",
+                                                                              "ar": "وفي أي شارع؟",
+                                                                              "en": "Which street?",
+                                                                              "es": "¿Y en qué calle está?",
+                                                                              "fr": "Et quel est le nom de la rue ? ",
+                                                                              "ru": "А на какой улице?"
+                                                                            }
+                                                                          },
                                                                           "uid": "af2e5a6cea"
                                                                         },
                                                                         {
                                                                           "uid": "aa479218e8",
                                                                           "wait": {
-                                                                            "placeholder": "שם הרחוב, אם ידוע",
+                                                                            "placeholder": {
+                                                                              ".tx": {
+                                                                                "_": "שם הרחוב, אם ידוע",
+                                                                                "ar": "إسم الشارع، إذا معروف",
+                                                                                "en": "Street name, if known",
+                                                                                "es": "Nombre de la calle, si se sabe",
+                                                                                "fr": "Nom de la rue, s'il est connu",
+                                                                                "ru": "Название улицы, если известно"
+                                                                              }
+                                                                            },
                                                                             "required": false,
                                                                             "variable": "routine_workplace_street"
                                                                           }
@@ -3071,7 +3179,16 @@ export const script = {
                                                                       "uid": "9342fb3752"
                                                                     },
                                                                     {
-                                                                      "show": "עדיף שלא"
+                                                                      "show": {
+                                                                        ".tx": {
+                                                                          "_": "עדיף שלא",
+                                                                          "ar": "مُفضل لا",
+                                                                          "en": "I prefer not to answer",
+                                                                          "es": "Preferible que no",
+                                                                          "fr": "Je ne préfère pas",
+                                                                          "ru": "Предпочитаю не отвечать на этот вопрос."
+                                                                        }
+                                                                      }
                                                                     }
                                                                   ]
                                                                 }
@@ -3081,7 +3198,16 @@ export const script = {
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": "לא, אין כתובת קבועה בעבודה",
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "לא, אין כתובת קבועה בעבודה",
+                                                                "ar": "لا يوجد عنوان ثابت في العمل",
+                                                                "en": "No, I don't have a fixed work address",
+                                                                "es": "No, no hay una dirección fija en el trabajo.",
+                                                                "fr": "Non, je ne travail pas à une adresse fixe",
+                                                                "ru": "Нет, у моего места работы нет постоянного адреса"
+                                                              }
+                                                            },
                                                             "value": false
                                                           }
                                                         ],
@@ -3089,7 +3215,16 @@ export const script = {
                                                       }
                                                     },
                                                     {
-                                                      "say": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
+                                                      "say": {
+                                                        ".tx": {
+                                                          "_": "האם באחד מן הימים בשבוע האחרון נתת שירות בעבודתך ליותר מ-10 אנשים?",
+                                                          "ar": "هل في أحد أيام الأسبوع السابق قمت من خلال عملك بتقديم خدمات وجها لوجه, لأكثر من 10 أشخاص؟",
+                                                          "en": "In any day during the last week, did you serve (face to face) more than 10 people?",
+                                                          "es": "La semana pasada en tu trabajo ¿has atendido, algún día, a más de 10 personas ese mismo día?",
+                                                          "fr": "Dans le cadre de votre profession, avez-vous physiquement aidé plus de 10 personnes au cours des 7 derniers jours ?",
+                                                          "ru": "Был ли день на последней неделе на работе когда вы обслужили больше 10 человек?"
+                                                        }
+                                                      },
                                                       "uid": "062de401ff"
                                                     },
                                                     {
@@ -3097,11 +3232,29 @@ export const script = {
                                                       "wait": {
                                                         "options": [
                                                           {
-                                                            "show": "כן, נתתי שירות",
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "כן, נתתי שירות",
+                                                                "ar": "نعم, أعطيت خدمات",
+                                                                "en": "Yes, I did.",
+                                                                "es": "Sí, he brindado servicio a clientes",
+                                                                "fr": "Oui, j'ai assisté plus de dix personnes",
+                                                                "ru": "Да, обслуживал/а"
+                                                              }
+                                                            },
                                                             "value": true
                                                           },
                                                           {
-                                                            "show": "לא נתתי שירות",
+                                                            "show": {
+                                                              ".tx": {
+                                                                "_": "לא נתתי שירות",
+                                                                "ar": "لا, لم أعط أي خدمة",
+                                                                "en": "No, I didn't.",
+                                                                "es": "No, no he dado servicio a clientes",
+                                                                "fr": "Non, je n'ai pas assisté plus de dix personnes",
+                                                                "ru": "Нет, не обслуживал/а"
+                                                              }
+                                                            },
                                                             "value": false
                                                           }
                                                         ],
@@ -3115,7 +3268,16 @@ export const script = {
                                                           {
                                                             "steps": [
                                                               {
-                                                                "say": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
+                                                                "say": {
+                                                                  ".tx": {
+                                                                    "_": "האם העבודה שלך היא כחלק מצוות רפואי - בטיפול בחולים או בקבלת קהל?",
+                                                                    "ar": "هل في عملك انت جزء من فريق طبي - الذي يعتني بمرضى أو يستقبل جمهور؟",
+                                                                    "en": "Do you work in a medical team, treating patients or receiving them?",
+                                                                    "es": "¿Es su trabajo parte de un equipo médico: atender pacientes o atender al público?",
+                                                                    "fr": "Faites vous partie d'une équipe médicale dans le cadre de votre travail ? Soignez-vous ou recevez-vous des patients ?",
+                                                                    "ru": "Работаете ли вы как медицинский персонал (уход за больными или прием публики)?"
+                                                                  }
+                                                                },
                                                                 "uid": "779ebae278"
                                                               },
                                                               {
@@ -3123,11 +3285,29 @@ export const script = {
                                                                 "wait": {
                                                                   "options": [
                                                                     {
-                                                                      "show": "כן, אני חלק מצוות רפואי",
+                                                                      "show": {
+                                                                        ".tx": {
+                                                                          "_": "כן, אני חלק מצוות רפואי",
+                                                                          "ar": "نعم, أنا من ضمن فريق طبي",
+                                                                          "en": "Yes, I am a health-care professional",
+                                                                          "es": "Sí, formo parte de un equipo médico",
+                                                                          "fr": "Oui, je fais partie d'une équipe médicale",
+                                                                          "ru": "Да, я часть медицинского персонала."
+                                                                        }
+                                                                      },
                                                                       "value": true
                                                                     },
                                                                     {
-                                                                      "show": "לא, אני לא",
+                                                                      "show": {
+                                                                        ".tx": {
+                                                                          "_": "לא, אני לא",
+                                                                          "ar": "لا, لستُ كذلك",
+                                                                          "en": "No, I'm not",
+                                                                          "es": "No, yo no",
+                                                                          "fr": "Non, je n'en fais pas partie",
+                                                                          "ru": "Нет, я не часть медицинского персонала"
+                                                                        }
+                                                                      },
                                                                       "value": false
                                                                     }
                                                                   ],
@@ -3150,7 +3330,16 @@ export const script = {
                                                   "value": true
                                                 },
                                                 {
-                                                  "show": "לא",
+                                                  "show": {
+                                                    ".tx": {
+                                                      "_": "לא",
+                                                      "ar": "لا",
+                                                      "en": "No",
+                                                      "es": "No",
+                                                      "fr": "Non",
+                                                      "ru": "Нет"
+                                                    }
+                                                  },
                                                   "value": false
                                                 }
                                               ],
@@ -3258,53 +3447,36 @@ export const script = {
                                         "match": "empty",
                                         "steps": [
                                           {
-                                            "switch": {
-                                              "arg": "routine_visits_prayer_house",
-                                              "cases": [
+                                            "say": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
+                                            "uid": "beeea14718"
+                                          },
+                                          {
+                                            "uid": "6c1dc1952c",
+                                            "wait": {
+                                              "options": [
                                                 {
-                                                  "default": true
+                                                  "show": "כן",
+                                                  "value": true
                                                 },
                                                 {
-                                                  "steps": [
-                                                    {
-                                                      "say": "האם ביקרת בבית תפילה באופן שגרתי השבוע?",
-                                                      "uid": "55aa85582d"
-                                                    },
-                                                    {
-                                                      "uid": "7c947e6580",
-                                                      "wait": {
-                                                        "options": [
-                                                          {
-                                                            "show": "כן",
-                                                            "value": true
-                                                          },
-                                                          {
-                                                            "show": "לא",
-                                                            "value": false
-                                                          },
-                                                          {
-                                                            "class": "other",
-                                                            "show": "לא רוצה להשיב",
-                                                            "value": "no_response"
-                                                          }
-                                                        ],
-                                                        "variable": "routine_visits_prayer_house"
-                                                      }
-                                                    }
-                                                  ],
-                                                  "uid": "9a70daa206",
-                                                  "undefined": true
+                                                  "show": "לא",
+                                                  "value": false
+                                                },
+                                                {
+                                                  "class": "other",
+                                                  "show": "לא רוצה להשיב",
+                                                  "value": "no_response"
                                                 }
-                                              ]
-                                            },
-                                            "uid": "bc7deb7c10"
+                                              ],
+                                              "variable": "routine_visits_prayer_house"
+                                            }
                                           },
                                           {
                                             "say": "האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?",
-                                            "uid": "d575928b15"
+                                            "uid": "d64369849b"
                                           },
                                           {
-                                            "uid": "3a55d284cb",
+                                            "uid": "dd85821ed3",
                                             "wait": {
                                               "options": [
                                                 {
@@ -3312,10 +3484,10 @@ export const script = {
                                                   "steps": [
                                                     {
                                                       "say": "במה מאלה השתמשת השבוע?",
-                                                      "uid": "b851ff5e82"
+                                                      "uid": "fe21db81f1"
                                                     },
                                                     {
-                                                      "uid": "646184848f",
+                                                      "uid": "e3ab3dfd6a",
                                                       "wait": {
                                                         "multi": true,
                                                         "options": [
@@ -3351,10 +3523,10 @@ export const script = {
                                                           "_var"
                                                         ]
                                                       },
-                                                      "uid": "e29eb759e8"
+                                                      "uid": "6018c1501f"
                                                     }
                                                   ],
-                                                  "uid": "bea066ed77",
+                                                  "uid": "611dc320d8",
                                                   "value": true
                                                 },
                                                 {
@@ -3367,10 +3539,10 @@ export const script = {
                                           },
                                           {
                                             "say": "האם חבשת השבוע מסיכה כשיצאת מהבית?",
-                                            "uid": "d7e6447df9"
+                                            "uid": "7e8759beee"
                                           },
                                           {
-                                            "uid": "1a3e3a74ec",
+                                            "uid": "3695634ccb",
                                             "wait": {
                                               "options": [
                                                 {

@@ -851,23 +851,17 @@
                                 - default: true
                                 - match: empty
                                   steps:
-                                    - switch:
-                                        arg: routine_visits_prayer_house
-                                        cases:
-                                          - default: true 
-                                          - undefined: true 
-                                            steps:
-                                            - say: האם ביקרת בבית תפילה באופן שגרתי השבוע?
-                                            - wait:
-                                                variable: routine_visits_prayer_house
-                                                options:
-                                                - show: כן
-                                                  value: true
-                                                - show: לא
-                                                  value: false
-                                                - show: לא רוצה להשיב
-                                                  value: no_response
-                                                  class: other
+                                    - say: האם ביקרת בבית תפילה באופן שגרתי השבוע?
+                                    - wait:
+                                        variable: routine_visits_prayer_house
+                                        options:
+                                        - show: כן
+                                          value: true
+                                        - show: לא
+                                          value: false
+                                        - show: לא רוצה להשיב
+                                          value: no_response
+                                          class: other
 
                                     - say: האם יצא לך להשתמש בתחבורה ציבורית בשבוע האחרון?          
                                     - wait:
