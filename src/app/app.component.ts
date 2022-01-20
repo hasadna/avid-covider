@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
+    window.alert('This site was active during the first two waves of Covid-19 in Israel. The data here is no longer up to date and is presented here for archival reference only.')
     // this.setupSync().then(() => { console.log('done!'); }, () => { console.log('Failed to setup sync'); });
   }
 
